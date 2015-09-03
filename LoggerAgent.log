@@ -1,0 +1,898 @@
+0    [main] INFO  meteringcomreader.HubConnection  - Time:20405236855761,Found port COM1
+26   [main] INFO  meteringcomreader.HubConnection  - Time:20405263459414,Found port COM4
+70   [main] INFO  meteringcomreader.HubConnection  - Input BufferSize=0
+6294 [main] INFO  meteringcomreader.HubConnection  - Time:20411531741483,Found port COM5
+6348 [main] INFO  meteringcomreader.HubConnection  - Input BufferSize=0
+9576 [main] INFO  meteringcomreader.HubConnection  - Time:20414813069382,hub found:COM5hub firm ver259
+9766 [main] INFO  meteringcomreader.HubConnection  - Input BufferSize=0
+9770 [main] DEBUG meteringcomreader.HubConnection  - Time:20415006218582,wait sendCommand 0xf102 thread: main
+9770 [main] DEBUG meteringcomreader.HubConnection  - Time:20415006949223,start sendCommand 0xf102 thread: main
+9772 [main] DEBUG meteringcomreader.ComReadDispatch  - Time:20415008713182, serialEvent: gnu.io.SerialPortEvent[source=//./COM5],2, thread: main
+9772 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:20415009438403, serialEvent: gnu.io.SerialPortEvent[source=//./COM5],2, thread: Thread-3
+9788 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:20415024566531, serialEvent: gnu.io.SerialPortEvent[source=//./COM5],1, thread: Thread-3
+9788 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:20415024692120 serialEvent loopNo:1
+9788 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:20415024941791, _readBytes size:2
+9789 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:20415025012566, 0X2,0X19,
+9802 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Size for:0x1902 : 0
+9802 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:20415038886016 serialEvent loopNo:2
+9809 [main] DEBUG meteringcomreader.HubConnection  - Time:20415045922277,wait sendCommand 0x   d thread: main
+9809 [main] DEBUG meteringcomreader.HubConnection  - Time:20415046077983,start sendCommand 0x   d thread: main
+9810 [main] DEBUG meteringcomreader.ComReadDispatch  - Time:20415047432049, serialEvent: gnu.io.SerialPortEvent[source=//./COM5],2, thread: main
+10763 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:20415999830139, _readBytes size:2
+10763 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:20415999936754, 0XD,0X20,
+10763 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Size for:0x200d : 0
+10763 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:20416000212928 serialEvent loopNo:3
+10763 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:20416000298460, _readBytes size:2
+10763 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:20416000346949, 0X48,0X0,
+1    [main] INFO  meteringcomreader.HubConnection  - Time:20470005255737,Found port COM1
+26   [main] INFO  meteringcomreader.HubConnection  - Time:20470030976658,Found port COM4
+70   [main] INFO  meteringcomreader.HubConnection  - Input BufferSize=0
+4791 [main] INFO  meteringcomreader.HubConnection  - Time:20474796402269,Found port COM5
+4848 [main] INFO  meteringcomreader.HubConnection  - Input BufferSize=0
+8075 [main] INFO  meteringcomreader.HubConnection  - Time:20478080920475,hub found:COM5hub firm ver259
+8265 [main] INFO  meteringcomreader.HubConnection  - Input BufferSize=0
+8267 [main] DEBUG meteringcomreader.HubConnection  - Time:20478272090377,wait sendCommand 0xf102 thread: main
+8267 [main] DEBUG meteringcomreader.HubConnection  - Time:20478272523160,start sendCommand 0xf102 thread: main
+8269 [main] DEBUG meteringcomreader.ComReadDispatch  - Time:20478274247666, serialEvent: gnu.io.SerialPortEvent[source=//./COM5],2, thread: main
+8270 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:20478275193946, serialEvent: gnu.io.SerialPortEvent[source=//./COM5],2, thread: Thread-3
+8288 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:20478293035326, serialEvent: gnu.io.SerialPortEvent[source=//./COM5],1, thread: Thread-3
+8288 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:20478293146759 serialEvent loopNo:1
+8288 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:20478293320234, _readBytes size:2
+8289 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:20478293451545, 0X2,0X19,
+8292 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Size for:0x1902 : 0
+8292 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:20478297187573 serialEvent loopNo:2
+8294 [main] DEBUG meteringcomreader.HubConnection  - Time:20478299292759,wait sendCommand 0x   d thread: main
+8294 [main] DEBUG meteringcomreader.HubConnection  - Time:20478299448766,start sendCommand 0x   d thread: main
+8295 [main] DEBUG meteringcomreader.ComReadDispatch  - Time:20478300833852, serialEvent: gnu.io.SerialPortEvent[source=//./COM5],2, thread: main
+9957 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:20479962567134, _readBytes size:2
+9957 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:20479962726153, 0XD,0X40,
+9957 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Size for:0x400d : 0
+9958 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:20479963030637 serialEvent loopNo:3
+11459 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:20481464176442, _readBytes size:2
+11459 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:20481464292695, 0X0,0X0,
+0    [main] INFO  meteringcomreader.HubConnection  - Time:20536883360925,Found port COM1
+26   [main] INFO  meteringcomreader.HubConnection  - Time:20536909653770,Found port COM4
+70   [main] INFO  meteringcomreader.HubConnection  - Input BufferSize=0
+6293 [main] INFO  meteringcomreader.HubConnection  - Time:20543177103703,Found port COM5
+6350 [main] INFO  meteringcomreader.HubConnection  - Input BufferSize=0
+9576 [main] INFO  meteringcomreader.HubConnection  - Time:20546460280492,hub found:COM5hub firm ver259
+9766 [main] INFO  meteringcomreader.HubConnection  - Input BufferSize=0
+9768 [main] DEBUG meteringcomreader.HubConnection  - Time:20546652023222,wait sendCommand 0x 301 thread: main
+9768 [main] DEBUG meteringcomreader.HubConnection  - Time:20546652519552,start sendCommand 0x 301 thread: main
+9770 [main] DEBUG meteringcomreader.ComReadDispatch  - Time:20546654266044, serialEvent: gnu.io.SerialPortEvent[source=//./COM5],2, thread: main
+9772 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:20546655961939, serialEvent: gnu.io.SerialPortEvent[source=//./COM5],2, thread: Thread-3
+9788 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:20546671711685, serialEvent: gnu.io.SerialPortEvent[source=//./COM5],1, thread: Thread-3
+9788 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:20546671829141 serialEvent loopNo:1
+9789 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:20546672661579, _readBytes size:2
+9789 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:20546672753737, 0X1,0X3,
+9792 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Size for:0x301 : 2
+9792 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:20546676152755, _readBytes size:2
+9792 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:20546676212989, 0X1,0X0,
+9792 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:20546676424712 serialEvent loopNo:2
+9792 [main] DEBUG meteringcomreader.HubConnection  - Time:20546676476815,done receiveAck 0x 301 thread: main
+9793 [main] DEBUG meteringcomreader.HubConnection  - Time:20546676595175,wait sendCommand 0x 201 thread: main
+9793 [main] DEBUG meteringcomreader.HubConnection  - Time:20546676686430,start sendCommand 0x 201 thread: main
+9794 [main] DEBUG meteringcomreader.ComReadDispatch  - Time:20546677992609, serialEvent: gnu.io.SerialPortEvent[source=//./COM5],2, thread: main
+9812 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:20546696126728, _readBytes size:2
+9812 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:20546696229427, 0X1,0X2,
+9812 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Size for:0x201 : 2
+9812 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:20546696490241, _readBytes size:2
+9813 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:20546696539031, 0X3,0X1,
+9813 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:20546696714312 serialEvent loopNo:3
+9813 [main] DEBUG meteringcomreader.HubConnection  - Time:20546696742623,done receiveAck 0x 201 thread: main
+9815 [main] DEBUG meteringcomreader.HubConnection  - Time:20546699157112,wait sendCommand 0x 202 thread: main
+9815 [main] DEBUG meteringcomreader.HubConnection  - Time:20546699269449,start sendCommand 0x 202 thread: main0XFF,0XFF,0XFF,0XFF,
+9817 [main] DEBUG meteringcomreader.ComReadDispatch  - Time:20546700972270, serialEvent: gnu.io.SerialPortEvent[source=//./COM5],2, thread: main
+9834 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:20546718099272, _readBytes size:2
+9834 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:20546718202574, 0X2,0X2,
+9834 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Size for:0x202 : 1
+9834 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:20546718448028, _readBytes size:1
+9834 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:20546718492301, 0X1,
+9835 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:20546718597409 serialEvent loopNo:4
+9835 [main] DEBUG meteringcomreader.HubConnection  - Time:20546718630839,done receiveAck 0x 202 thread: main
+9835 [main] DEBUG meteringcomreader.HubConnection  - Time:20546718785340,wait sendCommand 0x 21a thread: main
+9835 [main] DEBUG meteringcomreader.HubConnection  - Time:20546719016941,start sendCommand 0x 21a thread: main
+9837 [main] DEBUG meteringcomreader.ComReadDispatch  - Time:20546720625195, serialEvent: gnu.io.SerialPortEvent[source=//./COM5],2, thread: main
+9855 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:20546739043016, _readBytes size:2
+9855 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:20546739145113, 0X1A,0XF2,
+9855 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Size for:0xf21a : 0
+9855 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:20546739374304 serialEvent loopNo:5
+9858 [main] DEBUG meteringcomreader.HubConnection  - Time:20546741643027,wait sendCommand 0xf202 thread: main
+9858 [main] DEBUG meteringcomreader.HubConnection  - Time:20546741798732,start sendCommand 0xf202 thread: main
+9859 [main] DEBUG meteringcomreader.ComReadDispatch  - Time:20546743160327, serialEvent: gnu.io.SerialPortEvent[source=//./COM5],2, thread: main
+9875 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:20546759049214, _readBytes size:2
+9875 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:20546759170887, 0X2,0XA,
+9875 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Size for:0xa02 : 0
+9875 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:20546759388333 serialEvent loopNo:6
+9875 [main] DEBUG meteringcomreader.HubConnection  - Time:20546759416342,done receiveAck 0x a02 thread: main
+12877 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:20549760794200, _readBytes size:2
+12877 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:20549760917379, 0X0,0X0,
+0    [main] INFO  meteringcomreader.HubConnection  - Time:20562995387262,Found port COM1
+26   [main] INFO  meteringcomreader.HubConnection  - Time:20563021608729,Found port COM4
+70   [main] INFO  meteringcomreader.HubConnection  - Input BufferSize=0
+6294 [main] INFO  meteringcomreader.HubConnection  - Time:20569289812192,Found port COM5
+6349 [main] INFO  meteringcomreader.HubConnection  - Input BufferSize=0
+9576 [main] INFO  meteringcomreader.HubConnection  - Time:20572570759110,hub found:COM5hub firm ver259
+9766 [main] INFO  meteringcomreader.HubConnection  - Input BufferSize=0
+9768 [main] DEBUG meteringcomreader.HubConnection  - Time:20572762672906,wait sendCommand 0xf102 thread: main
+9768 [main] DEBUG meteringcomreader.HubConnection  - Time:20572763119542,start sendCommand 0xf102 thread: main
+9770 [main] DEBUG meteringcomreader.ComReadDispatch  - Time:20572764839230, serialEvent: gnu.io.SerialPortEvent[source=//./COM5],2, thread: main
+9771 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:20572765773162, serialEvent: gnu.io.SerialPortEvent[source=//./COM5],2, thread: Thread-3
+9787 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:20572781708128, serialEvent: gnu.io.SerialPortEvent[source=//./COM5],1, thread: Thread-3
+9787 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:20572781828898 serialEvent loopNo:1
+9787 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:20572782029478, _readBytes size:2
+9788 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:20572782121636, 0X2,0X19,
+9792 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Size for:0x1902 : 0
+9792 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:20572786850023 serialEvent loopNo:2
+9794 [main] DEBUG meteringcomreader.HubConnection  - Time:20572789014239,wait sendCommand 0x   d thread: main
+9794 [main] DEBUG meteringcomreader.HubConnection  - Time:20572789142538,start sendCommand 0x   d thread: main
+9795 [main] DEBUG meteringcomreader.ComReadDispatch  - Time:20572790466185, serialEvent: gnu.io.SerialPortEvent[source=//./COM5],2, thread: main
+10001 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:20572996438349, _readBytes size:2
+10002 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:20572996544362, 0XD,0X20,
+10002 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Size for:0x200d : 0
+10002 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:20572996774155 serialEvent loopNo:3
+10002 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:20572996854869, _readBytes size:2
+10002 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:20572996903960, 0X48,0X0,
+0    [main] INFO  meteringcomreader.HubConnection  - Time:20949233846458,Found port COM1
+26   [main] INFO  meteringcomreader.HubConnection  - Time:20949259628818,Found port COM4
+70   [main] INFO  meteringcomreader.HubConnection  - Input BufferSize=0
+4794 [main] INFO  meteringcomreader.HubConnection  - Time:20954027720095,Found port COM5
+4848 [main] INFO  meteringcomreader.HubConnection  - Input BufferSize=0
+8076 [main] INFO  meteringcomreader.HubConnection  - Time:20957309114252,hub found:COM5hub firm ver259
+8265 [main] INFO  meteringcomreader.HubConnection  - Input BufferSize=0
+8268 [main] DEBUG meteringcomreader.HubConnection  - Time:20957500357640,wait sendCommand 0x 301 thread: main
+8268 [main] DEBUG meteringcomreader.HubConnection  - Time:20957500834695,start sendCommand 0x 301 thread: main
+8270 [main] DEBUG meteringcomreader.ComReadDispatch  - Time:20957502621243, serialEvent: gnu.io.SerialPortEvent[source=//./COM5],2, thread: main
+8270 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:20957503282012, serialEvent: gnu.io.SerialPortEvent[source=//./COM5],2, thread: Thread-3
+8287 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:20957519637715, serialEvent: gnu.io.SerialPortEvent[source=//./COM5],1, thread: Thread-3
+8287 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:20957519749449 serialEvent loopNo:1
+8287 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:20957519925634, _readBytes size:2
+8287 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:20957519994000, 0X1,0X3,
+8300 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Size for:0x301 : 2
+8300 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:20957533002486, _readBytes size:2
+8300 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:20957533053083, 0X1,0X0,
+8300 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:20957533256072 serialEvent loopNo:2
+8300 [main] DEBUG meteringcomreader.HubConnection  - Time:20957533300947,done receiveAck 0x 301 thread: main
+8300 [main] DEBUG meteringcomreader.HubConnection  - Time:20957533416295,wait sendCommand 0x 201 thread: main
+8301 [main] DEBUG meteringcomreader.HubConnection  - Time:20957533503334,start sendCommand 0x 201 thread: main
+8302 [main] DEBUG meteringcomreader.ComReadDispatch  - Time:20957534825174, serialEvent: gnu.io.SerialPortEvent[source=//./COM5],2, thread: main
+8319 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:20957552037407, _readBytes size:2
+8319 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:20957552172031, 0X1,0X2,
+8319 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Size for:0x201 : 2
+8319 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:20957552434652, _readBytes size:2
+8320 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:20957552484345, 0X3,0X1,
+8320 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:20957552628004 serialEvent loopNo:3
+8320 [main] DEBUG meteringcomreader.HubConnection  - Time:20957552648484,done receiveAck 0x 201 thread: main
+8322 [main] DEBUG meteringcomreader.HubConnection  - Time:20957554561824,wait sendCommand 0x 202 thread: main
+8322 [main] DEBUG meteringcomreader.HubConnection  - Time:20957554702772,start sendCommand 0x 202 thread: main0XFF,0XFF,0XFF,0XFF,
+8323 [main] DEBUG meteringcomreader.ComReadDispatch  - Time:20957556331205, serialEvent: gnu.io.SerialPortEvent[source=//./COM5],2, thread: main
+8341 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:20957573971402, _readBytes size:2
+8341 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:20957574065970, 0X2,0X2,
+8341 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Size for:0x202 : 1
+8341 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:20957574302088, _readBytes size:1
+8341 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:20957574354191, 0X1,
+8341 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:20957574468335 serialEvent loopNo:4
+8342 [main] DEBUG meteringcomreader.HubConnection  - Time:20957574852027,done receiveAck 0x 202 thread: main
+8342 [main] DEBUG meteringcomreader.HubConnection  - Time:20957574971592,wait sendCommand 0x 21a thread: main
+8342 [main] DEBUG meteringcomreader.HubConnection  - Time:20957575075797,start sendCommand 0x 21a thread: main
+8343 [main] DEBUG meteringcomreader.ComReadDispatch  - Time:20957576408479, serialEvent: gnu.io.SerialPortEvent[source=//./COM5],2, thread: main
+8362 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:20957594942251, _readBytes size:2
+8362 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:20957595041036, 0X1A,0XF2,
+8362 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Size for:0xf21a : 0
+8362 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:20957595258782 serialEvent loopNo:5
+8368 [main] DEBUG meteringcomreader.HubConnection  - Time:20957600527170,wait sendCommand 0xf202 thread: main
+8368 [main] DEBUG meteringcomreader.HubConnection  - Time:20957600697331,start sendCommand 0xf202 thread: main
+8369 [main] DEBUG meteringcomreader.ComReadDispatch  - Time:20957602000499, serialEvent: gnu.io.SerialPortEvent[source=//./COM5],2, thread: main
+8387 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:20957619987043, _readBytes size:2
+8387 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:20957620107512, 0X2,0XA,
+8387 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Size for:0xa02 : 0
+8387 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:20957620322548 serialEvent loopNo:6
+8387 [main] DEBUG meteringcomreader.HubConnection  - Time:20957620350557,done receiveAck 0x a02 thread: main
+11389 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:20960621730222, _readBytes size:2
+11389 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:20960621834728, 0X0,0X0,
+0    [main] INFO  meteringcomreader.HubConnection  - Time:21090671796916,Found port COM1
+25   [main] INFO  meteringcomreader.HubConnection  - Time:21090697094692,Found port COM4
+69   [main] INFO  meteringcomreader.HubConnection  - Input BufferSize=0
+6291 [main] INFO  meteringcomreader.HubConnection  - Time:21096962425283,Found port COM5
+6337 [main] INFO  meteringcomreader.HubConnection  - Input BufferSize=0
+9563 [main] INFO  meteringcomreader.HubConnection  - Time:21100235018918,hub found:COM5hub firm ver259
+9753 [main] INFO  meteringcomreader.HubConnection  - Input BufferSize=0
+9755 [main] DEBUG meteringcomreader.HubConnection  - Time:21100426068954,wait sendCommand 0xf102 thread: main
+9755 [main] DEBUG meteringcomreader.HubConnection  - Time:21100426575825,start sendCommand 0xf102 thread: main
+9757 [main] DEBUG meteringcomreader.ComReadDispatch  - Time:21100428286778, serialEvent: gnu.io.SerialPortEvent[source=//./COM5],2, thread: main
+9758 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:21100429181558, serialEvent: gnu.io.SerialPortEvent[source=//./COM5],2, thread: Thread-3
+9776 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:21100447140696, serialEvent: gnu.io.SerialPortEvent[source=//./COM5],1, thread: Thread-3
+9776 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:21100447249418 serialEvent loopNo:1
+9776 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:21100447415364, _readBytes size:2
+9776 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:21100447485537, 0X2,0X19,
+9779 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Size for:0x1902 : 0
+9779 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:21100451056824 serialEvent loopNo:2
+9782 [main] DEBUG meteringcomreader.HubConnection  - Time:21100453246339,wait sendCommand 0x   d thread: main
+9782 [main] DEBUG meteringcomreader.HubConnection  - Time:21100453398430,start sendCommand 0x   d thread: main
+9783 [main] DEBUG meteringcomreader.ComReadDispatch  - Time:21100454755507, serialEvent: gnu.io.SerialPortEvent[source=//./COM5],2, thread: main
+10316 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:21100987357738, _readBytes size:2
+10316 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:21100987459835, 0XD,0X20,
+10316 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Size for:0x200d : 0
+10316 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:21100987679690 serialEvent loopNo:3
+10316 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:21100987755886, _readBytes size:2
+10316 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:21100987802869, 0X48,0X0,
+0    [main] INFO  meteringcomreader.HubConnection  - Time:21182225556120,Found port COM1
+27   [main] INFO  meteringcomreader.HubConnection  - Time:21182252605205,Found port COM4
+71   [main] INFO  meteringcomreader.HubConnection  - Input BufferSize=0
+4798 [main] INFO  meteringcomreader.HubConnection  - Time:21187023893113,Found port COM5
+4849 [main] INFO  meteringcomreader.HubConnection  - Input BufferSize=0
+8079 [main] INFO  meteringcomreader.HubConnection  - Time:21190304913216,hub found:COM5hub firm ver259
+8265 [main] INFO  meteringcomreader.HubConnection  - Input BufferSize=0
+8268 [main] DEBUG meteringcomreader.HubConnection  - Time:21190493094898,wait sendCommand 0x 301 thread: main
+8268 [main] DEBUG meteringcomreader.HubConnection  - Time:21190493843007,start sendCommand 0x 301 thread: main
+8270 [main] DEBUG meteringcomreader.ComReadDispatch  - Time:21190495855734, serialEvent: gnu.io.SerialPortEvent[source=//./COM5],2, thread: main
+8271 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:21190496802013, serialEvent: gnu.io.SerialPortEvent[source=//./COM5],2, thread: Thread-3
+8288 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:21190513654046, serialEvent: gnu.io.SerialPortEvent[source=//./COM5],1, thread: Thread-3
+8288 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:21190513814269 serialEvent loopNo:1
+8288 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:21190514082914, _readBytes size:2
+8289 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:21190514224765, 0X1,0X3,
+8294 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Size for:0x301 : 2
+8294 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:21190520213855, _readBytes size:2
+8294 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:21190520299388, 0X1,0X0,
+8295 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:21190520848724 serialEvent loopNo:2
+8295 [main] DEBUG meteringcomreader.HubConnection  - Time:21190520923414,done receiveAck 0x 301 thread: main
+8295 [main] DEBUG meteringcomreader.HubConnection  - Time:21190521175193,wait sendCommand 0x 201 thread: main
+8295 [main] DEBUG meteringcomreader.HubConnection  - Time:21190521378484,start sendCommand 0x 201 thread: main
+8297 [main] DEBUG meteringcomreader.ComReadDispatch  - Time:21190522777123, serialEvent: gnu.io.SerialPortEvent[source=//./COM5],2, thread: main
+8314 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:21190540089646, _readBytes size:2
+8314 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:21190540229691, 0X1,0X2,
+8314 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Size for:0x201 : 2
+8315 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:21190540651330, _readBytes size:2
+8315 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:21190540735056, 0X3,0X1,
+8315 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:21190540972981 serialEvent loopNo:3
+8316 [main] DEBUG meteringcomreader.HubConnection  - Time:21190541612066,done receiveAck 0x 201 thread: main
+8317 [main] DEBUG meteringcomreader.HubConnection  - Time:21190542725195,wait sendCommand 0x 202 thread: main
+8317 [main] DEBUG meteringcomreader.HubConnection  - Time:21190542900477,start sendCommand 0x 202 thread: main0XFF,0XFF,0XFF,0XFF,
+8319 [main] DEBUG meteringcomreader.ComReadDispatch  - Time:21190544629500, serialEvent: gnu.io.SerialPortEvent[source=//./COM5],2, thread: main
+8336 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:21190562050746, _readBytes size:2
+8336 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:21190562168805, 0X2,0X2,
+8336 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Size for:0x202 : 1
+8336 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:21190562515755, _readBytes size:1
+8337 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:21190562597071, 0X1,
+8337 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:21190562763317 serialEvent loopNo:4
+8337 [main] DEBUG meteringcomreader.HubConnection  - Time:21190563164176,done receiveAck 0x 202 thread: main
+8337 [main] DEBUG meteringcomreader.HubConnection  - Time:21190563399993,wait sendCommand 0x 21a thread: main
+8338 [main] DEBUG meteringcomreader.HubConnection  - Time:21190563553289,start sendCommand 0x 21a thread: main
+8339 [main] DEBUG meteringcomreader.ComReadDispatch  - Time:21190564942592, serialEvent: gnu.io.SerialPortEvent[source=//./COM5],2, thread: main
+8357 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:21190583059543, _readBytes size:2
+8357 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:21190583189649, 0X1A,0XF2,
+8357 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Size for:0xf21a : 0
+8358 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:21190583593821 serialEvent loopNo:5
+8361 [main] DEBUG meteringcomreader.HubConnection  - Time:21190586807919,wait sendCommand 0xf202 thread: main
+8361 [main] DEBUG meteringcomreader.HubConnection  - Time:21190586986815,start sendCommand 0xf202 thread: main
+8362 [main] DEBUG meteringcomreader.ComReadDispatch  - Time:21190588411656, serialEvent: gnu.io.SerialPortEvent[source=//./COM5],2, thread: main
+8380 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:21190606094620, _readBytes size:2
+8380 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:21190606267793, 0X2,0XA,
+8380 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Size for:0xa02 : 0
+8381 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:21190606646064 serialEvent loopNo:6
+8381 [main] DEBUG meteringcomreader.HubConnection  - Time:21190606685517,done receiveAck 0x a02 thread: main
+11382 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:21193607823944, _readBytes size:2
+11382 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:21193607931764, 0X0,0X0,
+0    [AWT-EventQueue-0] INFO  meteringcomreader.DBUtils  - Trying to connect to:jdbc:oracle:thin:@//admlab1.cs.put.poznan.pl:12121/XE,user:,pwd:
+0    [main] INFO  meteringcomreader.HubConnection  - Time:21587369095802,Found port COM1
+25   [main] INFO  meteringcomreader.HubConnection  - Time:21587394403215,Found port COM4
+69   [main] INFO  meteringcomreader.HubConnection  - Input BufferSize=0
+6290 [main] INFO  meteringcomreader.HubConnection  - Time:21593659696762,Found port COM5
+6334 [main] INFO  meteringcomreader.HubConnection  - Input BufferSize=0
+9568 [main] INFO  meteringcomreader.HubConnection  - Time:21596938097881,hub found:COM5hub firm ver259
+9750 [main] INFO  meteringcomreader.HubConnection  - Input BufferSize=0
+9753 [main] DEBUG meteringcomreader.HubConnection  - Time:21597121908063,wait sendCommand 0xf102 thread: main
+9753 [main] DEBUG meteringcomreader.HubConnection  - Time:21597122540523,start sendCommand 0xf102 thread: main
+9755 [main] DEBUG meteringcomreader.ComReadDispatch  - Time:21597124748107, serialEvent: gnu.io.SerialPortEvent[source=//./COM5],2, thread: main
+9755 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:21597124968264, serialEvent: gnu.io.SerialPortEvent[source=//./COM5],2, thread: Thread-3
+9772 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:21597141422148, serialEvent: gnu.io.SerialPortEvent[source=//./COM5],1, thread: Thread-3
+9772 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:21597141565204 serialEvent loopNo:1
+9772 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:21597141782951, _readBytes size:2
+9773 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:21597141903419, 0X2,0X19,
+9777 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Size for:0x1902 : 0
+9777 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:21597146797752 serialEvent loopNo:2
+9780 [main] DEBUG meteringcomreader.HubConnection  - Time:21597149345359,wait sendCommand 0x   d thread: main
+9780 [main] DEBUG meteringcomreader.HubConnection  - Time:21597149515521,start sendCommand 0x   d thread: main
+9781 [main] DEBUG meteringcomreader.ComReadDispatch  - Time:21597150955119, serialEvent: gnu.io.SerialPortEvent[source=//./COM5],2, thread: main
+10608 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:21597978169005, _readBytes size:2
+10609 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:21597978319892, 0XD,0X20,
+10609 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Size for:0x200d : 0
+10609 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:21597978693344 serialEvent loopNo:3
+10609 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:21597978825860, _readBytes size:2
+10609 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:21597978905068, 0X48,0X0,
+0    [main] INFO  meteringcomreader.HubConnection  - Time:21732185130818,Found port COM1
+26   [main] INFO  meteringcomreader.HubConnection  - Time:21732210952330,Found port COM4
+70   [main] INFO  meteringcomreader.HubConnection  - Input BufferSize=0
+4793 [main] INFO  meteringcomreader.HubConnection  - Time:21736978215085,Found port COM5
+4846 [main] INFO  meteringcomreader.HubConnection  - Input BufferSize=0
+8073 [main] INFO  meteringcomreader.HubConnection  - Time:21740258200966,hub found:COM5hub firm ver259
+8263 [main] INFO  meteringcomreader.HubConnection  - Input BufferSize=0
+8267 [main] DEBUG meteringcomreader.HubConnection  - Time:21740451693500,wait sendCommand 0xf102 thread: main
+8268 [main] DEBUG meteringcomreader.HubConnection  - Time:21740452781330,start sendCommand 0xf102 thread: main
+8270 [main] DEBUG meteringcomreader.ComReadDispatch  - Time:21740455221419, serialEvent: gnu.io.SerialPortEvent[source=//./COM5],2, thread: main
+8273 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:21740458087966, serialEvent: gnu.io.SerialPortEvent[source=//./COM5],2, thread: Thread-3
+8288 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:21740473071232, serialEvent: gnu.io.SerialPortEvent[source=//./COM5],1, thread: Thread-3
+8288 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:21740473277233 serialEvent loopNo:1
+8288 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:21740473603401, _readBytes size:2
+8290 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:21740473790428, 0X2,0X19,
+8295 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Size for:0x1902 : 0
+8295 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:21740480438481 serialEvent loopNo:2
+8298 [main] DEBUG meteringcomreader.HubConnection  - Time:21740483030661,wait sendCommand 0x   d thread: main
+8298 [main] DEBUG meteringcomreader.HubConnection  - Time:21740483210159,start sendCommand 0x   d thread: main
+8300 [main] DEBUG meteringcomreader.ComReadDispatch  - Time:21740484959361, serialEvent: gnu.io.SerialPortEvent[source=//./COM5],2, thread: main
+8791 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:21740975012732, _readBytes size:2
+8791 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:21740975114829, 0XD,0X20,
+8791 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Size for:0x200d : 0
+8791 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:21740975337996 serialEvent loopNo:3
+8791 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:21740975415397, _readBytes size:2
+8791 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:21740975460874, 0X48,0X0,
+0    [main] INFO  meteringcomreader.HubConnection  - Time:21749811212662,Found port COM1
+25   [main] INFO  meteringcomreader.HubConnection  - Time:21749836604403,Found port COM4
+69   [main] INFO  meteringcomreader.HubConnection  - Input BufferSize=0
+6307 [main] INFO  meteringcomreader.HubConnection  - Time:21756118783413,Found port COM5
+6361 [main] INFO  meteringcomreader.HubConnection  - Input BufferSize=0
+9590 [main] INFO  meteringcomreader.HubConnection  - Time:21759400806717,hub found:COM5hub firm ver259
+9778 [main] INFO  meteringcomreader.HubConnection  - Input BufferSize=0
+9780 [main] DEBUG meteringcomreader.HubConnection  - Time:21759590248198,wait sendCommand 0x 301 thread: main
+9780 [main] DEBUG meteringcomreader.HubConnection  - Time:21759590779162,start sendCommand 0x 301 thread: main
+9781 [main] DEBUG meteringcomreader.ComReadDispatch  - Time:21759592606368, serialEvent: gnu.io.SerialPortEvent[source=//./COM5],2, thread: main
+9783 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:21759593839061, serialEvent: gnu.io.SerialPortEvent[source=//./COM5],2, thread: Thread-3
+9800 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:21759610716995, serialEvent: gnu.io.SerialPortEvent[source=//./COM5],1, thread: Thread-3
+9800 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:21759610828428 serialEvent loopNo:1
+9800 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:21759611002204, _readBytes size:2
+9801 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:21759611082918, 0X1,0X3,
+9803 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Size for:0x301 : 2
+9803 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:21759614622281, _readBytes size:2
+9804 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:21759614676793, 0X1,0X0,
+9804 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:21759614912309 serialEvent loopNo:2
+9804 [main] DEBUG meteringcomreader.HubConnection  - Time:21759615030669,done receiveAck 0x 301 thread: main
+9804 [main] DEBUG meteringcomreader.HubConnection  - Time:21759615243597,wait sendCommand 0x 201 thread: main
+9804 [main] DEBUG meteringcomreader.HubConnection  - Time:21759615366776,start sendCommand 0x 201 thread: main
+9806 [main] DEBUG meteringcomreader.ComReadDispatch  - Time:21759616707590, serialEvent: gnu.io.SerialPortEvent[source=//./COM5],2, thread: main
+9824 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:21759634969104, _readBytes size:2
+9824 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:21759635085657, 0X1,0X2,
+9824 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Size for:0x201 : 2
+9824 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:21759635378998, _readBytes size:2
+9824 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:21759635433209, 0X3,0X1,
+9824 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:21759635582891 serialEvent loopNo:3
+9825 [main] DEBUG meteringcomreader.HubConnection  - Time:21759636027118,done receiveAck 0x 201 thread: main
+9826 [main] DEBUG meteringcomreader.HubConnection  - Time:21759636802935,wait sendCommand 0x 202 thread: main
+9826 [main] DEBUG meteringcomreader.HubConnection  - Time:21759636920392,start sendCommand 0x 202 thread: main0XFF,0XFF,0XFF,0XFF,
+9827 [main] DEBUG meteringcomreader.ComReadDispatch  - Time:21759638446727, serialEvent: gnu.io.SerialPortEvent[source=//./COM5],2, thread: main
+9846 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:21759656955804, _readBytes size:2
+9846 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:21759657082597, 0X2,0X2,
+9846 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Size for:0x202 : 1
+9846 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:21759657356662, _readBytes size:1
+9846 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:21759657423221, 0X1,
+9846 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:21759657536763 serialEvent loopNo:4
+9846 [main] DEBUG meteringcomreader.HubConnection  - Time:21759657571096,done receiveAck 0x 202 thread: main
+9847 [main] DEBUG meteringcomreader.HubConnection  - Time:21759657843656,wait sendCommand 0x 21a thread: main
+9847 [main] DEBUG meteringcomreader.HubConnection  - Time:21759657940031,start sendCommand 0x 21a thread: main
+9848 [main] DEBUG meteringcomreader.ComReadDispatch  - Time:21759659287471, serialEvent: gnu.io.SerialPortEvent[source=//./COM5],2, thread: main
+9867 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:21759677924244, _readBytes size:2
+9867 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:21759678061578, 0X1A,0XF2,
+9867 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Size for:0xf21a : 0
+9867 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:21759678350401 serialEvent loopNo:5
+9871 [main] DEBUG meteringcomreader.HubConnection  - Time:21759681866273,wait sendCommand 0xf202 thread: main
+9871 [main] DEBUG meteringcomreader.HubConnection  - Time:21759682063841,start sendCommand 0xf202 thread: main
+9872 [main] DEBUG meteringcomreader.ComReadDispatch  - Time:21759683500126, serialEvent: gnu.io.SerialPortEvent[source=//./COM5],2, thread: main
+9890 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:21759700924986, _readBytes size:2
+9890 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:21759701056598, 0X2,0XA,
+9890 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Size for:0xa02 : 0
+9890 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:21759701302956 serialEvent loopNo:6
+9890 [main] DEBUG meteringcomreader.HubConnection  - Time:21759701334880,done receiveAck 0x a02 thread: main
+12892 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:21762702897658, _readBytes size:2
+12892 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:21762703100346, 0X0,0X0,
+0    [main] INFO  meteringcomreader.HubConnection  - Time:22221214242022,Found port COM1
+25   [main] INFO  meteringcomreader.HubConnection  - Time:22221239976797,Found port COM4
+69   [main] INFO  meteringcomreader.HubConnection  - Input BufferSize=0
+4794 [main] INFO  meteringcomreader.HubConnection  - Time:22226009606155,Found port COM5
+4843 [main] INFO  meteringcomreader.HubConnection  - Input BufferSize=0
+8072 [main] INFO  meteringcomreader.HubConnection  - Time:22229287290486,hub found:COM5hub firm ver259
+8260 [main] INFO  meteringcomreader.HubConnection  - Input BufferSize=0
+8263 [main] DEBUG meteringcomreader.HubConnection  - Time:22229477363222,wait sendCommand 0xf102 thread: main
+8263 [main] DEBUG meteringcomreader.HubConnection  - Time:22229477981526,start sendCommand 0xf102 thread: main
+8265 [main] DEBUG meteringcomreader.ComReadDispatch  - Time:22229479837945, serialEvent: gnu.io.SerialPortEvent[source=//./COM5],2, thread: main
+8266 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:22229481175446, serialEvent: gnu.io.SerialPortEvent[source=//./COM5],2, thread: Thread-3
+8281 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:22229495941869, serialEvent: gnu.io.SerialPortEvent[source=//./COM5],1, thread: Thread-3
+8281 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:22229496133715 serialEvent loopNo:1
+8281 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:22229496529152, _readBytes size:2
+8282 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:22229496649320, 0X2,0X19,
+8287 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Size for:0x1902 : 0
+8287 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:22229502170088 serialEvent loopNo:2
+8291 [main] DEBUG meteringcomreader.HubConnection  - Time:22229506328660,wait sendCommand 0x   d thread: main
+8291 [main] DEBUG meteringcomreader.HubConnection  - Time:22229506522915,start sendCommand 0x   d thread: main
+8293 [main] DEBUG meteringcomreader.ComReadDispatch  - Time:22229508313980, serialEvent: gnu.io.SerialPortEvent[source=//./COM5],2, thread: main
+8750 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:22229965346944, _readBytes size:2
+8750 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:22229965505661, 0XD,0X20,
+8750 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Size for:0x200d : 0
+8751 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:22229965881523 serialEvent loopNo:3
+8751 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:22229966091439, _readBytes size:2
+8751 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:22229966263709, 0X48,0X0,
+0    [main] INFO  meteringcomreader.HubConnection  - Time:22437965644200,Found port COM1
+25   [main] INFO  meteringcomreader.HubConnection  - Time:22437991281094,Found port COM4
+69   [main] INFO  meteringcomreader.HubConnection  - Input BufferSize=0
+6292 [main] INFO  meteringcomreader.HubConnection  - Time:22444257399549,Found port COM5
+6348 [main] INFO  meteringcomreader.HubConnection  - Input BufferSize=0
+9574 [main] INFO  meteringcomreader.HubConnection  - Time:22447539415023,hub found:COM5hub firm ver259
+9763 [main] INFO  meteringcomreader.HubConnection  - Input BufferSize=0
+9765 [main] DEBUG meteringcomreader.HubConnection  - Time:22447730302728,wait sendCommand 0xf102 thread: main
+9765 [main] DEBUG meteringcomreader.HubConnection  - Time:22447730908383,start sendCommand 0xf102 thread: main
+9767 [main] DEBUG meteringcomreader.ComReadDispatch  - Time:22447732761790, serialEvent: gnu.io.SerialPortEvent[source=//./COM5],2, thread: main
+9768 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:22447733497250, serialEvent: gnu.io.SerialPortEvent[source=//./COM5],2, thread: Thread-3
+9785 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:22447750422769, serialEvent: gnu.io.SerialPortEvent[source=//./COM5],1, thread: Thread-3
+9785 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:22447750589015 serialEvent loopNo:1
+9785 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:22447750751647, _readBytes size:2
+9786 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:22447750833867, 0X2,0X19,
+9789 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Size for:0x1902 : 0
+9789 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:22447754494301 serialEvent loopNo:2
+9791 [main] DEBUG meteringcomreader.HubConnection  - Time:22447756321808,wait sendCommand 0x   d thread: main
+9791 [main] DEBUG meteringcomreader.HubConnection  - Time:22447756467575,start sendCommand 0x   d thread: main
+9792 [main] DEBUG meteringcomreader.ComReadDispatch  - Time:22447757809292, serialEvent: gnu.io.SerialPortEvent[source=//./COM5],2, thread: main
+9996 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:22447961771440, _readBytes size:2
+9996 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:22447961921122, 0XD,0X20,
+9996 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Size for:0x200d : 0
+9996 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:22447962267770 serialEvent loopNo:3
+9997 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:22447962398478, _readBytes size:2
+9997 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:22447962534909, 0X48,0X0,
+0    [main] INFO  meteringcomreader.HubConnection  - Time:22542155339870,Found port COM1
+26   [main] INFO  meteringcomreader.HubConnection  - Time:22542181367985,Found port COM4
+70   [main] INFO  meteringcomreader.HubConnection  - Input BufferSize=0
+4798 [main] INFO  meteringcomreader.HubConnection  - Time:22546952586924,Found port COM5
+4842 [main] INFO  meteringcomreader.HubConnection  - Input BufferSize=0
+8084 [main] INFO  meteringcomreader.HubConnection  - Time:22550238429380,hub found:COM5hub firm ver259
+8260 [main] INFO  meteringcomreader.HubConnection  - Input BufferSize=0
+8262 [main] DEBUG meteringcomreader.HubConnection  - Time:22550416307093,wait sendCommand 0xf102 thread: main
+8262 [main] DEBUG meteringcomreader.HubConnection  - Time:22550416768186,start sendCommand 0xf102 thread: main
+8264 [main] DEBUG meteringcomreader.ComReadDispatch  - Time:22550418465888, serialEvent: gnu.io.SerialPortEvent[source=//./COM5],2, thread: main
+8265 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:22550419553718, serialEvent: gnu.io.SerialPortEvent[source=//./COM5],2, thread: Thread-3
+8282 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:22550436403341, serialEvent: gnu.io.SerialPortEvent[source=//./COM5],1, thread: Thread-3
+8282 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:22550436501222 serialEvent loopNo:1
+8282 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:22550436673492, _readBytes size:2
+8282 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:22550436742159, 0X2,0X19,
+8286 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Size for:0x1902 : 0
+8286 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:22550440544746 serialEvent loopNo:2
+8288 [main] DEBUG meteringcomreader.HubConnection  - Time:22550442690289,wait sendCommand 0x   d thread: main
+8288 [main] DEBUG meteringcomreader.HubConnection  - Time:22550442833044,start sendCommand 0x   d thread: main
+8289 [main] DEBUG meteringcomreader.ComReadDispatch  - Time:22550444205180, serialEvent: gnu.io.SerialPortEvent[source=//./COM5],2, thread: main
+8806 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:22550960343889, _readBytes size:2
+8806 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:22550960464056, 0XD,0X20,
+8806 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Size for:0x200d : 0
+8806 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:22550960724268 serialEvent loopNo:3
+8806 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:22550960815222, _readBytes size:2
+8806 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:22550960870336, 0X48,0X0,
+0    [main] INFO  meteringcomreader.HubConnection  - Time:22561627121186,Found port COM1
+31   [main] INFO  meteringcomreader.HubConnection  - Time:22561658474007,Found port COM4
+75   [main] INFO  meteringcomreader.HubConnection  - Input BufferSize=0
+4800 [main] INFO  meteringcomreader.HubConnection  - Time:22566426657743,Found port COM5
+4845 [main] INFO  meteringcomreader.HubConnection  - Input BufferSize=0
+6573 [main] INFO  meteringcomreader.HubConnection  - Time:22568199947837,hub found:COM5hub firm ver259
+31266 [main] INFO  meteringcomreader.HubConnection  - Input BufferSize=0
+82757 [main] DEBUG meteringcomreader.HubConnection  - Time:22644381851907,wait sendCommand 0xf102 thread: main
+82757 [main] DEBUG meteringcomreader.HubConnection  - Time:22644382408170,start sendCommand 0xf102 thread: main
+82759 [main] DEBUG meteringcomreader.ComReadDispatch  - Time:22644384221823, serialEvent: gnu.io.SerialPortEvent[source=//./COM5],2, thread: main
+82761 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:22644386090590, serialEvent: gnu.io.SerialPortEvent[source=//./COM5],2, thread: Thread-3
+82778 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:22644403003760, serialEvent: gnu.io.SerialPortEvent[source=//./COM5],1, thread: Thread-3
+82778 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:22644403135974 serialEvent loopNo:1
+82778 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:22644403371791, _readBytes size:2
+82779 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:22644403468769, 0X2,0X19,
+82782 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Size for:0x1902 : 0
+82782 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:22644407745399 serialEvent loopNo:2
+82785 [main] DEBUG meteringcomreader.HubConnection  - Time:22644410144227,wait sendCommand 0x   d thread: main
+82785 [main] DEBUG meteringcomreader.HubConnection  - Time:22644410310474,start sendCommand 0x   d thread: main
+82786 [main] DEBUG meteringcomreader.ComReadDispatch  - Time:22644411649782, serialEvent: gnu.io.SerialPortEvent[source=//./COM5],2, thread: main
+83334 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:22644959277442, _readBytes size:2
+83334 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:22644959401825, 0XD,0X20,
+83334 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Size for:0x200d : 0
+83334 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:22644959699684 serialEvent loopNo:3
+83334 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:22644959802082, _readBytes size:2
+83334 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:22644959859907, 0X48,0X0,
+0    [main] INFO  meteringcomreader.HubConnection  - Time:22670108530040,Found port COM1
+25   [main] INFO  meteringcomreader.HubConnection  - Time:22670134313906,Found port COM4
+69   [main] INFO  meteringcomreader.HubConnection  - Input BufferSize=0
+6297 [main] INFO  meteringcomreader.HubConnection  - Time:22676406888567,Found port COM5
+6346 [main] INFO  meteringcomreader.HubConnection  - Input BufferSize=0
+9574 [main] INFO  meteringcomreader.HubConnection  - Time:22679683670890,hub found:COM5hub firm ver259
+9763 [main] INFO  meteringcomreader.HubConnection  - Input BufferSize=0
+9765 [main] DEBUG meteringcomreader.HubConnection  - Time:22679874663102,wait sendCommand 0xf102 thread: main
+9766 [main] DEBUG meteringcomreader.HubConnection  - Time:22679875183225,start sendCommand 0xf102 thread: main
+9767 [main] DEBUG meteringcomreader.ComReadDispatch  - Time:22679877162823, serialEvent: gnu.io.SerialPortEvent[source=//./COM5],2, thread: main
+9768 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:22679877657346, serialEvent: gnu.io.SerialPortEvent[source=//./COM5],2, thread: Thread-3
+9785 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:22679894459384, serialEvent: gnu.io.SerialPortEvent[source=//./COM5],1, thread: Thread-3
+9785 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:22679894583466 serialEvent loopNo:1
+9785 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:22679894772903, _readBytes size:2
+9786 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:22679894856930, 0X2,0X19,
+9789 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Size for:0x1902 : 0
+9789 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:22679898625786 serialEvent loopNo:2
+9791 [main] DEBUG meteringcomreader.HubConnection  - Time:22679900756572,wait sendCommand 0x   d thread: main
+9791 [main] DEBUG meteringcomreader.HubConnection  - Time:22679900873426,start sendCommand 0x   d thread: main
+9792 [main] DEBUG meteringcomreader.ComReadDispatch  - Time:22679902253091, serialEvent: gnu.io.SerialPortEvent[source=//./COM5],2, thread: main
+9832 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:22679941626402, _readBytes size:2
+9832 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:22679941754099, 0XD,0X20,
+9832 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Size for:0x200d : 0
+9832 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:22679942010094 serialEvent loopNo:3
+9832 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:22679942102253, _readBytes size:2
+9832 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:22679942192604, 0X48,0X0,
+0    [main] INFO  meteringcomreader.HubConnection  - Time:22773519263359,Found port COM1
+26   [main] INFO  meteringcomreader.HubConnection  - Time:22773545538736,Found port COM4
+71   [main] INFO  meteringcomreader.HubConnection  - Input BufferSize=0
+6294 [main] INFO  meteringcomreader.HubConnection  - Time:22779813759366,Found port COM5
+6348 [main] INFO  meteringcomreader.HubConnection  - Input BufferSize=0
+9577 [main] INFO  meteringcomreader.HubConnection  - Time:22783097212028,hub found:COM5hub firm ver259
+9763 [main] INFO  meteringcomreader.HubConnection  - Input BufferSize=0
+9765 [main] DEBUG meteringcomreader.HubConnection  - Time:22783284621206,wait sendCommand 0xf102 thread: main
+9765 [main] DEBUG meteringcomreader.HubConnection  - Time:22783285123258,start sendCommand 0xf102 thread: main
+9767 [main] DEBUG meteringcomreader.ComReadDispatch  - Time:22783286825177, serialEvent: gnu.io.SerialPortEvent[source=//./COM5],2, thread: main
+9768 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:22783287682009, serialEvent: gnu.io.SerialPortEvent[source=//./COM5],2, thread: Thread-3
+9785 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:22783304616562, serialEvent: gnu.io.SerialPortEvent[source=//./COM5],1, thread: Thread-3
+9785 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:22783304734621 serialEvent loopNo:1
+9785 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:22783305213784, _readBytes size:2
+9786 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:22783305294799, 0X2,0X19,
+9790 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Size for:0x1902 : 0
+9790 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:22783309506979 serialEvent loopNo:2
+9792 [main] DEBUG meteringcomreader.HubConnection  - Time:22783312126867,wait sendCommand 0x   d thread: main
+9792 [main] DEBUG meteringcomreader.HubConnection  - Time:22783312267514,start sendCommand 0x   d thread: main
+9794 [main] DEBUG meteringcomreader.ComReadDispatch  - Time:22783313729700, serialEvent: gnu.io.SerialPortEvent[source=//./COM5],2, thread: main
+10435 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:22783955235725, _readBytes size:2
+10436 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:22783955362518, 0XD,0X20,
+10436 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Size for:0x200d : 0
+10436 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:22783955693505 serialEvent loopNo:3
+10436 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:22783955781447, _readBytes size:2
+10436 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:22783955832044, 0X48,0X0,
+0    [main] INFO  meteringcomreader.HubConnection  - Time:22880897122038,Found port COM1
+26   [main] INFO  meteringcomreader.HubConnection  - Time:22880923445000,Found port COM4
+70   [main] INFO  meteringcomreader.HubConnection  - Input BufferSize=0
+4795 [main] INFO  meteringcomreader.HubConnection  - Time:22885692775897,Found port COM5
+4841 [main] INFO  meteringcomreader.HubConnection  - Input BufferSize=0
+8069 [main] INFO  meteringcomreader.HubConnection  - Time:22888967039827,hub found:COM5hub firm ver259
+8258 [main] INFO  meteringcomreader.HubConnection  - Input BufferSize=0
+8260 [main] DEBUG meteringcomreader.HubConnection  - Time:22889157609194,wait sendCommand 0xf102 thread: main
+8260 [main] DEBUG meteringcomreader.HubConnection  - Time:22889158188648,start sendCommand 0xf102 thread: main
+8262 [main] DEBUG meteringcomreader.ComReadDispatch  - Time:22889159919478, serialEvent: gnu.io.SerialPortEvent[source=//./COM5],2, thread: main
+8263 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:22889160583260, serialEvent: gnu.io.SerialPortEvent[source=//./COM5],2, thread: Thread-3
+8280 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:22889177547027, serialEvent: gnu.io.SerialPortEvent[source=//./COM5],1, thread: Thread-3
+8280 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:22889177660869 serialEvent loopNo:1
+8280 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:22889177842174, _readBytes size:2
+8281 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:22889177972280, 0X2,0X19,
+8283 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Size for:0x1902 : 0
+8283 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:22889181431231 serialEvent loopNo:2
+11285 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:22892182670249, _readBytes size:2
+11285 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:22892182778671, 0X0,0X0,
+29284 [main] DEBUG meteringcomreader.HubConnection  - Time:22910181979363,wait sendCommand 0x   d thread: main
+29285 [main] DEBUG meteringcomreader.HubConnection  - Time:22910182257344,start sendCommand 0x   d thread: main
+29286 [main] DEBUG meteringcomreader.ComReadDispatch  - Time:22910183680377, serialEvent: gnu.io.SerialPortEvent[source=//./COM5],2, thread: main
+0    [main] INFO  meteringcomreader.HubConnection  - Time:22988921272351,Found port COM1
+25   [main] INFO  meteringcomreader.HubConnection  - Time:22988946668007,Found port COM4
+69   [main] INFO  meteringcomreader.HubConnection  - Input BufferSize=0
+4793 [main] INFO  meteringcomreader.HubConnection  - Time:22993715036964,Found port COM5
+4842 [main] INFO  meteringcomreader.HubConnection  - Input BufferSize=0
+8068 [main] INFO  meteringcomreader.HubConnection  - Time:22996990279700,hub found:COM5hub firm ver259
+8258 [main] INFO  meteringcomreader.HubConnection  - Input BufferSize=0
+8260 [main] DEBUG meteringcomreader.HubConnection  - Time:22997182016407,wait sendCommand 0xf102 thread: main
+8260 [main] DEBUG meteringcomreader.HubConnection  - Time:22997182507617,start sendCommand 0xf102 thread: main
+8263 [main] DEBUG meteringcomreader.ComReadDispatch  - Time:22997185179909, serialEvent: gnu.io.SerialPortEvent[source=//./COM5],2, thread: main
+8264 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:22997186053606, serialEvent: gnu.io.SerialPortEvent[source=//./COM5],2, thread: Thread-3
+8280 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:22997201724144, serialEvent: gnu.io.SerialPortEvent[source=//./COM5],1, thread: Thread-3
+8280 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:22997201840697 serialEvent loopNo:1
+8280 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:22997202063263, _readBytes size:2
+8281 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:22997202149398, 0X2,0X19,
+8284 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Size for:0x1902 : 0
+8284 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:22997206486564 serialEvent loopNo:2
+8286 [main] DEBUG meteringcomreader.HubConnection  - Time:22997208149631,wait sendCommand 0x   d thread: main
+8286 [main] DEBUG meteringcomreader.HubConnection  - Time:22997208280942,start sendCommand 0x   d thread: main
+8288 [main] DEBUG meteringcomreader.ComReadDispatch  - Time:22997209668437, serialEvent: gnu.io.SerialPortEvent[source=//./COM5],2, thread: main
+9015 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:22997937503068, _readBytes size:2
+9016 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:22997937726537, 0XD,0X20,
+9016 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Size for:0x200d : 0
+9016 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:22997938223770 serialEvent loopNo:3
+9016 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:22997938430675, _readBytes size:2
+9017 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:22997938545421, 0X48,0X0,
+0    [main] INFO  meteringcomreader.HubConnection  - Time:23108262342069,Found port COM1
+27   [main] INFO  meteringcomreader.HubConnection  - Time:23108290356710,Found port COM4
+71   [main] INFO  meteringcomreader.HubConnection  - Input BufferSize=0
+4797 [main] INFO  meteringcomreader.HubConnection  - Time:23113060557690,Found port COM5
+4843 [main] INFO  meteringcomreader.HubConnection  - Input BufferSize=0
+8074 [main] INFO  meteringcomreader.HubConnection  - Time:23116337679735,hub found:COM5hub firm ver259
+8263 [main] INFO  meteringcomreader.HubConnection  - Input BufferSize=0
+8265 [main] DEBUG meteringcomreader.HubConnection  - Time:23116528480702,wait sendCommand 0xf102 thread: main
+8265 [main] DEBUG meteringcomreader.HubConnection  - Time:23116529014077,start sendCommand 0xf102 thread: main
+8268 [main] DEBUG meteringcomreader.ComReadDispatch  - Time:23116531673117, serialEvent: gnu.io.SerialPortEvent[source=//./COM5],2, thread: main
+8269 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:23116532487484, serialEvent: gnu.io.SerialPortEvent[source=//./COM5],2, thread: Thread-3
+8285 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:23116548347759, serialEvent: gnu.io.SerialPortEvent[source=//./COM5],1, thread: Thread-3
+8285 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:23116548467023 serialEvent loopNo:1
+8285 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:23116548657363, _readBytes size:2
+8286 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:23116548732054, 0X2,0X19,
+8288 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Size for:0x1902 : 0
+8289 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:23116552510246 serialEvent loopNo:2
+8291 [main] DEBUG meteringcomreader.HubConnection  - Time:23116554844925,wait sendCommand 0x   d thread: main
+8291 [main] DEBUG meteringcomreader.HubConnection  - Time:23116554980753,start sendCommand 0x   d thread: main
+8293 [main] DEBUG meteringcomreader.ComReadDispatch  - Time:23116557260318, serialEvent: gnu.io.SerialPortEvent[source=//./COM5],2, thread: main
+8685 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:23116949164114, _readBytes size:2
+8686 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:23116949268922, 0XD,0X20,
+8686 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Size for:0x200d : 0
+8686 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:23116949500221 serialEvent loopNo:3
+8686 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:23116949579429, _readBytes size:2
+8686 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:23116949628219, 0X48,0X0,
+0    [main] INFO  meteringcomreader.HubConnection  - Time:23129437143921,Found port COM1
+26   [main] INFO  meteringcomreader.HubConnection  - Time:23129463212996,Found port COM4
+69   [main] INFO  meteringcomreader.HubConnection  - Input BufferSize=0
+6293 [main] INFO  meteringcomreader.HubConnection  - Time:23135730428316,Found port COM5
+6346 [main] INFO  meteringcomreader.HubConnection  - Input BufferSize=0
+9572 [main] INFO  meteringcomreader.HubConnection  - Time:23139010066344,hub found:COM5hub firm ver259
+9762 [main] INFO  meteringcomreader.HubConnection  - Input BufferSize=0
+9764 [main] DEBUG meteringcomreader.HubConnection  - Time:23139201100419,wait sendCommand 0xf102 thread: main
+9764 [main] DEBUG meteringcomreader.HubConnection  - Time:23139201596749,start sendCommand 0xf102 thread: main
+9766 [main] DEBUG meteringcomreader.ComReadDispatch  - Time:23139203306497, serialEvent: gnu.io.SerialPortEvent[source=//./COM5],2, thread: main
+9767 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:23139204228382, serialEvent: gnu.io.SerialPortEvent[source=//./COM5],2, thread: Thread-3
+9784 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:23139221190041, serialEvent: gnu.io.SerialPortEvent[source=//./COM5],1, thread: Thread-3
+9784 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:23139221303282 serialEvent loopNo:1
+9784 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:23139221463505, _readBytes size:2
+9785 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:23139221534581, 0X2,0X19,
+9787 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Size for:0x1902 : 0
+9788 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:23139225185378 serialEvent loopNo:2
+9790 [main] DEBUG meteringcomreader.HubConnection  - Time:23139227795930,wait sendCommand 0x   d thread: main
+9791 [main] DEBUG meteringcomreader.HubConnection  - Time:23139228269672,start sendCommand 0x   d thread: main
+9793 [main] DEBUG meteringcomreader.ComReadDispatch  - Time:23139230871188, serialEvent: gnu.io.SerialPortEvent[source=//./COM5],2, thread: main
+10514 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:23139951076250, _readBytes size:2
+10515 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:23139951213283, 0XD,0X20,
+10515 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Size for:0x200d : 0
+10515 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:23139951510840 serialEvent loopNo:3
+10515 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:23139951595168, _readBytes size:2
+10515 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:23139951645162, 0X48,0X0,
+0    [main] INFO  meteringcomreader.HubConnection  - Time:23154570550399,Found port COM1
+28   [main] INFO  meteringcomreader.HubConnection  - Time:23154599149010,Found port COM4
+72   [main] INFO  meteringcomreader.HubConnection  - Input BufferSize=0
+6295 [main] INFO  meteringcomreader.HubConnection  - Time:23160865421665,Found port COM5
+6340 [main] INFO  meteringcomreader.HubConnection  - Input BufferSize=0
+9567 [main] INFO  meteringcomreader.HubConnection  - Time:23164137326822,hub found:COM5hub firm ver259
+9755 [main] INFO  meteringcomreader.HubConnection  - Input BufferSize=0
+9757 [main] DEBUG meteringcomreader.HubConnection  - Time:23164327408292,wait sendCommand 0xf102 thread: main
+9757 [main] DEBUG meteringcomreader.HubConnection  - Time:23164327955520,start sendCommand 0xf102 thread: main
+9759 [main] DEBUG meteringcomreader.ComReadDispatch  - Time:23164329839045, serialEvent: gnu.io.SerialPortEvent[source=//./COM5],2, thread: main
+9760 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:23164330385971, serialEvent: gnu.io.SerialPortEvent[source=//./COM5],2, thread: Thread-3
+9777 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:23164347179577, serialEvent: gnu.io.SerialPortEvent[source=//./COM5],1, thread: Thread-3
+9777 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:23164347294925 serialEvent loopNo:1
+9777 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:23164347479543, _readBytes size:2
+9778 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:23164347581941, 0X2,0X19,
+9780 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Size for:0x1902 : 0
+9781 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:23164351138171 serialEvent loopNo:2
+12782 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:23167352352794, _readBytes size:2
+12782 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:23167352466034, 0X0,0X0,
+23247 [main] DEBUG meteringcomreader.HubConnection  - Time:23177817278551,wait sendCommand 0x   d thread: main
+23248 [main] DEBUG meteringcomreader.HubConnection  - Time:23177817826983,start sendCommand 0x   d thread: main
+23249 [main] DEBUG meteringcomreader.ComReadDispatch  - Time:23177819573475, serialEvent: gnu.io.SerialPortEvent[source=//./COM5],2, thread: main
+0    [main] INFO  meteringcomreader.HubConnection  - Time:23216585395427,Found port COM1
+25   [main] INFO  meteringcomreader.HubConnection  - Time:23216610472745,Found port COM4
+68   [main] INFO  meteringcomreader.HubConnection  - Input BufferSize=0
+6291 [main] INFO  meteringcomreader.HubConnection  - Time:23222876845991,Found port COM5
+6343 [main] INFO  meteringcomreader.HubConnection  - Input BufferSize=0
+9576 [main] INFO  meteringcomreader.HubConnection  - Time:23226162048457,hub found:COM5hub firm ver259
+9761 [main] INFO  meteringcomreader.HubConnection  - Input BufferSize=0
+9765 [main] DEBUG meteringcomreader.HubConnection  - Time:23226349957580,wait sendCommand 0xf102 thread: main
+9765 [main] DEBUG meteringcomreader.HubConnection  - Time:23226350934579,start sendCommand 0xf102 thread: main
+9767 [main] DEBUG meteringcomreader.ComReadDispatch  - Time:23226353100903, serialEvent: gnu.io.SerialPortEvent[source=//./COM5],2, thread: main
+9767 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:23226353396352, serialEvent: gnu.io.SerialPortEvent[source=//./COM5],2, thread: Thread-3
+9785 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:23226370813683, serialEvent: gnu.io.SerialPortEvent[source=//./COM5],1, thread: Thread-3
+9785 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:23226371001915 serialEvent loopNo:1
+9786 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:23226371606968, _readBytes size:2
+9787 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:23226371757854, 0X2,0X19,
+9793 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Size for:0x1902 : 0
+9793 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:23226379146788 serialEvent loopNo:2
+9797 [main] DEBUG meteringcomreader.HubConnection  - Time:23226382765359,wait sendCommand 0x   d thread: main
+9797 [main] DEBUG meteringcomreader.HubConnection  - Time:23226382936123,start sendCommand 0x   d thread: main
+9799 [main] DEBUG meteringcomreader.ComReadDispatch  - Time:23226384865426, serialEvent: gnu.io.SerialPortEvent[source=//./COM5],2, thread: main
+10362 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:23226946992971, _readBytes size:2
+10362 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:23226947138136, 0XD,0X20,
+10362 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Size for:0x200d : 0
+10362 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:23226947483880 serialEvent loopNo:3
+10363 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:23226947654343, _readBytes size:2
+10363 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:23226947739876, 0X48,0X0,
+0    [main] INFO  meteringcomreader.HubConnection  - Time:23258131849121,Found port COM1
+28   [main] INFO  meteringcomreader.HubConnection  - Time:23258160106205,Found port COM4
+72   [main] INFO  meteringcomreader.HubConnection  - Input BufferSize=0
+4793 [main] INFO  meteringcomreader.HubConnection  - Time:23262924632819,Found port COM5
+4837 [main] INFO  meteringcomreader.HubConnection  - Input BufferSize=0
+8068 [main] INFO  meteringcomreader.HubConnection  - Time:23266199634016,hub found:COM5hub firm ver259
+8254 [main] INFO  meteringcomreader.HubConnection  - Input BufferSize=0
+8258 [main] DEBUG meteringcomreader.HubConnection  - Time:23266388519535,wait sendCommand 0xf102 thread: main
+8258 [main] DEBUG meteringcomreader.HubConnection  - Time:23266389416122,start sendCommand 0xf102 thread: main
+8260 [main] DEBUG meteringcomreader.ComReadDispatch  - Time:23266391669485, serialEvent: gnu.io.SerialPortEvent[source=//./COM5],2, thread: main
+8260 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:23266391914337, serialEvent: gnu.io.SerialPortEvent[source=//./COM5],2, thread: Thread-3
+8276 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:23266407189437, serialEvent: gnu.io.SerialPortEvent[source=//./COM5],1, thread: Thread-3
+8276 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:23266407378573 serialEvent loopNo:1
+8276 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:23266407702030, _readBytes size:2
+8277 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:23266407864362, 0X2,0X19,
+8283 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Size for:0x1902 : 0
+8283 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:23266414602765 serialEvent loopNo:2
+8287 [main] DEBUG meteringcomreader.HubConnection  - Time:23266418792659,wait sendCommand 0x   d thread: main
+8288 [main] DEBUG meteringcomreader.HubConnection  - Time:23266419043534,start sendCommand 0x   d thread: main
+8289 [main] DEBUG meteringcomreader.ComReadDispatch  - Time:23266420826166, serialEvent: gnu.io.SerialPortEvent[source=//./COM5],2, thread: main
+8816 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:23266947813662, _readBytes size:2
+8816 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:23266947937143, 0XD,0X20,
+8817 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Size for:0x200d : 0
+8817 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:23266948220545 serialEvent loopNo:3
+8817 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:23266948317823, _readBytes size:2
+8817 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:23266948419318, 0X48,0X0,
+0    [main] INFO  meteringcomreader.HubConnection  - Time:23397703761718,Found port COM1
+26   [main] INFO  meteringcomreader.HubConnection  - Time:23397729627803,Found port COM4
+70   [main] INFO  meteringcomreader.HubConnection  - Input BufferSize=0
+6293 [main] INFO  meteringcomreader.HubConnection  - Time:23403995882689,Found port COM5
+6346 [main] INFO  meteringcomreader.HubConnection  - Input BufferSize=0
+9576 [main] INFO  meteringcomreader.HubConnection  - Time:23407279343784,hub found:COM5hub firm ver259
+9763 [main] INFO  meteringcomreader.HubConnection  - Input BufferSize=0
+9767 [main] DEBUG meteringcomreader.HubConnection  - Time:23407469008131,wait sendCommand 0x 301 thread: main
+9767 [main] DEBUG meteringcomreader.HubConnection  - Time:23407470033619,start sendCommand 0x 301 thread: main
+9770 [main] DEBUG meteringcomreader.ComReadDispatch  - Time:23407472460758, serialEvent: gnu.io.SerialPortEvent[source=//./COM5],2, thread: main
+9770 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:23407472572793, serialEvent: gnu.io.SerialPortEvent[source=//./COM5],2, thread: Thread-3
+9786 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:23407489141424, serialEvent: gnu.io.SerialPortEvent[source=//./COM5],1, thread: Thread-3
+9786 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:23407489296828 serialEvent loopNo:1
+9786 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:23407489530537, _readBytes size:2
+9787 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:23407489641368, 0X1,0X3,
+9792 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Size for:0x301 : 2
+9792 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:23407495224178, _readBytes size:2
+9792 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:23407495314830, 0X1,0X0,
+9793 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:23407495631964 serialEvent loopNo:2
+9793 [main] DEBUG meteringcomreader.HubConnection  - Time:23407495693704,done receiveAck 0x 301 thread: main
+9793 [main] DEBUG meteringcomreader.HubConnection  - Time:23407495917173,wait sendCommand 0x 201 thread: main
+9793 [main] DEBUG meteringcomreader.HubConnection  - Time:23407496065951,start sendCommand 0x 201 thread: main
+9794 [main] DEBUG meteringcomreader.ComReadDispatch  - Time:23407497470312, serialEvent: gnu.io.SerialPortEvent[source=//./COM5],2, thread: main
+9811 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:23407513904319, _readBytes size:2
+9811 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:23407514041352, 0X1,0X2,
+9811 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Size for:0x201 : 2
+9811 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:23407514443416, _readBytes size:2
+9812 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:23407514518106, 0X3,0X1,
+9812 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:23407514740973 serialEvent loopNo:3
+9812 [main] DEBUG meteringcomreader.HubConnection  - Time:23407514775909,done receiveAck 0x 201 thread: main
+9813 [main] DEBUG meteringcomreader.HubConnection  - Time:23407516073655,wait sendCommand 0x 202 thread: main
+9814 [main] DEBUG meteringcomreader.HubConnection  - Time:23407516227855,start sendCommand 0x 202 thread: main0XFF,0XFF,0XFF,0XFF,
+9815 [main] DEBUG meteringcomreader.ComReadDispatch  - Time:23407517920136, serialEvent: gnu.io.SerialPortEvent[source=//./COM5],2, thread: main
+9833 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:23407535727784, _readBytes size:2
+9833 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:23407535853674, 0X2,0X2,
+9833 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Size for:0x202 : 1
+9833 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:23407536158459, _readBytes size:1
+9833 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:23407536212369, 0X1,
+9833 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:23407536335548 serialEvent loopNo:4
+9834 [main] DEBUG meteringcomreader.HubConnection  - Time:23407537069803,done receiveAck 0x 202 thread: main
+9834 [main] DEBUG meteringcomreader.HubConnection  - Time:23407537244482,wait sendCommand 0x 21a thread: main
+9834 [main] DEBUG meteringcomreader.HubConnection  - Time:23407537395068,start sendCommand 0x 21a thread: main
+9836 [main] DEBUG meteringcomreader.ComReadDispatch  - Time:23407538912368, serialEvent: gnu.io.SerialPortEvent[source=//./COM5],2, thread: main
+9854 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:23407556680563, _readBytes size:2
+9854 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:23407556783865, 0X1A,0XF2,
+9854 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Size for:0xf21a : 0
+9854 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:23407557038957 serialEvent loopNo:5
+9856 [main] DEBUG meteringcomreader.HubConnection  - Time:23407559237205,wait sendCommand 0xf202 thread: main
+9856 [main] DEBUG meteringcomreader.HubConnection  - Time:23407559381165,start sendCommand 0xf202 thread: main
+9858 [main] DEBUG meteringcomreader.ComReadDispatch  - Time:23407560796971, serialEvent: gnu.io.SerialPortEvent[source=//./COM5],2, thread: main
+9874 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:23407576687665, _readBytes size:2
+9874 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:23407576808434, 0X2,0XA,
+9874 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Size for:0xa02 : 0
+9874 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:23407577022567 serialEvent loopNo:6
+9874 [main] DEBUG meteringcomreader.HubConnection  - Time:23407577050877,done receiveAck 0x a02 thread: main
+12875 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:23410577771279, _readBytes size:2
+12875 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:23410577912528, 0X0,0X0,
+0    [main] INFO  meteringcomreader.HubConnection  - Time:23461309577152,Found port COM1
+26   [main] INFO  meteringcomreader.HubConnection  - Time:23461336149183,Found port COM4
+69   [main] INFO  meteringcomreader.HubConnection  - Input BufferSize=0
+6292 [main] INFO  meteringcomreader.HubConnection  - Time:23467602692891,Found port COM5
+6342 [main] INFO  meteringcomreader.HubConnection  - Input BufferSize=0
+9571 [main] INFO  meteringcomreader.HubConnection  - Time:23470881207250,hub found:COM5hub firm ver259
+9760 [main] INFO  meteringcomreader.HubConnection  - Input BufferSize=0
+9762 [main] DEBUG meteringcomreader.HubConnection  - Time:23471071832936,wait sendCommand 0x 301 thread: main
+9762 [main] DEBUG meteringcomreader.HubConnection  - Time:23471072386790,start sendCommand 0x 301 thread: main
+9764 [main] DEBUG meteringcomreader.ComReadDispatch  - Time:23471074136594, serialEvent: gnu.io.SerialPortEvent[source=//./COM5],2, thread: main
+9765 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:23471075222618, serialEvent: gnu.io.SerialPortEvent[source=//./COM5],2, thread: Thread-3
+9781 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:23471091116022, serialEvent: gnu.io.SerialPortEvent[source=//./COM5],1, thread: Thread-3
+9781 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:23471091233479 serialEvent loopNo:1
+9781 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:23471091440685, _readBytes size:2
+9782 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:23471091525615, 0X1,0X3,
+9785 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Size for:0x301 : 2
+9785 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:23471095301097, _readBytes size:2
+9785 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:23471095355007, 0X1,0X0,
+9785 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:23471095561911 serialEvent loopNo:2
+9785 [main] DEBUG meteringcomreader.HubConnection  - Time:23471095608291,done receiveAck 0x 301 thread: main
+9785 [main] DEBUG meteringcomreader.HubConnection  - Time:23471095732374,wait sendCommand 0x 201 thread: main
+9785 [main] DEBUG meteringcomreader.HubConnection  - Time:23471095865793,start sendCommand 0x 201 thread: main
+9787 [main] DEBUG meteringcomreader.ComReadDispatch  - Time:23471097228592, serialEvent: gnu.io.SerialPortEvent[source=//./COM5],2, thread: main
+9803 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:23471113552371, _readBytes size:2
+9803 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:23471113658985, 0X1,0X2,
+9803 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Size for:0x201 : 2
+9803 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:23471113951422, _readBytes size:2
+9804 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:23471114004429, 0X3,0X1,
+9804 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:23471114167964 serialEvent loopNo:3
+9804 [main] DEBUG meteringcomreader.HubConnection  - Time:23471114189348,done receiveAck 0x 201 thread: main
+9805 [main] DEBUG meteringcomreader.HubConnection  - Time:23471114994679,wait sendCommand 0x 202 thread: main
+9805 [main] DEBUG meteringcomreader.HubConnection  - Time:23471115105811,start sendCommand 0x 202 thread: main0XFF,0XFF,0XFF,0XFF,
+9806 [main] DEBUG meteringcomreader.ComReadDispatch  - Time:23471116661662, serialEvent: gnu.io.SerialPortEvent[source=//./COM5],2, thread: main
+9824 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:23471134478647, _readBytes size:2
+9824 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:23471134579840, 0X2,0X2,
+9824 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Size for:0x202 : 1
+9824 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:23471134820476, _readBytes size:1
+9824 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:23471134868964, 0X1,
+9824 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:23471134974374 serialEvent loopNo:4
+9825 [main] DEBUG meteringcomreader.HubConnection  - Time:23471135010816,done receiveAck 0x 202 thread: main
+9825 [main] DEBUG meteringcomreader.HubConnection  - Time:23471135165618,wait sendCommand 0x 21a thread: main
+9825 [main] DEBUG meteringcomreader.HubConnection  - Time:23471135260788,start sendCommand 0x 21a thread: main
+9826 [main] DEBUG meteringcomreader.ComReadDispatch  - Time:23471136582327, serialEvent: gnu.io.SerialPortEvent[source=//./COM5],2, thread: main
+9845 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:23471155468771, _readBytes size:2
+9845 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:23471155575687, 0X1A,0XF2,
+9845 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Size for:0xf21a : 0
+9845 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:23471155810299 serialEvent loopNo:5
+9848 [main] DEBUG meteringcomreader.HubConnection  - Time:23471158152507,wait sendCommand 0xf202 thread: main
+9848 [main] DEBUG meteringcomreader.HubConnection  - Time:23471158272674,start sendCommand 0xf202 thread: main
+9849 [main] DEBUG meteringcomreader.ComReadDispatch  - Time:23471159618910, serialEvent: gnu.io.SerialPortEvent[source=//./COM5],2, thread: main
+9865 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:23471175504484, _readBytes size:2
+9865 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:23471175622844, 0X2,0XA,
+9865 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Size for:0xa02 : 0
+9865 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:23471175848120 serialEvent loopNo:6
+9865 [main] DEBUG meteringcomreader.HubConnection  - Time:23471175878538,done receiveAck 0x a02 thread: main
+12868 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:23474177223870, _readBytes size:2
+12868 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:23474177361505, 0X0,0X0,
+0    [main] INFO  meteringcomreader.HubConnection  - Time:23497867763271,Found port COM1
+28   [main] INFO  meteringcomreader.HubConnection  - Time:23497896633840,Found port COM4
+72   [main] INFO  meteringcomreader.HubConnection  - Input BufferSize=0
+4809 [main] INFO  meteringcomreader.HubConnection  - Time:23502677707701,Found port COM5
+4853 [main] INFO  meteringcomreader.HubConnection  - Input BufferSize=0
+8085 [main] INFO  meteringcomreader.HubConnection  - Time:23505953567839,hub found:COM5hub firm ver259
+8268 [main] INFO  meteringcomreader.HubConnection  - Input BufferSize=0
+8272 [main] DEBUG meteringcomreader.HubConnection  - Time:23506140160241,wait sendCommand 0x 301 thread: main
+8272 [main] DEBUG meteringcomreader.HubConnection  - Time:23506141105617,start sendCommand 0x 301 thread: main
+8275 [main] DEBUG meteringcomreader.ComReadDispatch  - Time:23506143652621, serialEvent: gnu.io.SerialPortEvent[source=//./COM5],2, thread: main
+8275 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:23506143652621, serialEvent: gnu.io.SerialPortEvent[source=//./COM5],2, thread: Thread-3
+8290 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:23506158481386, serialEvent: gnu.io.SerialPortEvent[source=//./COM5],1, thread: Thread-3
+8290 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:23506158593723 serialEvent loopNo:1
+8290 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:23506158911458, _readBytes size:2
+8292 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:23506158988257, 0X1,0X3,
+8295 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Size for:0x301 : 2
+8295 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:23506163721463, _readBytes size:2
+8295 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:23506163773867, 0X1,0X0,
+8295 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:23506163976856 serialEvent loopNo:2
+8295 [main] DEBUG meteringcomreader.HubConnection  - Time:23506164029862,done receiveAck 0x 301 thread: main
+8295 [main] DEBUG meteringcomreader.HubConnection  - Time:23506164176533,wait sendCommand 0x 201 thread: main
+8295 [main] DEBUG meteringcomreader.HubConnection  - Time:23506164274413,start sendCommand 0x 201 thread: main
+8297 [main] DEBUG meteringcomreader.ComReadDispatch  - Time:23506165622154, serialEvent: gnu.io.SerialPortEvent[source=//./COM5],2, thread: main
+8315 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:23506183584906, _readBytes size:2
+8315 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:23506183690918, 0X1,0X2,
+8315 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Size for:0x201 : 2
+8315 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:23506184013774, _readBytes size:2
+8315 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:23506184068587, 0X3,0X1,
+8315 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:23506184220377 serialEvent loopNo:3
+8316 [main] DEBUG meteringcomreader.HubConnection  - Time:23506184635090,done receiveAck 0x 201 thread: main
+8317 [main] DEBUG meteringcomreader.HubConnection  - Time:23506185542218,wait sendCommand 0x 202 thread: main
+8317 [main] DEBUG meteringcomreader.HubConnection  - Time:23506185660277,start sendCommand 0x 202 thread: main0XFF,0XFF,0XFF,0XFF,
+8318 [main] DEBUG meteringcomreader.ComReadDispatch  - Time:23506187208899, serialEvent: gnu.io.SerialPortEvent[source=//./COM5],2, thread: main
+8337 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:23506205576425, _readBytes size:2
+8337 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:23506205694484, 0X2,0X2,
+8337 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Size for:0x202 : 1
+8337 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:23506205974874, _readBytes size:1
+8337 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:23506206033904, 0X1,
+8337 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:23506206151661 serialEvent loopNo:4
+8337 [main] DEBUG meteringcomreader.HubConnection  - Time:23506206190211,done receiveAck 0x 202 thread: main
+11340 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:23509207637038, _readBytes size:2
+11340 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:23509207742749, 0X0,0X0,
+11365 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:23509232733932, serialEvent: gnu.io.SerialPortEvent[source=//./COM5],2, thread: Thread-3
+69491 [main] DEBUG meteringcomreader.HubConnection  - Time:23567357723880,wait sendCommand 0x 21a thread: main
+69491 [main] DEBUG meteringcomreader.HubConnection  - Time:23567357956083,start sendCommand 0x 21a thread: main
+69492 [main] DEBUG meteringcomreader.ComReadDispatch  - Time:23567359373395, serialEvent: gnu.io.SerialPortEvent[source=//./COM5],2, thread: main
+69492 [main] DEBUG meteringcomreader.HubConnection  - Time:23567359657098,wait sendCommand 0xf202 thread: main
+69493 [main] DEBUG meteringcomreader.HubConnection  - Time:23567359811900,start sendCommand 0xf202 thread: main
+69494 [main] DEBUG meteringcomreader.ComReadDispatch  - Time:23567361375882, serialEvent: gnu.io.SerialPortEvent[source=//./COM5],2, thread: main
+69496 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:23567363020276, serialEvent: gnu.io.SerialPortEvent[source=//./COM5],2, thread: Thread-3
+69496 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:23567363114844, serialEvent: gnu.io.SerialPortEvent[source=//./COM5],1, thread: Thread-3
+69496 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:23567363173874 serialEvent loopNo:1
+69496 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:23567363267237, _readBytes size:2
+69496 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:23567363315424, 0X1A,0XF2,
+69496 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Size for:0xf21a : 0
+69496 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:23567363544013 serialEvent loopNo:2
+69497 [main] WARN  meteringcomreader.HubConnection  - 
+meteringcomreader.exceptions.MeteringSessionException: Expected command ack: 0x2 found: 0x1a
+	at meteringcomreader.ComResp.receiveAck(ComResp.java:189)
+	at meteringcomreader.HubConnection.receiveAck(HubConnection.java:683)
+	at meteringcomreader.HubFlashSession.close(HubFlashSession.java:229)
+	at meteringcomreader.HubConnection.close(HubConnection.java:325)
+	at meteringcomreader.TestHubFlashSession.main(TestHubFlashSession.java:127)
+69511 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:23567378492644, _readBytes size:2
+69512 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:23567378623352, 0X2,0XA,
+69512 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Size for:0xa02 : 0
+69512 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:23567378878444 serialEvent loopNo:3
+72513 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:23570380075298, _readBytes size:2
+72513 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:23570380213235, 0X0,0X0,
