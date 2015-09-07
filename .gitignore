@@ -1,4 +1,8 @@
 /build
 /nbproject
+<<<<<<< HEAD
 /dist/
 nbbuild.xml
+=======
+/dist/
+>>>>>>> origin/master
