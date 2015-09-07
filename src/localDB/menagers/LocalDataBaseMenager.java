@@ -19,6 +19,7 @@ import localDB.SetupDB;
 import project.Settings;
 import project.data.Datagram;
 import project.data.Datagram;
+import project.data.Session;
 
 /**
  *
@@ -40,7 +41,7 @@ public class LocalDataBaseMenager {
         DBPatch = dBPatch;
     }
 
-    public LocalDataBaseMenager() throws SQLException {
+    public LocalDataBaseMenager() throws SQLException, ClassNotFoundException {
         this.setDBPatch(Settings.getString("DBPath"));
         datagramMenager = new DatagramMenager(getConnection());
         sessionMenager = new SessionMenager(getConnection());
@@ -72,10 +73,18 @@ public class LocalDataBaseMenager {
         }
     }
 
-    public boolean saveDatagram(Datagram datagram)
+    public boolean createDatagram(Datagram datagram)
             throws Exception {
         if (testBDExists() == true) {
-            return datagramMenager.saveDatagram(datagram);
+            return getDatagramMenager().createDatagram(datagram);
+        }
+        return false;
+    }
+    
+    public boolean updateDatagram(Datagram datagram, String error)
+            throws Exception {
+        if (testBDExists() == true) {
+            return getDatagramMenager().updateDatagram(datagram, error);
         }
         return false;
     }
@@ -83,9 +92,61 @@ public class LocalDataBaseMenager {
     public Set<Datagram> getDatagramsToSend()
             throws ClassNotFoundException, SQLException {
         if (testBDExists() == true) {
-            return datagramMenager.getDatagramsToSend();
+            return getDatagramMenager().getDatagramsToSend();
         }
         return null;
+    }  
+
+    public boolean createSession(Session session)
+            throws Exception {
+        if (testBDExists() == true) {
+            return getSessionMenager().createSession(session);
+        }
+        return false;
+    }
+
+    public boolean updateSession(Session session)
+            throws Exception {
+        if (testBDExists() == true) {
+            return getSessionMenager().updateSession(session);
+        }
+        return false;
+    }
+
+    public boolean closeSession(Session session)
+            throws Exception {
+        if (testBDExists() == true) {
+            return getSessionMenager().closeSession(session);
+        }
+        return false;
+    }
+
+    /**
+     * @return the datagramMenager
+     */
+    public DatagramMenager getDatagramMenager() {
+        return datagramMenager;
+    }
+
+    /**
+     * @param datagramMenager the datagramMenager to set
+     */
+    public void setDatagramMenager(DatagramMenager datagramMenager) {
+        this.datagramMenager = datagramMenager;
+    }
+
+    /**
+     * @return the sessionMenager
+     */
+    public SessionMenager getSessionMenager() {
+        return sessionMenager;
+    }
+
+    /**
+     * @param sessionMenager the sessionMenager to set
+     */
+    public void setSessionMenager(SessionMenager sessionMenager) {
+        this.sessionMenager = sessionMenager;
     }
 
 }

@@ -5,15 +5,11 @@
  */
 package localDB.menagers;
 
-import java.math.BigDecimal;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.HashSet;
-import java.util.Set;
-import project.data.Session;
 import project.data.Session;
 
 /**
@@ -42,7 +38,7 @@ public class SessionMenager {
         this.connection = connection;
     }
 
-    public boolean saveSession(Session session)
+    public boolean createSession(Session session)
             throws ClassNotFoundException, SQLException, Exception {
         if (session.getId() == null) {
             String sql = "INSERT INTO Session(d_enqueued,d_received,d_send_ok,d_send_failures) VALUES (?,?,?,?)";
@@ -70,21 +66,6 @@ public class SessionMenager {
         }
     }
 
-    // czy to będzie potrzebne?
-//    public Session getSession(BigDecimal id)
-//            throws ClassNotFoundException, SQLException, Exception {
-//        Session session = null;
-//        String sql = "select * from Session_statistics where id = ?";
-//        PreparedStatement cs = getConnection().prepareStatement(sql);
-//        cs.setBigDecimal(1, id);
-//        ResultSet rs = cs.executeQuery();
-//        while (rs.next()) {
-//            session = new Session(rs.getBigDecimal(1));
-//        }
-//        rs.close();
-//        cs.close();
-//        return session;
-//    }
 
     public boolean updateSession(Session session) throws SQLException{
         if (session.getId() != null) {

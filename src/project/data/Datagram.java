@@ -17,11 +17,18 @@ public class Datagram {
     private final String data;
     private boolean dataSend;
 
+     public Datagram(BigDecimal id, String data, boolean dataSend) {
+        this.id = id;
+        this.data = data;
+        this.dataSend = dataSend;
+    }
+
     public Datagram(BigDecimal id, String data) {
         this.id = id;
         this.data = data;
         this.dataSend = false;
     }
+
 
     public Datagram(String data) {
         this.id = null;
