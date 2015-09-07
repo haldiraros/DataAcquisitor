@@ -8,7 +8,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="569.0" prefWidth="756.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane id="AnchorPane" prefHeight="569.0" prefWidth="756.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hubGui.views.MainFormController">
     <stylesheets>
         <URL value="@mainform.css" />
     </stylesheets>
@@ -23,9 +23,9 @@
                         <Label layoutX="14.0" layoutY="14.0" text="Registered chips" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0" />
                         <ToolBar layoutX="14.0" layoutY="515.0" prefHeight="40.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
                           <items>
-                            <Button fx:id="registerButton" mnemonicParsing="false" text="Register" />
-                              <Button fx:id="unregisterButton" mnemonicParsing="false" text="Unregister" />
-                              <Button fx:id="readButton" mnemonicParsing="false" text="Read" />
+                            <Button fx:id="registerButton" mnemonicParsing="false" onAction="#registerActionHandler" text="Register" />
+                              <Button fx:id="unregisterButton" mnemonicParsing="false" onAction="#unregisterActionHandler" text="Unregister" />
+                              <Button fx:id="readButton" mnemonicParsing="false" onAction="#readActionHandler" text="Read" />
                           </items>
                         </ToolBar>
                      </children>
@@ -60,18 +60,19 @@
               <menus>
                   <Menu mnemonicParsing="false" text="App">
                     <items>
-                      <MenuItem fx:id="closeMenuItem" mnemonicParsing="false" text="Close" />
+                      <MenuItem fx:id="closeMenuItem" mnemonicParsing="false" onAction="#closeActionHandler" text="Close" />
                     </items>
                   </Menu>
                 <Menu mnemonicParsing="false" text="Hub">
                   <items>
-                    <MenuItem fx:id="registerMenuItem" mnemonicParsing="false" text="Register Chip" />
-                        <MenuItem fx:id="unregisterMenuItem" mnemonicParsing="false" text="Unregister Chip" />
+                    <MenuItem fx:id="registerMenuItem" mnemonicParsing="false" onAction="#registerActionHandler" text="Register Chip" />
+                    <MenuItem fx:id="unregisterMenuItem" mnemonicParsing="false" onAction="#unregisterActionHandler" text="Unregister Chip" />
+                    <MenuItem fx:id="readMenuItem" mnemonicParsing="false" onAction="#readActionHandler" text="Read" />
                   </items>
                 </Menu>
                 <Menu mnemonicParsing="false" text="Help">
                   <items>
-                    <MenuItem fx:id="aboutMenuItem" mnemonicParsing="false" text="About" />
+                    <MenuItem fx:id="aboutMenuItem" mnemonicParsing="false" onAction="#aboutActionHandler" text="About" />
                   </items>
                 </Menu>
               </menus>

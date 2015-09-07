@@ -5,7 +5,7 @@
  */
 package hubGui;
 
-import hubGui.views.MainFormController;
+import com.sun.javafx.runtime.VersionInfo;
 import java.io.IOException;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -21,8 +21,9 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) {
         try {
+            System.out.println("JavaFX runtime version: " + VersionInfo.getRuntimeVersion());
+            
             FXMLLoader loader = new FXMLLoader();
-            loader.setController(new MainFormController());
             loader.setLocation(Main.class.getResource("views/MainForm.fxml"));
             Scene scene = new Scene(loader.load());
             primaryStage.setScene(scene);
