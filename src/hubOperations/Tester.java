@@ -18,7 +18,9 @@ package hubOperations;
 
 import gnu.io.SerialPortEvent;
 import hubLibrary.meteringcomreader.LoggerFlashSession;
+import hubLibrary.meteringcomreader.TestFlashSession;
 import hubLibrary.meteringcomreader.exceptions.MeteringSessionException;
+import org.apache.log4j.PropertyConfigurator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -29,10 +31,38 @@ import org.slf4j.LoggerFactory;
 public class Tester {
     private static final Logger lgr = LoggerFactory.getLogger(Tester.class);
     
-    public static void main(String[] args) throws MeteringSessionException{
+    public static void main(String[] args) throws MeteringSessionException,InterruptedException, Exception{
+        PropertyConfigurator.configure(Tester.class.getResource("log4j.properties"));
         
         System.out.println("SerialPortEvent.DATA_AVAILABLE="+SerialPortEvent.DATA_AVAILABLE);
         System.out.println("SerialPortEvent.OUTPUT_BUFFER_EMPTY ="+SerialPortEvent.OUTPUT_BUFFER_EMPTY);
+        
+        HubControl hubC = new HubControl(0, "COM5");
+        hubC.openHubConn();
+        
+        long[] listLoggers1= hubC.getRegisteredLoggersList();
+        if(listLoggers1!=null)
+            System.out.println("Regstred loggers count:"+listLoggers1.length);
+        for (int i=0; i<listLoggers1.length; i++){
+            System.out.println("Regstred logger:0x"+Long.toHexString(listLoggers1[i])); 
+        }
+         /* Logger registering unregistering test */
+        /*
+        //hubC.unregisterAllLoggers();
+        //System.out.println(Long.toHexString(hubC.checkLoggerID()));
+        //hubC.autoRegisterLogger();
+        long[] listLoggers2= hubC.getRegisteredLoggersList();
+        if(listLoggers2!=null)
+            System.out.println("Regstred loggers count:"+listLoggers2.length);
+        for (int i=0; i<listLoggers2.length; i++){
+            System.out.println("Regstred logger:0x"+Long.toHexString(listLoggers2[i])); 
+        }
+        */
+        
+        //hubC.readPacketsHubFlash();
+        //hubC.readPacketsLoggerFlash();
+        
+        hubC.closeHubConn();
         
     }
     

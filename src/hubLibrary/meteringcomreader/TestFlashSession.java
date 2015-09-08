@@ -67,7 +67,7 @@ public class TestFlashSession {
             hubSession.close();
              */
 
-            hc.closeAllSessions();//test czy przypadkiem nie jest niezamknięta sesja
+           // hc.closeAllSessions();//test czy przypadkiem nie jest niezamknięta sesja
             //
             LoggerFlashSession loggerFlashSession = hc.createLoggerFlashSession(new Timestamp(0));
             DataPacket packet=null;

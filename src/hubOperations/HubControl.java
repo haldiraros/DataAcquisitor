@@ -115,6 +115,9 @@ public class HubControl {
             System.out.println("Removing logger:0x"+Long.toHexString(currentLoggers[i]));
             unregisterLogger(currentLoggers[i]);
             removalCount++;
+            try{
+            Thread.sleep(10000);
+            }catch(Exception e){}
         }
         return removalCount;
     }
@@ -165,7 +168,7 @@ public class HubControl {
                 }
         }finally{
             try{
-                hubConn.closeLoggerFlashSession();
+                if(hubConn!=null) hubConn.closeLoggerFlashSession();
             }catch(Exception e){
                 System.out.println("Error closing Logger Flash Session "+e.getMessage());
             }
