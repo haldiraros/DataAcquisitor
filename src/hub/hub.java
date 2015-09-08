@@ -16,9 +16,13 @@
  */
 package hub;
 
+import hubLibrary.meteringcomreader.DataPacket;
 import hubLibrary.meteringcomreader.Hub;
 import hubLibrary.meteringcomreader.HubConnection;
+import hubLibrary.meteringcomreader.HubFlashSession;
+import hubLibrary.meteringcomreader.LoggerFlashSession;
 import hubLibrary.meteringcomreader.exceptions.MeteringSessionException;
+import java.sql.Timestamp;
 
 /**
  *
@@ -107,15 +111,7 @@ public class hub {
             System.out.println("error closing sessions "+e.getMessage());
         }
     }
-    
-    public void readPacketsLoggerFlash(){
-        
-    }
-    
-    public void readPacketsHubFlash(){
-        
-    }
-    
+      
     public long checkLoggerID(){
         long loggerID=-1;
         try{
@@ -139,7 +135,44 @@ public class hub {
         return logID!=-1 ? true : false ;
     }
     
-    //TODO: Session starters, or rather start and read right away aside from radio...
     //TODO: Somehow have radio on idle loop or sth that can be broken when needed...
+    public void processDataPacket (DataPacket pck){ //TODO: all the packet processing!!
+        System.out.println(pck);
+    }
     
+    public void readPacketsLoggerFlash() throws MeteringSessionException{
+        DataPacket packet=null;
+        try{
+            LoggerFlashSession loggerFlashSession = hubConn.createLoggerFlashSession(new Timestamp(0));
+            while ((packet = loggerFlashSession.getNextPacket(100000))!=null){
+                processDataPacket(packet);
+                }
+        }finally{
+            try{
+                hubConn.closeLoggerFlashSession();
+            }catch(Exception e){
+                System.out.println("Error closing Logger Flash Session "+e.getMessage());
+            }
+        }
+    }
+    
+    public void readPacketsHubFlash() throws MeteringSessionException{
+        DataPacket packet=null;
+        int packetCount =0;
+        try{
+            HubFlashSession hubFlashSession = hubConn.createHubFlashSession(0xFFFFFFFF);
+            while ((packet = hubFlashSession.getPrevPacket())!=null){
+                processDataPacket(packet);
+                packetCount++;
+                if (packetCount==10000)
+                    break;
+            }
+        }finally{
+            try{
+                hubConn.closeHubFlashSession();
+            }catch(Exception e){
+                System.out.println("Error closing Hub Flash Session "+e.getMessage());
+            }
+        }
+    }
 }
