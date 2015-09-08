@@ -99,4 +99,15 @@ public class hub {
         return removalCount;
     }
     
+    public void closeAllSesssions(){
+        try{
+            hubConn.closeAllSessions();
+        }catch(Exception e)
+        {
+            System.out.println("error closing sessions "+e.getMessage());
+        }
+    }
+    
+    
+    
 }

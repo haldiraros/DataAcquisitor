@@ -29,7 +29,7 @@ public class I18nHelper {
         return rb.getString(message);
     }
 static{
-    rb = ResourceBundle.getBundle("meteringcomreader.exceptions.messages");
+    rb = ResourceBundle.getBundle("hubLibrary.meteringcomreader.exceptions.messages");
 }    
     
 }

@@ -98,11 +98,12 @@ public class TestHubFlashSession {
 */
 //            hc.createRadioSession(89);
 
-           
+   
+
             HubFlashSession loggerFlashSession = hc.createHubFlashSession(0xFFFFFFFF);
 //            LoggerFlashSession loggerFlashSession = hc.createLoggerFlashSession(new Timestamp(0));
             
-            System.out.println("bla");
+
                     DataPacket packet=null;
             int packetCount =0;
             while ((packet = loggerFlashSession.getPrevPacket())!=null){
@@ -126,6 +127,7 @@ System.out.println("koniec");
             finally{
 //                Thread.sleep(10000);
                 if (hc!=null)
+                    System.out.println("test");
                     hc.close();
             }
             

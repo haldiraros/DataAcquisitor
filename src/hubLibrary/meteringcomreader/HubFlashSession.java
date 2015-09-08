@@ -18,6 +18,7 @@
 package hubLibrary.meteringcomreader;
 
 import hubLibrary.meteringcomreader.exceptions.MeteringSessionException;
+import hubLibrary.meteringcomreader.exceptions.MeteringSessionNoMoreDataException;
 import java.sql.Timestamp;
 import hubLibrary.meteringcomreader.exceptions.MeteringSessionOperationAlreadyInProgressException;
 import hubLibrary.meteringcomreader.exceptions.MeteringSessionTimeoutException;
@@ -84,7 +85,11 @@ public class HubFlashSession extends MeteringSession{
     }
     
     public DataPacket getPrevPacket() throws MeteringSessionException{
-        return getPacket(Utils.getPrevHubFlashSessionReq, Utils.getPrevHubFlashSessionRes, 1);        
+        try{
+            return getPacket(Utils.getPrevHubFlashSessionReq, Utils.getPrevHubFlashSessionRes, 1);
+        }catch (MeteringSessionNoMoreDataException e){
+            return null;
+        }
     }
         
     /**

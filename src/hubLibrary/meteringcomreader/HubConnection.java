@@ -20,6 +20,7 @@ package hubLibrary.meteringcomreader;
 import hubLibrary.meteringcomreader.exceptions.MeteringSessionSPException;
 import hubLibrary.meteringcomreader.exceptions.MeteringSessionException;
 import gnu.io.*;
+import hubLibrary.meteringcomreader.exceptions.MeteringSessionNoMoreDataException;
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.IOException;
@@ -682,6 +683,8 @@ public class HubConnection implements Runnable{
             ComResp rs = crd.getNextResp();
             rs.receiveAck(ack); //TODO:P sprawdzić testowanie
             ret = rs.receiveData();
+        }catch(MeteringSessionNoMoreDataException e){
+            throw e;
         }
         finally{
             canSendCommand=true;
