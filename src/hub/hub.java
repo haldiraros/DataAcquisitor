@@ -108,6 +108,38 @@ public class hub {
         }
     }
     
+    public void readPacketsLoggerFlash(){
+        
+    }
     
+    public void readPacketsHubFlash(){
+        
+    }
+    
+    public long checkLoggerID(){
+        long loggerID=-1;
+        try{
+            loggerID= hubConn.getLoggerId();
+        }catch(Exception e){
+            System.out.println("error getting LoggerId "+e.getMessage());
+        }
+        return loggerID;
+        
+    }
+    
+    public boolean autoRegisterLogger(){
+        long logID = -1;
+        try{
+            logID = checkLoggerID();
+            hubConn.registerLogger(logID);
+        }catch(Exception e){
+            System.out.println("Error on Logger autoregister "+e.getMessage());
+            return false;
+        }
+        return logID!=-1 ? true : false ;
+    }
+    
+    //TODO: Session starters, or rather start and read right away aside from radio...
+    //TODO: Somehow have radio on idle loop or sth that can be broken when needed...
     
 }
