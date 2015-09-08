@@ -61,7 +61,9 @@ public class Tester {
         
         //hubC.readPacketsHubFlash();
         //hubC.readPacketsLoggerFlash();
-        
+        hubC.startRecievingInRadioSession();
+        Thread.sleep(1000000);
+        hubC.stopRecievingInRadioSession();
         hubC.closeHubConn();
         
     }

@@ -22,6 +22,7 @@ import hubLibrary.meteringcomreader.HubConnection;
 import hubLibrary.meteringcomreader.HubFlashSession;
 import hubLibrary.meteringcomreader.LoggerFlashSession;
 import hubLibrary.meteringcomreader.exceptions.MeteringSessionException;
+import static hubOperations.RadioSessionReciever.createRadioSessionReciever;
 import java.sql.Timestamp;
 
 /**
@@ -33,6 +34,7 @@ public class HubControl {
    
     HubConnection hubConn=null;
     Hub hub =null;
+    RadioSessionReciever RSRecv=null;
 
     /**
      * Konstruktor klasy hub wykorzystującej klasę Hub z biblioteki
@@ -193,5 +195,22 @@ public class HubControl {
                 System.out.println("Error closing Hub Flash Session "+e.getMessage());
             }
         }
+    }
+    
+    public void startRecievingInRadioSession() throws MeteringSessionException{
+       try{
+           //hubConn.createRadioSession(0xFFFFFFFF);
+           RSRecv = createRadioSessionReciever(this);
+           System.out.println("Started radio session recieving ");
+           
+       }catch(Exception e){System.out.println("Error in radio session "+e.getMessage());}
+    }
+    
+    public void stopRecievingInRadioSession() throws MeteringSessionException{
+        if(RSRecv!=null){
+            RSRecv.close();
+            //hubConn.closeRadioSession();
+        }
+        RSRecv = null;
     }
 }
