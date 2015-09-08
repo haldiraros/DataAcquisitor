@@ -14,12 +14,26 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package hub;
+package hubOperations;
+
+import gnu.io.SerialPortEvent;
+import hubLibrary.meteringcomreader.LoggerFlashSession;
+import hubLibrary.meteringcomreader.exceptions.MeteringSessionException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  *
  * @author Haros
  */
-public class radioSessionReciever {
+public class Tester {
+    private static final Logger lgr = LoggerFactory.getLogger(Tester.class);
+    
+    public static void main(String[] args) throws MeteringSessionException{
+        
+        System.out.println("SerialPortEvent.DATA_AVAILABLE="+SerialPortEvent.DATA_AVAILABLE);
+        System.out.println("SerialPortEvent.OUTPUT_BUFFER_EMPTY ="+SerialPortEvent.OUTPUT_BUFFER_EMPTY);
+        
+    }
     
 }

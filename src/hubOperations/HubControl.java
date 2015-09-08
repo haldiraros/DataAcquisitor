@@ -14,7 +14,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package hub;
+package hubOperations;
 
 import hubLibrary.meteringcomreader.DataPacket;
 import hubLibrary.meteringcomreader.Hub;
@@ -28,12 +28,28 @@ import java.sql.Timestamp;
  *
  * @author Haros
  */
-public class hub {
+public class HubControl {
 
    
     HubConnection hubConn=null;
     Hub hub =null;
 
+    /**
+     * Konstruktor klasy hub wykorzystującej klasę Hub z biblioteki
+     * @param hubId  identyfikator koncentratora
+     * @param comPortName nazwa portu, do którego podłączony jest koncentrator
+     */
+    public HubControl(long hubId, String comPortName){
+        this.hub= new Hub(hubId,comPortName);
+    }
+    /**
+     * Konstruktor klasy hub wykorzystującej klasę Hub z biblioteki
+     * @param hexHubId heksadecymalny identyfikator koncentratora
+     * @param comPortName nazwa portu, do którego podłączony jest koncentrator
+     */
+    public HubControl(String hexHubId, String comPortName){
+        this.hub= new Hub(hexHubId,comPortName);
+    } 
     public Hub getHub() {
         return hub;
     }
