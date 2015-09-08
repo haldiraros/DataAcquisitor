@@ -202,6 +202,7 @@ public class HubControl {
            hubConn.createRadioSession(0);
            RSRecv = createRadioSessionReciever(this);
            System.out.println("Started radio session recieving ");
+           RSRecv.mainThread();
            
        //}catch(Exception e){System.out.println("Error in radio session "+e.getMessage());}
     }

@@ -48,7 +48,6 @@ public class RadioSessionReciever implements Runnable{
     static public RadioSessionReciever createRadioSessionReciever(HubControl hCon) throws MeteringSessionException {
         RadioSessionReciever RSRcv = new RadioSessionReciever(hCon);
         RSRcv.metSess = RSRcv.hubContr.getHubConn().getRadioSession();
-
         return RSRcv;
     }
 
@@ -60,6 +59,7 @@ public class RadioSessionReciever implements Runnable{
 
     @Override
     public void run() {
+    lgr.debug("Time:"+System.nanoTime()+","+"Thread started: "+Thread.currentThread().getName());
         DataPacket dp;
         try {
             while (isShouldRun()) {
@@ -74,7 +74,7 @@ public class RadioSessionReciever implements Runnable{
             setThread(null);
             //TODO: close remaining resoureses
         }
-lgr.debug("Time:"+System.nanoTime()+","+"Thread stoped: "+Thread.currentThread().getName());
+    lgr.debug("Time:"+System.nanoTime()+","+"Thread stoped: "+Thread.currentThread().getName());
     }
     
     public void close() throws MeteringSessionException{

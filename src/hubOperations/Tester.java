@@ -63,7 +63,7 @@ public class Tester {
         //hubC.readPacketsLoggerFlash();
         hubC.getHubConn().closeAllSessions(); //dla pewnosci domykamy inne sesje!
         hubC.startRecievingInRadioSession();
-        Thread.sleep(1000000);
+        Thread.sleep(1200000); //20 minut
         hubC.stopRecievingInRadioSession();
         hubC.closeHubConn();
         
