@@ -106,7 +106,7 @@ public class DataPacket implements Serializable{
         Frame infbFrame = new Frame(data, start + infbPosion/8, 4); //zakladam, że inb rozpoczyna się od pełnego bajtu
         
         encAlg = (short)infbFrame.getHeaderElement(Frame.frameINFB, "ENCF");
-//        encAlg=0;
+        //encAlg=0; //TESTING CHANGE
         short isSPRDF = (short)infbFrame.getHeaderElement(Frame.frameINFB, "SPRDF");
 
         int startTMF = frame.getPositionOfNextElement(Frame.headerFrameLogger, "INFB")/8;  // zakładam, że INFF zaczyna się od pełnych bajtów
@@ -134,8 +134,9 @@ public class DataPacket implements Serializable{
         lqi= ((int)Utils.bytes2long(data, start + frameSize-1, 1))&0x7F; //ignore b7
         
         if (encAlg!=0){
-//                encriptedData= Arrays.copyOfRange(data, START_DATA, START_DATA+16);
-                throw new MeteringSessionException("Decription is not supported yet");
+            //Trying stuff- Haros
+                encriptedData= Arrays.copyOfRange(data, start+startData, start+startData+DATA_FRAME_SIZE);
+                //throw new MeteringSessionException("Decription is not supported yet");
                         //System.arraycopy(LEN, lqi, LEN, LEN, LEN)
         }
         else{
@@ -170,7 +171,11 @@ public class DataPacket implements Serializable{
         StringBuilder sb = new StringBuilder("appId:");sb.append(String.format("%0#8X", appId));
         sb.append(", fieldLength:");sb.append(fieldLength);
         sb.append(", loggerId:");sb.append(String.format("%0#8X", loggerNo));
-        sb.append(", encAlg:");sb.append(encAlg);
+        sb.append(", encAlg:");sb.append(encAlg); 
+        sb.append(", encryptedData:");
+            for (byte b : encriptedData) {
+            sb.append(String.format("%02X ",b));//changes
+            }
         sb.append(", measurmentTime:");sb.append(measurmentTimeStart);
         sb.append(", measurmentPeriod:");sb.append(measurmentPeriod);
         sb.append(", temperatures:(");

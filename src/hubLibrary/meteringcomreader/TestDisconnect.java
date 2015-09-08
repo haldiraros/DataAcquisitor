@@ -40,7 +40,7 @@ public class TestDisconnect {
         Hub hub = new Hub(0, "COM5");
 //        Hub hub = new Hub(0, "COM102");
          hc = HubConnection.createHubConnection(hub);
-       // long registerLogger = hc.registerLogger(0x238b0048);
+        long registerLogger = hc.registerLogger(0x238b0048);
         
         long[] registredLoggers = hc.getRegistredLoggers();
 System.out.println("Regstred loggers count:"+registredLoggers.length);

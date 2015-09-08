@@ -101,7 +101,9 @@ public class TestHubFlashSession {
            
             HubFlashSession loggerFlashSession = hc.createHubFlashSession(0xFFFFFFFF);
 //            LoggerFlashSession loggerFlashSession = hc.createLoggerFlashSession(new Timestamp(0));
-            DataPacket packet=null;
+            
+            System.out.println("bla");
+                    DataPacket packet=null;
             int packetCount =0;
             while ((packet = loggerFlashSession.getPrevPacket())!=null){
 //                lgr.info("next data");

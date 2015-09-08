@@ -897,3 +897,751 @@ meteringcomreader.exceptions.MeteringSessionException: Expected command ack: 0x2
 72513 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:23570380075298, _readBytes size:2
 72513 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:23570380213235, 0X0,0X0,
 0    [main] INFO  hubLibrary.meteringcomreader.HubConnection  - Time:3142131532535,Found port COM1
+0    [main] INFO  hubLibrary.meteringcomreader.HubConnection  - Time:3981981814929,Found port COM1
+24   [main] INFO  hubLibrary.meteringcomreader.HubConnection  - Time:3982006435143,Found port COM5
+77   [main] INFO  hubLibrary.meteringcomreader.HubConnection  - Input BufferSize=0
+3348 [main] INFO  hubLibrary.meteringcomreader.HubConnection  - Time:3985331254041,hub found:COM5hub firm ver259
+3521 [main] INFO  hubLibrary.meteringcomreader.HubConnection  - Input BufferSize=0
+3528 [main] DEBUG hubLibrary.meteringcomreader.HubConnection  - Time:3985510498406,wait sendCommand 0x 301 thread: main
+3529 [main] DEBUG hubLibrary.meteringcomreader.HubConnection  - Time:3985511129060,start sendCommand 0x 301 thread: main
+3532 [main] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:3985514184150, serialEvent: gnu.io.SerialPortEvent[source=//./COM5],2, thread: main
+3532 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:3985514193486, serialEvent: gnu.io.SerialPortEvent[source=//./COM5],2, thread: Thread-2
+3548 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:3985530418830, serialEvent: gnu.io.SerialPortEvent[source=//./COM5],1, thread: Thread-2
+3548 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:3985530682657 serialEvent loopNo:1
+3548 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:3985531108515, _readBytes size:2
+3551 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:3985531565995, 0X1,0X3,
+3561 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Size for:0x301 : 2
+3561 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:3985543970068, _readBytes size:2
+3562 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:3985544160107, 0X1,0X0,
+3562 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:3985544959418 serialEvent loopNo:2
+3564 [main] DEBUG hubLibrary.meteringcomreader.HubConnection  - Time:3985545116028,done receiveAck 0x 301 thread: main
+3564 [main] DEBUG hubLibrary.meteringcomreader.HubConnection  - Time:3985546780304,wait sendCommand 0x 201 thread: main
+3565 [main] DEBUG hubLibrary.meteringcomreader.HubConnection  - Time:3985547162793,start sendCommand 0x 201 thread: main
+3566 [main] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:3985548896641, serialEvent: gnu.io.SerialPortEvent[source=//./COM5],2, thread: main
+3583 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:3985566268848, _readBytes size:2
+3584 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:3985566430879, 0X1,0X2,
+3584 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Size for:0x201 : 2
+3584 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:3985566849508, _readBytes size:2
+3584 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:3985566936245, 0X3,0X1,
+3584 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:3985567176882 serialEvent loopNo:3
+3585 [main] DEBUG hubLibrary.meteringcomreader.HubConnection  - Time:3985567219046,done receiveAck 0x 201 thread: main
+3598 [main] DEBUG hubLibrary.meteringcomreader.HubConnection  - Time:3985580292624,wait sendCommand 0x 202 thread: main
+3598 [main] DEBUG hubLibrary.meteringcomreader.HubConnection  - Time:3985580550428,start sendCommand 0x 202 thread: main0XFF,0XFF,0XFF,0XFF,
+3600 [main] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:3985582318006, serialEvent: gnu.io.SerialPortEvent[source=//./COM5],2, thread: main
+3616 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:3985599174607, _readBytes size:2
+3617 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:3985599320977, 0X2,0X2,
+3617 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Size for:0x202 : 1
+3617 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:3985599807370, _readBytes size:1
+3618 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:3985600357611, 0X1,
+3618 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:3985600596742 serialEvent loopNo:4
+3618 [main] DEBUG hubLibrary.meteringcomreader.HubConnection  - Time:3985600877735,done receiveAck 0x 202 thread: main
+3619 [main] DEBUG hubLibrary.meteringcomreader.HubConnection  - Time:3985601815886,wait sendCommand 0x 21a thread: main
+3619 [main] DEBUG hubLibrary.meteringcomreader.HubConnection  - Time:3985602021286,start sendCommand 0x 21a thread: main
+3621 [main] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:3985603690683, serialEvent: gnu.io.SerialPortEvent[source=//./COM5],2, thread: main
+3647 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:3985630213100, _readBytes size:2
+3648 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:3985630388683, 0X1A,0X2,
+3648 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Size for:0x21a : 256
+3655 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:3985637379188, _readBytes size:256
+3666 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:3985637508692, 0X0,0X0,0X0,0X0,0XDD,0X99,0XEE,0X55,0X1F,0X4D,0X45,0X4D,0X45,0X18,0X48,0X0,0X8B,0X23,0X31,0X8,0X11,0X0,0X7A,0XFF,0X94,0X26,0XE8,0X15,0X38,0XFF,0XFF,0X1E,0X78,0X52,0X36,0XE,0XC6,0XD5,0X4D,0XB2,0X0,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,
+3666 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:3985649089662 serialEvent loopNo:5
+3667 [main] DEBUG hubLibrary.meteringcomreader.HubConnection  - Time:3985649785670,done receiveAck 0x 21a thread: main
+3673 [main] DEBUG hubLibrary.meteringcomreader.HubConnection  - Time:3985655943736,wait sendCommand 0xf202 thread: main
+3673 [main] DEBUG hubLibrary.meteringcomreader.HubConnection  - Time:3985656082275,start sendCommand 0xf202 thread: main
+3675 [main] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:3985657343584, serialEvent: gnu.io.SerialPortEvent[source=//./COM5],2, thread: main
+3692 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:3985675072379, _readBytes size:2
+3692 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:3985675136528, 0X2,0XA,
+3692 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Size for:0xa02 : 0
+3692 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:3985675299462 serialEvent loopNo:6
+3693 [main] DEBUG hubLibrary.meteringcomreader.HubConnection  - Time:3985675314521,done receiveAck 0x a02 thread: main
+6694 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:3988676549327, _readBytes size:2
+6694 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:3988676814960, 0X0,0X0,
+0    [main] INFO  hubLibrary.meteringcomreader.HubConnection  - Time:4358276584082,Found port COM1
+29   [main] INFO  hubLibrary.meteringcomreader.HubConnection  - Time:4358306359760,Found port COM5
+76   [main] INFO  hubLibrary.meteringcomreader.HubConnection  - Input BufferSize=0
+3334 [main] INFO  hubLibrary.meteringcomreader.HubConnection  - Time:4361611075723,hub found:COM5hub firm ver259
+3515 [main] INFO  hubLibrary.meteringcomreader.HubConnection  - Input BufferSize=0
+3525 [main] DEBUG hubLibrary.meteringcomreader.HubConnection  - Time:4361801324012,wait sendCommand 0x 301 thread: main
+3525 [main] DEBUG hubLibrary.meteringcomreader.HubConnection  - Time:4361802575382,start sendCommand 0x 301 thread: main
+3529 [main] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:4361806167763, serialEvent: gnu.io.SerialPortEvent[source=//./COM5],2, thread: main
+3530 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:4361807294447, serialEvent: gnu.io.SerialPortEvent[source=//./COM5],2, thread: Thread-2
+3545 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:4361822150964, serialEvent: gnu.io.SerialPortEvent[source=//./COM5],1, thread: Thread-2
+3545 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:4361822346124 serialEvent loopNo:1
+3545 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:4361822586459, _readBytes size:2
+3546 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:4361822749694, 0X1,0X3,
+3552 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Size for:0x301 : 2
+3552 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:4361829411320, _readBytes size:2
+3552 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:4361829585096, 0X1,0X0,
+3552 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:4361830021795 serialEvent loopNo:2
+3553 [main] DEBUG hubLibrary.meteringcomreader.HubConnection  - Time:4361830105822,done receiveAck 0x 301 thread: main
+3553 [main] DEBUG hubLibrary.meteringcomreader.HubConnection  - Time:4361830434401,wait sendCommand 0x 201 thread: main
+3553 [main] DEBUG hubLibrary.meteringcomreader.HubConnection  - Time:4361830628958,start sendCommand 0x 201 thread: main
+3555 [main] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:4361832851909, serialEvent: gnu.io.SerialPortEvent[source=//./COM5],2, thread: main
+3571 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:4361848825172, _readBytes size:2
+3572 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:4361848984191, 0X1,0X2,
+3572 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Size for:0x201 : 2
+3572 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:4361849457935, _readBytes size:2
+3572 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:4361849557322, 0X3,0X1,
+3572 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:4361849831991 serialEvent loopNo:3
+3573 [main] DEBUG hubLibrary.meteringcomreader.HubConnection  - Time:4361849909994,done receiveAck 0x 201 thread: main
+3574 [main] DEBUG hubLibrary.meteringcomreader.HubConnection  - Time:4361851509820,wait sendCommand 0x 202 thread: main
+3575 [main] DEBUG hubLibrary.meteringcomreader.HubConnection  - Time:4361851740518,start sendCommand 0x 202 thread: main0XFF,0XFF,0XFF,0XFF,
+3576 [main] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:4361853805053, serialEvent: gnu.io.SerialPortEvent[source=//./COM5],2, thread: main
+3593 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:4361870824889, _readBytes size:2
+3594 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:4361870975776, 0X2,0X2,
+3594 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Size for:0x202 : 1
+3594 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:4361871565772, _readBytes size:1
+3594 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:4361871716057, 0X1,
+3594 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:4361871941334 serialEvent loopNo:4
+3596 [main] DEBUG hubLibrary.meteringcomreader.HubConnection  - Time:4361873080969,done receiveAck 0x 202 thread: main
+3596 [main] DEBUG hubLibrary.meteringcomreader.HubConnection  - Time:4361873439966,wait sendCommand 0x 21a thread: main
+3596 [main] DEBUG hubLibrary.meteringcomreader.HubConnection  - Time:4361873645064,start sendCommand 0x 21a thread: main
+3598 [main] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:4361875942405, serialEvent: gnu.io.SerialPortEvent[source=//./COM5],2, thread: main
+3625 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:4361902639200, _readBytes size:2
+3626 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:4361902908448, 0X1A,0X2,
+3626 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Size for:0x21a : 256
+3634 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:4361911119001, _readBytes size:256
+3648 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:4361911289766, 0X0,0X0,0X0,0X0,0XDD,0X99,0XEE,0X55,0X1F,0X4D,0X45,0X4D,0X45,0X18,0X48,0X0,0X8B,0X23,0X31,0X8,0X11,0X0,0X7A,0XFF,0X94,0X26,0XE8,0X15,0X38,0XFF,0XFF,0X1E,0X78,0X52,0X36,0XE,0XC6,0XD5,0X4D,0XB2,0X1F,0X4D,0X45,0X4D,0X45,0X18,0X48,0X0,0X8B,0X23,0X31,0X8,0X11,0X0,0XB0,0XA9,0X96,0X3A,0X23,0X30,0XD6,0XB3,0X94,0XC2,0XC6,0X42,0XD5,0X5B,0X51,0XCE,0X3F,0XB2,0X0,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,
+3649 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:4361926383908 serialEvent loopNo:5
+3649 [main] DEBUG hubLibrary.meteringcomreader.HubConnection  - Time:4361926409206,done receiveAck 0x 21a thread: main
+3655 [main] DEBUG hubLibrary.meteringcomreader.HubConnection  - Time:4361932654611,wait sendCommand 0x 21a thread: main
+3655 [main] DEBUG hubLibrary.meteringcomreader.HubConnection  - Time:4361932744963,start sendCommand 0x 21a thread: main
+3657 [main] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:4361934124030, serialEvent: gnu.io.SerialPortEvent[source=//./COM5],2, thread: main
+3675 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:4361952569012, _readBytes size:2
+3675 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:4361952640992, 0X1A,0XF2,
+3675 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Size for:0xf21a : 0
+3675 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:4361952816275 serialEvent loopNo:6
+3676 [main] DEBUG hubLibrary.meteringcomreader.HubConnection  - Time:4361953960126,wait sendCommand 0xf202 thread: main
+3677 [main] DEBUG hubLibrary.meteringcomreader.HubConnection  - Time:4361954046563,start sendCommand 0xf202 thread: main
+3678 [main] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:4361955371418, serialEvent: gnu.io.SerialPortEvent[source=//./COM5],2, thread: main
+3695 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:4361972513832, _readBytes size:2
+3695 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:4361972633698, 0X2,0XA,
+3695 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Size for:0xa02 : 0
+3695 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:4361972983961 serialEvent loopNo:7
+3696 [main] DEBUG hubLibrary.meteringcomreader.HubConnection  - Time:4361973296879,done receiveAck 0x a02 thread: main
+6698 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:4364974311227, _readBytes size:2
+6698 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:4364974653659, 0X0,0X0,
+0    [main] INFO  hubLibrary.meteringcomreader.HubConnection  - Time:4417986298176,Found port COM1
+35   [main] INFO  hubLibrary.meteringcomreader.HubConnection  - Time:4418022823120,Found port COM5
+86   [main] INFO  hubLibrary.meteringcomreader.HubConnection  - Input BufferSize=0
+3351 [main] INFO  hubLibrary.meteringcomreader.HubConnection  - Time:4421338761658,hub found:COM5hub firm ver259
+3521 [main] INFO  hubLibrary.meteringcomreader.HubConnection  - Input BufferSize=0
+3526 [main] DEBUG hubLibrary.meteringcomreader.HubConnection  - Time:4421513728175,wait sendCommand 0x 301 thread: main
+3527 [main] DEBUG hubLibrary.meteringcomreader.HubConnection  - Time:4421514368768,start sendCommand 0x 301 thread: main
+3529 [main] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:4421517355793, serialEvent: gnu.io.SerialPortEvent[source=//./COM5],2, thread: main
+3532 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:4421519759447, serialEvent: gnu.io.SerialPortEvent[source=//./COM5],2, thread: Thread-2
+3547 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:4421534708725, serialEvent: gnu.io.SerialPortEvent[source=//./COM5],1, thread: Thread-2
+3547 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:4421535142112 serialEvent loopNo:1
+3548 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:4421535601098, _readBytes size:2
+3550 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:4421535837518, 0X1,0X3,
+3559 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Size for:0x301 : 2
+3559 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:4421546962212, _readBytes size:2
+3560 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:4421547127857, 0X1,0X0,
+3560 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:4421547900665 serialEvent loopNo:2
+3562 [main] DEBUG hubLibrary.meteringcomreader.HubConnection  - Time:4421550059165,done receiveAck 0x 301 thread: main
+3563 [main] DEBUG hubLibrary.meteringcomreader.HubConnection  - Time:4421550447978,wait sendCommand 0x 201 thread: main
+3563 [main] DEBUG hubLibrary.meteringcomreader.HubConnection  - Time:4421550788604,start sendCommand 0x 201 thread: main
+3564 [main] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:4421552405295, serialEvent: gnu.io.SerialPortEvent[source=//./COM5],2, thread: main
+3581 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:4421569156787, _readBytes size:2
+3582 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:4421569457056, 0X1,0X2,
+3582 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Size for:0x201 : 2
+3582 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:4421570212696, _readBytes size:2
+3583 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:4421570371113, 0X3,0X1,
+3583 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:4421570806909 serialEvent loopNo:3
+3583 [main] DEBUG hubLibrary.meteringcomreader.HubConnection  - Time:4421571171929,done receiveAck 0x 201 thread: main
+3586 [main] DEBUG hubLibrary.meteringcomreader.HubConnection  - Time:4421574053544,wait sendCommand 0x 202 thread: main
+3587 [main] DEBUG hubLibrary.meteringcomreader.HubConnection  - Time:4421574521565,start sendCommand 0x 202 thread: main0XFF,0XFF,0XFF,0XFF,
+3589 [main] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:4421576974913, serialEvent: gnu.io.SerialPortEvent[source=//./COM5],2, thread: main
+3606 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:4421594211292, _readBytes size:2
+3607 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:4421594420004, 0X2,0X2,
+3607 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Size for:0x202 : 1
+3607 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:4421595469287, _readBytes size:1
+3608 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:4421595762328, 0X1,
+3608 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:4421596082172 serialEvent loopNo:4
+3610 [main] DEBUG hubLibrary.meteringcomreader.HubConnection  - Time:4421597496778,done receiveAck 0x 202 thread: main
+3611 [main] DEBUG hubLibrary.meteringcomreader.HubConnection  - Time:4421598303618,wait sendCommand 0x 21a thread: main
+3611 [main] DEBUG hubLibrary.meteringcomreader.HubConnection  - Time:4421598755376,start sendCommand 0x 21a thread: main
+3613 [main] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:4421601061752, serialEvent: gnu.io.SerialPortEvent[source=//./COM5],2, thread: main
+3640 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:4421628281683, _readBytes size:2
+3641 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:4421628560870, 0X1A,0X2,
+3641 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Size for:0x21a : 256
+3652 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:4421640349949, _readBytes size:256
+3674 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:4421640579141, 0X0,0X0,0X0,0X0,0XDD,0X99,0XEE,0X55,0X1F,0X4D,0X45,0X4D,0X45,0X18,0X48,0X0,0X8B,0X23,0X31,0X8,0X11,0X0,0X7A,0XFF,0X94,0X26,0XE8,0X15,0X38,0XFF,0XFF,0X1E,0X78,0X52,0X36,0XE,0XC6,0XD5,0X4D,0XB2,0X1F,0X4D,0X45,0X4D,0X45,0X18,0X48,0X0,0X8B,0X23,0X31,0X8,0X11,0X0,0XB0,0XA9,0X96,0X3A,0X23,0X30,0XD6,0XB3,0X94,0XC2,0XC6,0X42,0XD5,0X5B,0X51,0XCE,0X3F,0XB2,0X0,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,
+3674 [main] DEBUG hubLibrary.meteringcomreader.HubConnection  - Time:4421662343642,done receiveAck 0x 21a thread: main
+3675 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:4421662305092 serialEvent loopNo:5
+3679 [main] DEBUG hubLibrary.meteringcomreader.HubConnection  - Time:4421666962116,wait sendCommand 0xf202 thread: main
+3679 [main] DEBUG hubLibrary.meteringcomreader.HubConnection  - Time:4421667171431,start sendCommand 0xf202 thread: main
+3681 [main] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:4421668565255, serialEvent: gnu.io.SerialPortEvent[source=//./COM5],2, thread: main
+3697 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:4421685057739, _readBytes size:2
+3697 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:4421685197181, 0X2,0XA,
+3697 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Size for:0xa02 : 0
+3697 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:4421685471850 serialEvent loopNo:6
+3698 [main] DEBUG hubLibrary.meteringcomreader.HubConnection  - Time:4421685510400,done receiveAck 0x a02 thread: main
+5199 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:4423186750778, _readBytes size:2
+5199 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:4423187011593, 0X0,0X0,
+0    [main] INFO  hubLibrary.meteringcomreader.HubConnection  - Time:4820297781777,Found port COM1
+29   [main] INFO  hubLibrary.meteringcomreader.HubConnection  - Time:4820327712558,Found port COM5
+73   [main] INFO  hubLibrary.meteringcomreader.HubConnection  - Input BufferSize=0
+3336 [main] INFO  hubLibrary.meteringcomreader.HubConnection  - Time:4823635198702,hub found:COM5hub firm ver259
+3510 [main] INFO  hubLibrary.meteringcomreader.HubConnection  - Input BufferSize=0
+3518 [main] DEBUG hubLibrary.meteringcomreader.HubConnection  - Time:4823816791909,wait sendCommand 0xf102 thread: main
+3519 [main] DEBUG hubLibrary.meteringcomreader.HubConnection  - Time:4823817395759,start sendCommand 0xf102 thread: main
+3522 [main] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:4823820527045, serialEvent: gnu.io.SerialPortEvent[source=//./COM5],2, thread: main
+3522 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:4823820527647, serialEvent: gnu.io.SerialPortEvent[source=//./COM5],2, thread: Thread-2
+3539 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:4823837450204, serialEvent: gnu.io.SerialPortEvent[source=//./COM5],1, thread: Thread-2
+3539 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:4823837786915 serialEvent loopNo:1
+3539 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:4823838218193, _readBytes size:2
+3542 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:4823838568155, 0X2,0X19,
+3551 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Size for:0x1902 : 0
+3552 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:4823850826461 serialEvent loopNo:2
+6555 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:4826853644227, _readBytes size:2
+6555 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:4826853939677, 0X0,0X0,
+0    [main] INFO  hubLibrary.meteringcomreader.HubConnection  - Time:4839649248681,Found port COM1
+35   [main] INFO  hubLibrary.meteringcomreader.HubConnection  - Time:4839685564310,Found port COM5
+88   [main] INFO  hubLibrary.meteringcomreader.HubConnection  - Input BufferSize=0
+3367 [main] INFO  hubLibrary.meteringcomreader.HubConnection  - Time:4843017676993,hub found:COM5hub firm ver259
+3540 [main] INFO  hubLibrary.meteringcomreader.HubConnection  - Input BufferSize=0
+3548 [main] DEBUG hubLibrary.meteringcomreader.HubConnection  - Time:4843197832404,wait sendCommand 0x 301 thread: main
+3548 [main] DEBUG hubLibrary.meteringcomreader.HubConnection  - Time:4843198604910,start sendCommand 0x 301 thread: main
+3551 [main] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:4843201772337, serialEvent: gnu.io.SerialPortEvent[source=//./COM5],2, thread: main
+3551 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:4843201770229, serialEvent: gnu.io.SerialPortEvent[source=//./COM5],2, thread: Thread-2
+3567 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:4843217325766, serialEvent: gnu.io.SerialPortEvent[source=//./COM5],1, thread: Thread-2
+3567 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:4843217595315 serialEvent loopNo:1
+3567 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:4843218024485, _readBytes size:2
+3569 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:4843218269941, 0X1,0X3,
+3579 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Size for:0x301 : 2
+3580 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:4843230185512, _readBytes size:2
+3580 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:4843230380371, 0X1,0X0,
+3581 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:4843231152576 serialEvent loopNo:2
+3581 [main] DEBUG hubLibrary.meteringcomreader.HubConnection  - Time:4843231391707,done receiveAck 0x 301 thread: main
+3581 [main] DEBUG hubLibrary.meteringcomreader.HubConnection  - Time:4843231892556,wait sendCommand 0x 201 thread: main
+3582 [main] DEBUG hubLibrary.meteringcomreader.HubConnection  - Time:4843232257576,start sendCommand 0x 201 thread: main
+3583 [main] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:4843234071235, serialEvent: gnu.io.SerialPortEvent[source=//./COM5],2, thread: main
+3599 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:4843250101419, _readBytes size:2
+3600 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:4843250387231, 0X1,0X2,
+3600 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Size for:0x201 : 2
+3601 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:4843251225393, _readBytes size:2
+3601 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:4843251411518, 0X3,0X1,
+3601 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:4843251919595 serialEvent loopNo:3
+3602 [main] DEBUG hubLibrary.meteringcomreader.HubConnection  - Time:4843251982239,done receiveAck 0x 201 thread: main
+3604 [main] DEBUG hubLibrary.meteringcomreader.HubConnection  - Time:4843254742481,wait sendCommand 0x 202 thread: main
+3605 [main] DEBUG hubLibrary.meteringcomreader.HubConnection  - Time:4843255167435,start sendCommand 0x 202 thread: main0XFF,0XFF,0XFF,0XFF,
+3607 [main] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:4843257724988, serialEvent: gnu.io.SerialPortEvent[source=//./COM5],2, thread: main
+3624 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:4843275106833, _readBytes size:2
+3625 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:4843275353794, 0X2,0X2,
+3625 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Size for:0x202 : 1
+3625 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:4843276098592, _readBytes size:1
+3626 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:4843276303389, 0X1,
+3626 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:4843276677746 serialEvent loopNo:4
+3627 [main] DEBUG hubLibrary.meteringcomreader.HubConnection  - Time:4843277640292,done receiveAck 0x 202 thread: main
+3629 [main] DEBUG hubLibrary.meteringcomreader.HubConnection  - Time:4843278284198,wait sendCommand 0x 21a thread: main
+3629 [main] DEBUG hubLibrary.meteringcomreader.HubConnection  - Time:4843279874688,start sendCommand 0x 21a thread: main
+3632 [main] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:4843282774975, serialEvent: gnu.io.SerialPortEvent[source=//./COM5],2, thread: main
+3658 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:4843309041697, _readBytes size:2
+3659 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:4843309237760, 0X1A,0X2,
+3659 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Size for:0x21a : 256
+3667 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:4843317403740, _readBytes size:256
+3682 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:4843317526317, 0X0,0X0,0X0,0X0,0XDD,0X99,0XEE,0X55,0X1F,0X4D,0X45,0X4D,0X45,0X18,0X48,0X0,0X8B,0X23,0X31,0X8,0X11,0X0,0X7A,0XFF,0X94,0X26,0XE8,0X15,0X38,0XFF,0XFF,0X1E,0X78,0X52,0X36,0XE,0XC6,0XD5,0X4D,0XB2,0X1F,0X4D,0X45,0X4D,0X45,0X18,0X48,0X0,0X8B,0X23,0X31,0X8,0X11,0X0,0XB0,0XA9,0X96,0X3A,0X23,0X30,0XD6,0XB3,0X94,0XC2,0XC6,0X42,0XD5,0X5B,0X51,0XCE,0X3F,0XB2,0X1F,0X4D,0X45,0X4D,0X45,0X18,0X48,0X0,0X8B,0X23,0X31,0X8,0X11,0X0,0X5D,0X91,0X7,0X42,0XB6,0XE9,0X60,0X52,0XB5,0X58,0XD6,0XE5,0X2A,0XB8,0X6F,0X72,0X43,0XB2,0X0,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,
+3683 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:4843333201721 serialEvent loopNo:5
+3683 [main] DEBUG hubLibrary.meteringcomreader.HubConnection  - Time:4843333972119,done receiveAck 0x 21a thread: main
+3686 [main] DEBUG hubLibrary.meteringcomreader.HubConnection  - Time:4843336130619,wait sendCommand 0xf202 thread: main
+3686 [main] DEBUG hubLibrary.meteringcomreader.HubConnection  - Time:4843336228199,start sendCommand 0xf202 thread: main
+3687 [main] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:4843337554561, serialEvent: gnu.io.SerialPortEvent[source=//./COM5],2, thread: main
+3703 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:4843353919046, _readBytes size:2
+3703 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:4843354006687, 0X2,0XA,
+3703 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Size for:0xa02 : 0
+3704 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:4843354185885 serialEvent loopNo:6
+3704 [main] DEBUG hubLibrary.meteringcomreader.HubConnection  - Time:4843354206364,done receiveAck 0x a02 thread: main
+6705 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:4846355414667, _readBytes size:2
+6705 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:4846355685420, 0X0,0X0,
+0    [main] INFO  hubLibrary.meteringcomreader.HubConnection  - Time:4879966664769,Found port COM1
+28   [main] INFO  hubLibrary.meteringcomreader.HubConnection  - Time:4879995138179,Found port COM5
+75   [main] INFO  hubLibrary.meteringcomreader.HubConnection  - Input BufferSize=0
+3345 [main] INFO  hubLibrary.meteringcomreader.HubConnection  - Time:4883311870305,hub found:COM5hub firm ver259
+3514 [main] INFO  hubLibrary.meteringcomreader.HubConnection  - Input BufferSize=0
+3521 [main] DEBUG hubLibrary.meteringcomreader.HubConnection  - Time:4883487822559,wait sendCommand 0x 301 thread: main
+3521 [main] DEBUG hubLibrary.meteringcomreader.HubConnection  - Time:4883488429721,start sendCommand 0x 301 thread: main
+3524 [main] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:4883491488425, serialEvent: gnu.io.SerialPortEvent[source=//./COM5],2, thread: main
+3524 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:4883491489931, serialEvent: gnu.io.SerialPortEvent[source=//./COM5],2, thread: Thread-2
+3542 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:4883508947069, serialEvent: gnu.io.SerialPortEvent[source=//./COM5],1, thread: Thread-2
+3542 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:4883509209089 serialEvent loopNo:1
+3542 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:4883509630729, _readBytes size:2
+3544 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:4883509867149, 0X1,0X3,
+3554 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Size for:0x301 : 2
+3554 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:4883521474622, _readBytes size:2
+3555 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:4883521665264, 0X1,0X0,
+3555 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:4883522448914 serialEvent loopNo:2
+3556 [main] DEBUG hubLibrary.meteringcomreader.HubConnection  - Time:4883522622690,done receiveAck 0x 301 thread: main
+3556 [main] DEBUG hubLibrary.meteringcomreader.HubConnection  - Time:4883523169920,wait sendCommand 0x 201 thread: main
+3556 [main] DEBUG hubLibrary.meteringcomreader.HubConnection  - Time:4883523517171,start sendCommand 0x 201 thread: main
+3558 [main] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:4883525335949, serialEvent: gnu.io.SerialPortEvent[source=//./COM5],2, thread: main
+3574 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:4883541496240, _readBytes size:2
+3574 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:4883541643514, 0X1,0X2,
+3575 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Size for:0x201 : 2
+3575 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:4883542060938, _readBytes size:2
+3575 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:4883542155506, 0X3,0X1,
+3575 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:4883542398853 serialEvent loopNo:3
+3575 [main] DEBUG hubLibrary.meteringcomreader.HubConnection  - Time:4883542434693,done receiveAck 0x 201 thread: main
+3576 [main] DEBUG hubLibrary.meteringcomreader.HubConnection  - Time:4883543673714,wait sendCommand 0x 202 thread: main
+3577 [main] DEBUG hubLibrary.meteringcomreader.HubConnection  - Time:4883543870079,start sendCommand 0x 202 thread: main0XFF,0XFF,0XFF,0XFF,
+3578 [main] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:4883545634646, serialEvent: gnu.io.SerialPortEvent[source=//./COM5],2, thread: main
+3596 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:4883563516738, _readBytes size:2
+3597 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:4883563660397, 0X2,0X2,
+3597 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Size for:0x202 : 1
+3597 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:4883564147091, _readBytes size:1
+3597 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:4883564236840, 0X1,
+3597 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:4883564423868 serialEvent loopNo:4
+3598 [main] DEBUG hubLibrary.meteringcomreader.HubConnection  - Time:4883565233418,done receiveAck 0x 202 thread: main
+3598 [main] DEBUG hubLibrary.meteringcomreader.HubConnection  - Time:4883565533085,wait sendCommand 0x 21a thread: main
+3598 [main] DEBUG hubLibrary.meteringcomreader.HubConnection  - Time:4883565700837,start sendCommand 0x 21a thread: main
+3600 [main] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:4883567302471, serialEvent: gnu.io.SerialPortEvent[source=//./COM5],2, thread: main
+3627 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:4883594473311, _readBytes size:2
+3627 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:4883594644979, 0X1A,0X2,
+3628 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Size for:0x21a : 256
+3634 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:4883601406594, _readBytes size:256
+3647 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:4883601510799, 0X0,0X0,0X0,0X0,0XDD,0X99,0XEE,0X55,0X1F,0X4D,0X45,0X4D,0X45,0X18,0X48,0X0,0X8B,0X23,0X31,0X8,0X11,0X0,0X7A,0XFF,0X94,0X26,0XE8,0X15,0X38,0XFF,0XFF,0X1E,0X78,0X52,0X36,0XE,0XC6,0XD5,0X4D,0XB2,0X1F,0X4D,0X45,0X4D,0X45,0X18,0X48,0X0,0X8B,0X23,0X31,0X8,0X11,0X0,0XB0,0XA9,0X96,0X3A,0X23,0X30,0XD6,0XB3,0X94,0XC2,0XC6,0X42,0XD5,0X5B,0X51,0XCE,0X3F,0XB2,0X1F,0X4D,0X45,0X4D,0X45,0X18,0X48,0X0,0X8B,0X23,0X31,0X8,0X11,0X0,0X5D,0X91,0X7,0X42,0XB6,0XE9,0X60,0X52,0XB5,0X58,0XD6,0XE5,0X2A,0XB8,0X6F,0X72,0X43,0XB2,0X0,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,
+3648 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:4883614900909 serialEvent loopNo:5
+3648 [main] DEBUG hubLibrary.meteringcomreader.HubConnection  - Time:4883614937954,done receiveAck 0x 21a thread: main
+3655 [main] DEBUG hubLibrary.meteringcomreader.HubConnection  - Time:4883622503095,wait sendCommand 0x 21a thread: main
+3655 [main] DEBUG hubLibrary.meteringcomreader.HubConnection  - Time:4883622682895,start sendCommand 0x 21a thread: main
+3657 [main] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:4883624118582, serialEvent: gnu.io.SerialPortEvent[source=//./COM5],2, thread: main
+3659 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:4883626377071, _readBytes size:2
+3659 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:4883626452967, 0X1A,0XF2,
+3659 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Size for:0xf21a : 0
+3659 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:4883626631562 serialEvent loopNo:6
+3661 [main] DEBUG hubLibrary.meteringcomreader.HubConnection  - Time:4883628010628,wait sendCommand 0xf202 thread: main
+3661 [main] DEBUG hubLibrary.meteringcomreader.HubConnection  - Time:4883628106401,start sendCommand 0xf202 thread: main
+3662 [main] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:4883629369517, serialEvent: gnu.io.SerialPortEvent[source=//./COM5],2, thread: main
+3679 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:4883646286352, _readBytes size:2
+3679 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:4883646393871, 0X2,0XA,
+3679 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Size for:0xa02 : 0
+3679 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:4883646563732 serialEvent loopNo:7
+3679 [main] DEBUG hubLibrary.meteringcomreader.HubConnection  - Time:4883646586621,done receiveAck 0x a02 thread: main
+6681 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:4886648127417, _readBytes size:2
+6681 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:4886648479186, 0X0,0X0,
+1    [main] INFO  hubLibrary.meteringcomreader.HubConnection  - Time:5018774508856,Found port COM1
+30   [main] INFO  hubLibrary.meteringcomreader.HubConnection  - Time:5018804842907,Found port COM5
+75   [main] INFO  hubLibrary.meteringcomreader.HubConnection  - Input BufferSize=0
+3330 [main] INFO  hubLibrary.meteringcomreader.HubConnection  - Time:5022105314151,hub found:COM5hub firm ver259
+3504 [main] INFO  hubLibrary.meteringcomreader.HubConnection  - Input BufferSize=0
+3509 [main] DEBUG hubLibrary.meteringcomreader.HubConnection  - Time:5022283393883,wait sendCommand 0x 301 thread: main
+3509 [main] DEBUG hubLibrary.meteringcomreader.HubConnection  - Time:5022283887806,start sendCommand 0x 301 thread: main
+3512 [main] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:5022287028428, serialEvent: gnu.io.SerialPortEvent[source=//./COM5],2, thread: main
+3514 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:5022288789682, serialEvent: gnu.io.SerialPortEvent[source=//./COM5],2, thread: Thread-2
+3530 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:5022304703313, serialEvent: gnu.io.SerialPortEvent[source=//./COM5],1, thread: Thread-2
+3530 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:5022304888835 serialEvent loopNo:1
+3530 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:5022305206271, _readBytes size:2
+3532 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:5022305425223, 0X1,0X3,
+3539 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Size for:0x301 : 2
+3539 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:5022314556158, _readBytes size:2
+3540 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:5022314683553, 0X1,0X0,
+3540 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:5022315204280 serialEvent loopNo:2
+3540 [main] DEBUG hubLibrary.meteringcomreader.HubConnection  - Time:5022315397030,done receiveAck 0x 301 thread: main
+3541 [main] DEBUG hubLibrary.meteringcomreader.HubConnection  - Time:5022315688565,wait sendCommand 0x 201 thread: main
+3541 [main] DEBUG hubLibrary.meteringcomreader.HubConnection  - Time:5022315919564,start sendCommand 0x 201 thread: main
+3543 [main] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:5022318171728, serialEvent: gnu.io.SerialPortEvent[source=//./COM5],2, thread: main
+3559 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:5022334217574, _readBytes size:2
+3560 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:5022334435020, 0X1,0X2,
+3560 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Size for:0x201 : 2
+3560 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:5022335128318, _readBytes size:2
+3560 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:5022335283723, 0X3,0X1,
+3561 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:5022335683379 serialEvent loopNo:3
+3561 [main] DEBUG hubLibrary.meteringcomreader.HubConnection  - Time:5022335765598,done receiveAck 0x 201 thread: main
+3563 [main] DEBUG hubLibrary.meteringcomreader.HubConnection  - Time:5022337566306,wait sendCommand 0x 202 thread: main
+3563 [main] DEBUG hubLibrary.meteringcomreader.HubConnection  - Time:5022337852119,start sendCommand 0x 202 thread: main0XFF,0XFF,0XFF,0XFF,
+3566 [main] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:5022341188503, serialEvent: gnu.io.SerialPortEvent[source=//./COM5],2, thread: main
+3582 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:5022357227120, _readBytes size:2
+3583 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:5022357403005, 0X2,0X2,
+3583 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Size for:0x202 : 1
+3583 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:5022358042995, _readBytes size:1
+3583 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:5022358172499, 0X1,
+3583 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:5022358430002 serialEvent loopNo:4
+3585 [main] DEBUG hubLibrary.meteringcomreader.HubConnection  - Time:5022359711489,done receiveAck 0x 202 thread: main
+3585 [main] DEBUG hubLibrary.meteringcomreader.HubConnection  - Time:5022360211736,wait sendCommand 0x 21a thread: main
+3585 [main] DEBUG hubLibrary.meteringcomreader.HubConnection  - Time:5022360512606,start sendCommand 0x 21a thread: main
+3589 [main] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:5022363730931, serialEvent: gnu.io.SerialPortEvent[source=//./COM5],2, thread: main
+3613 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:5022388271937, _readBytes size:2
+3614 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:5022388489685, 0X1A,0X2,
+3614 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Size for:0x21a : 256
+3623 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:5022398233204, _readBytes size:256
+3642 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:5022398412702, 0X0,0X0,0X0,0X0,0XDD,0X99,0XEE,0X55,0X1F,0X4D,0X45,0X4D,0X45,0X18,0X48,0X0,0X8B,0X23,0X31,0X8,0X11,0X0,0X7A,0XFF,0X94,0X26,0XE8,0X15,0X38,0XFF,0XFF,0X1E,0X78,0X52,0X36,0XE,0XC6,0XD5,0X4D,0XB2,0X1F,0X4D,0X45,0X4D,0X45,0X18,0X48,0X0,0X8B,0X23,0X31,0X8,0X11,0X0,0XB0,0XA9,0X96,0X3A,0X23,0X30,0XD6,0XB3,0X94,0XC2,0XC6,0X42,0XD5,0X5B,0X51,0XCE,0X3F,0XB2,0X1F,0X4D,0X45,0X4D,0X45,0X18,0X48,0X0,0X8B,0X23,0X31,0X8,0X11,0X0,0X5D,0X91,0X7,0X42,0XB6,0XE9,0X60,0X52,0XB5,0X58,0XD6,0XE5,0X2A,0XB8,0X6F,0X72,0X43,0XB2,0X0,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,
+3642 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:5022417630492 serialEvent loopNo:5
+3643 [main] DEBUG hubLibrary.meteringcomreader.HubConnection  - Time:5022418147002,done receiveAck 0x 21a thread: main
+3650 [main] DEBUG hubLibrary.meteringcomreader.HubConnection  - Time:5022425429343,wait sendCommand 0xf202 thread: main
+3651 [main] DEBUG hubLibrary.meteringcomreader.HubConnection  - Time:5022425707325,start sendCommand 0xf202 thread: main
+3652 [main] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:5022427232460, serialEvent: gnu.io.SerialPortEvent[source=//./COM5],2, thread: main
+3669 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:5022444122190, _readBytes size:2
+3669 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:5022444227299, 0X2,0XA,
+3669 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Size for:0xa02 : 0
+3669 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:5022444428482 serialEvent loopNo:6
+3669 [main] DEBUG hubLibrary.meteringcomreader.HubConnection  - Time:5022444457997,done receiveAck 0x a02 thread: main
+6671 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:5025445897900, _readBytes size:2
+6671 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:5025446188531, 0X0,0X0,
+0    [main] INFO  hubLibrary.meteringcomreader.HubConnection  - Time:5582544181792,Found port COM1
+35   [main] INFO  hubLibrary.meteringcomreader.HubConnection  - Time:5582580924483,Found port COM5
+88   [main] INFO  hubLibrary.meteringcomreader.HubConnection  - Input BufferSize=0
+1857 [main] INFO  hubLibrary.meteringcomreader.HubConnection  - Time:5584402802887,hub found:COM5hub firm ver259
+2029 [main] INFO  hubLibrary.meteringcomreader.HubConnection  - Input BufferSize=0
+2036 [main] DEBUG hubLibrary.meteringcomreader.HubConnection  - Time:5584581678317,wait sendCommand 0x 301 thread: main
+2037 [main] DEBUG hubLibrary.meteringcomreader.HubConnection  - Time:5584582325837,start sendCommand 0x 301 thread: main
+2040 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:5584585457725, serialEvent: gnu.io.SerialPortEvent[source=//./COM5],2, thread: Thread-2
+2040 [main] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:5584585386950, serialEvent: gnu.io.SerialPortEvent[source=//./COM5],2, thread: main
+2057 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:5584602281800, serialEvent: gnu.io.SerialPortEvent[source=//./COM5],1, thread: Thread-2
+2057 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:5584602625437 serialEvent loopNo:1
+2057 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:5584603063040, _readBytes size:2
+2060 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:5584603309098, 0X1,0X3,
+2070 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Size for:0x301 : 2
+2071 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:5584616122764, _readBytes size:2
+2071 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:5584616324851, 0X1,0X0,
+2071 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:5584617108199 serialEvent loopNo:2
+2072 [main] DEBUG hubLibrary.meteringcomreader.HubConnection  - Time:5584617282578,done receiveAck 0x 301 thread: main
+2072 [main] DEBUG hubLibrary.meteringcomreader.HubConnection  - Time:5584617941844,wait sendCommand 0x 201 thread: main
+2073 [main] DEBUG hubLibrary.meteringcomreader.HubConnection  - Time:5584618300540,start sendCommand 0x 201 thread: main
+2074 [main] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:5584620087092, serialEvent: gnu.io.SerialPortEvent[source=//./COM5],2, thread: main
+2092 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:5584637590310, _readBytes size:2
+2093 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:5584637775229, 0X1,0X2,
+2093 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Size for:0x201 : 2
+2093 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:5584638507680, _readBytes size:2
+2093 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:5584638614897, 0X3,0X1,
+2094 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:5584639157308 serialEvent loopNo:3
+2094 [main] DEBUG hubLibrary.meteringcomreader.HubConnection  - Time:5584639193147,done receiveAck 0x 201 thread: main
+2096 [main] DEBUG hubLibrary.meteringcomreader.HubConnection  - Time:5584641122155,wait sendCommand 0x 202 thread: main
+2097 [main] DEBUG hubLibrary.meteringcomreader.HubConnection  - Time:5584641466394,start sendCommand 0x 202 thread: main0XFF,0XFF,0XFF,0XFF,
+2098 [main] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:5584643678804, serialEvent: gnu.io.SerialPortEvent[source=//./COM5],2, thread: main
+2116 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:5584661581677, _readBytes size:2
+2116 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:5584661822916, 0X2,0X2,
+2117 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Size for:0x202 : 1
+2118 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:5584663322753, _readBytes size:1
+2118 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:5584663448944, 0X1,
+2119 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:5584664272348 serialEvent loopNo:4
+2119 [main] DEBUG hubLibrary.meteringcomreader.HubConnection  - Time:5584664355472,done receiveAck 0x 202 thread: main
+2119 [main] DEBUG hubLibrary.meteringcomreader.HubConnection  - Time:5584664772294,wait sendCommand 0x 21a thread: main
+2119 [main] DEBUG hubLibrary.meteringcomreader.HubConnection  - Time:5584664966851,start sendCommand 0x 21a thread: main
+2121 [main] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:5584666695278, serialEvent: gnu.io.SerialPortEvent[source=//./COM5],2, thread: main
+2148 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:5584693604400, _readBytes size:2
+2148 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:5584693818533, 0X1A,0X2,
+2149 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Size for:0x21a : 256
+2157 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:5584702268518, _readBytes size:256
+2170 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:5584702398323, 0X0,0X0,0X0,0X0,0XDD,0X99,0XEE,0X55,0X1F,0X4D,0X45,0X4D,0X45,0X18,0X48,0X0,0X8B,0X23,0X31,0X8,0X11,0X0,0X7A,0XFF,0X94,0X26,0XE8,0X15,0X38,0XFF,0XFF,0X1E,0X78,0X52,0X36,0XE,0XC6,0XD5,0X4D,0XB2,0X1F,0X4D,0X45,0X4D,0X45,0X18,0X48,0X0,0X8B,0X23,0X31,0X8,0X11,0X0,0XB0,0XA9,0X96,0X3A,0X23,0X30,0XD6,0XB3,0X94,0XC2,0XC6,0X42,0XD5,0X5B,0X51,0XCE,0X3F,0XB2,0X1F,0X4D,0X45,0X4D,0X45,0X18,0X48,0X0,0X8B,0X23,0X31,0X8,0X11,0X0,0X5D,0X91,0X7,0X42,0XB6,0XE9,0X60,0X52,0XB5,0X58,0XD6,0XE5,0X2A,0XB8,0X6F,0X72,0X43,0XB2,0X0,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,
+2170 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:5584715728801 serialEvent loopNo:5
+2170 [main] DEBUG hubLibrary.meteringcomreader.HubConnection  - Time:5584715761328,done receiveAck 0x 21a thread: main
+2183 [main] DEBUG hubLibrary.meteringcomreader.HubConnection  - Time:5584728485246,wait sendCommand 0x 21a thread: main
+2183 [main] DEBUG hubLibrary.meteringcomreader.HubConnection  - Time:5584728609630,start sendCommand 0x 21a thread: main
+2184 [main] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:5584729954965, serialEvent: gnu.io.SerialPortEvent[source=//./COM5],2, thread: main
+2203 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:5584748546317, _readBytes size:2
+2203 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:5584748654137, 0X1A,0XF2,
+2203 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Size for:0xf21a : 0
+2203 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:5584748849597 serialEvent loopNo:6
+2204 [main] DEBUG hubLibrary.meteringcomreader.HubConnection  - Time:5584749961224,wait sendCommand 0xf202 thread: main
+2204 [main] DEBUG hubLibrary.meteringcomreader.HubConnection  - Time:5584750047058,start sendCommand 0xf202 thread: main
+2206 [main] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:5584751349928, serialEvent: gnu.io.SerialPortEvent[source=//./COM5],2, thread: main
+2223 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:5584768477584, _readBytes size:2
+2223 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:5584768529686, 0X2,0XA,
+2223 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Size for:0xa02 : 0
+2223 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:5584768677863 serialEvent loopNo:7
+2223 [main] DEBUG hubLibrary.meteringcomreader.HubConnection  - Time:5584768700451,done receiveAck 0x a02 thread: main
+5225 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:5587769416939, _readBytes size:2
+5225 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:5587769772925, 0X0,0X0,
+0    [main] INFO  hubLibrary.meteringcomreader.HubConnection  - Time:5694210944532,Found port COM1
+38   [main] INFO  hubLibrary.meteringcomreader.HubConnection  - Time:5694251190457,Found port COM5
+86   [main] INFO  hubLibrary.meteringcomreader.HubConnection  - Input BufferSize=0
+3352 [main] INFO  hubLibrary.meteringcomreader.HubConnection  - Time:5697565699934,hub found:COM5hub firm ver259
+3523 [main] INFO  hubLibrary.meteringcomreader.HubConnection  - Input BufferSize=0
+3530 [main] DEBUG hubLibrary.meteringcomreader.HubConnection  - Time:5697743339052,wait sendCommand 0x 301 thread: main
+3531 [main] DEBUG hubLibrary.meteringcomreader.HubConnection  - Time:5697744041687,start sendCommand 0x 301 thread: main
+3534 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:5697747591301, serialEvent: gnu.io.SerialPortEvent[source=//./COM5],2, thread: Thread-2
+3534 [main] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:5697747594312, serialEvent: gnu.io.SerialPortEvent[source=//./COM5],2, thread: main
+3550 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:5697763043837, serialEvent: gnu.io.SerialPortEvent[source=//./COM5],1, thread: Thread-2
+3550 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:5697763228456 serialEvent loopNo:1
+3550 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:5697763519388, _readBytes size:2
+3551 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:5697763677503, 0X1,0X3,
+3558 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Size for:0x301 : 2
+3558 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:5697771537492, _readBytes size:2
+3559 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:5697771665791, 0X1,0X0,
+3559 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:5697772196758 serialEvent loopNo:2
+3560 [main] DEBUG hubLibrary.meteringcomreader.HubConnection  - Time:5697773540587,done receiveAck 0x 301 thread: main
+3561 [main] DEBUG hubLibrary.meteringcomreader.HubConnection  - Time:5697773885128,wait sendCommand 0x 201 thread: main
+3561 [main] DEBUG hubLibrary.meteringcomreader.HubConnection  - Time:5697774119741,start sendCommand 0x 201 thread: main
+3562 [main] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:5697775669272, serialEvent: gnu.io.SerialPortEvent[source=//./COM5],2, thread: main
+3579 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:5697792849632, _readBytes size:2
+3580 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:5697793079728, 0X1,0X2,
+3580 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Size for:0x201 : 2
+3580 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:5697793670929, _readBytes size:2
+3581 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:5697793797120, 0X3,0X1,
+3581 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:5697794156719 serialEvent loopNo:3
+3582 [main] DEBUG hubLibrary.meteringcomreader.HubConnection  - Time:5697795137938,done receiveAck 0x 201 thread: main
+3584 [main] DEBUG hubLibrary.meteringcomreader.HubConnection  - Time:5697797199461,wait sendCommand 0x 202 thread: main
+3585 [main] DEBUG hubLibrary.meteringcomreader.HubConnection  - Time:5697797466600,start sendCommand 0x 202 thread: main0XFF,0XFF,0XFF,0XFF,
+3586 [main] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:5697799543182, serialEvent: gnu.io.SerialPortEvent[source=//./COM5],2, thread: main
+3604 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:5697817779151, _readBytes size:2
+3605 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:5697817995392, 0X2,0X2,
+3605 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Size for:0x202 : 1
+3605 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:5697818847709, _readBytes size:1
+3606 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:5697818972093, 0X1,
+3606 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:5697819230800 serialEvent loopNo:4
+3607 [main] DEBUG hubLibrary.meteringcomreader.HubConnection  - Time:5697820529153,done receiveAck 0x 202 thread: main
+3608 [main] DEBUG hubLibrary.meteringcomreader.HubConnection  - Time:5697820927302,wait sendCommand 0x 21a thread: main
+3608 [main] DEBUG hubLibrary.meteringcomreader.HubConnection  - Time:5697821266723,start sendCommand 0x 21a thread: main
+3610 [main] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:5697823040627, serialEvent: gnu.io.SerialPortEvent[source=//./COM5],2, thread: main
+3636 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:5697849738627, _readBytes size:2
+3637 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:5697849868432, 0X1A,0X2,
+3637 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Size for:0x21a : 256
+3642 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:5697855476859, _readBytes size:256
+3653 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:5697855555164, 0X0,0X0,0X0,0X0,0XDD,0X99,0XEE,0X55,0X1F,0X4D,0X45,0X4D,0X45,0X18,0X48,0X0,0X8B,0X23,0X31,0X8,0X11,0X0,0X7A,0XFF,0X94,0X26,0XE8,0X15,0X38,0XFF,0XFF,0X1E,0X78,0X52,0X36,0XE,0XC6,0XD5,0X4D,0XB2,0X1F,0X4D,0X45,0X4D,0X45,0X18,0X48,0X0,0X8B,0X23,0X31,0X8,0X11,0X0,0XB0,0XA9,0X96,0X3A,0X23,0X30,0XD6,0XB3,0X94,0XC2,0XC6,0X42,0XD5,0X5B,0X51,0XCE,0X3F,0XB2,0X1F,0X4D,0X45,0X4D,0X45,0X18,0X48,0X0,0X8B,0X23,0X31,0X8,0X11,0X0,0X5D,0X91,0X7,0X42,0XB6,0XE9,0X60,0X52,0XB5,0X58,0XD6,0XE5,0X2A,0XB8,0X6F,0X72,0X43,0XB2,0X0,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,
+3653 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:5697866107028 serialEvent loopNo:5
+3653 [main] DEBUG hubLibrary.meteringcomreader.HubConnection  - Time:5697866188646,done receiveAck 0x 21a thread: main
+3658 [main] DEBUG hubLibrary.meteringcomreader.HubConnection  - Time:5697870838743,wait sendCommand 0xf202 thread: main
+3658 [main] DEBUG hubLibrary.meteringcomreader.HubConnection  - Time:5697871021855,start sendCommand 0xf202 thread: main
+3659 [main] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:5697872372311, serialEvent: gnu.io.SerialPortEvent[source=//./COM5],2, thread: main
+3675 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:5697888692223, _readBytes size:2
+3675 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:5697888772034, 0X2,0XA,
+3676 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Size for:0xa02 : 0
+3676 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:5697889015682 serialEvent loopNo:6
+3676 [main] DEBUG hubLibrary.meteringcomreader.HubConnection  - Time:5697889044293,done receiveAck 0x a02 thread: main
+6677 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:5700890158329, _readBytes size:2
+6677 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:5700890430588, 0X0,0X0,
+0    [main] INFO  hubLibrary.meteringcomreader.HubConnection  - Time:6511326121466,Found port COM1
+35   [main] INFO  hubLibrary.meteringcomreader.HubConnection  - Time:6511362562986,Found port COM5
+87   [main] INFO  hubLibrary.meteringcomreader.HubConnection  - Input BufferSize=0
+3360 [main] INFO  hubLibrary.meteringcomreader.HubConnection  - Time:6514686733460,hub found:COM5hub firm ver259
+3533 [main] INFO  hubLibrary.meteringcomreader.HubConnection  - Input BufferSize=0
+3540 [main] DEBUG hubLibrary.meteringcomreader.HubConnection  - Time:6514865990475,wait sendCommand 0x 301 thread: main
+3540 [main] DEBUG hubLibrary.meteringcomreader.HubConnection  - Time:6514866609986,start sendCommand 0x 301 thread: main
+3543 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:6514869869872, serialEvent: gnu.io.SerialPortEvent[source=//./COM5],2, thread: Thread-2
+3544 [main] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:6514869870474, serialEvent: gnu.io.SerialPortEvent[source=//./COM5],2, thread: main
+3559 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:6514885165799, serialEvent: gnu.io.SerialPortEvent[source=//./COM5],1, thread: Thread-2
+3559 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:6514885435348 serialEvent loopNo:1
+3559 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:6514885857893, _readBytes size:2
+3562 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:6514886225323, 0X1,0X3,
+3572 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Size for:0x301 : 2
+3572 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:6514898793233, _readBytes size:2
+3573 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:6514898985983, 0X1,0X0,
+3573 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:6514899945216 serialEvent loopNo:2
+3574 [main] DEBUG hubLibrary.meteringcomreader.HubConnection  - Time:6514900567137,done receiveAck 0x 301 thread: main
+3575 [main] DEBUG hubLibrary.meteringcomreader.HubConnection  - Time:6514901089670,wait sendCommand 0x 201 thread: main
+3575 [main] DEBUG hubLibrary.meteringcomreader.HubConnection  - Time:6514901470653,start sendCommand 0x 201 thread: main
+3578 [main] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:6514904240532, serialEvent: gnu.io.SerialPortEvent[source=//./COM5],2, thread: main
+3594 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:6514920390885, _readBytes size:2
+3594 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:6514920544784, 0X1,0X2,
+3594 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Size for:0x201 : 2
+3595 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:6514921107072, _readBytes size:2
+3595 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:6514921278740, 0X3,0X1,
+3595 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:6514921586839 serialEvent loopNo:3
+3595 [main] DEBUG hubLibrary.meteringcomreader.HubConnection  - Time:6514921619064,done receiveAck 0x 201 thread: main
+3597 [main] DEBUG hubLibrary.meteringcomreader.HubConnection  - Time:6514923219493,wait sendCommand 0x 202 thread: main
+3597 [main] DEBUG hubLibrary.meteringcomreader.HubConnection  - Time:6514923507112,start sendCommand 0x 202 thread: main0XFF,0XFF,0XFF,0XFF,
+3600 [main] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:6514926384209, serialEvent: gnu.io.SerialPortEvent[source=//./COM5],2, thread: main
+3616 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:6514942142435, _readBytes size:2
+3616 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:6514942276457, 0X2,0X2,
+3616 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Size for:0x202 : 1
+3616 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:6514942715566, _readBytes size:1
+3616 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:6514942830011, 0X1,
+3617 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:6514943111005 serialEvent loopNo:4
+3617 [main] DEBUG hubLibrary.meteringcomreader.HubConnection  - Time:6514943575713,done receiveAck 0x 202 thread: main
+3617 [main] DEBUG hubLibrary.meteringcomreader.HubConnection  - Time:6514943928988,wait sendCommand 0x 21a thread: main
+3618 [main] DEBUG hubLibrary.meteringcomreader.HubConnection  - Time:6514944129267,start sendCommand 0x 21a thread: main
+3620 [main] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:6514946726575, serialEvent: gnu.io.SerialPortEvent[source=//./COM5],2, thread: main
+3647 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:6514973161954, _readBytes size:2
+3647 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:6514973358619, 0X1A,0X2,
+3647 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Size for:0x21a : 256
+3655 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:6514981640851, _readBytes size:256
+3670 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:6514981767042, 0X0,0X0,0X0,0X0,0XDD,0X99,0XEE,0X55,0X1F,0X4D,0X45,0X4D,0X45,0X18,0X48,0X0,0X8B,0X23,0X31,0X8,0X11,0X0,0X7A,0XFF,0X94,0X26,0XE8,0X15,0X38,0XFF,0XFF,0X1E,0X78,0X52,0X36,0XE,0XC6,0XD5,0X4D,0XB2,0X1F,0X4D,0X45,0X4D,0X45,0X18,0X48,0X0,0X8B,0X23,0X31,0X8,0X11,0X0,0XB0,0XA9,0X96,0X3A,0X23,0X30,0XD6,0XB3,0X94,0XC2,0XC6,0X42,0XD5,0X5B,0X51,0XCE,0X3F,0XB2,0X1F,0X4D,0X45,0X4D,0X45,0X18,0X48,0X0,0X8B,0X23,0X31,0X8,0X11,0X0,0X5D,0X91,0X7,0X42,0XB6,0XE9,0X60,0X52,0XB5,0X58,0XD6,0XE5,0X2A,0XB8,0X6F,0X72,0X43,0XB2,0X0,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,
+3671 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:6514997243673 serialEvent loopNo:5
+3672 [main] DEBUG hubLibrary.meteringcomreader.HubConnection  - Time:6514997949018,done receiveAck 0x 21a thread: main
+3675 [main] DEBUG hubLibrary.meteringcomreader.HubConnection  - Time:6515001885939,wait sendCommand 0xf202 thread: main
+3675 [main] DEBUG hubLibrary.meteringcomreader.HubConnection  - Time:6515001984422,start sendCommand 0xf202 thread: main
+3677 [main] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:6515003286389, serialEvent: gnu.io.SerialPortEvent[source=//./COM5],2, thread: main
+3694 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:6515021016690, _readBytes size:2
+3695 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:6515021084454, 0X2,0XA,
+3695 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Size for:0xa02 : 0
+3695 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:6515021285637 serialEvent loopNo:6
+3695 [main] DEBUG hubLibrary.meteringcomreader.HubConnection  - Time:6515021311538,done receiveAck 0x a02 thread: main
+6696 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:6518022296671, _readBytes size:2
+6696 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:6518022654163, 0X0,0X0,
+0    [main] INFO  hubLibrary.meteringcomreader.HubConnection  - Time:6567781425573,Found port COM1
+36   [main] INFO  hubLibrary.meteringcomreader.HubConnection  - Time:6567818831145,Found port COM5
+87   [main] INFO  hubLibrary.meteringcomreader.HubConnection  - Input BufferSize=0
+3366 [main] INFO  hubLibrary.meteringcomreader.HubConnection  - Time:6571148869656,hub found:COM5hub firm ver259
+3539 [main] INFO  hubLibrary.meteringcomreader.HubConnection  - Input BufferSize=0
+3546 [main] DEBUG hubLibrary.meteringcomreader.HubConnection  - Time:6571328792863,wait sendCommand 0x 301 thread: main
+3547 [main] DEBUG hubLibrary.meteringcomreader.HubConnection  - Time:6571329440985,start sendCommand 0x 301 thread: main
+3550 [main] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:6571332497580, serialEvent: gnu.io.SerialPortEvent[source=//./COM5],2, thread: main
+3550 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:6571332505110, serialEvent: gnu.io.SerialPortEvent[source=//./COM5],2, thread: Thread-2
+3566 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:6571348526560, serialEvent: gnu.io.SerialPortEvent[source=//./COM5],1, thread: Thread-2
+3566 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:6571348843996 serialEvent loopNo:1
+3566 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:6571349282201, _readBytes size:2
+3569 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:6571349526452, 0X1,0X3,
+3579 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Size for:0x301 : 2
+3579 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:6571361960943, _readBytes size:2
+3580 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:6571362153091, 0X1,0X0,
+3580 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:6571362929211 serialEvent loopNo:2
+3580 [main] DEBUG hubLibrary.meteringcomreader.HubConnection  - Time:6571363097867,done receiveAck 0x 301 thread: main
+3581 [main] DEBUG hubLibrary.meteringcomreader.HubConnection  - Time:6571363600524,wait sendCommand 0x 201 thread: main
+3581 [main] DEBUG hubLibrary.meteringcomreader.HubConnection  - Time:6571363968255,start sendCommand 0x 201 thread: main
+3584 [main] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:6571366624592, serialEvent: gnu.io.SerialPortEvent[source=//./COM5],2, thread: main
+3601 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:6571383827842, _readBytes size:2
+3602 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:6571384107631, 0X1,0X2,
+3602 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Size for:0x201 : 2
+3602 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:6571384937360, _readBytes size:2
+3603 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:6571385123485, 0X3,0X1,
+3603 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:6571385668606 serialEvent loopNo:3
+3603 [main] DEBUG hubLibrary.meteringcomreader.HubConnection  - Time:6571385734262,done receiveAck 0x 201 thread: main
+3606 [main] DEBUG hubLibrary.meteringcomreader.HubConnection  - Time:6571389018844,wait sendCommand 0x 202 thread: main
+3607 [main] DEBUG hubLibrary.meteringcomreader.HubConnection  - Time:6571389446207,start sendCommand 0x 202 thread: main0XFF,0XFF,0XFF,0XFF,
+3609 [main] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:6571391995328, serialEvent: gnu.io.SerialPortEvent[source=//./COM5],2, thread: main
+3626 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:6571408593222, _readBytes size:2
+3626 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:6571408826630, 0X2,0X2,
+3627 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Size for:0x202 : 1
+3627 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:6571409703944, _readBytes size:1
+3627 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:6571409909645, 0X1,
+3627 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:6571410287616 serialEvent loopNo:4
+3629 [main] DEBUG hubLibrary.meteringcomreader.HubConnection  - Time:6571412031703,done receiveAck 0x 202 thread: main
+3630 [main] DEBUG hubLibrary.meteringcomreader.HubConnection  - Time:6571412744276,wait sendCommand 0x 21a thread: main
+3630 [main] DEBUG hubLibrary.meteringcomreader.HubConnection  - Time:6571413091528,start sendCommand 0x 21a thread: main
+3632 [main] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:6571415076854, serialEvent: gnu.io.SerialPortEvent[source=//./COM5],2, thread: main
+3660 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:6571442650362, _readBytes size:2
+3660 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:6571443006046, 0X1A,0X2,
+3661 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Size for:0x21a : 256
+3675 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:6571457434598, _readBytes size:256
+3703 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:6571457733360, 0X0,0X0,0X0,0X0,0XDD,0X99,0XEE,0X55,0X1F,0X4D,0X45,0X4D,0X45,0X18,0X48,0X0,0X8B,0X23,0X31,0X8,0X11,0X0,0X7A,0XFF,0X94,0X26,0XE8,0X15,0X38,0XFF,0XFF,0X1E,0X78,0X52,0X36,0XE,0XC6,0XD5,0X4D,0XB2,0X1F,0X4D,0X45,0X4D,0X45,0X18,0X48,0X0,0X8B,0X23,0X31,0X8,0X11,0X0,0XB0,0XA9,0X96,0X3A,0X23,0X30,0XD6,0XB3,0X94,0XC2,0XC6,0X42,0XD5,0X5B,0X51,0XCE,0X3F,0XB2,0X1F,0X4D,0X45,0X4D,0X45,0X18,0X48,0X0,0X8B,0X23,0X31,0X8,0X11,0X0,0X5D,0X91,0X7,0X42,0XB6,0XE9,0X60,0X52,0XB5,0X58,0XD6,0XE5,0X2A,0XB8,0X6F,0X72,0X43,0XB2,0X0,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,
+3703 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:6571486034199 serialEvent loopNo:5
+3705 [main] DEBUG hubLibrary.meteringcomreader.HubConnection  - Time:6571486329950,done receiveAck 0x 21a thread: main
+3710 [main] DEBUG hubLibrary.meteringcomreader.HubConnection  - Time:6571493332200,wait sendCommand 0x 21a thread: main
+3711 [main] DEBUG hubLibrary.meteringcomreader.HubConnection  - Time:6571493515915,start sendCommand 0x 21a thread: main
+3712 [main] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:6571495044062, serialEvent: gnu.io.SerialPortEvent[source=//./COM5],2, thread: main
+3732 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:6571514487430, _readBytes size:2
+3732 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:6571514623560, 0X1A,0XF2,
+3732 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Size for:0xf21a : 0
+3732 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:6571514932864 serialEvent loopNo:6
+3734 [main] DEBUG hubLibrary.meteringcomreader.HubConnection  - Time:6571516932345,wait sendCommand 0xf202 thread: main
+3734 [main] DEBUG hubLibrary.meteringcomreader.HubConnection  - Time:6571517096785,start sendCommand 0xf202 thread: main
+3736 [main] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:6571518519823, serialEvent: gnu.io.SerialPortEvent[source=//./COM5],2, thread: main
+3752 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:6571534402735, _readBytes size:2
+3752 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:6571534504230, 0X2,0XA,
+3752 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Size for:0xa02 : 0
+3752 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:6571534775887 serialEvent loopNo:7
+3752 [main] DEBUG hubLibrary.meteringcomreader.HubConnection  - Time:6571534812630,done receiveAck 0x a02 thread: main
+6754 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:6574536653092, _readBytes size:2
+6754 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:6574536995525, 0X0,0X0,
+0    [main] INFO  hubLibrary.meteringcomreader.HubConnection  - Time:6743381669944,Found port COM1
+28   [main] INFO  hubLibrary.meteringcomreader.HubConnection  - Time:6743410133115,Found port COM5
+75   [main] INFO  hubLibrary.meteringcomreader.HubConnection  - Input BufferSize=0
+1854 [main] INFO  hubLibrary.meteringcomreader.HubConnection  - Time:6745236024335,hub found:COM5hub firm ver259
+2026 [main] INFO  hubLibrary.meteringcomreader.HubConnection  - Input BufferSize=0
+2033 [main] DEBUG hubLibrary.meteringcomreader.HubConnection  - Time:6745414759419,wait sendCommand 0x 301 thread: main
+2034 [main] DEBUG hubLibrary.meteringcomreader.HubConnection  - Time:6745415546683,start sendCommand 0x 301 thread: main
+2037 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:6745418758984, serialEvent: gnu.io.SerialPortEvent[source=//./COM5],2, thread: Thread-2
+2037 [main] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:6745418760791, serialEvent: gnu.io.SerialPortEvent[source=//./COM5],2, thread: main
+2054 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:6745435764966, serialEvent: gnu.io.SerialPortEvent[source=//./COM5],1, thread: Thread-2
+2054 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:6745436027889 serialEvent loopNo:1
+2054 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:6745436455554, _readBytes size:2
+2056 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:6745436694383, 0X1,0X3,
+2066 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Size for:0x301 : 2
+2067 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:6745448789152, _readBytes size:2
+2067 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:6745449005996, 0X1,0X0,
+2068 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:6745449816450 serialEvent loopNo:2
+2068 [main] DEBUG hubLibrary.meteringcomreader.HubConnection  - Time:6745449991130,done receiveAck 0x 301 thread: main
+2069 [main] DEBUG hubLibrary.meteringcomreader.HubConnection  - Time:6745450670875,wait sendCommand 0x 201 thread: main
+2069 [main] DEBUG hubLibrary.meteringcomreader.HubConnection  - Time:6745451137692,start sendCommand 0x 201 thread: main
+2071 [main] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:6745452963096, serialEvent: gnu.io.SerialPortEvent[source=//./COM5],2, thread: main
+2089 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:6745470924998, _readBytes size:2
+2089 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:6745471220749, 0X1,0X2,
+2090 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Size for:0x201 : 2
+2090 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:6745472090534, _readBytes size:2
+2090 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:6745472279971, 0X3,0X1,
+2091 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:6745472807625 serialEvent loopNo:3
+2091 [main] DEBUG hubLibrary.meteringcomreader.HubConnection  - Time:6745472874786,done receiveAck 0x 201 thread: main
+2094 [main] DEBUG hubLibrary.meteringcomreader.HubConnection  - Time:6745475653701,wait sendCommand 0x 202 thread: main
+2095 [main] DEBUG hubLibrary.meteringcomreader.HubConnection  - Time:6745476219302,start sendCommand 0x 202 thread: main0XFF,0XFF,0XFF,0XFF,
+2097 [main] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:6745478770531, serialEvent: gnu.io.SerialPortEvent[source=//./COM5],2, thread: main
+2113 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:6745494903415, _readBytes size:2
+2113 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:6745495123572, 0X2,0X2,
+2113 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Size for:0x202 : 1
+2114 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:6745495890055, _readBytes size:1
+2114 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:6745496068650, 0X1,
+2114 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:6745496446621 serialEvent loopNo:4
+2115 [main] DEBUG hubLibrary.meteringcomreader.HubConnection  - Time:6745497274543,done receiveAck 0x 202 thread: main
+2116 [main] DEBUG hubLibrary.meteringcomreader.HubConnection  - Time:6745498005487,wait sendCommand 0x 21a thread: main
+2117 [main] DEBUG hubLibrary.meteringcomreader.HubConnection  - Time:6745498457246,start sendCommand 0x 21a thread: main
+2119 [main] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:6745501159361, serialEvent: gnu.io.SerialPortEvent[source=//./COM5],2, thread: main
+2145 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:6745526969808, _readBytes size:2
+2146 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:6745527354103, 0X1A,0X2,
+2146 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Size for:0x21a : 256
+2160 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:6745542118161, _readBytes size:256
+2177 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:6745542337715, 0X0,0X0,0X0,0X0,0XDD,0X99,0XEE,0X55,0X1F,0X4D,0X45,0X4D,0X45,0X18,0X48,0X0,0X8B,0X23,0X31,0X8,0X11,0X0,0X7A,0XFF,0X94,0X26,0XE8,0X15,0X38,0XFF,0XFF,0X1E,0X78,0X52,0X36,0XE,0XC6,0XD5,0X4D,0XB2,0X1F,0X4D,0X45,0X4D,0X45,0X18,0X48,0X0,0X8B,0X23,0X31,0X8,0X11,0X0,0XB0,0XA9,0X96,0X3A,0X23,0X30,0XD6,0XB3,0X94,0XC2,0XC6,0X42,0XD5,0X5B,0X51,0XCE,0X3F,0XB2,0X1F,0X4D,0X45,0X4D,0X45,0X18,0X48,0X0,0X8B,0X23,0X31,0X8,0X11,0X0,0X5D,0X91,0X7,0X42,0XB6,0XE9,0X60,0X52,0XB5,0X58,0XD6,0XE5,0X2A,0XB8,0X6F,0X72,0X43,0XB2,0X0,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,
+2177 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:6745559435856 serialEvent loopNo:5
+2178 [main] DEBUG hubLibrary.meteringcomreader.HubConnection  - Time:6745560137286,done receiveAck 0x 21a thread: main
+2186 [main] DEBUG hubLibrary.meteringcomreader.HubConnection  - Time:6745568133404,wait sendCommand 0xf202 thread: main
+2186 [main] DEBUG hubLibrary.meteringcomreader.HubConnection  - Time:6745568374041,start sendCommand 0xf202 thread: main
+2188 [main] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:6745569991937, serialEvent: gnu.io.SerialPortEvent[source=//./COM5],2, thread: main
+2204 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:6745586000739, _readBytes size:2
+2204 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:6745586111269, 0X2,0XA,
+2204 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Size for:0xa02 : 0
+2204 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:6745586421777 serialEvent loopNo:6
+2204 [main] DEBUG hubLibrary.meteringcomreader.HubConnection  - Time:6745586454906,done receiveAck 0x a02 thread: main
+5206 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:6748587933962, _readBytes size:2
+5206 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:6748588234231, 0X0,0X0,
+0    [main] INFO  hubLibrary.meteringcomreader.HubConnection  - Time:6868344467965,Found port COM1
+27   [main] INFO  hubLibrary.meteringcomreader.HubConnection  - Time:6868372219165,Found port COM5
+75   [main] INFO  hubLibrary.meteringcomreader.HubConnection  - Input BufferSize=0
+3336 [main] INFO  hubLibrary.meteringcomreader.HubConnection  - Time:6871681451203,hub found:COM5hub firm ver259
+3526 [main] INFO  hubLibrary.meteringcomreader.HubConnection  - Input BufferSize=0
+3528 [main] DEBUG hubLibrary.meteringcomreader.HubConnection  - Time:6871873118013,wait sendCommand 0x 301 thread: main
+3528 [main] DEBUG hubLibrary.meteringcomreader.HubConnection  - Time:6871873369190,start sendCommand 0x 301 thread: main
+3530 [main] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:6871875435833, serialEvent: gnu.io.SerialPortEvent[source=//./COM5],2, thread: main
+3531 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:6871876096605, serialEvent: gnu.io.SerialPortEvent[source=//./COM5],2, thread: Thread-2
+3548 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:6871893009826, serialEvent: gnu.io.SerialPortEvent[source=//./COM5],1, thread: Thread-2
+3548 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:6871893116742 serialEvent loopNo:1
+3548 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:6871893235705, _readBytes size:2
+3548 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:6871893293229, 0X1,0X3,
+3551 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Size for:0x301 : 2
+3551 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:6871896374520, _readBytes size:2
+3551 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:6871896426322, 0X1,0X0,
+3551 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:6871896639250 serialEvent loopNo:2
+3551 [main] DEBUG hubLibrary.meteringcomreader.HubConnection  - Time:6871896691956,done receiveAck 0x 301 thread: main
+3551 [main] DEBUG hubLibrary.meteringcomreader.HubConnection  - Time:6871896804293,wait sendCommand 0x 201 thread: main
+3551 [main] DEBUG hubLibrary.meteringcomreader.HubConnection  - Time:6871896882598,start sendCommand 0x 201 thread: main
+3553 [main] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:6871898209260, serialEvent: gnu.io.SerialPortEvent[source=//./COM5],2, thread: main
+3569 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:6871914207220, _readBytes size:2
+3569 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:6871914318051, 0X1,0X2,
+3569 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Size for:0x201 : 2
+3569 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:6871914636992, _readBytes size:2
+3569 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:6871914683072, 0X3,0X1,
+3569 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:6871914824924 serialEvent loopNo:3
+3570 [main] DEBUG hubLibrary.meteringcomreader.HubConnection  - Time:6871915130011,done receiveAck 0x 201 thread: main
+3571 [main] DEBUG hubLibrary.meteringcomreader.HubConnection  - Time:6871915910348,wait sendCommand 0x 202 thread: main
+3571 [main] DEBUG hubLibrary.meteringcomreader.HubConnection  - Time:6871916045273,start sendCommand 0x 202 thread: main0XFF,0XFF,0XFF,0XFF,
+3572 [main] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:6871917567999, serialEvent: gnu.io.SerialPortEvent[source=//./COM5],2, thread: main
+3591 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:6871936200611, _readBytes size:2
+3591 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:6871936307829, 0X2,0X2,
+3591 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Size for:0x202 : 1
+3591 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:6871936584003, _readBytes size:1
+3591 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:6871936623758, 0X1,
+3591 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:6871936718025 serialEvent loopNo:4
+3592 [main] DEBUG hubLibrary.meteringcomreader.HubConnection  - Time:6871937529383,done receiveAck 0x 202 thread: main
+3592 [main] DEBUG hubLibrary.meteringcomreader.HubConnection  - Time:6871937893801,wait sendCommand 0x 21a thread: main
+3593 [main] DEBUG hubLibrary.meteringcomreader.HubConnection  - Time:6871937998308,start sendCommand 0x 21a thread: main
+3594 [main] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:6871939764682, serialEvent: gnu.io.SerialPortEvent[source=//./COM5],2, thread: main
+3622 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:6871967207782, _readBytes size:2
+3622 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:6871967313192, 0X1A,0X2,
+3622 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Size for:0x21a : 256
+3625 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:6871970685416, _readBytes size:256
+3632 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:6871970760107, 0X0,0X0,0X0,0X0,0XDD,0X99,0XEE,0X55,0X1F,0X4D,0X45,0X4D,0X45,0X18,0X48,0X0,0X8B,0X23,0X31,0X8,0X11,0X0,0X7A,0XFF,0X94,0X26,0XE8,0X15,0X38,0XFF,0XFF,0X1E,0X78,0X52,0X36,0XE,0XC6,0XD5,0X4D,0XB2,0X1F,0X4D,0X45,0X4D,0X45,0X18,0X48,0X0,0X8B,0X23,0X31,0X8,0X11,0X0,0XB0,0XA9,0X96,0X3A,0X23,0X30,0XD6,0XB3,0X94,0XC2,0XC6,0X42,0XD5,0X5B,0X51,0XCE,0X3F,0XB2,0X1F,0X4D,0X45,0X4D,0X45,0X18,0X48,0X0,0X8B,0X23,0X31,0X8,0X11,0X0,0X5D,0X91,0X7,0X42,0XB6,0XE9,0X60,0X52,0XB5,0X58,0XD6,0XE5,0X2A,0XB8,0X6F,0X72,0X43,0XB2,0X0,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,
+3632 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:6871977141340 serialEvent loopNo:5
+3632 [main] DEBUG hubLibrary.meteringcomreader.HubConnection  - Time:6871977157905,done receiveAck 0x 21a thread: main
+3637 [main] DEBUG hubLibrary.meteringcomreader.HubConnection  - Time:6871982647971,wait sendCommand 0x 21a thread: main
+3637 [main] DEBUG hubLibrary.meteringcomreader.HubConnection  - Time:6871982732901,start sendCommand 0x 21a thread: main
+3639 [main] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:6871984043602, serialEvent: gnu.io.SerialPortEvent[source=//./COM5],2, thread: main
+3658 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:6872003165920, _readBytes size:2
+3658 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:6872003261091, 0X1A,0XF2,
+3658 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Size for:0xf21a : 0
+3658 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:6872003501426 serialEvent loopNo:6
+3660 [main] DEBUG hubLibrary.meteringcomreader.HubConnection  - Time:6872004936812,wait sendCommand 0xf202 thread: main
+3660 [main] DEBUG hubLibrary.meteringcomreader.HubConnection  - Time:6872005119322,start sendCommand 0xf202 thread: main
+3661 [main] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:6872006430023, serialEvent: gnu.io.SerialPortEvent[source=//./COM5],2, thread: main
+3679 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:6872024167552, _readBytes size:2
+3679 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:6872024250074, 0X2,0XA,
+3679 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Size for:0xa02 : 0
+3679 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:6872024473242 serialEvent loopNo:7
+3679 [main] DEBUG hubLibrary.meteringcomreader.HubConnection  - Time:6872024600035,done receiveAck 0x a02 thread: main
+6680 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:6875025158107, _readBytes size:2
+6680 [Thread-2] DEBUG hubLibrary.meteringcomreader.ComReadDispatch  - Time:6875025296345, 0X0,0X0,
