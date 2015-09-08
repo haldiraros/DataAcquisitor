@@ -198,18 +198,18 @@ public class HubControl {
     }
     
     public void startRecievingInRadioSession() throws MeteringSessionException{
-       try{
-           //hubConn.createRadioSession(0xFFFFFFFF);
+      // try{
+           hubConn.createRadioSession(0);
            RSRecv = createRadioSessionReciever(this);
            System.out.println("Started radio session recieving ");
            
-       }catch(Exception e){System.out.println("Error in radio session "+e.getMessage());}
+       //}catch(Exception e){System.out.println("Error in radio session "+e.getMessage());}
     }
     
     public void stopRecievingInRadioSession() throws MeteringSessionException{
         if(RSRecv!=null){
             RSRecv.close();
-            //hubConn.closeRadioSession();
+            hubConn.closeRadioSession();
         }
         RSRecv = null;
     }
