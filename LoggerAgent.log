@@ -896,3 +896,4 @@ meteringcomreader.exceptions.MeteringSessionException: Expected command ack: 0x2
 69512 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:23567378878444 serialEvent loopNo:3
 72513 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:23570380075298, _readBytes size:2
 72513 [Thread-3] DEBUG meteringcomreader.ComReadDispatch  - Time:23570380213235, 0X0,0X0,
+0    [main] INFO  hubLibrary.meteringcomreader.HubConnection  - Time:3142131532535,Found port COM1
