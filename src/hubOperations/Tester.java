@@ -37,31 +37,36 @@ public class Tester {
         System.out.println("SerialPortEvent.DATA_AVAILABLE="+SerialPortEvent.DATA_AVAILABLE);
         System.out.println("SerialPortEvent.OUTPUT_BUFFER_EMPTY ="+SerialPortEvent.OUTPUT_BUFFER_EMPTY);
         
-        HubControl hubC = new HubControl(0, "COM5");
+        HubControl hubC = new HubControl(0, "COM3");
         hubC.openHubConn();
         
         long[] listLoggers1= hubC.getRegisteredLoggersList();
-        if(listLoggers1!=null)
+        if(listLoggers1!=null){
             System.out.println("Regstred loggers count:"+listLoggers1.length);
         for (int i=0; i<listLoggers1.length; i++){
             System.out.println("Regstred logger:0x"+Long.toHexString(listLoggers1[i])); 
         }
+        }
          /* Logger registering unregistering test */
-        /*
+        
         //hubC.unregisterAllLoggers();
         //System.out.println(Long.toHexString(hubC.checkLoggerID()));
+        
         //hubC.autoRegisterLogger();
+        /*
         long[] listLoggers2= hubC.getRegisteredLoggersList();
-        if(listLoggers2!=null)
+        if(listLoggers2!=null){
             System.out.println("Regstred loggers count:"+listLoggers2.length);
         for (int i=0; i<listLoggers2.length; i++){
             System.out.println("Regstred logger:0x"+Long.toHexString(listLoggers2[i])); 
         }
+        }
         */
+ //hubC.getHubConn().closeAllSessions(); //dla pewnosci domykamy inne sesje!        
+//hubC.readPacketsHubFlash();
         
-        //hubC.readPacketsHubFlash();
         //hubC.readPacketsLoggerFlash();
-        hubC.getHubConn().closeAllSessions(); //dla pewnosci domykamy inne sesje!
+        //hubC.getHubConn().closeAllSessions(); //dla pewnosci domykamy inne sesje!
         hubC.startRecievingInRadioSession();
         Thread.sleep(1200000); //20 minut
         hubC.stopRecievingInRadioSession();

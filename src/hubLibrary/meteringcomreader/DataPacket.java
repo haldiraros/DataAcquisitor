@@ -17,6 +17,7 @@
 
 package hubLibrary.meteringcomreader;
 
+import com.sun.org.apache.xml.internal.security.encryption.EncryptedData;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -171,11 +172,13 @@ public class DataPacket implements Serializable{
         StringBuilder sb = new StringBuilder("appId:");sb.append(String.format("%0#8X", appId));
         sb.append(", fieldLength:");sb.append(fieldLength);
         sb.append(", loggerId:");sb.append(String.format("%0#8X", loggerNo));
-        sb.append(", encAlg:");sb.append(encAlg); 
+        sb.append(", encAlg:");sb.append(encAlg);
+        if(encriptedData !=null){
         sb.append(", encryptedData:");
             for (byte b : encriptedData) {
             sb.append(String.format("%02X ",b));//changes
             }
+        }
         sb.append(", measurmentTime:");sb.append(measurmentTimeStart);
         sb.append(", measurmentPeriod:");sb.append(measurmentPeriod);
         sb.append(", temperatures:(");

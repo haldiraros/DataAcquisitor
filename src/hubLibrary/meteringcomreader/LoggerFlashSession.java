@@ -25,6 +25,7 @@ import hubLibrary.meteringcomreader.exceptions.MeteringSessionFlashLoggerTransEx
 import hubLibrary.meteringcomreader.exceptions.MeteringSessionNoLoggerOnHub;
 import hubLibrary.meteringcomreader.exceptions.MeteringSessionNoMoreDataException;
 import hubLibrary.meteringcomreader.exceptions.MeteringSessionOperationAlreadyInProgressException;
+import java.util.logging.Level;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -57,12 +58,15 @@ public class LoggerFlashSession  extends MeteringSession{
         byte[] ret;
 
         
-        try{close();} 
-        catch(MeteringSessionException e){}
+//        try{close();} 
+//        catch(MeteringSessionException e){}
         
         try{
-            hc.sendCommand(Utils.getIdLoggerFlashSessionReq);
-            
+            Thread.sleep(1000);
+            //hc.sendCommand(Utils.getIdLoggerFlashSessionReq);
+            hc.sendCommand(Utils.getLoggerIdReq);
+            Thread.sleep(1000);
+                    
             ret=hc.receiveAck(Utils.getIdLoggerFlashSessionRes);
             System.out.println("test");
             loggerId=Utils.bytes2long(ret, 4);
@@ -70,6 +74,8 @@ public class LoggerFlashSession  extends MeteringSession{
         }
         catch(MeteringSessionTimeoutException e){
             throw new MeteringSessionNoLoggerOnHub();
+        } catch (InterruptedException ex) {
+            java.util.logging.Logger.getLogger(LoggerFlashSession.class.getName()).log(Level.SEVERE, null, ex);
         }
 /*        
         hc.sendCommand(Utils.getLoggerHardwareVerReq);

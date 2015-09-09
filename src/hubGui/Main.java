@@ -6,6 +6,8 @@
 package hubGui;
 
 import com.sun.javafx.runtime.VersionInfo;
+import hubLibrary.meteringcomreader.TestFlashSession;
+import hubOperations.Tester;
 import java.io.IOException;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -35,9 +37,14 @@ public class Main extends Application {
 
     /**
      * @param args the command line arguments
+     * @throws java.lang.Exception
      */
-    public static void main(String[] args) {
-        launch(args);
+    public static void main(String[] args) throws Exception {
+        //launch(args);
+//        TestFlashSession.main(args);
+        Tester.main(args);
+        
+               
     }
     
 }

@@ -131,8 +131,8 @@ public class Utils {
     static final int stopLoggerFlashSessionRes=0x0902;
     static final int countRecordsPerPageLoggerFlashSessionReq=0x040C;
     static final int countRecordsPerPageLoggerFlashSessionRes=0x040C;
-    static final int getIdLoggerFlashSessionReq=0x000d;
-    static final int getIdLoggerFlashSessionRes=0x000d;
+    static final int getIdLoggerFlashSessionReq=0x000D;
+    static final int getIdLoggerFlashSessionRes=0x000D;
     
     static final int getLoggerFirmwareVerReq=0x020d;
     static final int getLoggerFirmwareVerRes=0x020d;

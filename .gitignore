@@ -6,3 +6,5 @@ nbbuild.xml
 =======
 /dist/
 >>>>>>> origin/master
+dll/rxtxParallel.dll
+dll/rxtxParallel.dll
