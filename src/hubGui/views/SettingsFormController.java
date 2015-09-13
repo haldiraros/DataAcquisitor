@@ -6,6 +6,9 @@
 package hubGui.views;
 
 import hubGui.models.IdKeyPair;
+import hubGui.settings.HubConfig;
+import hubGui.settings.Settings;
+import hubGui.settings.SettingsLoader;
 import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
@@ -16,6 +19,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.stage.Stage;
 import javafx.util.Pair;
 
 /**
@@ -44,6 +48,15 @@ public class SettingsFormController implements Initializable {
         
         ObservableList<IdKeyPair> idKeyPairs = FXCollections.observableArrayList();
         hubIdKeyTable.setItems(idKeyPairs);
+        
+        try {
+            Settings settings = SettingsLoader.loadOrCreateEmpty();
+            setSettings(settings);
+        }
+        catch(Exception ex) {
+            Dialogs.showInfoAlert("Error loading settings: " + ex.getMessage());
+            close();
+        }
     }    
     
     @FXML
@@ -97,8 +110,47 @@ public class SettingsFormController implements Initializable {
         hubIdKeyTable.getItems().remove(index);
     }
     
+    @FXML
+    private void cancelActionHandler(ActionEvent event) {
+        close();
+    }
+    
+    @FXML
+    private void okActionHandler(ActionEvent event) {
+        try {
+            Settings settings = getSettings();
+            SettingsLoader.save(settings);
+            close();
+        }
+        catch (Exception ex) {
+            Dialogs.showInfoAlert("Error saving settings: " + ex.getMessage());
+        }
+    }
+    
     private static void showNoHubConfigSelectedAlert() {
         Dialogs.showInfoAlert("No hub configuration selected.");
+    }
+    
+    private void close() {
+        Stage stage = (Stage) hubIdKeyTable.getScene().getWindow();
+        stage.close();
+    }
+    
+    private void setSettings(Settings settings) {
+        ObservableList<IdKeyPair> items = hubIdKeyTable.getItems();
+        for(HubConfig hubConfig : settings.getHubConfigs()) {
+            IdKeyPair pair = new IdKeyPair(hubConfig.getId(), hubConfig.getKey());
+            items.add(pair);
+        }
+    }
+    
+    private Settings getSettings() {
+        Settings settings = new Settings();
+        for(IdKeyPair pair : hubIdKeyTable.getItems()) {
+            HubConfig hubConfig = new HubConfig(pair.getId(), pair.getKey());
+            settings.getHubConfigs().add(hubConfig);
+        }
+        return settings;
     }
     
 }
