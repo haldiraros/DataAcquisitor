@@ -60,6 +60,7 @@
               <menus>
                   <Menu mnemonicParsing="false" text="App">
                     <items>
+                      <MenuItem fx:id="settingsMenuItem" mnemonicParsing="false" onAction="#settingsActionHandler" text="Settings" />
                       <MenuItem fx:id="closeMenuItem" mnemonicParsing="false" onAction="#closeActionHandler" text="Close" />
                     </items>
                   </Menu>

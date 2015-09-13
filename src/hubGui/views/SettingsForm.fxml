@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="502.0" prefWidth="347.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hubGui.views.SettingsFormController">
+   <children>
+      <BorderPane prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <center>
+            <GridPane prefHeight="502.0" prefWidth="434.0" BorderPane.alignment="CENTER">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints maxHeight="292.0" minHeight="10.0" prefHeight="292.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="246.0" minHeight="10.0" prefHeight="210.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <FlowPane orientation="VERTICAL" prefHeight="200.0" prefWidth="200.0">
+                     <children>
+                        <Label prefHeight="17.0" prefWidth="337.0" text="Hubs configuration">
+                           <FlowPane.margin>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </FlowPane.margin>
+                        </Label>
+                        <TableView fx:id="hubIdKeyTable" prefHeight="208.0" prefWidth="335.0">
+                          <columns>
+                            <TableColumn fx:id="hubIdColumn" prefWidth="112.0" text="Id" />
+                            <TableColumn fx:id="hubKeyColumn" prefWidth="224.0" text="Key" />
+                          </columns>
+                           <FlowPane.margin>
+                              <Insets left="5.0" right="5.0" />
+                           </FlowPane.margin>
+                        </TableView>
+                        <HBox prefHeight="35.0" prefWidth="346.0" HBox.hgrow="ALWAYS">
+                           <children>
+                                <Pane HBox.hgrow="ALWAYS" />
+                              <Button fx:id="deleteButton" mnemonicParsing="false" text="Delete" onAction="#deleteActionHandler" >
+                                 <HBox.margin>
+                                    <Insets left="5.0" />
+                                 </HBox.margin>
+                              </Button>
+                              <Button fx:id="editButton" mnemonicParsing="false" text="Edit" onAction="#editActionHandler">
+                                 <HBox.margin>
+                                    <Insets left="5.0" />
+                                 </HBox.margin>
+                              </Button>
+                              <Button fx:id="addButton" mnemonicParsing="false" text="Add" onAction="#addActionHandler">
+                                 <HBox.margin>
+                                    <Insets left="5.0" />
+                                 </HBox.margin>
+                              </Button>
+                           </children>
+                           <padding>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </padding>
+                        </HBox>
+                     </children>
+                  </FlowPane>
+               </children>
+            </GridPane>
+         </center>
+         <bottom>
+            <ToolBar prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+              <items>
+                  <Pane HBox.hgrow="ALWAYS" />
+                <Button fx:id="cancelButton" mnemonicParsing="false" prefHeight="25.0" prefWidth="67.0" text="Cancel" />
+                  <Button fx:id="okButton" mnemonicParsing="false" prefHeight="25.0" prefWidth="78.0" text="Ok" />
+              </items>
+            </ToolBar>
+         </bottom>
+      </BorderPane>
+   </children>
+</AnchorPane>

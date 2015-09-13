@@ -40,11 +40,7 @@ public class Main extends Application {
      * @throws java.lang.Exception
      */
     public static void main(String[] args) throws Exception {
-        //launch(args);
-//        TestFlashSession.main(args);
-        Tester.main(args);
-        
-               
+        launch(args);       
     }
     
 }
