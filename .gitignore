@@ -11,3 +11,4 @@ dll/rxtxParallel.dll
 dll/rxtxParallel.dll
 dll/rxtxParallel.dll
 dll/rxtxSerial.dll
+*.db
