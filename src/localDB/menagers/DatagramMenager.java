@@ -8,7 +8,6 @@ package localDB.menagers;
 import java.math.BigDecimal;
 import java.sql.CallableStatement;
 import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashSet;
@@ -32,12 +31,12 @@ public class DatagramMenager {
         if (datagram.getId() == null) {
             String sql = "INSERT INTO DATAGRAMS(DATA) VALUES (?)";
 
-            PreparedStatement cs = getConnection().prepareCall(sql);
+            CallableStatement cs = getConnection().prepareCall(sql);
             cs.setString(1, datagram.getData());
             cs.execute();
             cs.close();
 
-            cs = getConnection().prepareStatement(
+            cs = getConnection().prepareCall(
                     "select last_insert_rowid()");
             ResultSet rs = cs.executeQuery();
             while (rs.next()) {
@@ -47,7 +46,7 @@ public class DatagramMenager {
             cs.close();
 
             sql = "INSERT INTO Datagram_statistics(datagram_id) VALUES (?)";
-            cs = getConnection().prepareStatement(sql);
+            cs = getConnection().prepareCall(sql);
             cs.setBigDecimal(1, datagram.getId());
             cs.execute();
             cs.close();
@@ -68,7 +67,7 @@ public class DatagramMenager {
                 + "        , Datagram_statistics stat "
                 + "    where stat.datagram_id = dt.id "
                 + "      and dt.id = (?) ";
-        PreparedStatement cs = getConnection().prepareStatement(sql);
+        CallableStatement cs = getConnection().prepareCall(sql);
         cs.setBigDecimal(1, id);
         ResultSet rs = cs.executeQuery();
         while (rs.next()) {
@@ -92,7 +91,7 @@ public class DatagramMenager {
                 + "      (select datagram_id "
                 + "         from Datagram_statistics"
                 + "        where is_send = FALSE)";
-        PreparedStatement cs = getConnection().prepareStatement(sql);
+        CallableStatement cs = getConnection().prepareCall(sql);
         ResultSet rs = cs.executeQuery();
         while (rs.next()) {
             BigDecimal id = rs.getBigDecimal(1);
@@ -136,14 +135,14 @@ public class DatagramMenager {
         if (datagram.getId() != null && datagram.isDataSend() != true) {
             String sql = "INSERT INTO SEND_HISTORY(DATAGRAM_ID,ERROR) VALUES (?,?)";
 
-            PreparedStatement cs = getConnection().prepareCall(sql);
+            CallableStatement cs = getConnection().prepareCall(sql);
             cs.setBigDecimal(1, datagram.getId());
             cs.setString(2, error.substring(0, 200));
             cs.execute();
             cs.close();
 
             BigDecimal errorId = null;
-            cs = getConnection().prepareStatement(
+            cs = getConnection().prepareCall(
                     "select last_insert_rowid()");
             ResultSet rs = cs.executeQuery();
             while (rs.next()) {
@@ -178,7 +177,7 @@ public class DatagramMenager {
                     + " send_attemps = send_attemps + 1"
                     + " WHERE "
                     + " datagram_id = (?)";
-            PreparedStatement cs = getConnection().prepareCall(sql);
+            CallableStatement cs = getConnection().prepareCall(sql);
             cs.setBigDecimal(1, datagram.getId());
             cs.execute();
             cs.close();
@@ -198,7 +197,7 @@ public class DatagramMenager {
                 + "      (select datagram_id "
                 + "         from Datagram_statistics"
                 + "        where is_send = TRUE)";
-        PreparedStatement cs = getConnection().prepareStatement(sql);
+        CallableStatement cs = getConnection().prepareCall(sql);
         ResultSet rs = cs.executeQuery();
         while (rs.next()) {
             BigDecimal id = rs.getBigDecimal(1);

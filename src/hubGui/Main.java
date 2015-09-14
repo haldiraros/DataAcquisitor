@@ -6,6 +6,8 @@
 package hubGui;
 
 import com.sun.javafx.runtime.VersionInfo;
+import hubGui.logging.LogTyps;
+import hubGui.logging.Logger;
 import hubLibrary.meteringcomreader.TestFlashSession;
 import hubOperations.Tester;
 import java.io.IOException;
@@ -13,6 +15,8 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import localDB.menagers.LocalDataBaseMenager;
+import project.data.Session;
 
 /**
  *
@@ -40,6 +44,23 @@ public class Main extends Application {
      * @throws java.lang.Exception
      */
     public static void main(String[] args) throws Exception {
+        LocalDataBaseMenager ldbm = new LocalDataBaseMenager();
+        if(ldbm.fullTestBDExists()== false){
+            Logger loger = Logger.getInstance(null);
+            loger.write("Local DB Not Found!", LogTyps.WARNING);
+            loger.write("Trying to create new Local DB.", LogTyps.MESSAGE);
+            try {
+                ldbm.setupDataBase();
+                loger.write("New Local DB created.", LogTyps.MESSAGE);
+            } catch (Exception e) {
+                loger.write("Error while creating Local DB:"+e.getMessage(), LogTyps.ERROR);
+                e.printStackTrace();
+            }
+            if (ldbm.fullTestBDExists()== false) {
+                loger.write("Error: Local BD is not valid!", LogTyps.ERROR);               
+            }
+        }
+        Session localDBSession = new Session(ldbm,false);
         launch(args);       
     }
     

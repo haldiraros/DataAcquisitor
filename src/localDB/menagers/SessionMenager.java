@@ -41,9 +41,9 @@ public class SessionMenager {
     public boolean createSession(Session session)
             throws ClassNotFoundException, SQLException, Exception {
         if (session.getId() == null) {
-            String sql = "INSERT INTO Session(d_enqueued,d_received,d_send_ok,d_send_failures) VALUES (?,?,?,?)";
+            String sql = "INSERT INTO Session_statistics(d_enqueued,d_received,d_send_ok,d_send_failures) VALUES (?,?,?,?)";
 
-            PreparedStatement cs = getConnection().prepareCall(sql);
+            PreparedStatement cs = getConnection().prepareStatement(sql);
             cs.setInt(1, session.getDatagramsEnqueued());
             cs.setInt(2, session.getDatagramsReceived());
             cs.setInt(3, session.getDatagramsSend_OK());
@@ -51,14 +51,14 @@ public class SessionMenager {
             cs.execute();
             cs.close();
 
-            cs = getConnection().prepareStatement(
-                    "select last_insert_rowid()");
-            ResultSet rs = cs.executeQuery();
-            while (rs.next()) {
-                session.setId(rs.getBigDecimal(1));
-            }
-            rs.close();
-            cs.close();
+//            cs = getConnection().prepareCall(
+//                    "select last_insert_rowid()");
+//            ResultSet rs = cs.executeQuery();
+//            while (rs.next()) {
+//                session.setId(rs.getBigDecimal(1));
+//            }
+//            rs.close();
+//            cs.close();
 
             return true;
         } else {

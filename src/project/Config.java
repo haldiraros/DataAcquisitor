@@ -12,14 +12,14 @@ import java.util.ResourceBundle;
  *
  * @author hp
  */
-public class Settings {
+public class Config {
 
     private static final String BUNDLE_NAME = "project.settings";
 
     private static final ResourceBundle RESOURCE_BUNDLE = ResourceBundle
             .getBundle(BUNDLE_NAME);
 
-    private Settings() {
+    private Config() {
     }
 
     public static String getString(String key) {

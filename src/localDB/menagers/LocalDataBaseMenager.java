@@ -5,18 +5,21 @@
  */
 package localDB.menagers;
 
+import hubGui.logging.Logger;
 import java.io.File;
 import java.math.BigDecimal;
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.HashSet;
 import java.util.Set;
 import localDB.SetupDB;
 
-import project.Settings;
+import project.Config;
 import project.data.Datagram;
 import project.data.Datagram;
 import project.data.Session;
@@ -42,7 +45,7 @@ public class LocalDataBaseMenager {
     }
 
     public LocalDataBaseMenager() throws SQLException, ClassNotFoundException {
-        this.setDBPatch(Settings.getString("DBPath"));
+        this.setDBPatch(Config.getString("DBPath"));
         datagramMenager = new DatagramMenager(getConnection());
         sessionMenager = new SessionMenager(getConnection());
     }
@@ -57,8 +60,8 @@ public class LocalDataBaseMenager {
         }
     }
 
-    protected boolean testBDExists() throws ClassNotFoundException {
-        Class.forName(Settings.getString("sqliteJDBC"));
+    public boolean testBDExists() throws ClassNotFoundException {
+        Class.forName(Config.getString("sqliteJDBC"));
         File BDFile = new File(getDBPatch());
         if (BDFile.exists()) {
             return true;
@@ -67,10 +70,34 @@ public class LocalDataBaseMenager {
         }
     }
 
-    public void setupDataBase() throws ClassNotFoundException, SQLException {
-        if (testBDExists() == false) {
-            new SetupDB().setupDB(getConnection());
+    public boolean fullTestBDExists() throws ClassNotFoundException, SQLException {
+        String tables[] = {"Datagrams", "Datagram_statistics", "Errors_log", "Session_statistics"};
+        for (String table : tables) {
+            try {
+                String sql = "select count(*) from " + table + ";";
+                Statement stmt = getConnection().createStatement();
+                System.out.println(sql);
+                ResultSet rs = stmt.executeQuery(sql);
+                while (rs.next()) {
+                    rs.getBigDecimal(1);
+                }
+                rs.close();
+                stmt.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+                return false;
+            }
         }
+        return true;
+    }
+
+    public boolean setupDataBase() throws ClassNotFoundException, SQLException, Exception {
+//        if (testBDExists() == false) {
+            new SetupDB().setupDB(getDBPatch());
+            return testBDExists();
+//        } else {
+//            throw new Exception("LocalDB already exists!");
+//        }
     }
 
     public boolean createDatagram(Datagram datagram)
@@ -80,7 +107,7 @@ public class LocalDataBaseMenager {
         }
         return false;
     }
-    
+
     public boolean updateDatagram(Datagram datagram, String error)
             throws Exception {
         if (testBDExists() == true) {
@@ -95,7 +122,7 @@ public class LocalDataBaseMenager {
             return getDatagramMenager().getDatagramsToSend();
         }
         return null;
-    }  
+    }
 
     public boolean createSession(Session session)
             throws Exception {

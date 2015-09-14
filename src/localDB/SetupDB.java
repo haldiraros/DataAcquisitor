@@ -6,6 +6,7 @@
 package localDB;
 
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 
@@ -58,14 +59,26 @@ public class SetupDB {
     public SetupDB() {
     }
 
-    public void setupDB(Connection c) throws SQLException {
-        if (c != null) {
-            Statement stmt = c.createStatement();
+    public void setupDB(String dbPatch) throws SQLException {
+        Connection c = null;
+        Statement stmt = null;
+        try {
+            Class.forName("org.sqlite.JDBC");
+            c = DriverManager.getConnection("jdbc:sqlite:"
+                    + dbPatch);
+            System.out.println("Opened database successfully");
+
+            stmt = c.createStatement();
             stmt.executeUpdate(createDatagramsTable);
             stmt.executeUpdate(createDatagramsLogTable);
             stmt.executeUpdate(createDatagramsStatisticsTable);
             stmt.executeUpdate(createSessionStatisticsTable);
             stmt.close();
+            c.close();
+        } catch (Exception e) {
+            System.err.println(e.getClass().getName() + ": " + e.getMessage());
+            System.exit(0);
         }
+        System.out.println("Tables created successfully");
     }
 }

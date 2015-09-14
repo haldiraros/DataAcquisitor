@@ -26,14 +26,19 @@ public class Session {
     private int datagramsSend_Failures;
     private LocalDataBaseMenager localDataBaseMenager;
     private ScheduledExecutorService exec;
+    private Boolean sessionWithLocalDB;
 
     public Session() throws Exception {
-        SetUpStartValues();
+        SetUpStartValues(null, true);
     }
 
     public Session(BigDecimal id) throws Exception {
         this.setId(id);
-        SetUpStartValues();
+        SetUpStartValues(null, true);
+    }
+
+    public Session(LocalDataBaseMenager ldbm, Boolean sessionWithLocalDB) throws Exception {
+        SetUpStartValues(ldbm, sessionWithLocalDB);
     }
 
     // to_do - dodać tutaj menager wysyłania datagramów
@@ -58,41 +63,58 @@ public class Session {
         localDataBaseMenager.updateSession(this);
     }
 
-    public void SetUpStartValues() throws Exception {
+    public void SetUpStartValues(LocalDataBaseMenager ldbm, Boolean sessionWithLocalDB) throws Exception {
         setDatagramsEnqueued(0);
         setDatagramsReceived(0);
         setDatagramsSend_OK(0);
         setDatagramsSend_Failures(0);
+        this.sessionWithLocalDB = sessionWithLocalDB;
 
-        localDataBaseMenager = new LocalDataBaseMenager();
-        localDataBaseMenager.createSession(this);
-        localDataBaseMenager.getDatagramMenager().removeSendDatagrams();
-
-        exec = Executors.newSingleThreadScheduledExecutor();
-        exec.scheduleAtFixedRate(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    sendDatagrams();
-                } catch (Exception ex) {
-                    Logger.getLogger(Session.class.getName()).log(Level.SEVERE, null, ex);
-                }
+        if (sessionWithLocalDB) {
+            if (ldbm == null) {
+                localDataBaseMenager = new LocalDataBaseMenager();
+            } else {
+                localDataBaseMenager = ldbm;
             }
-        }, 0, 5, TimeUnit.MINUTES);
+            localDataBaseMenager.createSession(this);
+            localDataBaseMenager.getDatagramMenager().removeSendDatagrams();
+
+            exec = Executors.newSingleThreadScheduledExecutor();
+            exec.scheduleAtFixedRate(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        sendDatagrams();
+                    } catch (Exception ex) {
+                        Logger.getLogger(Session.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+            }, 0, 5, TimeUnit.MINUTES);
+        }
     }
 
     public boolean addDatagram(Datagram datagram) throws Exception {
+        if(sessionWithLocalDB){
         Boolean status = localDataBaseMenager.createDatagram(datagram);
         if (status) {
             addDatagramsReceived();
             localDataBaseMenager.updateSession(this);
         }
         return status;
+        }else{
+            String error = null;
+            //error = menager.send(datagram);
+            return false;
+        }
     }
 
     public boolean closeSession() throws Exception {
-        localDataBaseMenager.getDatagramMenager().removeSendDatagrams();
-        return localDataBaseMenager.closeSession(this);
+        if (sessionWithLocalDB) {
+            localDataBaseMenager.getDatagramMenager().removeSendDatagrams();
+            return localDataBaseMenager.closeSession(this);
+        }else{
+            return false;
+        }
     }
 
     public BigDecimal getId() {
@@ -187,6 +209,20 @@ public class Session {
      */
     public void setLocalDataBaseMenager(LocalDataBaseMenager localDataBaseMenager) {
         this.localDataBaseMenager = localDataBaseMenager;
+    }
+
+    /**
+     * @return the sessionWithLocalDB
+     */
+    public Boolean getSessionWithLocalDB() {
+        return sessionWithLocalDB;
+    }
+
+    /**
+     * @param sessionWithLocalDB the sessionWithLocalDB to set
+     */
+    public void setSessionWithLocalDB(Boolean sessionWithLocalDB) {
+        this.sessionWithLocalDB = sessionWithLocalDB;
     }
 
 }
