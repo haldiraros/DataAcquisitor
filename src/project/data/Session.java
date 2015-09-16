@@ -69,6 +69,7 @@ public class Session {
         setDatagramsSend_OK(0);
         setDatagramsSend_Failures(0);
         this.sessionWithLocalDB = sessionWithLocalDB;
+        System.out.println("sessionWithLocalDB:"+sessionWithLocalDB);
 
         if (sessionWithLocalDB) {
             if (ldbm == null) {
@@ -89,7 +90,7 @@ public class Session {
                         Logger.getLogger(Session.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }
-            }, 0, 5, TimeUnit.MINUTES);
+            }, 0, 20, TimeUnit.SECONDS);
         }
     }
 
@@ -122,7 +123,7 @@ public class Session {
     }
 
     public void setId(BigDecimal id) throws Exception {
-        if (id == null) {
+        if (this.id == null) {
             this.id = id;
         } else {
             throw new Exception("Id is already set [current id: ("

@@ -35,17 +35,17 @@ public class Logger {
         return logger;
     }
 
-    public void write(String message) {
+    public static void write(String message) {
         write(message, LogTyps.LOG);
     }
-    public void write(String message, LogTyps type){
-        if(console != null){
+    public static void write(String message, LogTyps type){
+//        if(console != null){
             if(type != null){
                 System.out.println(type + message + ANSI_RESET);
             }else{
                 System.out.println(message + ANSI_RESET);                
             }
-        }
+//        }
     }
  
 }

@@ -45,7 +45,7 @@ public class Datagram {
     }
 
     public void setId(BigDecimal id) throws Exception {
-        if (id == null) {
+        if (this.id == null) {
             this.id = id;
         } else {
             throw new Exception("Id is already set [current id: ("

@@ -5,11 +5,11 @@
  */
 package localDB.menagers;
 
-import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import project.data.Session;
 
 /**
@@ -38,37 +38,35 @@ public class SessionMenager {
         this.connection = connection;
     }
 
-    public boolean createSession(Session session)
-            throws ClassNotFoundException, SQLException, Exception {
+    public void createSession(Session session) throws SQLException, Exception {
         if (session.getId() == null) {
+            /*LOG*/ System.out.println("Start: createSession");
             String sql = "INSERT INTO Session_statistics(d_enqueued,d_received,d_send_ok,d_send_failures) VALUES (?,?,?,?)";
-
-            PreparedStatement cs = getConnection().prepareStatement(sql);
+            PreparedStatement cs = getConnection().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             cs.setInt(1, session.getDatagramsEnqueued());
             cs.setInt(2, session.getDatagramsReceived());
             cs.setInt(3, session.getDatagramsSend_OK());
             cs.setInt(4, session.getDatagramsSend_Failures());
-            cs.execute();
+            if (cs.executeUpdate() == 0) {
+                throw new SQLException("Creating session failed, no rows created.");
+            }
+            try (ResultSet generatedKeys = cs.getGeneratedKeys()) {
+                if (generatedKeys.next()) {
+                    session.setId(generatedKeys.getBigDecimal(1));
+                } else {
+                    throw new SQLException("Creating session failed, no ID obtained.");
+                }
+            }
             cs.close();
-
-//            cs = getConnection().prepareCall(
-//                    "select last_insert_rowid()");
-//            ResultSet rs = cs.executeQuery();
-//            while (rs.next()) {
-//                session.setId(rs.getBigDecimal(1));
-//            }
-//            rs.close();
-//            cs.close();
-
-            return true;
+            /*LOG*/ System.out.println("End: createSession, session id: " + session.getId().toPlainString());
         } else {
-            return false;
+            throw new SQLException("Creating session failed, session already has id: " + session.getId().toPlainString());
         }
     }
 
-
-    public boolean updateSession(Session session) throws SQLException{
+    public void updateSession(Session session) throws SQLException {
         if (session.getId() != null) {
+            /*LOG*/ System.out.println("Start: updateSession, session id: " + session.getId().toPlainString());
             String sql = "UPDATE Session_statistics SET"
                     + " d_enqueued = (?),"
                     + " d_received = (?),"
@@ -76,36 +74,46 @@ public class SessionMenager {
                     + " d_send_failures = (?), "
                     + " last_update = CURRENT_TIMESTAMP "
                     + " where id = (?)";
-            CallableStatement cs = getConnection().prepareCall(sql);
-            cs.setInt(1, session.getDatagramsEnqueued());
-            cs.setInt(2, session.getDatagramsReceived());
-            cs.setInt(3, session.getDatagramsSend_OK());
-            cs.setInt(4, session.getDatagramsSend_Failures());
-            cs.setBigDecimal(5, session.getId());
-            cs.execute();
-            cs.close();
-            
-            return true;
+            PreparedStatement ps = getConnection().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            ps.setInt(1, session.getDatagramsEnqueued());
+            ps.setInt(2, session.getDatagramsReceived());
+            ps.setInt(3, session.getDatagramsSend_OK());
+            ps.setInt(4, session.getDatagramsSend_Failures());
+            ps.setBigDecimal(5, session.getId());
+            if (ps.executeUpdate() == 0) {
+                throw new SQLException("Udating session failed, no rows affected.");
+            }
+            ps.close();
+            /*LOG*/ System.out.println("End: updateSession, session id: " + session.getId().toPlainString());
         } else {
-            return false;
+            throw new SQLException("Udating session failed, session has no ID!");
         }
     }
-    
-    public boolean closeSession(Session session)
-            throws ClassNotFoundException, SQLException {
+
+    public void closeSession(Session session) throws SQLException {
         if (session.getId() != null) {
+            /*LOG*/ System.out.println("Start: closeSession, session id: " + session.getId().toPlainString());
             String sql = "UPDATE Session_statistics SET "
+                    + " d_enqueued = (?),"
+                    + " d_received = (?),"
+                    + " d_send_ok = (?),"
+                    + " d_send_failures = (?), "
                     + " time_end = CURRENT_TIMESTAMP,"
                     + " last_update = CURRENT_TIMESTAMP "
                     + " where id = (?)";
-            CallableStatement cs = getConnection().prepareCall(sql);
-            cs.setBigDecimal(1, session.getId());
-            cs.execute();
-            cs.close();
-            
-            return true;
+            PreparedStatement ps = getConnection().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            ps.setInt(1, session.getDatagramsEnqueued());
+            ps.setInt(2, session.getDatagramsReceived());
+            ps.setInt(3, session.getDatagramsSend_OK());
+            ps.setInt(4, session.getDatagramsSend_Failures());
+            ps.setBigDecimal(5, session.getId());
+            if (ps.executeUpdate() == 0) {
+                throw new SQLException("Udating session failed, no rows affected.");
+            }
+            ps.close();
+            /*LOG*/ System.out.println("End: closeSession, session id: " + session.getId().toPlainString());
         } else {
-            return false;
+            throw new SQLException("Closing session failed, session has no ID.");
         }
     }
 
