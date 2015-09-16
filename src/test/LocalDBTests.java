@@ -24,6 +24,11 @@ public class LocalDBTests {
         System.out.println("LocalDBTests START:");
 
         LocalDataBaseMenager ldbm = new LocalDataBaseMenager();
+//        if(ldbm.fullTestBDExists()){
+//           Logger.write("Local DB Found!", LogTyps.WARNING); 
+//        }else{
+//            Logger.write("Local DB Not Found!", LogTyps.WARNING);
+//        }
         if (ldbm.fullTestBDExists() == false) {
             Logger.write("Local DB Not Found!", LogTyps.WARNING);
             Logger.write("Trying to create new Local DB.", LogTyps.MESSAGE);
@@ -36,10 +41,12 @@ public class LocalDBTests {
             }
             if (ldbm.fullTestBDExists() == false) {
                 Logger.write("Error: Local BD is not valid!", LogTyps.ERROR);
+                return;
             }
         }
         Session localDBSession = new Session(ldbm, true);
-
+        localDBSession.getLocalDataBaseMenager().getDatagramMenager().createDatagram(new Datagram("lol"));
+        
         testDatagram(localDBSession.getLocalDataBaseMenager().getDatagramMenager());
         
         localDBSession.closeSession();
@@ -54,7 +61,7 @@ public class LocalDBTests {
             dm.createDatagram(test);
             dm.updateDatagram(test, "ERROR?");
             Datagram test2 = dm.getDatagram(test.getId());
-            if (test.getData().equals(test2.getData())) {
+            if (!test.getData().equals(test2.getData())) {
                 Logger.write("ERROR while comparing datagram: test:[" + test.getData() + "];test2:[" + test2.getData() + "]", LogTyps.ERROR);
             } else {
                 Logger.write("SUCCESS while comparing datagram: test:[" + test.getData() + "];test2:[" + test2.getData() + "]", LogTyps.MESSAGE);

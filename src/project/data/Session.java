@@ -24,21 +24,26 @@ public class Session {
     private int datagramsReceived;
     private int datagramsSend_OK;
     private int datagramsSend_Failures;
+    private boolean closedOnLocalBD;
+
     private LocalDataBaseMenager localDataBaseMenager;
     private ScheduledExecutorService exec;
-    private Boolean sessionWithLocalDB;
 
     public Session() throws Exception {
-        SetUpStartValues(null, true);
+        setUpStartValues(null, true);
     }
 
     public Session(BigDecimal id) throws Exception {
         this.setId(id);
-        SetUpStartValues(null, true);
+        setUpStartValues(null, true);
     }
 
     public Session(LocalDataBaseMenager ldbm, Boolean sessionWithLocalDB) throws Exception {
-        SetUpStartValues(ldbm, sessionWithLocalDB);
+        setUpStartValues(ldbm, sessionWithLocalDB);
+    }
+
+    public Session(Boolean sessionWithLocalDB) throws Exception {
+        setUpStartValues(null, sessionWithLocalDB);
     }
 
     // to_do - dodać tutaj menager wysyłania datagramów
@@ -55,54 +60,65 @@ public class Session {
             //error = menager.send(datagram);
             localDataBaseMenager.updateDatagram(datagram, error);
             if (datagram.isDataSend()) {
-                addDatagramsSend_OK();
+                addDatagramSend_OK();
             } else {
-                addDatagramsSend_Failures();
+                addDatagramSend_Failures();
             }
         }
         localDataBaseMenager.updateSession(this);
     }
 
-    public void SetUpStartValues(LocalDataBaseMenager ldbm, Boolean sessionWithLocalDB) throws Exception {
+    public void setUpStartValues(LocalDataBaseMenager ldbm, Boolean sessionWithLocalDB) throws Exception {
         setDatagramsEnqueued(0);
         setDatagramsReceived(0);
         setDatagramsSend_OK(0);
         setDatagramsSend_Failures(0);
-        this.sessionWithLocalDB = sessionWithLocalDB;
-        System.out.println("sessionWithLocalDB:"+sessionWithLocalDB);
+        setClosedOnLocalBD(false);
 
+        // tworzenie bez lokalnej bazy
         if (sessionWithLocalDB) {
-            if (ldbm == null) {
-                localDataBaseMenager = new LocalDataBaseMenager();
-            } else {
-                localDataBaseMenager = ldbm;
-            }
-            localDataBaseMenager.createSession(this);
-            localDataBaseMenager.getDatagramMenager().removeSendDatagrams();
-
-            exec = Executors.newSingleThreadScheduledExecutor();
-            exec.scheduleAtFixedRate(new Runnable() {
-                @Override
-                public void run() {
-                    try {
-                        sendDatagrams();
-                    } catch (Exception ex) {
-                        Logger.getLogger(Session.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                }
-            }, 0, 20, TimeUnit.SECONDS);
+            setupDataBaseMenager(ldbm);
+        } else {
+            localDataBaseMenager = null;
         }
     }
 
-    public boolean addDatagram(Datagram datagram) throws Exception {
-        if(sessionWithLocalDB){
-        Boolean status = localDataBaseMenager.createDatagram(datagram);
-        if (status) {
-            addDatagramsReceived();
-            localDataBaseMenager.updateSession(this);
+    private void setupDataBaseMenager(LocalDataBaseMenager ldbm) throws Exception {
+        if (ldbm == null) {
+            localDataBaseMenager = new LocalDataBaseMenager();
+        } else {
+            localDataBaseMenager = ldbm;
         }
-        return status;
-        }else{
+        localDataBaseMenager.createSession(this);
+        localDataBaseMenager.getDatagramMenager().removeSendDatagrams();
+        createIddleSending();
+    }
+
+    private void createIddleSending() {
+        exec = Executors.newSingleThreadScheduledExecutor();
+        exec.scheduleAtFixedRate(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    sendDatagrams();
+                } catch (Exception ex) {
+                    Logger.getLogger(Session.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }, 0, 20, TimeUnit.SECONDS);
+    }
+
+    public boolean isSessionWithLocalDB() {
+        return localDataBaseMenager != null;
+    }
+
+    public boolean addDatagram(Datagram datagram) throws Exception {
+        if (localDataBaseMenager != null) {
+            localDataBaseMenager.createDatagram(datagram);
+            addDatagramReceived();
+            localDataBaseMenager.updateSession(this);
+            return true;
+        } else {
             String error = null;
             //error = menager.send(datagram);
             return false;
@@ -110,12 +126,12 @@ public class Session {
     }
 
     public boolean closeSession() throws Exception {
-        if (sessionWithLocalDB) {
+        if (localDataBaseMenager != null) {
             localDataBaseMenager.getDatagramMenager().removeSendDatagrams();
-            return localDataBaseMenager.closeSession(this);
-        }else{
-            return false;
+            localDataBaseMenager.closeSession(this);
+            return true;
         }
+        return false;
     }
 
     public BigDecimal getId() {
@@ -138,15 +154,15 @@ public class Session {
         return datagramsEnqueued;
     }
 
-    public void setDatagramsEnqueued(int datagramsEnqueued) {
+    private void setDatagramsEnqueued(int datagramsEnqueued) {
         this.datagramsEnqueued = datagramsEnqueued;
     }
 
-    public void addDatagramsEnqueued(int datagramsEnqueued) {
+    private void addDatagramsEnqueued(int datagramsEnqueued) {
         setDatagramsEnqueued(getDatagramsEnqueued() + datagramsEnqueued);
     }
 
-    public void addDatagramsEnqueued() {
+    private void addDatagramEnqueued() {
         this.addDatagramsEnqueued(1);
     }
 
@@ -154,15 +170,15 @@ public class Session {
         return datagramsReceived;
     }
 
-    public void setDatagramsReceived(int datagramsReceived) {
+    private void setDatagramsReceived(int datagramsReceived) {
         this.datagramsReceived = datagramsReceived;
     }
 
-    public void addDatagramsReceived(int datagramsReceived) {
+    private void addDatagramsReceived(int datagramsReceived) {
         setDatagramsReceived(getDatagramsReceived() + datagramsReceived);
     }
 
-    public void addDatagramsReceived() {
+    private void addDatagramReceived() {
         this.addDatagramsReceived(1);
     }
 
@@ -170,15 +186,15 @@ public class Session {
         return datagramsSend_OK;
     }
 
-    public void setDatagramsSend_OK(int datagramsSend_OK) {
+    private void setDatagramsSend_OK(int datagramsSend_OK) {
         this.datagramsSend_OK = datagramsSend_OK;
     }
 
-    public void addDatagramsSend_OK(int datagramsSend_OK) {
+    private void addDatagramsSend_OK(int datagramsSend_OK) {
         setDatagramsSend_OK(getDatagramsSend_OK() + datagramsSend_OK);
     }
 
-    public void addDatagramsSend_OK() {
+    private void addDatagramSend_OK() {
         this.addDatagramsSend_OK(1);
     }
 
@@ -186,15 +202,15 @@ public class Session {
         return datagramsSend_Failures;
     }
 
-    public void setDatagramsSend_Failures(int datagramsSend_Failures) {
+    private void setDatagramsSend_Failures(int datagramsSend_Failures) {
         this.datagramsSend_Failures = datagramsSend_Failures;
     }
 
-    public void addDatagramsSend_Failures(int datagramsSend_Failures) {
+    private void addDatagramsSend_Failures(int datagramsSend_Failures) {
         setDatagramsSend_Failures(getDatagramsSend_Failures() + datagramsSend_Failures);
     }
 
-    public void addDatagramsSend_Failures() {
+    private void addDatagramSend_Failures() {
         this.addDatagramsSend_Failures(1);
     }
 
@@ -213,17 +229,23 @@ public class Session {
     }
 
     /**
-     * @return the sessionWithLocalDB
+     * @return the closed
      */
-    public Boolean getSessionWithLocalDB() {
-        return sessionWithLocalDB;
+    public Boolean isClosedOnLocalBD() {
+        return closedOnLocalBD;
     }
 
     /**
-     * @param sessionWithLocalDB the sessionWithLocalDB to set
+     * @param closed the closed to set
      */
-    public void setSessionWithLocalDB(Boolean sessionWithLocalDB) {
-        this.sessionWithLocalDB = sessionWithLocalDB;
+    private void setClosedOnLocalBD(Boolean closed) {
+        this.closedOnLocalBD = closed;
     }
 
+    /**
+     * Closes the session, so it can't be changed
+     */
+    public void closeOnLocalBD() {
+        this.closedOnLocalBD = true;
+    }
 }

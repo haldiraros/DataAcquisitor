@@ -5,10 +5,12 @@
  */
 package localDB;
 
+import java.io.File;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
+import project.Config;
 
 /**
  *
@@ -59,22 +61,18 @@ public class SetupDB {
     public SetupDB() {
     }
 
-    public void setupDB(String dbPatch) throws SQLException {
-        Connection c = null;
+    public void setupDB(String dbPatch, Connection c) throws SQLException {
+        File BDFile = new File(dbPatch);
+        BDFile.delete();
         Statement stmt = null;
         try {
-            Class.forName("org.sqlite.JDBC");
-            c = DriverManager.getConnection("jdbc:sqlite:"
-                    + dbPatch);
             System.out.println("Opened database successfully");
-
             stmt = c.createStatement();
             stmt.executeUpdate(createDatagramsTable);
             stmt.executeUpdate(createDatagramsLogTable);
             stmt.executeUpdate(createDatagramsStatisticsTable);
             stmt.executeUpdate(createSessionStatisticsTable);
             stmt.close();
-            c.close();
         } catch (Exception e) {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
             System.exit(0);

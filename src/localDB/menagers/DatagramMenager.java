@@ -5,6 +5,8 @@
  */
 package localDB.menagers;
 
+import hubGui.logging.LogTyps;
+import hubGui.logging.Logger;
 import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -167,6 +169,7 @@ public class DatagramMenager {
             ps.setBigDecimal(1, errorId);
             ps.setBigDecimal(2, datagram.getId());
             if (ps.executeUpdate() == 0) {
+                Logger.write("datagram.getId():"+datagram.getId(), LogTyps.ERROR);
                 throw new SQLException("Updating Datagram_statistics failed, no rows affected.");
             }
             ps.close();

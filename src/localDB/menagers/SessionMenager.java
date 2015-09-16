@@ -65,7 +65,12 @@ public class SessionMenager {
     }
 
     public void updateSession(Session session) throws SQLException {
-        if (session.getId() != null) {
+        if (session.isClosedOnLocalBD()) {
+            throw new SQLException("Udating session failed, session is alrady closed");
+        } else if (session.getId() == null) {
+            throw new SQLException("Udating session failed, session has no ID!");
+        }
+        if (session.getId() != null  && !session.isClosedOnLocalBD()) {
             /*LOG*/ System.out.println("Start: updateSession, session id: " + session.getId().toPlainString());
             String sql = "UPDATE Session_statistics SET"
                     + " d_enqueued = (?),"
@@ -85,13 +90,16 @@ public class SessionMenager {
             }
             ps.close();
             /*LOG*/ System.out.println("End: updateSession, session id: " + session.getId().toPlainString());
-        } else {
-            throw new SQLException("Udating session failed, session has no ID!");
         }
     }
 
     public void closeSession(Session session) throws SQLException {
-        if (session.getId() != null) {
+        if (session.isClosedOnLocalBD()) {
+            throw new SQLException("Closing session failed, session is alrady closed");
+        } else if (session.getId() == null) {
+            throw new SQLException("Closing session failed, session has no ID.");
+        }
+        if (session.getId() != null && !session.isClosedOnLocalBD()) {
             /*LOG*/ System.out.println("Start: closeSession, session id: " + session.getId().toPlainString());
             String sql = "UPDATE Session_statistics SET "
                     + " d_enqueued = (?),"
@@ -110,10 +118,9 @@ public class SessionMenager {
             if (ps.executeUpdate() == 0) {
                 throw new SQLException("Udating session failed, no rows affected.");
             }
+            session.closeOnLocalBD();
             ps.close();
             /*LOG*/ System.out.println("End: closeSession, session id: " + session.getId().toPlainString());
-        } else {
-            throw new SQLException("Closing session failed, session has no ID.");
         }
     }
 

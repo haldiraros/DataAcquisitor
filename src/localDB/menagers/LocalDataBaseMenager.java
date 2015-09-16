@@ -5,22 +5,16 @@
  */
 package localDB.menagers;
 
-import hubGui.logging.Logger;
 import java.io.File;
-import java.math.BigDecimal;
-import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.HashSet;
 import java.util.Set;
 import localDB.SetupDB;
 
 import project.Config;
-import project.data.Datagram;
 import project.data.Datagram;
 import project.data.Session;
 
@@ -54,21 +48,15 @@ public class LocalDataBaseMenager {
         if (c != null) {
             return c;
         } else {
-            c = DriverManager.getConnection("jdbc:sqlite:"
-                    + getDBPatch());
+            try {
+                Class.forName("org.sqlite.JDBC");
+                c = DriverManager.getConnection("jdbc:sqlite:"
+                        + getDBPatch());
+            } catch (Exception e) {
+                System.err.println(e.getClass().getName() + ": " + e.getMessage());
+                System.exit(0);
+            }
             return c;
-        }
-    }
-
-    public boolean testBDExists() throws ClassNotFoundException {
-        Class.forName(Config.getString("sqliteJDBC"));
-        File BDFile = new File(getDBPatch());
-        if (BDFile.exists()) {
-            System.out.println("testBDExists: true");
-            return true;
-        } else {
-            System.out.println("testBDExists: false");
-            return false;
         }
     }
 
@@ -93,63 +81,37 @@ public class LocalDataBaseMenager {
         return true;
     }
 
-    public boolean setupDataBase() throws ClassNotFoundException, SQLException, Exception {
-//        if (testBDExists() == false) {
-        new SetupDB().setupDB(getDBPatch());
-        return testBDExists();
-//        } else {
-//            throw new Exception("LocalDB already exists!");
-//        }
+    public boolean setupDataBase() throws ClassNotFoundException, SQLException {
+        if (fullTestBDExists() == false) {
+            new SetupDB().setupDB(getDBPatch(), getConnection());
+            return fullTestBDExists();
+        } else {
+            throw new SQLException("LocalDB already exists!");
+        }
     }
 
-    public boolean createDatagram(Datagram datagram)
-            throws Exception {
-        if (testBDExists() == true) {
-            getDatagramMenager().createDatagram(datagram);
-            return false;
-        }
-        return false;
+    public void createDatagram(Datagram datagram) throws Exception {
+        getDatagramMenager().createDatagram(datagram);
     }
 
-    public boolean updateDatagram(Datagram datagram, String error)
-            throws Exception {
-        if (testBDExists() == true) {
-            getDatagramMenager().updateDatagram(datagram, error);
-            return false;
-        }
-        return false;
+    public void updateDatagram(Datagram datagram, String error) throws Exception {
+        getDatagramMenager().updateDatagram(datagram, error);
     }
 
-    public Set<Datagram> getDatagramsToSend()
-            throws ClassNotFoundException, SQLException {
-        if (testBDExists() == true) {
-            return getDatagramMenager().getDatagramsToSend();
-        }
-        return null;
+    public Set<Datagram> getDatagramsToSend() throws ClassNotFoundException, SQLException {
+        return getDatagramMenager().getDatagramsToSend();
     }
 
-    public boolean createSession(Session session) throws Exception {
-        if (testBDExists() == true) {
-            getSessionMenager().createSession(session);
-            return true;
-        }
-        return false;
+    public void createSession(Session session) throws Exception {
+        getSessionMenager().createSession(session);
     }
 
-    public boolean updateSession(Session session) throws Exception {
-        if (testBDExists() == true) {
-            getSessionMenager().updateSession(session);
-            return true;
-        }
-        return false;
+    public void updateSession(Session session) throws Exception {
+        getSessionMenager().updateSession(session);
     }
 
-    public boolean closeSession(Session session) throws Exception {
-        if (testBDExists() == true) {
-            getSessionMenager().closeSession(session);
-            return true;
-        }
-        return false;
+    public void closeSession(Session session) throws Exception {
+        getSessionMenager().closeSession(session);
     }
 
     /**
