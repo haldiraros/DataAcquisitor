@@ -20,6 +20,7 @@ import gnu.io.SerialPortEvent;
 import hubLibrary.meteringcomreader.LoggerFlashSession;
 import hubLibrary.meteringcomreader.TestFlashSession;
 import hubLibrary.meteringcomreader.exceptions.MeteringSessionException;
+import hubLibrary.meteringcomreader.exceptions.MeteringSessionOperationAlreadyInProgressException;
 import org.apache.log4j.PropertyConfigurator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -37,7 +38,7 @@ public class Tester {
         System.out.println("SerialPortEvent.DATA_AVAILABLE="+SerialPortEvent.DATA_AVAILABLE);
         System.out.println("SerialPortEvent.OUTPUT_BUFFER_EMPTY ="+SerialPortEvent.OUTPUT_BUFFER_EMPTY);
         
-        HubControl hubC = new HubControl(0, "COM3");
+        HubControl hubC = new HubControl(0, "COM5");
         hubC.openHubConn();
         
         long[] listLoggers1= hubC.getRegisteredLoggersList();
@@ -64,11 +65,18 @@ public class Tester {
         */
  //hubC.getHubConn().closeAllSessions(); //dla pewnosci domykamy inne sesje!        
 //hubC.readPacketsHubFlash();
-        
+
+        //System.out.println(hubC.checkLoggerID());
         //hubC.readPacketsLoggerFlash();
-        //hubC.getHubConn().closeAllSessions(); //dla pewnosci domykamy inne sesje!
-        hubC.startRecievingInRadioSession();
-        Thread.sleep(1200000); //20 minut
+      
+      // hubC.getHubConn().closeAllSessions(); //dla pewnosci domykamy inne sesje!
+       
+       hubC.startRecievingInRadioSession();
+        
+       
+            Thread.sleep(1800000); //30 min minut
+       
+                
         hubC.stopRecievingInRadioSession();
         hubC.closeHubConn();
         

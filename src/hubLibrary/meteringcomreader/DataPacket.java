@@ -57,6 +57,11 @@ public class DataPacket implements Serializable{
      byte[] encriptedData;
      byte[] decriptKey;
      private int frameSize;
+     byte [] orgData;
+
+    public byte[] getOrgData() {
+        return orgData;
+    }
      
 
      DataPacket(long loggerNo, long time, long period){
@@ -95,6 +100,7 @@ public class DataPacket implements Serializable{
     
     DataPacket(byte[] data, int frameSize, int start) throws MeteringSessionException {
         this.frameSize=frameSize;
+        orgData = data;
         Frame frame = new Frame(data, start, frameSize);
         int temp;
         

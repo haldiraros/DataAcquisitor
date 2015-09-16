@@ -64,7 +64,7 @@ public class RadioSessionReciever implements Runnable{
         try {
             while (isShouldRun()) {
                 dp = metSess.getNextPacket();
-                hubContr.processDataPacket(dp);
+                hubContr.processDataPacketEncoded(dp);
                 lgr.info("Time:"+System.nanoTime()+","+dp);
             } 
         }catch (MeteringSessionException tout) {

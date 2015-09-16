@@ -24,6 +24,7 @@ import hubLibrary.meteringcomreader.LoggerFlashSession;
 import hubLibrary.meteringcomreader.exceptions.MeteringSessionException;
 import static hubOperations.RadioSessionReciever.createRadioSessionReciever;
 import java.sql.Timestamp;
+import javax.xml.bind.DatatypeConverter;
 
 /**
  *
@@ -157,8 +158,14 @@ public class HubControl {
     }
     
     //TODO: Somehow have radio on idle loop or sth that can be broken when needed...
-    public void processDataPacket (DataPacket pck){ //TODO: all the packet processing!!
+    public void processDataPacketEncoded (DataPacket pck){ //TODO: all the packet processing!!
+        System.out.println("Paczka danych: " +DatatypeConverter.printHexBinary(pck.getOrgData()));
+        
+    }
+    public void processDataPacketTemps (DataPacket pck){ //TODO: all the packet processing!!
         System.out.println(pck);
+        //System.out.println("Paczka danych: " +DatatypeConverter.printHexBinary(pck.getOrgData()));
+        
     }
     
     public void readPacketsLoggerFlash() throws MeteringSessionException{
@@ -166,7 +173,7 @@ public class HubControl {
         try{
             LoggerFlashSession loggerFlashSession = hubConn.createLoggerFlashSession(new Timestamp(0));
             while ((packet = loggerFlashSession.getNextPacket(100000))!=null){
-                processDataPacket(packet);
+                processDataPacketTemps(packet);
                 }
         }finally{
             try{
@@ -182,12 +189,18 @@ public class HubControl {
         int packetCount =0;
         try{
             HubFlashSession hubFlashSession = hubConn.createHubFlashSession(0xFFFFFFFF);
+            System.out.println("Session started");
             while ((packet = hubFlashSession.getPrevPacket())!=null){
-                processDataPacket(packet);
+                System.out.println("packetrecvd");
+                processDataPacketEncoded(packet);
                 packetCount++;
                 if (packetCount==10000)
                     break;
             }
+            System.out.println("nopckg");
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        
         }finally{
             try{
                 hubConn.closeHubFlashSession();
@@ -213,5 +226,6 @@ public class HubControl {
             hubConn.closeRadioSession();
         }
         RSRecv = null;
+        System.out.println("Stopped radio session recieving ");
     }
 }

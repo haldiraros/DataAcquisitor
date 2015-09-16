@@ -120,9 +120,15 @@ lgr.debug("Time:"+System.nanoTime()+" serialEvent loopNo:"+loopNo);
             try {
                 try{
                     res = _receiveRes();
+                
                 } catch (MeteringSessionTimeoutException ex) {
                     return;  //if timeout to get next response then exit
                 }
+//                catch (MeteringSessionException ex) {
+//                    lgr.debug("Time:"+System.nanoTime()+","+" exeption detected in serialEvent "+ex);                                   
+//                    setRSException(ex);
+//                   
+//                }
                 if (res == Utils.radioSessionRes) 
                     try {
                         data =_receiveData(1);
