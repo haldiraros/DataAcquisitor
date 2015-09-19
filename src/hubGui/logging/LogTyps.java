@@ -23,36 +23,20 @@ public enum LogTyps {
     /**
      * Default log Type, in console displayed in black color 
      */
-    LOG{
-      public String toString() {
-          return "\u001B[30m";
-      }
-    },
+    LOG,
     
     /**
      * For reporting errors, in console displayed in red color 
      */
-    ERROR{
-      public String toString() {
-          return "\u001B[31m";
-      }
-    },
+    ERROR,
 
     /**
      * For reporting possible warnings, in console displayed in yellow color 
      */
-    WARNING{
-      public String toString() {
-          return "\u001B[33m";
-      }
-    },
+    WARNING,
 
     /**
      * For reporting events, in console displayed in green color 
      */
-    MESSAGE{
-      public String toString() {
-          return "\u001B[32m";
-      }
-    }
+    SUCCESS
 }

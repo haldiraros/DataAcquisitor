@@ -6,6 +6,7 @@
 package hubGui;
 
 import com.sun.javafx.runtime.VersionInfo;
+import hubGui.logging.ConsoleLogTarget;
 import hubGui.logging.LogTyps;
 import hubGui.logging.Logger;
 import hubLibrary.meteringcomreader.TestFlashSession;
@@ -46,6 +47,7 @@ public class Main extends Application {
      * @throws java.lang.Exception
      */
     public static void main(String[] args) throws Exception {
+        Logger.addTarget(new ConsoleLogTarget());
         //LocalDBTests.main(args);
         launch(args);  
     }

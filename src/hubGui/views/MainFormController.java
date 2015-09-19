@@ -5,6 +5,9 @@
  */
 package hubGui.views;
 
+import hubGui.logging.GuiLogTarget;
+import hubGui.logging.LogTyps;
+import hubGui.logging.Logger;
 import hubGui.models.Chip;
 import hubGui.models.Message;
 import java.io.IOException;
@@ -67,6 +70,7 @@ public class MainFormController implements Initializable {
         
         ObservableList<Message> messages = FXCollections.observableArrayList();
         messageTable.setItems(messages);
+        Logger.addTarget(new GuiLogTarget(messages));
         
         ObservableList<Chip> chips = FXCollections.observableArrayList();
         chipsList.setItems(chips);
@@ -169,8 +173,7 @@ public class MainFormController implements Initializable {
     }
     
     private void addMessage(String message) {
-        Message msg = new Message(LocalTime.now(), message);
-        messageTable.getItems().add(msg);
+        Logger.write(message, LogTyps.LOG);
     }
     
     private void showNoChipsSelectedAlert() {

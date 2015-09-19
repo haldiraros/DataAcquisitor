@@ -31,10 +31,10 @@ public class LocalDBTests {
 //        }
         if (ldbm.fullTestBDExists() == false) {
             Logger.write("Local DB Not Found!", LogTyps.WARNING);
-            Logger.write("Trying to create new Local DB.", LogTyps.MESSAGE);
+            Logger.write("Trying to create new Local DB.", LogTyps.SUCCESS);
             try {
                 ldbm.setupDataBase();
-                Logger.write("New Local DB created.", LogTyps.MESSAGE);
+                Logger.write("New Local DB created.", LogTyps.SUCCESS);
             } catch (Exception e) {
                 Logger.write("Error while creating Local DB:" + e.getMessage(), LogTyps.ERROR);
                 e.printStackTrace();
@@ -64,7 +64,7 @@ public class LocalDBTests {
             if (!test.getData().equals(test2.getData())) {
                 Logger.write("ERROR while comparing datagram: test:[" + test.getData() + "];test2:[" + test2.getData() + "]", LogTyps.ERROR);
             } else {
-                Logger.write("SUCCESS while comparing datagram: test:[" + test.getData() + "];test2:[" + test2.getData() + "]", LogTyps.MESSAGE);
+                Logger.write("SUCCESS while comparing datagram: test:[" + test.getData() + "];test2:[" + test2.getData() + "]", LogTyps.SUCCESS);
             }
             Logger.write("before setting as send:", LogTyps.WARNING);
             Logger.write("  dm.getDatagramsToSend().size()  :" + dm.getDatagramsToSend().size(), LogTyps.WARNING);
