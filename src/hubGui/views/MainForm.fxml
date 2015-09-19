@@ -20,7 +20,7 @@
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                      <children>
                         <ListView fx:id="chipsList" layoutX="14.0" layoutY="36.0" prefHeight="502.0" prefWidth="218.0" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="25.0" />
-                        <Label layoutX="14.0" layoutY="14.0" text="Registered chips" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0" />
+                        <Label layoutX="14.0" layoutY="14.0" text="Registered loggers" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0" />
                         <ToolBar layoutX="14.0" layoutY="515.0" prefHeight="40.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
                           <items>
                             <Button fx:id="registerButton" mnemonicParsing="false" onAction="#registerActionHandler" text="Register" />
@@ -66,8 +66,8 @@
                   </Menu>
                 <Menu mnemonicParsing="false" text="Hub">
                   <items>
-                    <MenuItem fx:id="registerMenuItem" mnemonicParsing="false" onAction="#registerActionHandler" text="Register Chip" />
-                    <MenuItem fx:id="unregisterMenuItem" mnemonicParsing="false" onAction="#unregisterActionHandler" text="Unregister Chip" />
+                    <MenuItem fx:id="registerMenuItem" mnemonicParsing="false" onAction="#registerActionHandler" text="Register Logger" />
+                    <MenuItem fx:id="unregisterMenuItem" mnemonicParsing="false" onAction="#unregisterActionHandler" text="Unregister Logger" />
                     <MenuItem fx:id="readMenuItem" mnemonicParsing="false" onAction="#readActionHandler" text="Read" />
                   </items>
                 </Menu>

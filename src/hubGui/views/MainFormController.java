@@ -80,7 +80,7 @@ public class MainFormController implements Initializable {
      @FXML
     private void registerActionHandler(ActionEvent event) {
         ObservableList<Chip> items = chipsList.getItems();
-        Chip chip = new Chip("Chip #" + items.size());
+        Chip chip = new Chip("Logger #" + items.size());
         addMessage(chip, "Registered.");
         items.add(chip);
     }
@@ -130,6 +130,6 @@ public class MainFormController implements Initializable {
     }
     
     private void showNoChipsSelectedAlert() {
-        Dialogs.showInfoAlert("No chips selected");
+        Dialogs.showInfoAlert("No loggers selected");
     }
 }
