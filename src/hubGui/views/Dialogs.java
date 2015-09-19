@@ -96,4 +96,65 @@ public class Dialogs {
 
         return dialog.showAndWait();
     }
+    
+    public static Optional<String> inputString(
+            String title,
+            String text,
+            String label) {
+        return inputString(title, text, label, null);
+    }
+    
+    public static Optional<String> inputString(
+            String title,
+            String text,
+            String label,
+            String value) {
+        Dialog<String> dialog = new Dialog<>();
+        
+        dialog.setTitle(title);
+        dialog.setHeaderText(text);
+        
+        ButtonType okButton = new ButtonType("Ok", ButtonData.OK_DONE);
+        dialog.getDialogPane().getButtonTypes().addAll(okButton, ButtonType.CANCEL);
+        
+        // Create the username and password labels and fields.
+        GridPane grid = new GridPane();
+        grid.setHgap(10);
+        grid.setVgap(10);
+        grid.setPadding(new Insets(20, 150, 10, 10));
+
+        TextField textField = new TextField();
+        
+        if (value != null) {
+            textField.setText(value);
+        }
+
+        grid.add(new Label(label), 0, 0);
+        grid.add(textField, 1, 0);
+
+        // Enable/Disable login button depending on whether a username was entered.
+        Node okButtonNode = dialog.getDialogPane().lookupButton(okButton);
+        if (textField.getText().equals(""))
+            okButtonNode.setDisable(true);
+
+        // Do some validation (using the Java 8 lambda syntax).
+        textField.textProperty().addListener((observable, oldValue, newValue) -> {
+            okButtonNode.setDisable(newValue.trim().isEmpty());
+        });
+
+        dialog.getDialogPane().setContent(grid);
+
+        // Request focus on the username field by default.
+        Platform.runLater(() -> textField.requestFocus());
+
+        // Convert the result to a username-password-pair when the login button is clicked.
+        dialog.setResultConverter(dialogButton -> {
+            if (dialogButton == okButton) {
+                return textField.getText();
+            }
+            return null;
+        });
+
+        return dialog.showAndWait();
+    }
 }

@@ -10,6 +10,7 @@ import hubGui.models.Message;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalTime;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -21,9 +22,11 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.CheckMenuItem;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.ToggleButton;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -45,6 +48,14 @@ public class MainFormController implements Initializable {
     
     @FXML
     private ListView<Chip> chipsList;
+    
+    @FXML
+    private ToggleButton radioSessionToggle;
+    
+    @FXML
+    private CheckMenuItem radioSessionMenuItem;
+    
+    private boolean isRadioSessionActive;
 
     /**
      * Initializes the controller class.
@@ -77,10 +88,22 @@ public class MainFormController implements Initializable {
         }
     }
     
-     @FXML
+    @FXML
     private void registerActionHandler(ActionEvent event) {
+        Optional<String> chipId = Dialogs.inputString("Registration", "Logger registration", "Logger ID");
+        
+        if (chipId.isPresent()) {
+            ObservableList<Chip> items = chipsList.getItems();
+            Chip chip = new Chip(chipId.get());
+            addMessage(chip, "Registered.");
+            items.add(chip);
+        }
+    }
+    
+    @FXML
+    private void registerAutoActionHandler(ActionEvent event) {
         ObservableList<Chip> items = chipsList.getItems();
-        Chip chip = new Chip("Logger #" + items.size());
+        Chip chip = new Chip(Integer.toString(items.size() + 1));
         addMessage(chip, "Registered.");
         items.add(chip);
     }
@@ -124,8 +147,29 @@ public class MainFormController implements Initializable {
         alert.showAndWait();
     }
     
+    @FXML
+    private void readFromHubHandler(ActionEvent event) {
+        addMessage("Received data from Hub.");
+    }
+    
+    @FXML
+    private void radioSessionHandler(ActionEvent event) {
+        toggleRadioSession();
+        addMessage("Radio session is " + (radioSessionToggle.isSelected() ? "on." : "off."));
+    }
+    
     private void addMessage(Chip chip, String message) {
-        Message msg = new Message(LocalTime.now(), chip.toString() + ": " + message);
+        addMessage(chip.toString() + ": " + message);
+    }
+    
+    private void toggleRadioSession() {
+        isRadioSessionActive = !isRadioSessionActive;
+        radioSessionMenuItem.setSelected(isRadioSessionActive);
+        radioSessionToggle.setSelected(isRadioSessionActive);
+    }
+    
+    private void addMessage(String message) {
+        Message msg = new Message(LocalTime.now(), message);
         messageTable.getItems().add(msg);
     }
     

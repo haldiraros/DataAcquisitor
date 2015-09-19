@@ -38,7 +38,7 @@ public class Chip {
     @Override
     public String toString() {
         if (getName() == null)
-            return "?";
-        return getName();
+            return "Unknown logger";
+        return "Logger #" + getName();
     }
 }

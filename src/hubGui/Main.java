@@ -46,8 +46,8 @@ public class Main extends Application {
      * @throws java.lang.Exception
      */
     public static void main(String[] args) throws Exception {
-        LocalDBTests.main(args);
-        //launch(args);  
+        //LocalDBTests.main(args);
+        launch(args);  
     }
     
 }
