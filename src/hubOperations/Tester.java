@@ -38,7 +38,9 @@ public class Tester {
         System.out.println("SerialPortEvent.DATA_AVAILABLE="+SerialPortEvent.DATA_AVAILABLE);
         System.out.println("SerialPortEvent.OUTPUT_BUFFER_EMPTY ="+SerialPortEvent.OUTPUT_BUFFER_EMPTY);
         
-        HubControl hubC = new HubControl(0, "COM5");
+        HubHandler hubH = HubHandler.getInstance();
+        
+        HubControl hubC = hubH.getHubControl();
         hubC.openHubConn();
         
         long[] listLoggers1= hubC.getRegisteredLoggersList();

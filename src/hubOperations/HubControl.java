@@ -20,10 +20,14 @@ import hubLibrary.meteringcomreader.DataPacket;
 import hubLibrary.meteringcomreader.Hub;
 import hubLibrary.meteringcomreader.HubConnection;
 import hubLibrary.meteringcomreader.HubFlashSession;
+import hubLibrary.meteringcomreader.HubSessionDBManager;
+import hubLibrary.meteringcomreader.Hubs;
 import hubLibrary.meteringcomreader.LoggerFlashSession;
 import hubLibrary.meteringcomreader.exceptions.MeteringSessionException;
 import static hubOperations.RadioSessionReciever.createRadioSessionReciever;
 import java.sql.Timestamp;
+import java.util.Iterator;
+import java.util.Map;
 import javax.xml.bind.DatatypeConverter;
 
 /**
@@ -52,10 +56,24 @@ public class HubControl {
      */
     public HubControl(String hexHubId, String comPortName){
         this.hub= new Hub(hexHubId,comPortName);
-    } 
+    }
+    
+    public HubControl() throws MeteringSessionException{
+        Hubs hubs = HubSessionDBManager.getHubSessionManager().discoverHubs();
+        Iterator<Map.Entry<String, Hub>> it =hubs.entrySet().iterator();
+            if (it.hasNext()) {
+                Map.Entry<String, Hub> pairs = (Map.Entry<String, Hub>)it.next();
+                this.hub = pairs.getValue();
+
+            }
+            else{
+                throw new MeteringSessionException("nie znaleziono żadnego huba");
+            }
+    }
     public Hub getHub() {
         return hub;
     }
+    
 
     public void setHub(Hub hub) {
         this.hub = hub;
