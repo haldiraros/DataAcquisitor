@@ -57,10 +57,10 @@ public class DataPacket implements Serializable{
      byte[] encriptedData;
      byte[] decriptKey;
      private int frameSize;
-     byte [] orgData;
+     byte [] orgFrame;
 
     public byte[] getOrgData() {
-        return orgData;
+        return orgFrame;
     }
      
 
@@ -100,9 +100,11 @@ public class DataPacket implements Serializable{
     
     DataPacket(byte[] data, int frameSize, int start) throws MeteringSessionException {
         this.frameSize=frameSize;
-        orgData = data;
+        
         Frame frame = new Frame(data, start, frameSize);
         int temp;
+        
+        orgFrame = frame.getCtrlAsBytes();
         
         appId = frame.getHeaderElement(Frame.headerFrameLogger, "APPID");
         fieldLength = (short)frame.getHeaderElement(Frame.headerFrameLogger, "LEN");

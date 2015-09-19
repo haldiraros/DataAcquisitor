@@ -64,21 +64,23 @@ public class Tester {
         }
         */
  //hubC.getHubConn().closeAllSessions(); //dla pewnosci domykamy inne sesje!        
-//hubC.readPacketsHubFlash();
+hubC.readPacketsHubFlash();
 
         //System.out.println(hubC.checkLoggerID());
         //hubC.readPacketsLoggerFlash();
       
       // hubC.getHubConn().closeAllSessions(); //dla pewnosci domykamy inne sesje!
        
-       hubC.startRecievingInRadioSession();
+      // hubC.startRecievingInRadioSession();
         
        
-            Thread.sleep(1800000); //30 min minut
+          //  Thread.sleep(1800000); //30 min minut
        
                 
-        hubC.stopRecievingInRadioSession();
-        hubC.closeHubConn();
+      //  hubC.stopRecievingInRadioSession();
+      
+
+          hubC.closeHubConn();
         
     }
     
