@@ -71,8 +71,11 @@ public class MainFormController implements Initializable {
         ObservableList<Message> messages = FXCollections.observableArrayList();
         messageTable.setItems(messages);
         Logger.addTarget(new GuiLogTarget(messages));
+        //TODO: Find hub (here so that I can do a dialog if something goes wrong
+        //TODO: Start connection
         
         ObservableList<Chip> chips = FXCollections.observableArrayList();
+        //TODO: Add scan for chips
         chipsList.setItems(chips);
     } 
     
@@ -97,6 +100,7 @@ public class MainFormController implements Initializable {
         Optional<String> chipId = Dialogs.inputString("Registration", "Logger registration", "Logger ID");
         
         if (chipId.isPresent()) {
+            //TODO: Do actual registering logger
             ObservableList<Chip> items = chipsList.getItems();
             Chip chip = new Chip(chipId.get());
             addMessage(chip, "Registered.");
@@ -106,6 +110,7 @@ public class MainFormController implements Initializable {
     
     @FXML
     private void registerAutoActionHandler(ActionEvent event) {
+        //TODO: Do actual registering logger
         ObservableList<Chip> items = chipsList.getItems();
         Chip chip = new Chip(Integer.toString(items.size() + 1));
         addMessage(chip, "Registered.");
@@ -119,6 +124,7 @@ public class MainFormController implements Initializable {
             showNoChipsSelectedAlert();
             return;
         }
+        //TODO: Unregister logger!
         ObservableList<Chip> items = chipsList.getItems();
         Chip chip = items.get(index);
         addMessage(chip, "Unregistered.");
@@ -133,6 +139,7 @@ public class MainFormController implements Initializable {
             return;
         }
         Chip chip = chipsList.getItems().get(index);
+        //TODO: Logger Flash
         addMessage(chip, "Received data.");
     }
     
@@ -153,6 +160,7 @@ public class MainFormController implements Initializable {
     
     @FXML
     private void readFromHubHandler(ActionEvent event) {
+        //TODO: Read from hub
         addMessage("Received data from Hub.");
     }
     
@@ -167,6 +175,7 @@ public class MainFormController implements Initializable {
     }
     
     private void toggleRadioSession() {
+        //TODO: Add starting and closing of the radio sessions
         isRadioSessionActive = !isRadioSessionActive;
         radioSessionMenuItem.setSelected(isRadioSessionActive);
         radioSessionToggle.setSelected(isRadioSessionActive);

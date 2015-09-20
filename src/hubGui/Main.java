@@ -10,8 +10,11 @@ import hubGui.logging.ConsoleLogTarget;
 import hubGui.logging.LogTyps;
 import hubGui.logging.Logger;
 import hubLibrary.meteringcomreader.TestFlashSession;
+import hubLibrary.meteringcomreader.exceptions.MeteringSessionException;
+import hubOperations.HubHandler;
 import hubOperations.Tester;
 import java.io.IOException;
+import java.util.logging.Level;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -37,11 +40,26 @@ public class Main extends Application {
             Scene scene = new Scene(loader.load());
             primaryStage.setScene(scene);
             primaryStage.show();
+            
+            HubHandler hubH = HubHandler.getInstance();
+            try{
+                hubH.getHubControl().openHubConn();
+                //hubH.getHubControl().closeAllSesssions();
+            }catch (MeteringSessionException ex) {
+                 java.util.logging.Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+            }
+                
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
-
+    
+    @Override
+    public void stop(){
+        HubHandler hubH = HubHandler.getInstance();
+        hubH.getHubControl().closeAllSesssions();
+        hubH.getHubControl().closeHubConn();
+    }
     /**
      * @param args the command line arguments
      * @throws java.lang.Exception
