@@ -20,6 +20,7 @@ import java.net.URL;
 import java.time.LocalTime;
 import java.util.Optional;
 import java.util.ResourceBundle;
+import java.util.concurrent.ExecutionException;
 import java.util.logging.Level;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -244,14 +245,34 @@ public class MainFormController implements Initializable {
 
     @FXML
     private void readActionHandler(ActionEvent event) {
-        int index = chipsList.getSelectionModel().getSelectedIndex();
-        if (index == -1) {
-            showNoChipsSelectedAlert();
-            return;
-        }
-        Chip chip = chipsList.getItems().get(index);
-        //TODO: Logger Flash
-        addMessage(chip, "Received data.");
+        Task<Void> task = new Task<Void>() {
+            @Override public Void call() throws MeteringSessionException {
+                HubControl hubC = HubHandler.getInstance().getHubControl();
+                hubC.readPacketsLoggerFlash();
+                return null;
+            }
+        };
+        
+        ProgressForm test = new ProgressForm("Reading from Logger flash memory with IR connection");
+        task.setOnRunning((e) -> test.getDialogStage().show());
+        task.setOnSucceeded((e) -> {
+            test.getDialogStage().hide();
+            addMessage("Data from Logger device read.");
+        });
+        task.setOnFailed((e) -> {
+            test.getDialogStage().hide();
+            try {
+                task.get();
+            } catch (InterruptedException ex) {
+                java.util.logging.Logger.getLogger(MainFormController.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (ExecutionException ex) {
+                System.out.println("bla bla bla");
+                MeteringSessionException msEx =(MeteringSessionException) ex.getCause();
+                msEx.printStackTrace();
+            }
+            addMessage("Operation failed");  
+        });
+        new Thread(task).start();
     }
     
     @FXML
@@ -287,7 +308,17 @@ public class MainFormController implements Initializable {
             addMessage("Data from Hub device read.");
         });
         task.setOnFailed((e) -> {
-          // eventual error handling by catching exceptions from task.get()  
+            test.getDialogStage().hide();
+            try {
+                task.get();
+            } catch (InterruptedException ex) {
+                java.util.logging.Logger.getLogger(MainFormController.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (ExecutionException ex) {
+                System.out.println("bla bla bla");
+                MeteringSessionException msEx =(MeteringSessionException) ex.getCause();
+                msEx.printStackTrace();
+            }
+            addMessage("Operation failed");   
         });
         new Thread(task).start();
         
@@ -296,19 +327,33 @@ public class MainFormController implements Initializable {
     
     @FXML
     private void radioSessionHandler(ActionEvent event) {
-        toggleRadioSession();
-        addMessage("Radio session is " + (radioSessionToggle.isSelected() ? "on." : "off."));
+        boolean ret = toggleRadioSession();
+        if(ret) addMessage("Radio session recieving is now: " + (radioSessionToggle.isSelected() ? "on." : "off."));
+        if(!ret) Logger.write("Changing the state of radio session failed", LogTyps.ERROR);
     }
     
     private void addMessage(Chip chip, String message) {
         addMessage(chip.toString() + ": " + message);
     }
     
-    private void toggleRadioSession() {
-        //TODO: Add starting and closing of the radio sessions
+    private boolean toggleRadioSession() {
+        
+        HubControl hubC;
+        try {
+            hubC = HubHandler.getInstance().getHubControl();
+       
+            if(!isRadioSessionActive){
+                hubC.startRecievingInRadioSession();
+            }else{
+               hubC.stopRecievingInRadioSession();
+            }
+         } catch (MeteringSessionException ex) {
+            return false;
+        }
         isRadioSessionActive = !isRadioSessionActive;
         radioSessionMenuItem.setSelected(isRadioSessionActive);
         radioSessionToggle.setSelected(isRadioSessionActive);
+        return true;
     }
     
     private void addMessage(String message) {
