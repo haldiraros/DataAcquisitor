@@ -64,28 +64,33 @@ public class RestMenager {
             System.out.println("out.close");
             out.close();
 
+            System.out.println("Creating InputStreamReader");
+            InputStreamReader isr = new InputStreamReader(connection.getInputStream());
             System.out.println("Creating BufferedReader");
-            BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-            
+            BufferedReader in = new BufferedReader(isr);
+            System.out.println("Creating JSONObject response");
+            JSONObject response = new JSONObject(isr.toString());
+            System.out.println("\nJSON RESPONSE Object: " + response);
             String line = "";
-            System.out.println("RESPONSE:");
+            System.out.println("\nRESPONSE:");
             while ((line = in.readLine()) != null) {
                 System.out.println(line);
             }
             System.out.println("\nREST Service Invoked Successfully..");
-            status = parseResponse(connection);
+            status = parseResponse(response, datagram);
             in.close();
         } catch (Exception e) {
             System.out.println("\nError while calling REST Service");
             System.out.println(e);
         }
-
         return status;
     }
 
-    private String parseResponse(URLConnection connection) {
-        return "OK";
-//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    private String parseResponse(JSONObject response, Datagram datagram) throws JSONException {
+        if(response.getInt("errCode") == 0){
+            datagram.setDataSend(true);
+        }
+        return response.getString("errCode");
     }
 
     private JSONObject getDatagramInfos(Datagram datagram) throws JSONException {

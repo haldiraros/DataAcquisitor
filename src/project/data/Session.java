@@ -5,6 +5,7 @@
  */
 package project.data;
 
+import REST.RestMenager;
 import java.math.BigDecimal;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -27,6 +28,7 @@ public class Session {
     private boolean closedOnLocalBD;
 
     private LocalDataBaseMenager localDataBaseMenager;
+    private RestMenager restMenager;
     private ScheduledExecutorService exec;
 
     public Session() throws Exception {
@@ -56,8 +58,7 @@ public class Session {
     // czy tylko w jakiś szczególnych przypadkach ??
     public void sendDatagrams() throws Exception {
         for (Datagram datagram : localDataBaseMenager.getDatagramsToSend()) {
-            String error = null;
-            //error = menager.send(datagram);
+            String error = restMenager.sendDatagram(datagram);
             localDataBaseMenager.updateDatagram(datagram, error);
             if (datagram.isDataSend()) {
                 addDatagramSend_OK();
@@ -119,8 +120,7 @@ public class Session {
             localDataBaseMenager.updateSession(this);
             return true;
         } else {
-            String error = null;
-            //error = menager.send(datagram);
+            String error = restMenager.sendDatagram(datagram);
             return false;
         }
     }
@@ -129,6 +129,7 @@ public class Session {
         if (localDataBaseMenager != null) {
             localDataBaseMenager.getDatagramMenager().removeSendDatagrams();
             localDataBaseMenager.closeSession(this);
+            exec.shutdown();
             return true;
         }
         return false;
@@ -247,5 +248,19 @@ public class Session {
      */
     public void closeOnLocalBD() {
         this.closedOnLocalBD = true;
+    }
+
+    /**
+     * @return the restMenager
+     */
+    public RestMenager getRestMenager() {
+        return restMenager;
+    }
+
+    /**
+     * @param restMenager the restMenager to set
+     */
+    public void setRestMenager(RestMenager restMenager) {
+        this.restMenager = restMenager;
     }
 }
