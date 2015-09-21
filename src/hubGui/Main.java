@@ -40,15 +40,7 @@ public class Main extends Application {
             Scene scene = new Scene(loader.load());
             primaryStage.setScene(scene);
             primaryStage.show();
-            
-            HubHandler hubH = HubHandler.getInstance();
-            try{
-                hubH.getHubControl().openHubConn();
-                //hubH.getHubControl().closeAllSesssions();
-            }catch (MeteringSessionException ex) {
-                 java.util.logging.Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
-            }
-                
+      
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -56,9 +48,13 @@ public class Main extends Application {
     
     @Override
     public void stop(){
-        HubHandler hubH = HubHandler.getInstance();
-        hubH.getHubControl().closeAllSesssions();
-        hubH.getHubControl().closeHubConn();
+        try{
+            HubHandler hubH = HubHandler.getInstance();
+            hubH.getHubControl().closeAllSesssions();
+            hubH.getHubControl().closeHubConn();
+        }catch(Exception ex){
+                ;
+        }
     }
     /**
      * @param args the command line arguments

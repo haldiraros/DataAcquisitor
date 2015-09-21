@@ -32,6 +32,13 @@ public class Dialogs {
         alert.showAndWait();
     }
     
+    public static void showErrorAlert(String message) {
+        Alert alert = new Alert(AlertType.ERROR);
+        alert.setTitle("Error");
+        alert.setHeaderText(message);
+        alert.showAndWait();
+    }
+    
     public static Optional<Pair<String, String>> inputStringPair(
             String title,
             String text,

@@ -74,6 +74,10 @@ public class HubControl {
         return hub;
     }
     
+    public String getHubId(){
+        return hub.getHubHexId();
+    }
+    
 
     public void setHub(Hub hub) {
         this.hub = hub;

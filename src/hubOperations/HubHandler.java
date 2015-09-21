@@ -16,6 +16,8 @@
  */
 package hubOperations;
 
+import hubLibrary.meteringcomreader.exceptions.MeteringSessionException;
+
 /**
  *
  * @author Haros
@@ -29,16 +31,12 @@ public class HubHandler {
         return hubControl;
     }
     
-    private HubHandler() {
-        try{
+    private HubHandler() throws MeteringSessionException {
         hubControl = new HubControl();
-        }catch(Exception e){
-            
-        }
-                
+       
     }
     
-    public static synchronized HubHandler getInstance() {
+    public static synchronized HubHandler getInstance() throws MeteringSessionException {
         if (instance == null) {
             instance = new HubHandler();
         }

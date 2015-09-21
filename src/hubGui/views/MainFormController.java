@@ -5,16 +5,21 @@
  */
 package hubGui.views;
 
+import hubGui.Main;
 import hubGui.logging.GuiLogTarget;
 import hubGui.logging.LogTyps;
 import hubGui.logging.Logger;
 import hubGui.models.Chip;
 import hubGui.models.Message;
+import hubLibrary.meteringcomreader.exceptions.MeteringSessionException;
+import hubLibrary.meteringcomreader.exceptions.MeteringSessionOperationAlreadyInProgressException;
+import hubOperations.HubHandler;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalTime;
 import java.util.Optional;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -71,14 +76,40 @@ public class MainFormController implements Initializable {
         ObservableList<Message> messages = FXCollections.observableArrayList();
         messageTable.setItems(messages);
         Logger.addTarget(new GuiLogTarget(messages));
-        //TODO: Find hub (here so that I can do a dialog if something goes wrong
-        //TODO: Start connection
+        hubControlInit();
         
         ObservableList<Chip> chips = FXCollections.observableArrayList();
         //TODO: Add scan for chips
         chipsList.setItems(chips);
     } 
     
+    private void hubControlInit(){
+        HubHandler hubH = null;
+        try{
+            hubH = HubHandler.getInstance();
+        }catch(Exception ex){
+            Logger.write("Error on hub autofinding.", LogTyps.ERROR);
+            Dialogs.showErrorAlert("Error on hub autofinding, make sure that "+
+                    "Hub device is connected, drivers are installed and "+
+                    "the application has appropriate rights \n"+
+                    "Restart the application.");
+            this.closeActionHandler(null);
+            
+        }
+        try{
+            hubH.getHubControl().openHubConn();
+            hubH.getHubControl().closeAllSesssions();           
+        }catch (Exception ex) {
+             Logger.write("Error on creating hub connection", LogTyps.ERROR);
+             Dialogs.showErrorAlert("Error connecting to the hub device, make sure that "+
+                    "Hub device is connected, drivers are installed and "+
+                    "the application has appropriate rights \n"+
+                    "Restart the application.");
+            return;
+        }
+        addMessage("HUB: "+hubH.getHubControl().getHubId()+" connected");
+    }
+        
     @FXML
     private void settingsActionHandler(ActionEvent event) {
         try {
@@ -95,6 +126,7 @@ public class MainFormController implements Initializable {
         }
     }
     
+
     @FXML
     private void registerActionHandler(ActionEvent event) {
         Optional<String> chipId = Dialogs.inputString("Registration", "Logger registration", "Logger ID");
