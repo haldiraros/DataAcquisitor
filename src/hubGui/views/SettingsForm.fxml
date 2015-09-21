@@ -16,11 +16,12 @@
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
               </columnConstraints>
               <rowConstraints>
-                <RowConstraints maxHeight="292.0" minHeight="10.0" prefHeight="292.0" vgrow="SOMETIMES" />
-                <RowConstraints maxHeight="246.0" minHeight="10.0" prefHeight="210.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="292.0" minHeight="10.0" prefHeight="72.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="370.0" minHeight="10.0" prefHeight="367.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="246.0" minHeight="10.0" prefHeight="24.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <FlowPane orientation="VERTICAL" prefHeight="200.0" prefWidth="200.0">
+                  <FlowPane orientation="VERTICAL" prefHeight="388.0" prefWidth="347.0" GridPane.rowIndex="1">
                      <children>
                         <Label prefHeight="17.0" prefWidth="337.0" text="Hubs configuration">
                            <FlowPane.margin>
@@ -39,17 +40,17 @@
                         <HBox prefHeight="35.0" prefWidth="346.0" HBox.hgrow="ALWAYS">
                            <children>
                                 <Pane HBox.hgrow="ALWAYS" />
-                              <Button fx:id="deleteButton" mnemonicParsing="false" text="Delete" onAction="#deleteActionHandler" >
+                              <Button fx:id="deleteButton" mnemonicParsing="false" onAction="#deleteActionHandler" text="Delete">
                                  <HBox.margin>
                                     <Insets left="5.0" />
                                  </HBox.margin>
                               </Button>
-                              <Button fx:id="editButton" mnemonicParsing="false" text="Edit" onAction="#editActionHandler">
+                              <Button fx:id="editButton" mnemonicParsing="false" onAction="#editActionHandler" text="Edit">
                                  <HBox.margin>
                                     <Insets left="5.0" />
                                  </HBox.margin>
                               </Button>
-                              <Button fx:id="addButton" mnemonicParsing="false" text="Add" onAction="#addActionHandler">
+                              <Button fx:id="addButton" mnemonicParsing="false" onAction="#addActionHandler" text="Add">
                                  <HBox.margin>
                                     <Insets left="5.0" />
                                  </HBox.margin>
@@ -61,6 +62,20 @@
                         </HBox>
                      </children>
                   </FlowPane>
+                  <FlowPane orientation="VERTICAL" prefHeight="200.0" prefWidth="200.0">
+                     <children>
+                        <Label text="Rest URL">
+                           <FlowPane.margin>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </FlowPane.margin>
+                        </Label>
+                        <TextField fx:id="restUrlText" prefHeight="25.0" prefWidth="335.0">
+                           <FlowPane.margin>
+                              <Insets left="5.0" right="5.0" />
+                           </FlowPane.margin>
+                        </TextField>
+                     </children>
+                  </FlowPane>
                </children>
             </GridPane>
          </center>
@@ -68,8 +83,8 @@
             <ToolBar prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
               <items>
                   <Pane HBox.hgrow="ALWAYS" />
-                <Button fx:id="cancelButton" mnemonicParsing="false" prefHeight="25.0" prefWidth="67.0" text="Cancel" onAction="#cancelActionHandler" />
-                  <Button fx:id="okButton" mnemonicParsing="false" prefHeight="25.0" prefWidth="78.0" text="Ok" onAction="#okActionHandler"/>
+                <Button fx:id="cancelButton" mnemonicParsing="false" onAction="#cancelActionHandler" prefHeight="25.0" prefWidth="67.0" text="Cancel" />
+                  <Button fx:id="okButton" mnemonicParsing="false" onAction="#okActionHandler" prefHeight="25.0" prefWidth="78.0" text="Ok" />
               </items>
             </ToolBar>
          </bottom>

@@ -16,6 +16,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class Settings {
     
     private ArrayList<HubConfig> hubConfigs = new ArrayList<>();
+    private String restUrl;
 
     /**
      * @return the hubConfigs
@@ -29,5 +30,19 @@ public class Settings {
      */
     public void setHubConfigs(ArrayList<HubConfig> hubConfigs) {
         this.hubConfigs = hubConfigs;
+    }
+
+    /**
+     * @return the restUrl
+     */
+    public String getRestUrl() {
+        return restUrl;
+    }
+
+    /**
+     * @param restUrl the restUrl to set
+     */
+    public void setRestUrl(String restUrl) {
+        this.restUrl = restUrl;
     }
 }

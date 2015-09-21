@@ -97,7 +97,6 @@ public class MainFormController implements Initializable {
                     "Close all other instances of appliactions with access to the Hub device \n"+
                     "Restart the application.");
             this.closeActionHandler(null);
-            
         }
         try{
             hubH.getHubControl().openHubConn();

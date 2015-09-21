@@ -19,6 +19,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import javafx.util.Pair;
 
@@ -37,6 +38,9 @@ public class SettingsFormController implements Initializable {
     
     @FXML
     private TableColumn<IdKeyPair, String> hubKeyColumn;
+    
+    @FXML
+    private TextField restUrlText;
     
     /**
      * Initializes the controller class.
@@ -137,6 +141,7 @@ public class SettingsFormController implements Initializable {
     }
     
     private void setSettings(Settings settings) {
+        restUrlText.setText(settings.getRestUrl());
         ObservableList<IdKeyPair> items = hubIdKeyTable.getItems();
         for(HubConfig hubConfig : settings.getHubConfigs()) {
             IdKeyPair pair = new IdKeyPair(hubConfig.getId(), hubConfig.getKey());
@@ -146,6 +151,7 @@ public class SettingsFormController implements Initializable {
     
     private Settings getSettings() {
         Settings settings = new Settings();
+        settings.setRestUrl(restUrlText.getText());
         for(IdKeyPair pair : hubIdKeyTable.getItems()) {
             HubConfig hubConfig = new HubConfig(pair.getId(), pair.getKey());
             settings.getHubConfigs().add(hubConfig);
