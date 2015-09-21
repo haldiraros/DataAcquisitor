@@ -118,12 +118,14 @@ public class HubControl {
         }
     }
     
-    public void registerNewLogger(long loggerID){
+    public long registerNewLogger(long loggerID){
         try{
-            long registerLogger = hubConn.registerLogger(loggerID);
+            return hubConn.registerLogger(loggerID);
             }catch(Exception e){
              System.out.println("error registering loggers "+e.getMessage());
+             e.printStackTrace();
         }
+        return -1;
     }
     public void unregisterLogger(long registeredLoggerID){
         try{

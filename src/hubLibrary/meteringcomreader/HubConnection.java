@@ -488,7 +488,7 @@ public class HubConnection implements Runnable{
         int loggersCount = data.length/4;
         long loggers[] = new long[loggersCount];
         for (int i = 0; i < loggersCount; i += 1) {
-            loggers[i] = Utils.bytes2long(data, i, 4);
+            loggers[i] = Utils.bytes2long(data, i*4, 4);
         }
         return loggers;
     }

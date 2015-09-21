@@ -13,6 +13,7 @@ import hubGui.models.Chip;
 import hubGui.models.Message;
 import hubLibrary.meteringcomreader.exceptions.MeteringSessionException;
 import hubLibrary.meteringcomreader.exceptions.MeteringSessionOperationAlreadyInProgressException;
+import hubOperations.HubControl;
 import hubOperations.HubHandler;
 import java.io.IOException;
 import java.net.URL;
@@ -90,7 +91,8 @@ public class MainFormController implements Initializable {
             Logger.write("Error on hub autofinding.", LogTyps.ERROR);
             Dialogs.showErrorAlert("Error on hub autofinding, make sure that "+
                     "Hub device is connected, drivers are installed and "+
-                    "the application has appropriate rights \n"+
+                    "the application has appropriate rights.\n"+
+                    "Close all other instances of appliactions with access to the Hub device \n"+
                     "Restart the application.");
             this.closeActionHandler(null);
             
@@ -118,7 +120,7 @@ public class MainFormController implements Initializable {
                 addMessage("Found "+listLoggers.length+" registered loggers");
                 for (int i=0; i<listLoggers.length; i++)
                 { 
-                    Chip logger = new Chip("0x"+Long.toHexString(listLoggers[i]));
+                    Chip logger = new Chip(Long.toHexString(listLoggers[i]));
                     loggers.add(logger);
                     addMessage(logger, "Was found registered on Hub device.");
                 }
@@ -148,14 +150,49 @@ public class MainFormController implements Initializable {
 
     @FXML
     private void registerActionHandler(ActionEvent event) {
-        Optional<String> chipId = Dialogs.inputString("Registration", "Logger registration", "Logger ID");
+        boolean flag=true;
+        long idLogger = -1;
+        Optional<String> chipId;
+        do{
+            flag=true;
+             chipId = Dialogs.inputString("Registration", "Logger registration", "Logger ID");
+            if(chipId.isPresent()){
+                if(chipId.get().length()!=8) flag=false;
+                try{
+                    idLogger = Long.parseLong(chipId.get(), 16);
+                }catch(NumberFormatException ex){
+                   flag=false;
+                }
+            }
+            
+            if(!flag) Dialogs.showErrorAlert("Error registering new logger. Wrong ID format.\n"+
+                       "The given ID should be 8 characters long and given in HEX notation");
+        }
+        while(!flag);
         
         if (chipId.isPresent()) {
-            //TODO: Do actual registering logger
-            ObservableList<Chip> items = chipsList.getItems();
-            Chip chip = new Chip(chipId.get());
-            addMessage(chip, "Registered.");
-            items.add(chip);
+            HubControl hubC; 
+            
+            try {
+                hubC = HubHandler.getInstance().getHubControl();
+                idLogger = hubC.registerNewLogger(idLogger);
+            } catch (MeteringSessionException ex) {
+                Logger.write("Error registering new logger", LogTyps.ERROR);
+                Dialogs.showErrorAlert("Error registering new logger");
+            return;
+            }catch(NumberFormatException ex){
+                Logger.write("Error registering new logger. Wrong ID format.", LogTyps.ERROR);
+                Dialogs.showErrorAlert("Error registering new logger. Wrong ID format.\n"+
+                       "The given ID should be a String with logger ID given in HEX notation");
+                return;
+            }
+            if(idLogger !=-1){
+                ObservableList<Chip> items = chipsList.getItems();
+                Chip chip = new Chip(Long.toHexString(idLogger));
+                addMessage(chip, "Registered.");
+                items.add(chip);
+            }
+            
         }
     }
     
@@ -176,10 +213,17 @@ public class MainFormController implements Initializable {
             return;
         }
         //TODO: Unregister logger!
-        ObservableList<Chip> items = chipsList.getItems();
-        Chip chip = items.get(index);
-        addMessage(chip, "Unregistered.");
-        items.remove(index);
+        HubControl hubC; 
+        try {
+            hubC = HubHandler.getInstance().getHubControl();
+            ObservableList<Chip> items = chipsList.getItems();
+            Chip chip = items.get(index);
+            hubC.unregisterLogger(Long.parseLong(chip.getName(),16));
+            items.remove(index);
+            addMessage(chip, "Unregistered.");
+        } catch (MeteringSessionException ex) {
+            java.util.logging.Logger.getLogger(MainFormController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @FXML

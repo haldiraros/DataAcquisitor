@@ -24,6 +24,7 @@ import hubLibrary.meteringcomreader.exceptions.MeteringSessionException;
 import gnu.io.SerialPortEvent;
 import gnu.io.SerialPortEventListener;
 import gnu.io.UnsupportedCommOperationException;
+import hubLibrary.meteringcomreader.exceptions.MeteringSessionSerialEOFException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.concurrent.BlockingQueue;
@@ -124,11 +125,10 @@ lgr.debug("Time:"+System.nanoTime()+" serialEvent loopNo:"+loopNo);
                 } catch (MeteringSessionTimeoutException ex) {
                     return;  //if timeout to get next response then exit
                 }
-//                catch (MeteringSessionException ex) {
-//                    lgr.debug("Time:"+System.nanoTime()+","+" exeption detected in serialEvent "+ex);                                   
-//                    setRSException(ex);
-//                   
-//                }
+                catch (MeteringSessionSerialEOFException ex) {
+                    return;
+                   
+                }
                 if (res == Utils.radioSessionRes) 
                     try {
                         data =_receiveData(1);
@@ -291,7 +291,7 @@ lgr.debug("Time:"+System.nanoTime()+","+"exeption dedected in getNextResp "+e);
                 try {
                     len=this.inputStream.read(ret);
                     if(len==-1) 
-                        throw new MeteringSessionException("Serial EOF");
+                        throw new MeteringSessionSerialEOFException("Serial EOF");
                     if(len==0) {
                         lgr.debug("Time:"+System.nanoTime()+","+"Thread:"+Thread.currentThread().getName()+" Serial port read timeout in _readBytes size"+size);                
                         throw new MeteringSessionTimeoutException("Serial port read timeout");
