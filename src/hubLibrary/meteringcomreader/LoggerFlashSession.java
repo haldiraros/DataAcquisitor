@@ -59,7 +59,7 @@ public class LoggerFlashSession  extends MeteringSession{
 
         
 //        try{close();} 
-//        catch(MeteringSessionException e){}
+//       catch(MeteringSessionException e){}
         
         try{
             Thread.sleep(1000);
@@ -68,7 +68,7 @@ public class LoggerFlashSession  extends MeteringSession{
             Thread.sleep(1000);
                     
             ret=hc.receiveAck(Utils.getIdLoggerFlashSessionRes);
-            System.out.println("test");
+
             loggerId=Utils.bytes2long(ret, 4);
             lgr.debug("getIdLoggerFlashSessionRes="+Long.toHexString(loggerId));
         }

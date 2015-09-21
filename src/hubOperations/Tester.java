@@ -66,20 +66,34 @@ public class Tester {
         }
         */
  //hubC.getHubConn().closeAllSessions(); //dla pewnosci domykamy inne sesje!        
-//hubC.readPacketsHubFlash();
+    //hubC.readPacketsHubFlash();
 
-        //System.out.println(hubC.checkLoggerID());
+       // System.out.println(hubC.checkLoggerID());
         //hubC.readPacketsLoggerFlash();
-      
+        boolean flag = true;
+        int i=0;
+        do{
+            flag = true;
+            i++;
+        try{
+           // hubC.readPacketsLoggerFlash();
+            
+            System.out.println(Long.toHexString(hubC.checkLoggerID())+"   --- "+i);
+        }catch(MeteringSessionException ex){
+        System.out.println("tt" + i +" --- "+ ex.getMessage());
+
+        flag= false;
+        }
+        }while(!flag);
       // hubC.getHubConn().closeAllSessions(); //dla pewnosci domykamy inne sesje!
        
-       hubC.startRecievingInRadioSession();
+       //hubC.startRecievingInRadioSession();
         
        
-            Thread.sleep(1800000); //30 min minut
+           // Thread.sleep(1800000); //30 min minut
        
                 
-        hubC.stopRecievingInRadioSession();
+        //hubC.stopRecievingInRadioSession();
       
 
           hubC.closeHubConn();

@@ -184,18 +184,13 @@ public class HubControl {
     
     public void readPacketsLoggerFlash() throws MeteringSessionException{
         DataPacket packet=null;
-        try{
+        
             LoggerFlashSession loggerFlashSession = hubConn.createLoggerFlashSession(new Timestamp(0));
+            
             while ((packet = loggerFlashSession.getNextPacket(100000))!=null){
                 processDataPacketTemps(packet);
                 }
-        }finally{
-            try{
-                if(hubConn!=null) hubConn.closeLoggerFlashSession();
-            }catch(Exception e){
-                System.out.println("Error closing Logger Flash Session "+e.getMessage());
-            }
-        }
+            hubConn.closeLoggerFlashSession();
     }
     
     public void readPacketsHubFlash() throws MeteringSessionException{
@@ -210,11 +205,12 @@ public class HubControl {
                 packetCount++;
                 if (packetCount==10000)
                     break;
-            }
+    }
             System.out.println("nopckg");
         }catch(Exception e){
             System.out.println(e.getMessage());
-        
+            throw e;
+
         }finally{
             try{
                 hubConn.closeHubFlashSession();
@@ -223,7 +219,7 @@ public class HubControl {
             }
         }
     }
-    
+        
     public void startRecievingInRadioSession() throws MeteringSessionException{
       // try{
            hubConn.createRadioSession(0);

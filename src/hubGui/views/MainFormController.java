@@ -23,6 +23,7 @@ import java.util.ResourceBundle;
 import java.util.logging.Level;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -208,7 +209,8 @@ public class MainFormController implements Initializable {
             Logger.write("Error auto registering new logger.", LogTyps.ERROR);
                 Dialogs.showErrorAlert("Error registering new logger.\n"+
                        "Make sure that the logger is placed correctly on the Hub device.\n"+
-                       "Logger autoregistration is known to fail due to unsure IR connection");
+                       "Logger autoregistration is known to fail due to unsure IR connection.\n"+
+                       "Loggers tend to get stuck for prolonged periods");
                 return;
         }
         if(idLog !=-1){
@@ -269,8 +271,27 @@ public class MainFormController implements Initializable {
     
     @FXML
     private void readFromHubHandler(ActionEvent event) {
-        //TODO: Read from hub
-        addMessage("Received data from Hub.");
+        
+        Task<Void> task = new Task<Void>() {
+            @Override public Void call() throws MeteringSessionException {
+                HubControl hubC = HubHandler.getInstance().getHubControl();
+                hubC.readPacketsHubFlash();
+                return null;
+            }
+        };
+        
+        ProgressForm test = new ProgressForm("Reading from Hub device flash memory");
+        task.setOnRunning((e) -> test.getDialogStage().show());
+        task.setOnSucceeded((e) -> {
+            test.getDialogStage().hide();
+            addMessage("Data from Hub device read.");
+        });
+        task.setOnFailed((e) -> {
+          // eventual error handling by catching exceptions from task.get()  
+        });
+        new Thread(task).start();
+        
+        
     }
     
     @FXML
