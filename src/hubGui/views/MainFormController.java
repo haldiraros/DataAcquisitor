@@ -77,10 +77,9 @@ public class MainFormController implements Initializable {
         messageTable.setItems(messages);
         Logger.addTarget(new GuiLogTarget(messages));
         hubControlInit();
+        initializeLoggerList();
         
-        ObservableList<Chip> chips = FXCollections.observableArrayList();
-        //TODO: Add scan for chips
-        chipsList.setItems(chips);
+        
     } 
     
     private void hubControlInit(){
@@ -108,6 +107,26 @@ public class MainFormController implements Initializable {
             return;
         }
         addMessage("HUB: "+hubH.getHubControl().getHubId()+" connected");
+    }
+    
+    private void initializeLoggerList(){
+        try {
+            ObservableList<Chip> loggers = FXCollections.observableArrayList();
+            
+            long[] listLoggers= HubHandler.getInstance().getHubControl().getRegisteredLoggersList();
+            if(listLoggers!=null){
+                addMessage("Found "+listLoggers.length+" registered loggers");
+                for (int i=0; i<listLoggers.length; i++)
+                { 
+                    Chip logger = new Chip("0x"+Long.toHexString(listLoggers[i]));
+                    loggers.add(logger);
+                    addMessage(logger, "Was found registered on Hub device.");
+                }
+            }
+            chipsList.setItems(loggers);
+        } catch (MeteringSessionException ex) {
+            Logger.write("Error getting logger list", LogTyps.ERROR);
+        }
     }
         
     @FXML
