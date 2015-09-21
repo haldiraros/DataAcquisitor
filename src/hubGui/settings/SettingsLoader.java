@@ -5,14 +5,11 @@
  */
 package hubGui.settings;
 
+import hubLibrary.meteringcomreader.Hub;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
-import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 
@@ -50,5 +47,10 @@ public class SettingsLoader {
             save(settings);
         }
         return settings;
+    }
+
+    public static String getHubAuthKey(Hub hub) {
+        return "1";
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
