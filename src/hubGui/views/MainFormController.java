@@ -339,21 +339,24 @@ public class MainFormController implements Initializable {
     private boolean toggleRadioSession() {
         
         HubControl hubC;
+        boolean isToggled = false;
         try {
             hubC = HubHandler.getInstance().getHubControl();
        
             if(!isRadioSessionActive){
                 hubC.startRecievingInRadioSession();
+                isRadioSessionActive = true;
             }else{
                hubC.stopRecievingInRadioSession();
+               isRadioSessionActive = false;
             }
+            isToggled = true;
          } catch (MeteringSessionException ex) {
-            return false;
         }
-        isRadioSessionActive = !isRadioSessionActive;
+
         radioSessionMenuItem.setSelected(isRadioSessionActive);
         radioSessionToggle.setSelected(isRadioSessionActive);
-        return true;
+        return isToggled;
     }
     
     private void addMessage(String message) {
