@@ -118,21 +118,14 @@ public class HubControl {
         }
     }
     
-    public long registerNewLogger(long loggerID){
-        try{
-            return hubConn.registerLogger(loggerID);
-            }catch(Exception e){
-             System.out.println("error registering loggers "+e.getMessage());
-             e.printStackTrace();
-        }
-        return -1;
+    public long registerNewLogger(long loggerID) throws MeteringSessionException{
+        long out = -1;
+        out = hubConn.registerLogger(loggerID);
+        return out;
     }
-    public void unregisterLogger(long registeredLoggerID){
-        try{
+    public void unregisterLogger(long registeredLoggerID) throws MeteringSessionException{
              hubConn.unregisterLogger(registeredLoggerID);
-            }catch(Exception e){
-             System.out.println("error unregistering loggers "+e.getMessage());
-        }
+
     }
     
     public int unregisterAllLoggers(){
@@ -140,10 +133,14 @@ public class HubControl {
         long[] currentLoggers =getRegisteredLoggersList();
         for (int i=0; i<currentLoggers.length; i++){
             System.out.println("Removing logger:0x"+Long.toHexString(currentLoggers[i]));
+            try{
             unregisterLogger(currentLoggers[i]);
+            }catch(MeteringSessionException ex){
+                ;
+            }
             removalCount++;
             try{
-            Thread.sleep(10000);
+            Thread.sleep(100);
             }catch(Exception e){}
         }
         return removalCount;
@@ -158,27 +155,19 @@ public class HubControl {
         }
     }
       
-    public long checkLoggerID(){
+    public long checkLoggerID() throws MeteringSessionException{
         long loggerID=-1;
-        try{
-            loggerID= hubConn.getLoggerId();
-        }catch(Exception e){
-            System.out.println("error getting LoggerId "+e.getMessage());
-        }
+        loggerID= hubConn.getLoggerId();
         return loggerID;
         
     }
     
-    public boolean autoRegisterLogger(){
+    public long autoRegisterLogger() throws MeteringSessionException{
         long logID = -1;
-        try{
-            logID = checkLoggerID();
-            hubConn.registerLogger(logID);
-        }catch(Exception e){
-            System.out.println("Error on Logger autoregister "+e.getMessage());
-            return false;
-        }
-        return logID!=-1 ? true : false ;
+        logID = checkLoggerID();
+        //if(logID)
+        hubConn.registerLogger(logID);
+        return logID;
     }
     
     //TODO: Somehow have radio on idle loop or sth that can be broken when needed...

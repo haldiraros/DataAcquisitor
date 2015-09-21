@@ -199,10 +199,24 @@ public class MainFormController implements Initializable {
     @FXML
     private void registerAutoActionHandler(ActionEvent event) {
         //TODO: Do actual registering logger
-        ObservableList<Chip> items = chipsList.getItems();
-        Chip chip = new Chip(Integer.toString(items.size() + 1));
-        addMessage(chip, "Registered.");
-        items.add(chip);
+        long idLog = -1;
+        HubControl hubC;
+        try {
+            hubC = HubHandler.getInstance().getHubControl();
+            idLog = hubC.autoRegisterLogger();
+        } catch (MeteringSessionException ex) {
+            Logger.write("Error auto registering new logger.", LogTyps.ERROR);
+                Dialogs.showErrorAlert("Error registering new logger.\n"+
+                       "Make sure that the logger is placed correctly on the Hub device.\n"+
+                       "Logger autoregistration is known to fail due to unsure IR connection");
+                return;
+        }
+        if(idLog !=-1){
+            ObservableList<Chip> items = chipsList.getItems();
+            Chip chip = new Chip(Long.toHexString(idLog));
+            addMessage(chip, "Registered.");
+            items.add(chip);
+        }
     }
     
     @FXML
@@ -212,7 +226,7 @@ public class MainFormController implements Initializable {
             showNoChipsSelectedAlert();
             return;
         }
-        //TODO: Unregister logger!
+        
         HubControl hubC; 
         try {
             hubC = HubHandler.getInstance().getHubControl();
