@@ -162,7 +162,7 @@ public class HubControl {
         return removalCount;
     }
     
-    public void closeAllSesssions(){
+    public void closeAllSessions(){
         try{
             hubConn.closeAllSessions();
         }catch(Exception e)
@@ -264,7 +264,26 @@ public class HubControl {
         } catch (MeteringSessionException ex) {
             Logger.getLogger(HubControl.class.getName()).log(Level.SEVERE, null, ex);
         }
-        closeAllSesssions();
+        closeAllSessions();
         closeHubConn();
+    }
+    
+    public void restartAll() throws MeteringSessionException{
+        boolean flag = false;
+        if(RSRecv!=null)
+        {
+            flag = !flag;
+        
+            try {
+                stopRecievingInRadioSession();
+            } catch (MeteringSessionException ex) {
+                Logger.getLogger(HubControl.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        closeAllSessions();
+        closeHubConn();
+        openHubConn();
+        if(flag) startRecievingInRadioSession();
+ 
     }
 }
