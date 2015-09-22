@@ -17,6 +17,7 @@ public class RESTClient {
 
     public static void main(String[] args) {
         RestMenager mg = new RestMenager("http://jj-blus.rhcloud.com/bluconsole/1.0/resources/measurementbatch");
+        //Marcin B. Zmieniłem parę rzeczy w RESTManager i nie trzyma samego huba już, w razie co można zmienić potem....
         mg.setHub(new Hub(100, "LOL"));
         mg.sendDatagram(new Datagram("ALA"));
         
