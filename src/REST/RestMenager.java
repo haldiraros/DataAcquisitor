@@ -10,6 +10,7 @@ package REST;
  * @author hp
  */
 import hubGui.settings.SettingsLoader;
+import static hubGui.settings.SettingsLoader.getHubAuthKey;
 import hubOperations.HubControl;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -18,6 +19,8 @@ import java.io.OutputStreamWriter;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.Collection;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -49,7 +52,11 @@ public class RestMenager {
     private JSONObject getHubLogInfo() throws JSONException {
         JSONObject header = new JSONObject();
         header.put("hubId", hubC.getHubId());
-        header.put("authKey", hubC);
+        try {
+            header.put("authKey", getHubAuthKey(hubC.getHubId()));
+        } catch (Exception ex) {
+            Logger.getLogger(RestMenager.class.getName()).log(Level.SEVERE, null, ex);
+        }
         return header;
     }
 
