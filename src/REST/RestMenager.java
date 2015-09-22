@@ -11,6 +11,7 @@ package REST;
  */
 import hubGui.settings.SettingsLoader;
 import hubLibrary.meteringcomreader.Hub;
+import hubOperations.HubControl;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -30,21 +31,21 @@ public class RestMenager {
     private String hubcommandURL;
     private String hubcommandstatusURL;
     private final static String NoErrorResponse = "0";
-    private Hub hub;
+    private HubControl hubC;
 
     public RestMenager(String measurementsURL) {
         this.measurementsURL = measurementsURL;
     }
 
-    public RestMenager(String measurementsURL, Hub hub) {
+    public RestMenager(String measurementsURL, HubControl hub) {
         this.measurementsURL = measurementsURL;
-        this.hub = hub;
+        this.hubC = hub;
     }
 
     private JSONObject getHubLogInfo() throws JSONException {
         JSONObject header = new JSONObject();
-        header.put("hubId", hub.getHubHexId());
-        header.put("authKey", SettingsLoader.getHubAuthKey(hub));
+        header.put("hubId", hubC.getHubId());
+        header.put("authKey", SettingsLoader.getHubAuthKey(hubC.getHubId()));
         return header;
     }
 
@@ -138,7 +139,7 @@ public class RestMenager {
         JSONObject status = getHubLogInfo();
         status.put("firmwareVer", "1.0");
         status.put("hardwareVer", "1.0");
-        status.put("dateTime", hub.toString());
+        status.put("dateTime", "FFFF");
         JSONObject message = new JSONObject();
         message.put("status", status);
         System.out.println("\nJSON Object: " + message);
@@ -183,15 +184,15 @@ public class RestMenager {
     /**
      * @return the hub
      */
-    public Hub getHub() {
-        return hub;
+    public HubControl getHubControl() {
+        return hubC;
     }
 
     /**
      * @param hub the hub to set
      */
-    public void setHub(Hub hub) {
-        this.hub = hub;
+    public void setHubControl (HubControl hub) {
+        this.hubC = hub;
     }
 
     /**

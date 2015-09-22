@@ -49,7 +49,7 @@ public class SettingsLoader {
         return settings;
     }
 
-    public static String getHubAuthKey(Hub hub) {
+    public static String getHubAuthKey(String hubHexId) {
         return "1";
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
