@@ -60,24 +60,18 @@ public class RestMenager {
         return header;
     }
 
-    public String sendDatagram(Datagram datagram) {
-        try {
-            // Step1: Prepare JSON data
-            JSONObject message = getHubLogInfo();
-            message.put("frames", getDatagramInfos(datagram));
-            System.out.println("\nJSON Object: " + message);
-            // Step2: Now pass JSON File Data to REST Service
-            JSONObject response = sendToServer(message, SettingsLoader.load().getRestUrl() + measurementsURL);
-            String status = response.getString("errCode");
-            if (NoErrorResponse.equals(status)) {
-                datagram.setDataSend(true);
-            }
-            return status;
-        } catch (Exception e) {
-            System.out.println("\nError while calling REST Service");
-            System.out.println(e);
-            return e.getMessage();
+    public String sendDatagram(Datagram datagram) throws Exception {
+        // Step1: Prepare JSON data
+        JSONObject message = getHubLogInfo();
+        message.put("frames", getDatagramInfos(datagram));
+        System.out.println("\nJSON Object: " + message);
+        // Step2: Now pass JSON File Data to REST Service
+        JSONObject response = sendToServer(message, SettingsLoader.load().getRestUrl() + measurementsURL);
+        String status = response.getString("errCode");
+        if (NoErrorResponse.equals(status)) {
+            datagram.setDataSend(true);
         }
+        return status;
     }
 
     private JSONArray getDatagramInfos(Datagram datagram) throws JSONException {
