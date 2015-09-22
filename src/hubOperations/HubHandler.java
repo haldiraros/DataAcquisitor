@@ -17,6 +17,7 @@
 package hubOperations;
 
 import hubLibrary.meteringcomreader.exceptions.MeteringSessionException;
+import project.data.Session;
 
 /**
  *
@@ -42,6 +43,10 @@ public class HubHandler {
         }
 
         return instance;
+    }
+
+    public void setDBSession(Session dbSession) {
+        hubControl.setDbSession(dbSession);
     }
 
 

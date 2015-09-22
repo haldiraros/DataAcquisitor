@@ -50,8 +50,9 @@ public class Main extends Application {
     public void stop(){
         try{
             HubHandler hubH = HubHandler.getInstance();
-            hubH.getHubControl().closeAllSesssions();
-            hubH.getHubControl().closeHubConn();
+            hubH.getHubControl().closeAll();
+            hubH.getHubControl().getDbSession().closeSession();
+            hubH=null;
         }catch(Exception ex){
                 ;
         }

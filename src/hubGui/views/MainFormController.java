@@ -17,6 +17,7 @@ import hubOperations.HubControl;
 import hubOperations.HubHandler;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.time.LocalTime;
 import java.util.Optional;
 import java.util.ResourceBundle;
@@ -40,6 +41,8 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.ToggleButton;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import localDB.menagers.LocalDataBaseMenager;
+import project.data.Session;
 
 /**
  * FXML Controller class
@@ -79,16 +82,24 @@ public class MainFormController implements Initializable {
         ObservableList<Message> messages = FXCollections.observableArrayList();
         messageTable.setItems(messages);
         Logger.addTarget(new GuiLogTarget(messages));
-        hubControlInit();
+        Session ses =null;
+        try {
+             ses = setupDBSession();
+        } catch (Exception ex) {
+            java.util.logging.Logger.getLogger(MainFormController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        hubControlInit(ses);
         initializeLoggerList();
+        
         
         
     } 
     
-    private void hubControlInit(){
+    private void hubControlInit(Session dbSession){
         HubHandler hubH = null;
         try{
             hubH = HubHandler.getInstance();
+            hubH.setDBSession(dbSession);
         }catch(Exception ex){
             Logger.write("Error on hub autofinding.", LogTyps.ERROR);
             Dialogs.showErrorAlert("Error on hub autofinding, make sure that "+
@@ -364,5 +375,28 @@ public class MainFormController implements Initializable {
     
     private void showNoChipsSelectedAlert() {
         Dialogs.showInfoAlert("No loggers selected");
+    }
+
+    private Session setupDBSession() throws SQLException, ClassNotFoundException, Exception {
+        LocalDataBaseMenager ldbm = new LocalDataBaseMenager();
+        if (ldbm.fullTestBDExists() == false) {
+            Logger.write("Local DB Not Found!", LogTyps.WARNING);
+            Logger.write("Trying to create new Local DB.", LogTyps.SUCCESS);
+            try {
+                ldbm.setupDataBase();
+                Logger.write("New Local DB created.", LogTyps.SUCCESS);
+            } catch (Exception e) {
+                Logger.write("Error while creating Local DB:" + e.getMessage(), LogTyps.ERROR);
+                e.printStackTrace();
+            }
+            if (ldbm.fullTestBDExists() == false) {
+                Logger.write("Error: Local BD is not valid!", LogTyps.ERROR);
+                return null;
+            }
+        }
+
+        Session localDBSession = new Session(ldbm, true);
+        return localDBSession;
+
     }
 }

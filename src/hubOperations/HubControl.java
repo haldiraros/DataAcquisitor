@@ -16,6 +16,7 @@
  */
 package hubOperations;
 
+import hubGui.logging.LogTyps;
 import hubLibrary.meteringcomreader.DataPacket;
 import hubLibrary.meteringcomreader.Hub;
 import hubLibrary.meteringcomreader.HubConnection;
@@ -28,7 +29,11 @@ import static hubOperations.RadioSessionReciever.createRadioSessionReciever;
 import java.sql.Timestamp;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.xml.bind.DatatypeConverter;
+import project.data.Datagram;
+import project.data.Session;
 
 /**
  *
@@ -41,6 +46,17 @@ public class HubControl {
     Hub hub =null;
     RadioSessionReciever RSRecv=null;
 
+    
+    Session dbSession = null;
+
+    public Session getDbSession() {
+        return dbSession;
+    }
+    
+    public void setDbSession(Session dbSession) {
+        this.dbSession = dbSession;
+    }
+    
     /**
      * Konstruktor klasy hub wykorzystującej klasę Hub z biblioteki
      * @param hubId  identyfikator koncentratora
@@ -171,9 +187,10 @@ public class HubControl {
     }
     
     //TODO: Somehow have radio on idle loop or sth that can be broken when needed...
-    public void processDataPacketEncoded (DataPacket pck){ //TODO: all the packet processing!!
+    public void processDataPacketEncoded (DataPacket pck) throws Exception{ //TODO: all the packet processing!!
         System.out.println("Paczka danych: " +DatatypeConverter.printHexBinary(pck.getOrgData()));
-        System.out.println(pck);
+        //System.out.println(pck);
+        dbSession.addDatagram(new Datagram(DatatypeConverter.printHexBinary(pck.getOrgData())));
         
     }
     public void processDataPacketTemps (DataPacket pck){ //TODO: all the packet processing!!
@@ -207,10 +224,12 @@ public class HubControl {
                     break;
     }
             System.out.println("nopckg");
-        }catch(Exception e){
+        }catch(MeteringSessionException e){
             System.out.println(e.getMessage());
             throw e;
 
+        } catch (Exception ex) {
+            hubGui.logging.Logger.write("Error when processing packet from HUB.", LogTyps.ERROR);
         }finally{
             try{
                 hubConn.closeHubFlashSession();
@@ -237,5 +256,15 @@ public class HubControl {
         }
         RSRecv = null;
         System.out.println("Stopped radio session recieving ");
+    }
+    
+    public void closeAll(){
+        try {
+            stopRecievingInRadioSession();
+        } catch (MeteringSessionException ex) {
+            Logger.getLogger(HubControl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        closeAllSesssions();
+        closeHubConn();
     }
 }

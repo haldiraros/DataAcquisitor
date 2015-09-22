@@ -16,10 +16,12 @@
  */
 package hubOperations;
 
+import hubGui.logging.LogTyps;
 import hubLibrary.meteringcomreader.DataPacket;
 import hubLibrary.meteringcomreader.HubConnection;
 import hubLibrary.meteringcomreader.MeteringSession;
 import hubLibrary.meteringcomreader.exceptions.MeteringSessionException;
+import java.util.logging.Level;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -69,6 +71,8 @@ public class RadioSessionReciever implements Runnable{
             } 
         }catch (MeteringSessionException tout) {
             lgr.debug("Exception while processing new packet: "+tout.getMessage());            
+        } catch (Exception ex) {
+            hubGui.logging.Logger.write("Error when processing packet from HUB.", LogTyps.ERROR);
         }
         finally{
             setThread(null);
