@@ -132,7 +132,7 @@ public class Session {
                     Logger.write("Error while creating idle sending loop in: " + Session.class.getName() + ":\n" + ex.getMessage(), LogTyps.LOG);
                 }
             }
-        }, 100, 20, TimeUnit.SECONDS);
+        }, 15, 30, TimeUnit.SECONDS);
     }
 
     public boolean isSessionWithLocalDB() {
