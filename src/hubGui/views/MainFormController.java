@@ -111,7 +111,7 @@ public class MainFormController implements Initializable {
         }
         try{
             hubH.getHubControl().openHubConn();
-            hubH.getHubControl().closeAllSesssions();           
+            hubH.getHubControl().closeAllSessions();           
         }catch (Exception ex) {
              Logger.write("Error on creating hub connection", LogTyps.ERROR);
              Dialogs.showErrorAlert("Error connecting to the hub device, make sure that "+
@@ -222,6 +222,12 @@ public class MainFormController implements Initializable {
                        "Make sure that the logger is placed correctly on the Hub device.\n"+
                        "Logger autoregistration is known to fail due to unsure IR connection.\n"+
                        "Loggers tend to get stuck for prolonged periods");
+            try {
+                hubC = HubHandler.getInstance().getHubControl();
+                hubC.restartAll();
+            } catch (MeteringSessionException ex1) {
+                ;
+            }
                 return;
         }
         if(idLog !=-1){
@@ -276,11 +282,20 @@ public class MainFormController implements Initializable {
             } catch (InterruptedException ex) {
                 java.util.logging.Logger.getLogger(MainFormController.class.getName()).log(Level.SEVERE, null, ex);
             } catch (ExecutionException ex) {
-                System.out.println("bla bla bla");
                 MeteringSessionException msEx =(MeteringSessionException) ex.getCause();
                 msEx.printStackTrace();
+                Dialogs.showErrorAlert("Error reading from Logger flash memory with IR connection.\n"+
+                       "Make sure that the logger is placed correctly on the Hub device.\n"+
+                       "Reading data from the logger is known to fail due to unsure IR connection.\n"+
+                       "Loggers tend to get stuck for prolonged periods");
+                try {
+                    HubControl hubC = HubHandler.getInstance().getHubControl();
+                    hubC.restartAll();
+                } catch (MeteringSessionException ex1) {
+                    java.util.logging.Logger.getLogger(MainFormController.class.getName()).log(Level.SEVERE, null, ex1);
+                }
             }
-            addMessage("Operation failed");  
+            addMessage("Reading data from Logger device failed");  
         });
         new Thread(task).start();
     }
