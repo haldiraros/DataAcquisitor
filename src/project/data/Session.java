@@ -6,12 +6,12 @@
 package project.data;
 
 import REST.RestMenager;
+import hubGui.logging.LogTyps;
+import hubGui.logging.Logger;
 import java.math.BigDecimal;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import localDB.menagers.LocalDataBaseMenager;
 
 /**
@@ -40,6 +40,11 @@ public class Session {
         setUpStartValues(null, true);
     }
 
+    public Session(LocalDataBaseMenager ldbm, Boolean sessionWithLocalDB, RestMenager restMenager) throws Exception {
+        this.restMenager = restMenager;
+        setUpStartValues(ldbm, sessionWithLocalDB);
+    }
+
     public Session(LocalDataBaseMenager ldbm, Boolean sessionWithLocalDB) throws Exception {
         setUpStartValues(ldbm, sessionWithLocalDB);
     }
@@ -57,16 +62,20 @@ public class Session {
     // to powinno być przy każdym odpalaniu programu wołane i logowane jak nastąpi stworzebnie bazy, 
     // czy tylko w jakiś szczególnych przypadkach ??
     public void sendDatagrams() throws Exception {
-        for (Datagram datagram : localDataBaseMenager.getDatagramsToSend()) {
-            String error = restMenager.sendDatagram(datagram);
-            localDataBaseMenager.updateDatagram(datagram, error);
-            if (datagram.isDataSend()) {
-                addDatagramSend_OK();
-            } else {
-                addDatagramSend_Failures();
+        if (restMenager != null) {
+            for (Datagram datagram : localDataBaseMenager.getDatagramsToSend()) {
+                String error = restMenager.sendDatagram(datagram);
+                localDataBaseMenager.updateDatagram(datagram, error);
+                if (datagram.isDataSend()) {
+                    addDatagramSend_OK();
+                } else {
+                    addDatagramSend_Failures();
+                }
             }
+            localDataBaseMenager.updateSession(this);
+        } else {
+            Logger.write("No datagrams send - REST Menager not Found in Session", LogTyps.WARNING);
         }
-        localDataBaseMenager.updateSession(this);
     }
 
     public void setUpStartValues(LocalDataBaseMenager ldbm, Boolean sessionWithLocalDB) throws Exception {
@@ -103,7 +112,7 @@ public class Session {
                 try {
                     sendDatagrams();
                 } catch (Exception ex) {
-                    Logger.getLogger(Session.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.write("Error while creating idle sending loop in: " + Session.class.getName() + ":\n" + ex.getMessage(), LogTyps.LOG);
                 }
             }
         }, 0, 20, TimeUnit.SECONDS);
@@ -121,6 +130,9 @@ public class Session {
             return true;
         } else {
             String error = restMenager.sendDatagram(datagram);
+            if (!"0".equals(error)) {
+                Logger.write("Error while sending Datagram:"+error, LogTyps.ERROR);
+            }
             return false;
         }
     }

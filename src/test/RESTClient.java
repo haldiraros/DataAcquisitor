@@ -10,15 +10,14 @@ package test;
  * @author hp
  */
 import REST.RestMenager;
-import hubLibrary.meteringcomreader.Hub;
 import project.data.Datagram;
 
 public class RESTClient {
 
     public static void main(String[] args) {
-        RestMenager mg = new RestMenager("http://jj-blus.rhcloud.com/bluconsole/1.0/resources/measurementbatch");
+        RestMenager mg = new RestMenager();
         //Marcin B. Zmieniłem parę rzeczy w RESTManager i nie trzyma samego huba już, w razie co można zmienić potem....
-        mg.setHub(new Hub(100, "LOL"));
+        //mg.setHub(new Hub(100, "LOL"));
         mg.sendDatagram(new Datagram("ALA"));
         
     }

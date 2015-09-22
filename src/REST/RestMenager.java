@@ -10,7 +10,6 @@ package REST;
  * @author hp
  */
 import hubGui.settings.SettingsLoader;
-import hubLibrary.meteringcomreader.Hub;
 import hubOperations.HubControl;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -33,19 +32,24 @@ public class RestMenager {
     private final static String NoErrorResponse = "0";
     private HubControl hubC;
 
-    public RestMenager(String measurementsURL) {
-        this.measurementsURL = measurementsURL;
+    public RestMenager() {
     }
 
-    public RestMenager(String measurementsURL, HubControl hub) {
-        this.measurementsURL = measurementsURL;
+    public RestMenager(HubControl hub) {
         this.hubC = hub;
+    }
+
+    private void setupDefaultURLS() {
+        measurementsURL = "/bluconsole/1.0/resources/measurementbatch";
+        hubstatusURL = "/bluconsole/1.0/resources/hubstatus";
+        hubcommandURL = "/bluconsole/1.0/resources/hubcommand";
+        hubcommandstatusURL = "/bluconsole/1.0/resources/hubcommandstatus";
     }
 
     private JSONObject getHubLogInfo() throws JSONException {
         JSONObject header = new JSONObject();
         header.put("hubId", hubC.getHubId());
-        header.put("authKey", SettingsLoader.getHubAuthKey(hubC.getHubId()));
+        header.put("authKey", hubC);
         return header;
     }
 
@@ -56,7 +60,7 @@ public class RestMenager {
             message.put("frames", getDatagramInfos(datagram));
             System.out.println("\nJSON Object: " + message);
             // Step2: Now pass JSON File Data to REST Service
-            JSONObject response = sendToServer(message, measurementsURL);
+            JSONObject response = sendToServer(message, SettingsLoader.load().getRestUrl() + measurementsURL);
             String status = response.getString("errCode");
             if (NoErrorResponse.equals(status)) {
                 datagram.setDataSend(true);
@@ -109,7 +113,7 @@ public class RestMenager {
             message.put("frames", getDatagramsInfos(datagrams));
             System.out.println("\nJSON Object: " + message);
             // Step2: Now pass JSON File Data to REST Service
-            JSONObject response = sendToServer(message, measurementsURL);
+            JSONObject response = sendToServer(message, SettingsLoader.load().getRestUrl() + measurementsURL);
             String status = response.getString("errCode");
             if (NoErrorResponse.equals(status)) {
                 for (Datagram d : datagrams) {
@@ -134,7 +138,7 @@ public class RestMenager {
         return datas;
     }
 
-    public JSONObject sendHubStatus() throws JSONException, IOException {
+    public JSONObject sendHubStatus() throws JSONException, IOException, Exception {
         // Step1: Prepare JSON data
         JSONObject status = getHubLogInfo();
         status.put("firmwareVer", "1.0");
@@ -144,18 +148,18 @@ public class RestMenager {
         message.put("status", status);
         System.out.println("\nJSON Object: " + message);
         // Step2: Now pass JSON File Data to REST Service
-        return sendToServer(message, hubstatusURL);
+        return sendToServer(message, SettingsLoader.load().getRestUrl() + hubstatusURL);
     }
 
-    public JSONObject getHubCommand() throws JSONException, IOException {
+    public JSONObject getHubCommand() throws JSONException, IOException, Exception {
         // Step1: Prepare JSON data
         JSONObject message = getHubLogInfo();
         System.out.println("\nJSON Object: " + message);
         // Step2: Now pass JSON File Data to REST Service
-        return sendToServer(message, hubcommandURL);
+        return sendToServer(message, SettingsLoader.load().getRestUrl() + hubcommandURL);
     }
 
-    public JSONObject sendHubCommandStatus(Long commandId, String commandStatus) throws JSONException, IOException {
+    public JSONObject sendHubCommandStatus(Long commandId, String commandStatus) throws JSONException, IOException, Exception {
         // Step1: Prepare JSON data
         JSONObject message = getHubLogInfo();
         JSONObject command = new JSONObject();
@@ -164,7 +168,7 @@ public class RestMenager {
         message.put("command", command);
         System.out.println("\nJSON Object: " + message);
         // Step2: Now pass JSON File Data to REST Service
-        return sendToServer(message, hubcommandstatusURL);
+        return sendToServer(message, SettingsLoader.load().getRestUrl() + hubcommandstatusURL);
     }
 
     /**
@@ -191,7 +195,7 @@ public class RestMenager {
     /**
      * @param hub the hub to set
      */
-    public void setHubControl (HubControl hub) {
+    public void setHubControl(HubControl hub) {
         this.hubC = hub;
     }
 

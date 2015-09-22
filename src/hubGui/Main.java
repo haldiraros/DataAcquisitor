@@ -7,22 +7,13 @@ package hubGui;
 
 import com.sun.javafx.runtime.VersionInfo;
 import hubGui.logging.ConsoleLogTarget;
-import hubGui.logging.LogTyps;
 import hubGui.logging.Logger;
-import hubLibrary.meteringcomreader.TestFlashSession;
-import hubLibrary.meteringcomreader.exceptions.MeteringSessionException;
 import hubOperations.HubHandler;
-import hubOperations.Tester;
 import java.io.IOException;
-import java.util.logging.Level;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import localDB.menagers.LocalDataBaseMenager;
-import project.data.Datagram;
-import project.data.Session;
-import test.LocalDBTests;
 
 /**
  *
@@ -63,7 +54,6 @@ public class Main extends Application {
      */
     public static void main(String[] args) throws Exception {
         Logger.addTarget(new ConsoleLogTarget());
-        //LocalDBTests.main(args);
         launch(args);  
     }
     

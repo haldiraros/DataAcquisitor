@@ -5,14 +5,13 @@
  */
 package hubGui.views;
 
-import hubGui.Main;
+import REST.RestMenager;
 import hubGui.logging.GuiLogTarget;
 import hubGui.logging.LogTyps;
 import hubGui.logging.Logger;
 import hubGui.models.Chip;
 import hubGui.models.Message;
 import hubLibrary.meteringcomreader.exceptions.MeteringSessionException;
-import hubLibrary.meteringcomreader.exceptions.MeteringSessionOperationAlreadyInProgressException;
 import hubOperations.HubControl;
 import hubOperations.HubHandler;
 import java.io.IOException;
@@ -50,25 +49,25 @@ import project.data.Session;
  * @author Marcin
  */
 public class MainFormController implements Initializable {
-    
+
     @FXML
     private TableView<Message> messageTable;
-    
+
     @FXML
     private TableColumn<Message, LocalTime> timeColumn;
-    
+
     @FXML
     private TableColumn<Message, String> messageColumn;
-    
+
     @FXML
     private ListView<Chip> chipsList;
-    
+
     @FXML
     private ToggleButton radioSessionToggle;
-    
+
     @FXML
     private CheckMenuItem radioSessionMenuItem;
-    
+
     private boolean isRadioSessionActive;
 
     /**
@@ -78,60 +77,57 @@ public class MainFormController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         timeColumn.setCellValueFactory(c -> c.getValue().getTimeProperty());
         messageColumn.setCellValueFactory(c -> c.getValue().getMessageProperty());
-        
+
         ObservableList<Message> messages = FXCollections.observableArrayList();
         messageTable.setItems(messages);
         Logger.addTarget(new GuiLogTarget(messages));
-        Session ses =null;
+        Session ses = null;
         try {
-             ses = setupDBSession();
+            ses = setupDBSession();
         } catch (Exception ex) {
             java.util.logging.Logger.getLogger(MainFormController.class.getName()).log(Level.SEVERE, null, ex);
         }
         hubControlInit(ses);
         initializeLoggerList();
-        
-        
-        
-    } 
-    
-    private void hubControlInit(Session dbSession){
+    }
+
+    private void hubControlInit(Session dbSession) {
         HubHandler hubH = null;
-        try{
+        try {
             hubH = HubHandler.getInstance();
             hubH.setDBSession(dbSession);
-        }catch(Exception ex){
+        } catch (Exception ex) {
             Logger.write("Error on hub autofinding.", LogTyps.ERROR);
-            Dialogs.showErrorAlert("Error on hub autofinding, make sure that "+
-                    "Hub device is connected, drivers are installed and "+
-                    "the application has appropriate rights.\n"+
-                    "Close all other instances of appliactions with access to the Hub device \n"+
-                    "Restart the application.");
+            Dialogs.showErrorAlert("Error on hub autofinding, make sure that "
+                    + "Hub device is connected, drivers are installed and "
+                    + "the application has appropriate rights.\n"
+                    + "Close all other instances of appliactions with access to the Hub device \n"
+                    + "Restart the application.");
             this.closeActionHandler(null);
         }
-        try{
+        try {
             hubH.getHubControl().openHubConn();
-            hubH.getHubControl().closeAllSesssions();           
-        }catch (Exception ex) {
-             Logger.write("Error on creating hub connection", LogTyps.ERROR);
-             Dialogs.showErrorAlert("Error connecting to the hub device, make sure that "+
-                    "Hub device is connected, drivers are installed and "+
-                    "the application has appropriate rights \n"+
-                    "Restart the application.");
+            hubH.getHubControl().closeAllSesssions();
+            dbSession.setRestMenager(new RestMenager(hubH.getHubControl()));
+        } catch (Exception ex) {
+            Logger.write("Error on creating hub connection", LogTyps.ERROR);
+            Dialogs.showErrorAlert("Error connecting to the hub device, make sure that "
+                    + "Hub device is connected, drivers are installed and "
+                    + "the application has appropriate rights \n"
+                    + "Restart the application.");
             return;
         }
-        addMessage("HUB: "+hubH.getHubControl().getHubId()+" connected");
+        addMessage("HUB: " + hubH.getHubControl().getHubId() + " connected");
     }
-    
-    private void initializeLoggerList(){
+
+    private void initializeLoggerList() {
         try {
             ObservableList<Chip> loggers = FXCollections.observableArrayList();
-            
-            long[] listLoggers= HubHandler.getInstance().getHubControl().getRegisteredLoggersList();
-            if(listLoggers!=null){
-                addMessage("Found "+listLoggers.length+" registered loggers");
-                for (int i=0; i<listLoggers.length; i++)
-                { 
+
+            long[] listLoggers = HubHandler.getInstance().getHubControl().getRegisteredLoggersList();
+            if (listLoggers != null) {
+                addMessage("Found " + listLoggers.length + " registered loggers");
+                for (int i = 0; i < listLoggers.length; i++) {
                     Chip logger = new Chip(Long.toHexString(listLoggers[i]));
                     loggers.add(logger);
                     addMessage(logger, "Was found registered on Hub device.");
@@ -142,7 +138,7 @@ public class MainFormController implements Initializable {
             Logger.write("Error getting logger list", LogTyps.ERROR);
         }
     }
-        
+
     @FXML
     private void settingsActionHandler(ActionEvent event) {
         try {
@@ -152,62 +148,64 @@ public class MainFormController implements Initializable {
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.setResizable(false);
             stage.setTitle("Settings");
-            stage.setScene(new Scene(root));  
+            stage.setScene(new Scene(root));
             stage.show();
-        } catch(IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
-    
 
     @FXML
     private void registerActionHandler(ActionEvent event) {
-        boolean flag=true;
+        boolean flag = true;
         long idLogger = -1;
         Optional<String> chipId;
-        do{
-            flag=true;
-             chipId = Dialogs.inputString("Registration", "Logger registration", "Logger ID");
-            if(chipId.isPresent()){
-                if(chipId.get().length()!=8) flag=false;
-                try{
+        do {
+            flag = true;
+            chipId = Dialogs.inputString("Registration", "Logger registration", "Logger ID");
+            if (chipId.isPresent()) {
+                if (chipId.get().length() != 8) {
+                    flag = false;
+                }
+                try {
                     idLogger = Long.parseLong(chipId.get(), 16);
-                }catch(NumberFormatException ex){
-                   flag=false;
+                } catch (NumberFormatException ex) {
+                    flag = false;
                 }
             }
-            
-            if(!flag) Dialogs.showErrorAlert("Error registering new logger. Wrong ID format.\n"+
-                       "The given ID should be 8 characters long and given in HEX notation");
-        }
-        while(!flag);
-        
+
+            if (!flag) {
+                Dialogs.showErrorAlert("Error registering new logger. Wrong ID format.\n"
+                        + "The given ID should be 8 characters long and given in HEX notation");
+            }
+        } while (!flag);
+
         if (chipId.isPresent()) {
-            HubControl hubC; 
-            
+            HubControl hubC;
+
             try {
                 hubC = HubHandler.getInstance().getHubControl();
                 idLogger = hubC.registerNewLogger(idLogger);
             } catch (MeteringSessionException ex) {
                 Logger.write("Error registering new logger", LogTyps.ERROR);
                 Dialogs.showErrorAlert("Error registering new logger");
-            return;
-            }catch(NumberFormatException ex){
+                return;
+            } catch (NumberFormatException ex) {
                 Logger.write("Error registering new logger. Wrong ID format.", LogTyps.ERROR);
-                Dialogs.showErrorAlert("Error registering new logger. Wrong ID format.\n"+
-                       "The given ID should be a String with logger ID given in HEX notation");
+                Dialogs.showErrorAlert("Error registering new logger. Wrong ID format.\n"
+                        + "The given ID should be a String with logger ID given in HEX notation");
                 return;
             }
-            if(idLogger !=-1){
+            if (idLogger != -1) {
                 ObservableList<Chip> items = chipsList.getItems();
                 Chip chip = new Chip(Long.toHexString(idLogger));
                 addMessage(chip, "Registered.");
                 items.add(chip);
             }
-            
+
         }
     }
-    
+
     @FXML
     private void registerAutoActionHandler(ActionEvent event) {
         //TODO: Do actual registering logger
@@ -218,20 +216,20 @@ public class MainFormController implements Initializable {
             idLog = hubC.autoRegisterLogger();
         } catch (MeteringSessionException ex) {
             Logger.write("Error auto registering new logger.", LogTyps.ERROR);
-                Dialogs.showErrorAlert("Error registering new logger.\n"+
-                       "Make sure that the logger is placed correctly on the Hub device.\n"+
-                       "Logger autoregistration is known to fail due to unsure IR connection.\n"+
-                       "Loggers tend to get stuck for prolonged periods");
-                return;
+            Dialogs.showErrorAlert("Error registering new logger.\n"
+                    + "Make sure that the logger is placed correctly on the Hub device.\n"
+                    + "Logger autoregistration is known to fail due to unsure IR connection.\n"
+                    + "Loggers tend to get stuck for prolonged periods");
+            return;
         }
-        if(idLog !=-1){
+        if (idLog != -1) {
             ObservableList<Chip> items = chipsList.getItems();
             Chip chip = new Chip(Long.toHexString(idLog));
             addMessage(chip, "Registered.");
             items.add(chip);
         }
     }
-    
+
     @FXML
     private void unregisterActionHandler(ActionEvent event) {
         int index = chipsList.getSelectionModel().getSelectedIndex();
@@ -239,13 +237,13 @@ public class MainFormController implements Initializable {
             showNoChipsSelectedAlert();
             return;
         }
-        
-        HubControl hubC; 
+
+        HubControl hubC;
         try {
             hubC = HubHandler.getInstance().getHubControl();
             ObservableList<Chip> items = chipsList.getItems();
             Chip chip = items.get(index);
-            hubC.unregisterLogger(Long.parseLong(chip.getName(),16));
+            hubC.unregisterLogger(Long.parseLong(chip.getName(), 16));
             items.remove(index);
             addMessage(chip, "Unregistered.");
         } catch (MeteringSessionException ex) {
@@ -256,13 +254,14 @@ public class MainFormController implements Initializable {
     @FXML
     private void readActionHandler(ActionEvent event) {
         Task<Void> task = new Task<Void>() {
-            @Override public Void call() throws MeteringSessionException {
+            @Override
+            public Void call() throws MeteringSessionException {
                 HubControl hubC = HubHandler.getInstance().getHubControl();
                 hubC.readPacketsLoggerFlash();
                 return null;
             }
         };
-        
+
         ProgressForm test = new ProgressForm("Reading from Logger flash memory with IR connection");
         task.setOnRunning((e) -> test.getDialogStage().show());
         task.setOnSucceeded((e) -> {
@@ -277,20 +276,20 @@ public class MainFormController implements Initializable {
                 java.util.logging.Logger.getLogger(MainFormController.class.getName()).log(Level.SEVERE, null, ex);
             } catch (ExecutionException ex) {
                 System.out.println("bla bla bla");
-                MeteringSessionException msEx =(MeteringSessionException) ex.getCause();
+                MeteringSessionException msEx = (MeteringSessionException) ex.getCause();
                 msEx.printStackTrace();
             }
-            addMessage("Operation failed");  
+            addMessage("Operation failed");
         });
         new Thread(task).start();
     }
-    
+
     @FXML
-    private void closeActionHandler(ActionEvent event){
+    private void closeActionHandler(ActionEvent event) {
         Stage stage = (Stage) messageTable.getScene().getWindow();
         stage.close();
     }
-    
+
     @FXML
     private void aboutActionHandler(ActionEvent event) {
         Alert alert = new Alert(AlertType.INFORMATION);
@@ -299,18 +298,19 @@ public class MainFormController implements Initializable {
         alert.setContentText("Poznań University of Technology ©2015");
         alert.showAndWait();
     }
-    
+
     @FXML
     private void readFromHubHandler(ActionEvent event) {
-        
+
         Task<Void> task = new Task<Void>() {
-            @Override public Void call() throws MeteringSessionException {
+            @Override
+            public Void call() throws MeteringSessionException {
                 HubControl hubC = HubHandler.getInstance().getHubControl();
                 hubC.readPacketsHubFlash();
                 return null;
             }
         };
-        
+
         ProgressForm test = new ProgressForm("Reading from Hub device flash memory");
         task.setOnRunning((e) -> test.getDialogStage().show());
         task.setOnSucceeded((e) -> {
@@ -325,54 +325,57 @@ public class MainFormController implements Initializable {
                 java.util.logging.Logger.getLogger(MainFormController.class.getName()).log(Level.SEVERE, null, ex);
             } catch (ExecutionException ex) {
                 System.out.println("bla bla bla");
-                MeteringSessionException msEx =(MeteringSessionException) ex.getCause();
+                MeteringSessionException msEx = (MeteringSessionException) ex.getCause();
                 msEx.printStackTrace();
             }
-            addMessage("Operation failed");   
+            addMessage("Operation failed");
         });
         new Thread(task).start();
-        
-        
+
     }
-    
+
     @FXML
     private void radioSessionHandler(ActionEvent event) {
         boolean ret = toggleRadioSession();
-        if(ret) addMessage("Radio session recieving is now: " + (radioSessionToggle.isSelected() ? "on." : "off."));
-        if(!ret) Logger.write("Changing the state of radio session failed", LogTyps.ERROR);
+        if (ret) {
+            addMessage("Radio session recieving is now: " + (radioSessionToggle.isSelected() ? "on." : "off."));
+        }
+        if (!ret) {
+            Logger.write("Changing the state of radio session failed", LogTyps.ERROR);
+        }
     }
-    
+
     private void addMessage(Chip chip, String message) {
         addMessage(chip.toString() + ": " + message);
     }
-    
+
     private boolean toggleRadioSession() {
-        
+
         HubControl hubC;
         boolean isToggled = false;
         try {
             hubC = HubHandler.getInstance().getHubControl();
-       
-            if(!isRadioSessionActive){
+
+            if (!isRadioSessionActive) {
                 hubC.startRecievingInRadioSession();
                 isRadioSessionActive = true;
-            }else{
-               hubC.stopRecievingInRadioSession();
-               isRadioSessionActive = false;
+            } else {
+                hubC.stopRecievingInRadioSession();
+                isRadioSessionActive = false;
             }
             isToggled = true;
-         } catch (MeteringSessionException ex) {
+        } catch (MeteringSessionException ex) {
         }
 
         radioSessionMenuItem.setSelected(isRadioSessionActive);
         radioSessionToggle.setSelected(isRadioSessionActive);
         return isToggled;
     }
-    
+
     private void addMessage(String message) {
         Logger.write(message, LogTyps.LOG);
     }
-    
+
     private void showNoChipsSelectedAlert() {
         Dialogs.showInfoAlert("No loggers selected");
     }
@@ -394,9 +397,7 @@ public class MainFormController implements Initializable {
                 return null;
             }
         }
-
         Session localDBSession = new Session(ldbm, true);
         return localDBSession;
-
     }
 }

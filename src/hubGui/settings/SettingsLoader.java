@@ -5,7 +5,6 @@
  */
 package hubGui.settings;
 
-import hubLibrary.meteringcomreader.Hub;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -49,8 +48,15 @@ public class SettingsLoader {
         return settings;
     }
 
-    public static String getHubAuthKey(String hubHexId) {
-        return "1";
-        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public static String getHubAuthKey(String hubHexId) throws Exception {
+        Settings s = loadOrCreateEmpty();
+        for(HubConfig hc : s.getHubConfigs()){
+            if(hc.getId() != null && hubHexId != null){
+                if (hc.getId().equals(hubHexId)) {
+                    return hc.getKey();
+                }
+            }
+        }
+        return null;
     }
 }
