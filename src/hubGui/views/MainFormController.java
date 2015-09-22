@@ -339,11 +339,18 @@ public class MainFormController implements Initializable {
             } catch (InterruptedException ex) {
                 java.util.logging.Logger.getLogger(MainFormController.class.getName()).log(Level.SEVERE, null, ex);
             } catch (ExecutionException ex) {
-                System.out.println("bla bla bla");
                 MeteringSessionException msEx =(MeteringSessionException) ex.getCause();
                 msEx.printStackTrace();
+                Dialogs.showErrorAlert("Error reading from Hub flash memory.\n"+
+                       "Check connection with the device before clicking OK.");
+                try {
+                    HubControl hubC = HubHandler.getInstance().getHubControl();
+                    hubC.restartAll();
+                } catch (MeteringSessionException ex1) {
+                    java.util.logging.Logger.getLogger(MainFormController.class.getName()).log(Level.SEVERE, null, ex1);
+                }
             }
-            addMessage("Operation failed");   
+            addMessage("Reading from Hub device flash memory failed");   
         });
         new Thread(task).start();
         
