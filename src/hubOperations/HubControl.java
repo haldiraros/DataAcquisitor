@@ -18,6 +18,7 @@ package hubOperations;
 
 import hubGui.logging.LogTyps;
 import hubLibrary.meteringcomreader.DataPacket;
+import hubLibrary.meteringcomreader.DataPacketDTO;
 import hubLibrary.meteringcomreader.Hub;
 import hubLibrary.meteringcomreader.HubConnection;
 import hubLibrary.meteringcomreader.HubFlashSession;
@@ -91,7 +92,7 @@ public class HubControl {
     }
     
     public String getHubId(){
-        return hub.getHubHexId();
+        return hub.getHubHexId(); //TODO: Skasować pierwsze 4 bity
     }
     
 
@@ -194,6 +195,14 @@ public class HubControl {
     public void processDataPacketTemps (DataPacket pck){ //TODO: change to putting in DB whtn it's done
         System.out.println(pck);
         //System.out.println("Paczka danych: " +DatatypeConverter.printHexBinary(pck.getOrgData()));
+
+//Wydobywanie danych :        
+//        DataPacketDTO test =pck.generateDTO();
+//        pck.getLoggerHexId();  //usunąć pierwsze 4 znaki
+//        test.getMeasurmentTimeStart();
+//        test.getMeasurmentPeriod();
+//        test.getTemperatures();
+        
         
     }
     
