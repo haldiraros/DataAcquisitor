@@ -16,24 +16,21 @@ public class Datagram {
     private BigDecimal id;
     private final String data;
     private boolean dataSend;
-
-     public Datagram(BigDecimal id, String data, boolean dataSend) {
+    private final String hubId;
+    
+     public Datagram(BigDecimal id, String data, String hubId, boolean dataSend) {
         this.id = id;
         this.data = data;
         this.dataSend = dataSend;
+        this.hubId = hubId;
     }
 
-    public Datagram(BigDecimal id, String data) {
-        this.id = id;
-        this.data = data;
-        this.dataSend = false;
+    public Datagram(BigDecimal id, String data, String hubId) {
+        this(id,data,hubId,false);
     }
 
-
-    public Datagram(String data) {
-        this.id = null;
-        this.data = data;
-        this.dataSend = false;
+    public Datagram(String data, String hubId) {
+        this(null,data,hubId,false);
     }
 
     public boolean isDataSend() {
@@ -62,6 +59,13 @@ public class Datagram {
 
     public String getData() {
         return data;
+    }
+
+    /**
+     * @return the hubId
+     */
+    public String getHubId() {
+        return hubId;
     }
 
 }

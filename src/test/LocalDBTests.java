@@ -7,8 +7,6 @@ package test;
 
 import hubGui.logging.LogTyps;
 import hubGui.logging.Logger;
-import java.math.BigDecimal;
-import java.sql.SQLException;
 import localDB.menagers.DatagramMenager;
 import localDB.menagers.LocalDataBaseMenager;
 import project.data.Datagram;
@@ -45,7 +43,7 @@ public class LocalDBTests {
             }
         }
         Session localDBSession = new Session(ldbm, true);
-        localDBSession.getLocalDataBaseMenager().getDatagramMenager().createDatagram(new Datagram("lol"));
+        localDBSession.getLocalDataBaseMenager().getDatagramMenager().createDatagram(new Datagram("lol","hub_id"));
         
         testDatagram(localDBSession.getLocalDataBaseMenager().getDatagramMenager());
         
@@ -57,7 +55,7 @@ public class LocalDBTests {
 
     private static void testDatagram(DatagramMenager dm) throws Exception {
         if (dm != null) {
-            Datagram test = new Datagram("testowy");
+            Datagram test = new Datagram("testowy","hub_ID");
             dm.createDatagram(test);
             dm.updateDatagram(test, "ERROR?");
             Datagram test2 = dm.getDatagram(test.getId());

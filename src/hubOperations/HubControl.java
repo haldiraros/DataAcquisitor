@@ -191,7 +191,7 @@ public class HubControl {
         System.out.println("Paczka danych: " +DatatypeConverter.printHexBinary(pck.getOrgData()));
         hubGui.logging.Logger.write("Paczka danych: " +DatatypeConverter.printHexBinary(pck.getOrgData()));
         //System.out.println(pck);
-        dbSession.addDatagram(new Datagram(DatatypeConverter.printHexBinary(pck.getOrgData())));
+        dbSession.addDatagram(new Datagram(DatatypeConverter.printHexBinary(pck.getOrgData()),hub.getHubHexId()));
         
     }
     public void processDataPacketTemps (DataPacket pck){ //TODO: all the packet processing!!

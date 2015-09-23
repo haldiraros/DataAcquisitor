@@ -35,9 +35,10 @@ public class DatagramMenager {
             throw new SQLException("Storing Datagram failed, Datagram has ID:" + datagram.getId().toPlainString());
         } else {
             /*LOG*/ System.out.println("Start: createDatagram");
-            String sql = "INSERT INTO DATAGRAMS(MESSAGE) VALUES (?)";
+            String sql = "INSERT INTO DATAGRAMS(MESSAGE,HUB_ID) VALUES (?,?)";
             PreparedStatement ps = getConnection().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, datagram.getData());
+            ps.setString(2, datagram.getHubId());
             if (ps.executeUpdate() == 0) {
                 throw new SQLException("Storing Datagram failed, no rows inserted.");
             }
@@ -70,9 +71,10 @@ public class DatagramMenager {
             throws ClassNotFoundException, SQLException {
         /*LOG*/ System.out.println("Start: getDatagram, with ID: " + id.toPlainString());
         Datagram datagram = null;
-        String sql = "select dt.id"
-                + "        , dt.MESSAGE"
-                + "        , stat.is_send "
+        String sql = "select dt.id          ID"
+                + "        , dt.MESSAGE     MESSAGE"
+                + "        , dt.HUB_ID      HUB_ID"
+                + "        , stat.is_send   IS_SEND"
                 + "     from Datagrams dt"
                 + "        , Datagram_statistics stat "
                 + "    where stat.datagram_id = dt.id "
@@ -81,7 +83,7 @@ public class DatagramMenager {
         ps.setBigDecimal(1, id);
         ResultSet rs = ps.executeQuery();
         if (rs.next()) {
-            datagram = new Datagram( rs.getBigDecimal(1), rs.getString(2), rs.getBoolean(3));
+            datagram = new Datagram(rs.getBigDecimal("ID"), rs.getString("MESSAGE"), rs.getString("HUB_ID"), rs.getBoolean("IS_SEND"));
         }
         rs.close();
         ps.close();
@@ -95,6 +97,7 @@ public class DatagramMenager {
         Set<Datagram> datagrams = new HashSet<Datagram>();
         String sql = "select id"
                 + "        , MESSAGE "
+                + "        , HUB_ID"
                 + "     from Datagrams "
                 + "    where id in "
                 + "      (select datagram_id "
@@ -103,7 +106,7 @@ public class DatagramMenager {
         PreparedStatement ps = getConnection().prepareStatement(sql);
         ResultSet rs = ps.executeQuery();
         while (rs.next()) {
-            datagrams.add(new Datagram(rs.getBigDecimal("id"), rs.getString("MESSAGE")));
+            datagrams.add(new Datagram(rs.getBigDecimal("id"), rs.getString("MESSAGE"), rs.getString("HUB_ID")));
         }
         rs.close();
         ps.close();
@@ -206,8 +209,9 @@ public class DatagramMenager {
             throws ClassNotFoundException, SQLException {
         /*LOG*/ System.out.println("Start: getDatagramsToRemove");
         Set<Datagram> datagrams = new HashSet<Datagram>();
-        String sql = "select id"
+        String sql = "select ID"
                 + "        , MESSAGE "
+                + "        , HUB_ID"
                 + "     from Datagrams "
                 + "    where id in "
                 + "      (select datagram_id "
@@ -216,7 +220,7 @@ public class DatagramMenager {
         PreparedStatement ps = getConnection().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
         ResultSet rs = ps.executeQuery();
         while (rs.next()) {
-            datagrams.add(new Datagram(rs.getBigDecimal("id"), rs.getString("MESSAGE"), true));
+            datagrams.add(new Datagram(rs.getBigDecimal("ID"), rs.getString("MESSAGE"), rs.getString("HUB_ID"), true));
         }
         rs.close();
         ps.close();
