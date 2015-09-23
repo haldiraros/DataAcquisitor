@@ -22,6 +22,7 @@ import gnu.io.NoSuchPortException;
 import gnu.io.PortInUseException;
 import gnu.io.SerialPort;
 import gnu.io.UnsupportedCommOperationException;
+import hubLibrary.meteringcomreader.exceptions.MeteringSessionDeviceBusyException;
 import hubLibrary.meteringcomreader.exceptions.MeteringSessionException;
 import hubLibrary.meteringcomreader.exceptions.MeteringSessionNoMoreDataException;
 import hubLibrary.meteringcomreader.exceptions.MeteringSessionSPException;
@@ -895,8 +896,15 @@ public class HubConnection implements Runnable{
      * @throws MeteringSessionException 
      */
     public long getLoggerId() throws MeteringSessionException{
-        sendCommand(Utils.getLoggerIdReq);
-        byte[] data = receiveAck(Utils.getLoggerIdReq);
+        
+        byte[] data;
+        try{
+            sendCommand(Utils.getLoggerIdReq);
+            data= receiveAck(Utils.getLoggerIdReq);
+        }catch(MeteringSessionDeviceBusyException e){
+            sendCommand(Utils.getLoggerIdReq);
+            data = receiveAck(Utils.getLoggerIdReq); //single retry!
+        }
         return Utils.bytes2long(data, 4);
     }
     
