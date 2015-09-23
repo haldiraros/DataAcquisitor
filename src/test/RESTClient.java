@@ -10,7 +10,6 @@ package test;
  * @author hp
  */
 import REST.RestMenager;
-import project.data.Datagram;
 
 public class RESTClient {
 
@@ -18,7 +17,7 @@ public class RESTClient {
         RestMenager mg = new RestMenager();
         //Marcin B. Zmieniłem parę rzeczy w RESTManager i nie trzyma samego huba już, w razie co można zmienić potem....
         //mg.setHub(new Hub(100, "LOL"));
-        mg.sendDatagram(new Datagram("ALA"));
+        //mg.sendDatagram(new Datagram("ALA"));
         
     }
 }

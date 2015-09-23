@@ -16,10 +16,9 @@
  */
 
 package hubLibrary.meteringcomreader;
-import hubLibrary.meteringcomreader.exceptions.MeteringSessionException;
-import java.util.HashMap;
-import hubLibrary.meteringcomreader.exceptions.MeteringSessionEmptyMemoryException;
 import hubLibrary.meteringcomreader.exceptions.MeteringSessionDeviceBusyException;
+import hubLibrary.meteringcomreader.exceptions.MeteringSessionEmptyMemoryException;
+import hubLibrary.meteringcomreader.exceptions.MeteringSessionException;
 import hubLibrary.meteringcomreader.exceptions.MeteringSessionHubInternalError;
 import hubLibrary.meteringcomreader.exceptions.MeteringSessionInvalidParametersException;
 import hubLibrary.meteringcomreader.exceptions.MeteringSessionNoMoreDataException;
@@ -29,12 +28,8 @@ import hubLibrary.meteringcomreader.exceptions.MeteringSessionOutOfMemoryExcepti
 import hubLibrary.meteringcomreader.exceptions.MeteringSessionTimeoutException;
 import hubLibrary.meteringcomreader.exceptions.MeteringSessionUnknowCommand;
 import hubLibrary.meteringcomreader.exceptions.MeteringSessionUnsuportedCommandException;
+import java.util.HashMap;
 
-/**
- * Opisuje obiekt odpowiedź z koncentratora za pomocą pól <code>resp</code> i <code>data</code>,
- * zawiera również rozmiar parametrów odpowiedzi w <code>resSizes</code>.
- * @author Juliusz Jezierski
- */
 
 
 public class ComResp {
@@ -113,6 +108,8 @@ public class ComResp {
             if (sizeInt==null)
                 throw new MeteringSessionException("Unexpected response: 0x"+Integer.toHexString(res));
         }
+        else if(res==0x200d)                 //if oldest part is error code
+             return 4;       
         else if(res>0x0FFF)                 //if oldest part is error code
              return 0;       
         

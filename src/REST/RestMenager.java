@@ -36,17 +36,19 @@ public class RestMenager {
     private HubControl hubC;
 
     public RestMenager() {
+        this(null);
     }
 
-    public RestMenager(HubControl hub) {
-        this.hubC = hub;
+    public RestMenager(HubControl hubC) {
+        this.hubC = hubC;
+        setupDefaultURLS();
     }
 
     private void setupDefaultURLS() {
-        measurementsURL = "/bluconsole/1.0/resources/measurementbatch";
-        hubstatusURL = "/bluconsole/1.0/resources/hubstatus";
-        hubcommandURL = "/bluconsole/1.0/resources/hubcommand";
-        hubcommandstatusURL = "/bluconsole/1.0/resources/hubcommandstatus";
+        measurementsURL = "/bluconsolerest/1.0/resources/measurementbatch";
+        hubstatusURL = "/bluconsolerest/1.0/resources/hubstatus";
+        hubcommandURL = "/bluconsolerest/1.0/resources/hubcommand";
+        hubcommandstatusURL = "/bluconsolerest/1.0/resources/hubcommandstatus";
     }
 
     private JSONObject getHubLogInfo() throws JSONException {
@@ -67,19 +69,27 @@ public class RestMenager {
         System.out.println("\nJSON Object: " + message);
         // Step2: Now pass JSON File Data to REST Service
         JSONObject response = sendToServer(message, SettingsLoader.load().getRestUrl() + measurementsURL);
-        String status = response.getString("errCode");
-        if (NoErrorResponse.equals(status)) {
+        int status = response.getInt("errCode");
+        if (status == 0) {
             datagram.setDataSend(true);
         }
-        return status;
+        return Integer.toString(status);
     }
 
     private JSONArray getDatagramInfos(Datagram datagram) throws JSONException {
-        JSONObject data = new JSONObject();
         JSONArray datas = new JSONArray();
-        data.put("frame", datagram.getData());
-        datas.put(data);
+        datas.put(datagram.getData());
         return datas;
+    }
+
+    public String ReadBigStringIn(BufferedReader buffIn) throws IOException {
+        StringBuilder everything = new StringBuilder();
+        String line;
+        while ((line = buffIn.readLine()) != null) {
+            everything.append(line);
+        }
+        System.out.println(everything.toString());
+        return everything.toString();
     }
 
     private JSONObject sendToServer(JSONObject message, String service) throws IOException, JSONException {
@@ -102,7 +112,7 @@ public class RestMenager {
         System.out.println("Creating BufferedReader");
         BufferedReader in = new BufferedReader(isr);
         System.out.println("Creating JSONObject response");
-        JSONObject response = new JSONObject(isr.toString());
+        JSONObject response = new JSONObject(ReadBigStringIn(in));
         in.close();
         return response;
     }

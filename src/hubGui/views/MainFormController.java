@@ -222,7 +222,7 @@ public class MainFormController implements Initializable {
                     + "Loggers tend to get stuck for prolonged periods");
             try {
                 hubC = HubHandler.getInstance().getHubControl();
-                hubC.restartAll();
+                //hubC.restartAll();
             } catch (MeteringSessionException ex1) {
                 ;
             }
@@ -289,7 +289,7 @@ public class MainFormController implements Initializable {
                         + "Loggers tend to get stuck for prolonged periods");
                 try {
                     HubControl hubC = HubHandler.getInstance().getHubControl();
-                    hubC.restartAll();
+                    //hubC.restartAll();
                 } catch (MeteringSessionException ex1) {
                     java.util.logging.Logger.getLogger(MainFormController.class.getName()).log(Level.SEVERE, null, ex1);
                 }
@@ -345,7 +345,7 @@ public class MainFormController implements Initializable {
                         + "Check connection with the device before clicking OK.");
                 try {
                     HubControl hubC = HubHandler.getInstance().getHubControl();
-                    hubC.restartAll();
+                    //hubC.restartAll();
                 } catch (MeteringSessionException ex1) {
                     java.util.logging.Logger.getLogger(MainFormController.class.getName()).log(Level.SEVERE, null, ex1);
                 }

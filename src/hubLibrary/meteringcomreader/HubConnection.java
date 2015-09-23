@@ -17,11 +17,14 @@
 
 package hubLibrary.meteringcomreader;
 
-import hubLibrary.meteringcomreader.exceptions.MeteringSessionSPException;
+import gnu.io.CommPortIdentifier;
+import gnu.io.NoSuchPortException;
+import gnu.io.PortInUseException;
+import gnu.io.SerialPort;
+import gnu.io.UnsupportedCommOperationException;
 import hubLibrary.meteringcomreader.exceptions.MeteringSessionException;
-import gnu.io.*;
 import hubLibrary.meteringcomreader.exceptions.MeteringSessionNoMoreDataException;
-import java.io.BufferedInputStream;
+import hubLibrary.meteringcomreader.exceptions.MeteringSessionSPException;
 import java.io.BufferedOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -29,7 +32,6 @@ import java.io.OutputStream;
 import java.sql.Timestamp;
 import java.util.Enumeration;
 import java.util.TooManyListenersException;
-import java.util.logging.Level;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -679,8 +681,9 @@ public class HubConnection implements Runnable{
      */
     synchronized byte[] receiveAck(int ack) throws MeteringSessionException {
         byte[] ret = null;
+        ComResp rs =null;
         try{
-            ComResp rs = crd.getNextResp();
+            rs = crd.getNextResp();
             rs.receiveAck(ack); //TODO:P sprawdzić testowanie
             ret = rs.receiveData();
         }catch(MeteringSessionNoMoreDataException e){

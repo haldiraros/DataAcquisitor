@@ -91,7 +91,7 @@ public class Session {
                 System.out.println(e);
             }
         } else {
-            Logger.write("No datagrams send - REST Menager not Found in Session", LogTyps.WARNING);
+            Logger.write("No datagrams send - REST Manager not Found in Session", LogTyps.WARNING);
         }
     }
 
