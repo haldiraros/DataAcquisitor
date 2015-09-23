@@ -21,6 +21,7 @@ import hubLibrary.meteringcomreader.exceptions.MeteringSessionTimeoutException;
 import hubLibrary.meteringcomreader.exceptions.MeteringSessionException;
 import java.sql.Timestamp;
 import hubLibrary.meteringcomreader.exceptions.MeteringSessionCRCException;
+import hubLibrary.meteringcomreader.exceptions.MeteringSessionDeviceBusyException;
 import hubLibrary.meteringcomreader.exceptions.MeteringSessionFlashLoggerTransException;
 import hubLibrary.meteringcomreader.exceptions.MeteringSessionNoLoggerOnHub;
 import hubLibrary.meteringcomreader.exceptions.MeteringSessionNoMoreDataException;
@@ -62,20 +63,20 @@ public class LoggerFlashSession  extends MeteringSession{
 //       catch(MeteringSessionException e){}
         
         try{
-            Thread.sleep(1000);
-            //hc.sendCommand(Utils.getIdLoggerFlashSessionReq);
-            hc.sendCommand(Utils.getLoggerIdReq);
-            Thread.sleep(1000);
-                    
-            ret=hc.receiveAck(Utils.getIdLoggerFlashSessionRes);
 
+            //hc.sendCommand(Utils.getIdLoggerFlashSessionReq);
+            try{
+                hc.sendCommand(Utils.getLoggerIdReq);        
+                ret=hc.receiveAck(Utils.getIdLoggerFlashSessionRes);
+            }catch(MeteringSessionDeviceBusyException e){
+                hc.sendCommand(Utils.getLoggerIdReq);        
+                ret=hc.receiveAck(Utils.getIdLoggerFlashSessionRes); //single retry  
+            }
             loggerId=Utils.bytes2long(ret, 4);
             lgr.debug("getIdLoggerFlashSessionRes="+Long.toHexString(loggerId));
         }
         catch(MeteringSessionTimeoutException e){
             throw new MeteringSessionNoLoggerOnHub();
-        } catch (InterruptedException ex) {
-            java.util.logging.Logger.getLogger(LoggerFlashSession.class.getName()).log(Level.SEVERE, null, ex);
         }
 /*        
         hc.sendCommand(Utils.getLoggerHardwareVerReq);

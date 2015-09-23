@@ -185,16 +185,13 @@ public class HubControl {
         hubConn.registerLogger(logID);
         return logID;
     }
-    
-    //TODO: Somehow have radio on idle loop or sth that can be broken when needed...
-    public void processDataPacketEncoded (DataPacket pck) throws Exception{ //TODO: all the packet processing!!
-        System.out.println("Paczka danych: " +DatatypeConverter.printHexBinary(pck.getOrgData()));
-        hubGui.logging.Logger.write("Paczka danych: " +DatatypeConverter.printHexBinary(pck.getOrgData()));
-        //System.out.println(pck);
-        dbSession.addDatagram(new Datagram(DatatypeConverter.printHexBinary(pck.getOrgData()),hub.getHubHexId(),null));
-        
+
+    public void processDataPacketEncoded (DataPacket pck) throws Exception{ 
+        hubGui.logging.Logger.write("Paczka danych: " +DatatypeConverter.printHexBinary(pck.getOrgData())); //TODO: Remove later
+        dbSession.addDatagram(new Datagram(DatatypeConverter.printHexBinary(pck.getOrgData()),getHubId(),null));      
     }
-    public void processDataPacketTemps (DataPacket pck){ //TODO: all the packet processing!!
+    
+    public void processDataPacketTemps (DataPacket pck){ //TODO: change to putting in DB whtn it's done
         System.out.println(pck);
         //System.out.println("Paczka danych: " +DatatypeConverter.printHexBinary(pck.getOrgData()));
         
