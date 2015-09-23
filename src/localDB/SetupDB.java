@@ -7,10 +7,8 @@ package localDB;
 
 import java.io.File;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
-import project.Config;
 
 /**
  *
@@ -22,6 +20,7 @@ public class SetupDB {
             = "CREATE TABLE Datagrams( "
             + " id             integer        NOT NULL  PRIMARY KEY AUTOINCREMENT"
             + ",MESSAGE        varchar(128)   NOT NULL"
+            + ",HUB_ID         varchar(128)   NOT NULL"
             + ")";
 
     private final String createDatagramsStatisticsTable

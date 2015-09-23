@@ -186,11 +186,12 @@ public class HubControl {
         return logID;
     }
     
+
     public void processDataPacketEncoded (DataPacket pck) throws Exception{ 
         hubGui.logging.Logger.write("Paczka danych: " +DatatypeConverter.printHexBinary(pck.getOrgData())); //TODO: Remove later
-        dbSession.addDatagram(new Datagram(DatatypeConverter.printHexBinary(pck.getOrgData())));
-        
+        dbSession.addDatagram(new Datagram(DatatypeConverter.printHexBinary(pck.getOrgData()),getHubId()));      
     }
+    
     public void processDataPacketTemps (DataPacket pck){ //TODO: change to putting in DB whtn it's done
         System.out.println(pck);
         //System.out.println("Paczka danych: " +DatatypeConverter.printHexBinary(pck.getOrgData()));

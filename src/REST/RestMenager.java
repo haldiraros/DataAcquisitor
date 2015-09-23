@@ -9,30 +9,13 @@ package REST;
  *
  * @author hp
  */
-import hubGui.settings.SettingsLoader;
-import static hubGui.settings.SettingsLoader.getHubAuthKey;
+import REST.operations.RestDatagramOperations;
 import hubOperations.HubControl;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.net.URL;
-import java.net.URLConnection;
-import java.util.Collection;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
+import java.util.Set;
 import project.data.Datagram;
 
 public class RestMenager {
 
-    private String measurementsURL;
-    private String hubstatusURL;
-    private String hubcommandURL;
-    private String hubcommandstatusURL;
-    private final static String NoErrorResponse = "0";
     private HubControl hubC;
 
     public RestMenager() {
@@ -41,161 +24,8 @@ public class RestMenager {
 
     public RestMenager(HubControl hubC) {
         this.hubC = hubC;
-        setupDefaultURLS();
     }
-
-    private void setupDefaultURLS() {
-        measurementsURL = "/bluconsolerest/1.0/resources/measurementbatch";
-        hubstatusURL = "/bluconsolerest/1.0/resources/hubstatus";
-        hubcommandURL = "/bluconsolerest/1.0/resources/hubcommand";
-        hubcommandstatusURL = "/bluconsolerest/1.0/resources/hubcommandstatus";
-    }
-
-    private JSONObject getHubLogInfo() throws JSONException {
-        JSONObject header = new JSONObject();
-        header.put("hubId", hubC.getHubId());
-        try {
-            header.put("authKey", getHubAuthKey(hubC.getHubId()));
-        } catch (Exception ex) {
-            Logger.getLogger(RestMenager.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return header;
-    }
-
-    public String sendDatagram(Datagram datagram) throws Exception {
-        // Step1: Prepare JSON data
-        JSONObject message = getHubLogInfo();
-        message.put("frames", getDatagramInfos(datagram));
-        System.out.println("\nJSON Object: " + message);
-        // Step2: Now pass JSON File Data to REST Service
-        JSONObject response = sendToServer(message, SettingsLoader.load().getRestUrl() + measurementsURL);
-        int status = response.getInt("errCode");
-        if (status == 0) {
-            datagram.setDataSend(true);
-        }
-        return Integer.toString(status);
-    }
-
-    private JSONArray getDatagramInfos(Datagram datagram) throws JSONException {
-        JSONArray datas = new JSONArray();
-        datas.put(datagram.getData());
-        return datas;
-    }
-
-    public String ReadBigStringIn(BufferedReader buffIn) throws IOException {
-        StringBuilder everything = new StringBuilder();
-        String line;
-        while ((line = buffIn.readLine()) != null) {
-            everything.append(line);
-        }
-        System.out.println(everything.toString());
-        return everything.toString();
-    }
-
-    private JSONObject sendToServer(JSONObject message, String service) throws IOException, JSONException {
-        URL url = new URL(service);
-        System.out.println("Creating connection");
-        URLConnection connection = url.openConnection();
-        connection.setDoOutput(true);
-        connection.setRequestProperty("Content-Type", "application/json");
-        connection.setConnectTimeout(5000);
-        connection.setReadTimeout(5000);
-        System.out.println("Creating OutputStreamWriter");
-        OutputStreamWriter out = new OutputStreamWriter(connection.getOutputStream());
-        System.out.println("Writng Message");
-        out.write(message.toString());
-        System.out.println("out.close");
-        out.close();
-
-        System.out.println("Creating InputStreamReader");
-        InputStreamReader isr = new InputStreamReader(connection.getInputStream());
-        System.out.println("Creating BufferedReader");
-        BufferedReader in = new BufferedReader(isr);
-        System.out.println("Creating JSONObject response");
-        JSONObject response = new JSONObject(ReadBigStringIn(in));
-        in.close();
-        return response;
-    }
-
-    public String sendDatagrams(Collection<Datagram> datagrams) {
-        try {
-            // Step1: Prepare JSON data
-            JSONObject message = getHubLogInfo();
-            message.put("frames", getDatagramsInfos(datagrams));
-            System.out.println("\nJSON Object: " + message);
-            // Step2: Now pass JSON File Data to REST Service
-            JSONObject response = sendToServer(message, SettingsLoader.load().getRestUrl() + measurementsURL);
-            String status = response.getString("errCode");
-            if (NoErrorResponse.equals(status)) {
-                for (Datagram d : datagrams) {
-                    d.setDataSend(true);
-                }
-            }
-            return status;
-        } catch (Exception e) {
-            System.out.println("\nError while calling REST Service");
-            System.out.println(e);
-            return e.getMessage();
-        }
-    }
-
-    private JSONArray getDatagramsInfos(Collection<Datagram> datagrams) throws JSONException {
-        JSONArray datas = new JSONArray();
-        for (Datagram d : datagrams) {
-            JSONObject data = new JSONObject();
-            data.put("frame", d.getData());
-            datas.put(data);
-        }
-        return datas;
-    }
-
-    public JSONObject sendHubStatus() throws JSONException, IOException, Exception {
-        // Step1: Prepare JSON data
-        JSONObject status = getHubLogInfo();
-        status.put("firmwareVer", "1.0");
-        status.put("hardwareVer", "1.0");
-        status.put("dateTime", "FFFF");
-        JSONObject message = new JSONObject();
-        message.put("status", status);
-        System.out.println("\nJSON Object: " + message);
-        // Step2: Now pass JSON File Data to REST Service
-        return sendToServer(message, SettingsLoader.load().getRestUrl() + hubstatusURL);
-    }
-
-    public JSONObject getHubCommand() throws JSONException, IOException, Exception {
-        // Step1: Prepare JSON data
-        JSONObject message = getHubLogInfo();
-        System.out.println("\nJSON Object: " + message);
-        // Step2: Now pass JSON File Data to REST Service
-        return sendToServer(message, SettingsLoader.load().getRestUrl() + hubcommandURL);
-    }
-
-    public JSONObject sendHubCommandStatus(Long commandId, String commandStatus) throws JSONException, IOException, Exception {
-        // Step1: Prepare JSON data
-        JSONObject message = getHubLogInfo();
-        JSONObject command = new JSONObject();
-        command.put("id", commandId);
-        command.put("status", commandStatus);
-        message.put("command", command);
-        System.out.println("\nJSON Object: " + message);
-        // Step2: Now pass JSON File Data to REST Service
-        return sendToServer(message, SettingsLoader.load().getRestUrl() + hubcommandstatusURL);
-    }
-
-    /**
-     * @return the measurementsURL
-     */
-    public String getMeasurementsURL() {
-        return measurementsURL;
-    }
-
-    /**
-     * @param measurementsURL the measurementsURL to set
-     */
-    public void setMeasurementsURL(String measurementsURL) {
-        this.measurementsURL = measurementsURL;
-    }
-
+    
     /**
      * @return the hub
      */
@@ -210,46 +40,14 @@ public class RestMenager {
         this.hubC = hub;
     }
 
-    /**
-     * @return the hubstatusURL
-     */
-    public String getHubstatusURL() {
-        return hubstatusURL;
+    public DatagramsSendStatistics sendDatagrams(Set<Datagram> datagrams) {
+        RestDatagramOperations rdo = new RestDatagramOperations();
+        return rdo.sendDatagrams(datagrams);
     }
 
-    /**
-     * @param hubstatusURL the hubstatusURL to set
-     */
-    public void setHubstatusURL(String hubstatusURL) {
-        this.hubstatusURL = hubstatusURL;
-    }
-
-    /**
-     * @return the hubcommandURL
-     */
-    public String getHubcommandURL() {
-        return hubcommandURL;
-    }
-
-    /**
-     * @param hubcommandURL the hubcommandURL to set
-     */
-    public void setHubcommandURL(String hubcommandURL) {
-        this.hubcommandURL = hubcommandURL;
-    }
-
-    /**
-     * @return the hubcommandstatusURL
-     */
-    public String getHubcommandstatusURL() {
-        return hubcommandstatusURL;
-    }
-
-    /**
-     * @param hubcommandstatusURL the hubcommandstatusURL to set
-     */
-    public void setHubcommandstatusURL(String hubcommandstatusURL) {
-        this.hubcommandstatusURL = hubcommandstatusURL;
+    public DatagramsSendStatistics sendDatagram(Datagram datagram) throws Exception {
+        RestDatagramOperations rdo = new RestDatagramOperations();
+        return rdo.sendDatagram(datagram);
     }
 
 }
