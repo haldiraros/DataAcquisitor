@@ -57,7 +57,8 @@ public class LocalDBTests {
         if (dm != null) {
             Datagram test = new Datagram("testowy","hub_ID");
             dm.createDatagram(test);
-            dm.updateDatagram(test, "ERROR?");
+            test.setNewErrorMessage("error");
+            dm.updateDatagram(test);
             Datagram test2 = dm.getDatagram(test.getId());
             if (!test.getData().equals(test2.getData())) {
                 Logger.write("ERROR while comparing datagram: test:[" + test.getData() + "];test2:[" + test2.getData() + "]", LogTyps.ERROR);

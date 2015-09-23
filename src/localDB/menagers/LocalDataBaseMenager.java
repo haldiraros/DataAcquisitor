@@ -5,7 +5,6 @@
  */
 package localDB.menagers;
 
-import java.io.File;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -13,7 +12,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Set;
 import localDB.SetupDB;
-
 import project.Config;
 import project.data.Datagram;
 import project.data.Session;
@@ -94,8 +92,8 @@ public class LocalDataBaseMenager {
         getDatagramMenager().createDatagram(datagram);
     }
 
-    public void updateDatagram(Datagram datagram, String error) throws Exception {
-        getDatagramMenager().updateDatagram(datagram, error);
+    public void updateDatagram(Datagram datagram) throws Exception {
+        getDatagramMenager().updateDatagram(datagram);
     }
 
     public Set<Datagram> getDatagramsToSend() throws ClassNotFoundException, SQLException {
@@ -140,6 +138,12 @@ public class LocalDataBaseMenager {
      */
     public void setSessionMenager(SessionMenager sessionMenager) {
         this.sessionMenager = sessionMenager;
+    }
+
+    public void updateDatagrams(Set<Datagram> datagrams) throws Exception {
+        for (Datagram d : datagrams) {
+            getDatagramMenager().updateDatagram(d);
+        }
     }
 
 }

@@ -5,10 +5,12 @@
  */
 package project.data;
 
+import REST.DatagramsSendStatistics;
 import REST.RestMenager;
 import hubGui.logging.LogTyps;
 import hubGui.logging.Logger;
 import java.math.BigDecimal;
+import java.util.Set;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -64,28 +66,10 @@ public class Session {
     public void sendDatagrams() {
         if (restMenager != null) {
             try {
-                Boolean sendError = false;
-                String error = null;
-                for (Datagram datagram : localDataBaseMenager.getDatagramsToSend()) {
-                    try {
-                        error = restMenager.sendDatagram(datagram);
-                    } catch (Exception e) {
-                        error = e.getMessage();
-                        datagram.setDataSend(false);
-                        sendError = true;
-                        System.out.println("\nError while calling REST Service");
-                        System.out.println(e);
-                    }
-                    localDataBaseMenager.updateDatagram(datagram, error);
-                    if (datagram.isDataSend()) {
-                        addDatagramSend_OK();
-                    } else {
-                        addDatagramSend_Failures();
-                    }
-                    if(sendError == true){
-                        break;
-                    }
-                }
+                Set<Datagram> datagramsToSend = localDataBaseMenager.getDatagramsToSend();
+                DatagramsSendStatistics stats = restMenager.sendDatagrams(datagramsToSend);
+                localDataBaseMenager.updateDatagrams(datagramsToSend);
+                incrementCounters(stats);
                 localDataBaseMenager.updateSession(this);
             } catch (Exception e) {
                 System.out.println(e);
@@ -146,9 +130,9 @@ public class Session {
             localDataBaseMenager.updateSession(this);
             return true;
         } else {
-            String error = restMenager.sendDatagram(datagram);
-            if (!"0".equals(error)) {
-                Logger.write("Error while sending Datagram:" + error, LogTyps.ERROR);
+            DatagramsSendStatistics stats = restMenager.sendDatagram(datagram);
+            if (stats.getSendFailsCounter() > 0) {
+                Logger.write("Error while sending Datagram:" + datagram.getNewErrorMessage(), LogTyps.ERROR);
             }
             return false;
         }
@@ -292,12 +276,17 @@ public class Session {
     public void setRestMenager(RestMenager restMenager) {
         this.restMenager = restMenager;
     }
-    
-    public void stopIddleSending() throws InterruptedException{
+
+    public void stopIddleSending() throws InterruptedException {
         exec.wait();
     }
-    
-    public void resumeIddleSending() throws InterruptedException{
+
+    public void resumeIddleSending() throws InterruptedException {
         exec.notifyAll();
+    }
+
+    private void incrementCounters(DatagramsSendStatistics statistics) {
+        addDatagramsSend_OK(statistics.getSendOkCounter());
+        addDatagramsSend_Failures(statistics.getSendFailsCounter());
     }
 }

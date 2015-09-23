@@ -17,6 +17,8 @@ public class Datagram {
     private final String data;
     private boolean dataSend;
     private final String hubId;
+    private String newErrorMessage;
+    private String prevErrorMessage;
     
      public Datagram(BigDecimal id, String data, String hubId, boolean dataSend) {
         this.id = id;
@@ -66,6 +68,34 @@ public class Datagram {
      */
     public String getHubId() {
         return hubId;
+    }
+
+    /**
+     * @return the newErrorMessage
+     */
+    public String getNewErrorMessage() {
+        return newErrorMessage;
+    }
+
+    /**
+     * @param newErrorMessage the newErrorMessage to set
+     */
+    public void setNewErrorMessage(String newErrorMessage) {
+        this.newErrorMessage = newErrorMessage;
+    }
+
+    /**
+     * @return the prevErrorMessage
+     */
+    public String getPrevErrorMessage() {
+        return prevErrorMessage;
+    }
+
+    /**
+     * @param prevErrorMessage the prevErrorMessage to set
+     */
+    public void setPrevErrorMessage(String prevErrorMessage) {
+        this.prevErrorMessage = prevErrorMessage;
     }
 
 }
