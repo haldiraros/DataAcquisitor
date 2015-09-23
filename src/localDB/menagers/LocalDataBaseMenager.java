@@ -59,7 +59,8 @@ public class LocalDataBaseMenager {
     }
 
     public boolean fullTestBDExists() throws ClassNotFoundException, SQLException {
-        String tables[] = {"Datagrams", "Datagram_statistics", "Errors_log", "Session_statistics"};
+        String tables[] = {"Datagrams", "Datagram_statistics", "Datagram_Errors_log", "Session_statistics"
+                          ,"Measurements", "Measurements_Data", "Measurement_statistics", "Measurement_Errors_log"};
         for (String table : tables) {
             try {
                 String sql = "select count(*) from " + table + ";";

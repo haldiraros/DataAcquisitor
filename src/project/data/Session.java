@@ -27,6 +27,10 @@ public class Session {
     private int datagramsReceived;
     private int datagramsSend_OK;
     private int datagramsSend_Failures;
+    private int measuresEnqueued;
+    private int measuresReceived;
+    private int measuresSend_OK;
+    private int measuresSend_Failures;
     private boolean closedOnLocalBD;
 
     private LocalDataBaseMenager localDataBaseMenager;
@@ -84,6 +88,10 @@ public class Session {
         setDatagramsReceived(0);
         setDatagramsSend_OK(0);
         setDatagramsSend_Failures(0);
+        setMeasuresEnqueued(0);
+        setMeasuresReceived(0);
+        setMeasuresSend_OK(0);
+        setMeasuresSend_Failures(0);
         setClosedOnLocalBD(false);
 
         // tworzenie bez lokalnej bazy
@@ -146,6 +154,19 @@ public class Session {
             return true;
         }
         return false;
+    }
+
+    public void stopIddleSending() throws InterruptedException {
+        exec.wait();
+    }
+
+    public void resumeIddleSending() throws InterruptedException {
+        exec.notifyAll();
+    }
+
+    private void incrementCounters(DatagramsSendStatistics statistics) {
+        addDatagramsSend_OK(statistics.getSendOkCounter());
+        addDatagramsSend_Failures(statistics.getSendFailsCounter());
     }
 
     public BigDecimal getId() {
@@ -277,16 +298,80 @@ public class Session {
         this.restMenager = restMenager;
     }
 
-    public void stopIddleSending() throws InterruptedException {
-        exec.wait();
+    /**
+     * @return the measuresEnqueued
+     */
+    public int getMeasuresEnqueued() {
+        return measuresEnqueued;
     }
 
-    public void resumeIddleSending() throws InterruptedException {
-        exec.notifyAll();
+    private void setMeasuresEnqueued(int measuresEnqueued) {
+        this.measuresEnqueued = measuresEnqueued;
     }
 
-    private void incrementCounters(DatagramsSendStatistics statistics) {
-        addDatagramsSend_OK(statistics.getSendOkCounter());
-        addDatagramsSend_Failures(statistics.getSendFailsCounter());
+    private void addMeasuresEnqueued(int measuresEnqueued) {
+        setMeasuresEnqueued(getMeasuresEnqueued() + measuresEnqueued);
     }
+
+    private void addMeasuresEnqueued() {
+        this.addMeasuresEnqueued(1);
+    }
+
+    /**
+     * @return the measuresReceived
+     */
+    public int getMeasuresReceived() {
+        return measuresReceived;
+    }
+
+    private void setMeasuresReceived(int measuresReceived) {
+        this.measuresReceived = measuresReceived;
+    }
+
+    private void addMeasuresReceived(int measuresReceived) {
+        setMeasuresReceived(getMeasuresReceived() + measuresReceived);
+    }
+
+    private void addMeasuresReceived() {
+        this.addMeasuresReceived(1);
+    }
+
+    /**
+     * @return the measuresSend_OK
+     */
+    public int getMeasuresSend_OK() {
+        return measuresSend_OK;
+    }
+
+    private void setMeasuresSend_OK(int measuresSend_OK) {
+        this.measuresSend_OK = measuresSend_OK;
+    }
+
+    private void addMeasuresSend_OK(int measuresSend_OK) {
+        setMeasuresSend_OK(getMeasuresSend_OK() + measuresSend_OK);
+    }
+
+    private void addMeasuresSend_OK() {
+        this.addMeasuresSend_OK(1);
+    }
+
+    /**
+     * @return the measuresSend_Failures
+     */
+    public int getMeasuresSend_Failures() {
+        return measuresSend_Failures;
+    }
+    
+    private void setMeasuresSend_Failures(int measuresSend_Failures) {
+        this.measuresSend_Failures = measuresSend_Failures;
+    }
+
+    private void addMeasuresSend_Failures(int measuresSend_Failures) {
+        setMeasuresSend_Failures(getMeasuresSend_Failures() + measuresSend_Failures);
+    }
+
+    private void addMeasuresSend_Failures() {
+        this.addMeasuresSend_Failures(1);
+    }
+
 }

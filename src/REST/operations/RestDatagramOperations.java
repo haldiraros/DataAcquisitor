@@ -6,6 +6,7 @@
 package REST.operations;
 
 import REST.DatagramsSendStatistics;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 import org.json.JSONArray;
@@ -27,7 +28,9 @@ public class RestDatagramOperations {
         try {
             // Step1: Prepare JSON data
             JSONObject message = RestUtils.getHubLogInfo(datagram.getHubId());
-            message.put("frames", getDatagramInfos(datagram));
+            Set<Datagram> ds  = new HashSet<Datagram>();
+            ds.add(datagram);
+            fillDatagramsInfos(message, ds);
             System.out.println("\nJSON Object: " + message);
             // Step2: Now pass JSON File Data to REST Service
             JSONObject response = RestUtils.sendToServer(message, RestUtils.getMeasurementsURL());
@@ -46,12 +49,6 @@ public class RestDatagramOperations {
         return stats;
     }
 
-    private JSONArray getDatagramInfos(Datagram datagram) throws JSONException {
-        JSONArray datas = new JSONArray();
-        datas.put(datagram.getData());
-        return datas;
-    }
-
     public DatagramsSendStatistics sendDatagrams(Set<Datagram> datagrams) {
         Map<String, Set<Datagram>> mappedDatagrams = DatagramsUtils.sortDatagrams(datagrams);
         DatagramsSendStatistics stats = new DatagramsSendStatistics();
@@ -60,7 +57,7 @@ public class RestDatagramOperations {
                 try {
                     // Step1: Prepare JSON data
                     JSONObject message = RestUtils.getHubLogInfo(hubId);
-                    message.put("frames", getDatagramsInfos(datas));
+                    fillDatagramsInfos(message, datas);
                     System.out.println("\nJSON Object: " + message);
                     // Step2: Now pass JSON File Data to REST Service
                     JSONObject response = RestUtils.sendToServer(message, RestUtils.getMeasurementsURL());
@@ -87,12 +84,15 @@ public class RestDatagramOperations {
         return stats;
     }
 
-    private JSONArray getDatagramsInfos(Set<Datagram> datagrams) throws JSONException {
+    private void fillDatagramsInfos(JSONObject message, Set<Datagram> datagrams) throws JSONException {
         JSONArray datas = new JSONArray();
+        JSONArray times = new JSONArray();
         for (Datagram d : datagrams) {
             datas.put(d.getData());
+            times.put(d.getDataTimestamp());
         }
-        return datas;
+        message.put("frames", datas);
+        message.put("times", times);
     }
 
 }

@@ -41,12 +41,16 @@ public class SessionMenager {
     public void createSession(Session session) throws SQLException, Exception {
         if (session.getId() == null) {
             /*LOG*/ System.out.println("Start: createSession");
-            String sql = "INSERT INTO Session_statistics(d_enqueued,d_received,d_send_ok,d_send_failures) VALUES (?,?,?,?)";
+            String sql = "INSERT INTO Session_statistics(d_enqueued,d_received,d_send_ok,d_send_failures,m_enqueued,m_received,m_send_ok,m_send_failures) VALUES (?,?,?,?,?,?,?,?)";
             PreparedStatement cs = getConnection().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             cs.setInt(1, session.getDatagramsEnqueued());
             cs.setInt(2, session.getDatagramsReceived());
             cs.setInt(3, session.getDatagramsSend_OK());
             cs.setInt(4, session.getDatagramsSend_Failures());
+            cs.setInt(5, session.getMeasuresEnqueued());
+            cs.setInt(6, session.getMeasuresReceived());
+            cs.setInt(7, session.getMeasuresSend_OK());
+            cs.setInt(8, session.getMeasuresSend_Failures());
             if (cs.executeUpdate() == 0) {
                 throw new SQLException("Creating session failed, no rows created.");
             }
@@ -77,6 +81,10 @@ public class SessionMenager {
                     + " d_received = (?),"
                     + " d_send_ok = (?),"
                     + " d_send_failures = (?), "
+                    + " m_enqueued = (?),"
+                    + " m_received = (?),"
+                    + " m_send_ok = (?),"
+                    + " m_send_failures = (?), "
                     + " last_update = CURRENT_TIMESTAMP "
                     + " where id = (?)";
             PreparedStatement ps = getConnection().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
@@ -84,7 +92,11 @@ public class SessionMenager {
             ps.setInt(2, session.getDatagramsReceived());
             ps.setInt(3, session.getDatagramsSend_OK());
             ps.setInt(4, session.getDatagramsSend_Failures());
-            ps.setBigDecimal(5, session.getId());
+            ps.setInt(5, session.getMeasuresEnqueued());
+            ps.setInt(6, session.getMeasuresReceived());
+            ps.setInt(7, session.getMeasuresSend_OK());
+            ps.setInt(8, session.getMeasuresSend_Failures());
+            ps.setBigDecimal(9, session.getId());
             if (ps.executeUpdate() == 0) {
                 throw new SQLException("Udating session failed, no rows affected.");
             }
@@ -106,6 +118,10 @@ public class SessionMenager {
                     + " d_received = (?),"
                     + " d_send_ok = (?),"
                     + " d_send_failures = (?), "
+                    + " m_enqueued = (?),"
+                    + " m_received = (?),"
+                    + " m_send_ok = (?),"
+                    + " m_send_failures = (?), "
                     + " time_end = CURRENT_TIMESTAMP,"
                     + " last_update = CURRENT_TIMESTAMP "
                     + " where id = (?)";
@@ -114,7 +130,11 @@ public class SessionMenager {
             ps.setInt(2, session.getDatagramsReceived());
             ps.setInt(3, session.getDatagramsSend_OK());
             ps.setInt(4, session.getDatagramsSend_Failures());
-            ps.setBigDecimal(5, session.getId());
+            ps.setInt(5, session.getMeasuresEnqueued());
+            ps.setInt(6, session.getMeasuresReceived());
+            ps.setInt(7, session.getMeasuresSend_OK());
+            ps.setInt(8, session.getMeasuresSend_Failures());
+            ps.setBigDecimal(9, session.getId());
             if (ps.executeUpdate() == 0) {
                 throw new SQLException("Udating session failed, no rows affected.");
             }

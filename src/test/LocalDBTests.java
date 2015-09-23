@@ -43,7 +43,7 @@ public class LocalDBTests {
             }
         }
         Session localDBSession = new Session(ldbm, true);
-        localDBSession.getLocalDataBaseMenager().getDatagramMenager().createDatagram(new Datagram("lol","hub_id"));
+        localDBSession.getLocalDataBaseMenager().getDatagramMenager().createDatagram(new Datagram("lol","hub_id","teraz"));
         
         testDatagram(localDBSession.getLocalDataBaseMenager().getDatagramMenager());
         
@@ -55,7 +55,7 @@ public class LocalDBTests {
 
     private static void testDatagram(DatagramMenager dm) throws Exception {
         if (dm != null) {
-            Datagram test = new Datagram("testowy","hub_ID");
+            Datagram test = new Datagram("testowy","hub_ID","teraz");
             dm.createDatagram(test);
             test.setNewErrorMessage("error");
             dm.updateDatagram(test);

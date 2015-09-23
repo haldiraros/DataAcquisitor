@@ -35,10 +35,11 @@ public class DatagramMenager {
             throw new SQLException("Storing Datagram failed, Datagram has ID:" + datagram.getId().toPlainString());
         } else {
             /*LOG*/ System.out.println("Start: createDatagram");
-            String sql = "INSERT INTO DATAGRAMS(MESSAGE,HUB_ID) VALUES (?,?)";
+            String sql = "INSERT INTO DATAGRAMS(MESSAGE,HUB_ID,DATA_TIME) VALUES (?,?,?)";
             PreparedStatement ps = getConnection().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, datagram.getData());
             ps.setString(2, datagram.getHubId());
+            ps.setString(3, datagram.getDataTimestamp());
             if (ps.executeUpdate() == 0) {
                 throw new SQLException("Storing Datagram failed, no rows inserted.");
             }
@@ -74,6 +75,7 @@ public class DatagramMenager {
         String sql = "select dt.id          ID"
                 + "        , dt.MESSAGE     MESSAGE"
                 + "        , dt.HUB_ID      HUB_ID"
+                + "        , dt.DATA_TIME   DATA_TIME"
                 + "        , stat.is_send   IS_SEND"
                 + "     from Datagrams dt"
                 + "        , Datagram_statistics stat "
@@ -83,7 +85,7 @@ public class DatagramMenager {
         ps.setBigDecimal(1, id);
         ResultSet rs = ps.executeQuery();
         if (rs.next()) {
-            datagram = new Datagram(rs.getBigDecimal("ID"), rs.getString("MESSAGE"), rs.getString("HUB_ID"), rs.getBoolean("IS_SEND"));
+            datagram = new Datagram(rs.getBigDecimal("ID"), rs.getString("MESSAGE"), rs.getString("HUB_ID"), rs.getString("DATA_TIME"), rs.getBoolean("IS_SEND"));
             getLastDatagramError(datagram);
         }
         rs.close();
@@ -97,7 +99,7 @@ public class DatagramMenager {
         /*LOG*/ System.out.println("Start: getLastDatagramError, with ID: " + d.getId().toPlainString());
         Datagram datagram = null;
         String sql = "select err.error ERROR"
-                + "     from Errors_log err "
+                + "     from Datagram_Errors_log err "
                 + "        , Datagram_statistics stat "
                 + "    where stat.datagram_id = (?) "
                 + "      and err.id = stat.last_log_id ";
@@ -119,6 +121,7 @@ public class DatagramMenager {
         String sql = "select id"
                 + "        , MESSAGE "
                 + "        , HUB_ID"
+                + "        , DATA_TIME"
                 + "     from Datagrams "
                 + "    where id in "
                 + "      (select datagram_id "
@@ -127,7 +130,7 @@ public class DatagramMenager {
         PreparedStatement ps = getConnection().prepareStatement(sql);
         ResultSet rs = ps.executeQuery();
         while (rs.next()) {
-            Datagram datagram = new Datagram(rs.getBigDecimal("id"), rs.getString("MESSAGE"), rs.getString("HUB_ID"));
+            Datagram datagram = new Datagram(rs.getBigDecimal("id"), rs.getString("MESSAGE"), rs.getString("HUB_ID"), rs.getString("DATA_TIME"));
             getLastDatagramError(datagram);
             datagrams.add(datagram);
         }
@@ -149,7 +152,7 @@ public class DatagramMenager {
             if (ps.executeUpdate() == 0) {
                 throw new SQLException("Deleting from Datagram_statistics failed, no rows deleted.");
             }
-            sql = "DELETE FROM Errors_log WHERE datagram_id = (?)";
+            sql = "DELETE FROM Datagram_Errors_log WHERE datagram_id = (?)";
             ps = getConnection().prepareStatement(sql);
             ps.setBigDecimal(1, datagram.getId());
             ps.executeUpdate();
@@ -169,13 +172,13 @@ public class DatagramMenager {
             throws ClassNotFoundException, SQLException, Exception {
         if (datagram.getId() != null && datagram.isDataSend() != true) {
             /*LOG*/ System.out.println("Start: reportSendErrorForDatagram with id:" + datagram.getId());
-            String sql = "INSERT INTO Errors_log(DATAGRAM_ID,ERROR) VALUES (?,?)";
+            String sql = "INSERT INTO Datagram_Errors_log(DATAGRAM_ID,ERROR) VALUES (?,?)";
 
             PreparedStatement ps = getConnection().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setBigDecimal(1, datagram.getId());
-            ps.setString(2, datagram.getNewErrorMessage()!=null?datagram.getNewErrorMessage().substring(0, Math.min(datagram.getNewErrorMessage().length(),2000)):null);
+            ps.setString(2, datagram.getNewErrorMessage() != null ? datagram.getNewErrorMessage().substring(0, Math.min(datagram.getNewErrorMessage().length(), 2000)) : null);
             if (ps.executeUpdate() == 0) {
-                throw new SQLException("Creating Errors_log failed, no rows affected.");
+                throw new SQLException("Creating Datagram_Errors_log failed, no rows affected.");
             }
             BigDecimal errorId = null;
             try (ResultSet generatedKeys = ps.getGeneratedKeys()) {
@@ -195,7 +198,7 @@ public class DatagramMenager {
             ps.setBigDecimal(1, errorId);
             ps.setBigDecimal(2, datagram.getId());
             if (ps.executeUpdate() == 0) {
-                Logger.write("datagram.getId():"+datagram.getId(), LogTyps.ERROR);
+                Logger.write("datagram.getId():" + datagram.getId(), LogTyps.ERROR);
                 throw new SQLException("Updating Datagram_statistics failed, no rows affected.");
             }
             ps.close();
@@ -235,6 +238,7 @@ public class DatagramMenager {
         String sql = "select ID"
                 + "        , MESSAGE "
                 + "        , HUB_ID"
+                + "        , DATA_TIME"
                 + "     from Datagrams "
                 + "    where id in "
                 + "      (select datagram_id "
@@ -243,7 +247,7 @@ public class DatagramMenager {
         PreparedStatement ps = getConnection().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
         ResultSet rs = ps.executeQuery();
         while (rs.next()) {
-            Datagram datagram = new Datagram(rs.getBigDecimal("id"), rs.getString("MESSAGE"), rs.getString("HUB_ID"), true);
+            Datagram datagram = new Datagram(rs.getBigDecimal("id"), rs.getString("MESSAGE"), rs.getString("HUB_ID"), rs.getString("DATA_TIME"), true);
             getLastDatagramError(datagram);
             datagrams.add(datagram);
         }

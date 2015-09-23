@@ -21,6 +21,7 @@ public class SetupDB {
             + " id             integer        NOT NULL  PRIMARY KEY AUTOINCREMENT"
             + ",MESSAGE        varchar(128)   NOT NULL"
             + ",HUB_ID         varchar(128)   NOT NULL"
+            + ",DATA_TIME      varchar(128)   NOT NULL"
             + ")";
 
     private final String createDatagramsStatisticsTable
@@ -32,17 +33,56 @@ public class SetupDB {
             + ",send_attempts  INTEGER                  DEFAULT 0"
             + ",is_send        BOOLEAN        NOT NULL  DEFAULT FALSE"
             + ",FOREIGN KEY (datagram_id) REFERENCES Datagrams (id)"
-            + ",FOREIGN KEY (last_log_id) REFERENCES Errors_log (id)"
+            + ",FOREIGN KEY (last_log_id) REFERENCES Datagram_Errors_log (id)"
             + ")";
 
     private final String createDatagramsLogTable
-            = "CREATE TABLE Errors_log ("
+            = "CREATE TABLE Datagram_Errors_log ("
             + " id             integer        NOT NULL  PRIMARY KEY AUTOINCREMENT"
             + ",datagram_id    integer        NOT NULL"
             + ",time           datetime       NOT NULL  DEFAULT CURRENT_TIMESTAMP"
             + ",type           integer"
             + ",error          varchar(2000)"
             + ",FOREIGN KEY (datagram_id) REFERENCES Datagrams (id)"
+            + ")";
+    
+    private final String createMeasurementsTable
+            = "CREATE TABLE Measurements( "
+            + " ID               integer        NOT NULL  PRIMARY KEY AUTOINCREMENT"
+            + ",LOGGER_ID        varchar(128)   NOT NULL"
+            + ",HUB_ID           varchar(128)   NOT NULL"
+            + ",MEASUREMENT_TIME varchar(128)   NOT NULL"
+            + ")";
+    
+    private final String createMeasurementsDataTable
+            = "CREATE TABLE Measurements_Data( "
+            + " ID              integer   NOT NULL  PRIMARY KEY AUTOINCREMENT"
+            + ",Measurement_id  integer   NOT NULL"
+            + ",INDEX           integer   NOT NULL"
+            + ",VALUE           integer   NOT NULL"
+            + ",FOREIGN KEY (Measurement_id) REFERENCES Measurements (id)"
+            + ")";
+
+    private final String createMeasurementsStatisticsTable
+            = "CREATE TABLE Measurement_statistics ("
+            + " ID             INTEGER        NOT NULL  PRIMARY KEY AUTOINCREMENT"
+            + ",Measurement_id INTEGER        NOT NULL "
+            + ",last_log_id    INTEGER                  DEFAULT NULL"
+            + ",received       DATETIME                 DEFAULT CURRENT_TIMESTAMP"
+            + ",send_attempts  INTEGER                  DEFAULT 0"
+            + ",is_send        BOOLEAN        NOT NULL  DEFAULT FALSE"
+            + ",FOREIGN KEY (Measurement_id) REFERENCES Measurements (id)"
+            + ",FOREIGN KEY (last_log_id)    REFERENCES Measurement_Errors_log (id)"
+            + ")";
+
+    private final String createMeasurementsLogTable
+            = "CREATE TABLE Measurement_Errors_log ("
+            + " id             integer        NOT NULL  PRIMARY KEY AUTOINCREMENT"
+            + ",Measurement_id integer        NOT NULL"
+            + ",time           datetime       NOT NULL  DEFAULT CURRENT_TIMESTAMP"
+            + ",type           integer"
+            + ",error          varchar(2000)"
+            + ",FOREIGN KEY (Measurement_id) REFERENCES Measurements (id)"
             + ")";
 
     private final String createSessionStatisticsTable
@@ -55,6 +95,10 @@ public class SetupDB {
             + ",d_received      integer        NOT NULL  DEFAULT 0"
             + ",d_send_ok       integer        NOT NULL  DEFAULT 0"
             + ",d_send_failures integer        NOT NULL  DEFAULT 0"
+            + ",m_enqueued      integer        NOT NULL  DEFAULT 0"
+            + ",m_received      integer        NOT NULL  DEFAULT 0"
+            + ",m_send_ok       integer        NOT NULL  DEFAULT 0"
+            + ",m_send_failures integer        NOT NULL  DEFAULT 0"
             + ")";
 
     public SetupDB() {
@@ -70,6 +114,10 @@ public class SetupDB {
             stmt.executeUpdate(createDatagramsTable);
             stmt.executeUpdate(createDatagramsLogTable);
             stmt.executeUpdate(createDatagramsStatisticsTable);
+            stmt.executeUpdate(createMeasurementsTable);
+            stmt.executeUpdate(createMeasurementsDataTable);
+            stmt.executeUpdate(createMeasurementsLogTable);
+            stmt.executeUpdate(createMeasurementsStatisticsTable);
             stmt.executeUpdate(createSessionStatisticsTable);
             stmt.close();
         } catch (Exception e) {

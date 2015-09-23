@@ -10,35 +10,10 @@ package REST;
  * @author hp
  */
 import REST.operations.RestDatagramOperations;
-import hubOperations.HubControl;
 import java.util.Set;
 import project.data.Datagram;
 
 public class RestMenager {
-
-    private HubControl hubC;
-
-    public RestMenager() {
-        this(null);
-    }
-
-    public RestMenager(HubControl hubC) {
-        this.hubC = hubC;
-    }
-    
-    /**
-     * @return the hub
-     */
-    public HubControl getHubControl() {
-        return hubC;
-    }
-
-    /**
-     * @param hub the hub to set
-     */
-    public void setHubControl(HubControl hub) {
-        this.hubC = hub;
-    }
 
     public DatagramsSendStatistics sendDatagrams(Set<Datagram> datagrams) {
         RestDatagramOperations rdo = new RestDatagramOperations();

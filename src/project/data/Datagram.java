@@ -17,22 +17,24 @@ public class Datagram {
     private final String data;
     private boolean dataSend;
     private final String hubId;
+    private final String dataTimestamp;
     private String newErrorMessage;
     private String prevErrorMessage;
     
-     public Datagram(BigDecimal id, String data, String hubId, boolean dataSend) {
+     public Datagram(BigDecimal id, String data, String hubId, String dataTimestamp, boolean dataSend) {
         this.id = id;
         this.data = data;
         this.dataSend = dataSend;
+        this.dataTimestamp = dataTimestamp;
         this.hubId = hubId;
     }
 
-    public Datagram(BigDecimal id, String data, String hubId) {
-        this(id,data,hubId,false);
+    public Datagram(BigDecimal id, String data, String hubId, String dataTimestamp) {
+        this(id,data,hubId,dataTimestamp,false);
     }
 
-    public Datagram(String data, String hubId) {
-        this(null,data,hubId,false);
+    public Datagram(String data, String hubId, String dataTimestamp) {
+        this(null,data,hubId,dataTimestamp,false);
     }
 
     public boolean isDataSend() {
@@ -96,6 +98,13 @@ public class Datagram {
      */
     public void setPrevErrorMessage(String prevErrorMessage) {
         this.prevErrorMessage = prevErrorMessage;
+    }
+
+    /**
+     * @return the dataTimestamp
+     */
+    public String getDataTimestamp() {
+        return dataTimestamp;
     }
 
 }

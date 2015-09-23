@@ -108,7 +108,7 @@ public class MainFormController implements Initializable {
         try {
             hubH.getHubControl().openHubConn();
             hubH.getHubControl().closeAllSessions();
-            dbSession.setRestMenager(new RestMenager(hubH.getHubControl()));
+            dbSession.setRestMenager(new RestMenager());
         } catch (Exception ex) {
             Logger.write("Error on creating hub connection", LogTyps.ERROR);
             Dialogs.showErrorAlert("Error connecting to the hub device, make sure that "
