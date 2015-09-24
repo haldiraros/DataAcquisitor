@@ -154,7 +154,7 @@ public class LocalDataBaseMenager {
         getMeasurementManager().createMeasurement(measurement);
     }
 
-    public Set<Measurement> getMeasurementToSend() throws ClassNotFoundException, SQLException {
+    public Set<Measurement> getMeasurementsToSend() throws ClassNotFoundException, SQLException {
         return getMeasurementManager().getMeasurementsToSend();
     }
 

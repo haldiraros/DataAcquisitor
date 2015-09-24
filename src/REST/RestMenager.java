@@ -10,6 +10,7 @@ package REST;
  * @author hp
  */
 import REST.operations.RestDatagramOperations;
+import REST.operations.RestMeasurementOperations;
 import java.util.Set;
 import project.data.Datagram;
 import project.data.Measurement;
@@ -26,12 +27,14 @@ public class RestMenager {
         return rdo.sendDatagram(datagram);
     }
 
-    public SendStatistics sendMeasurement(Measurement measurement) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public SendStatistics sendMeasurement(Measurement measurement) throws Exception {
+        RestMeasurementOperations rmo = new RestMeasurementOperations();
+        return rmo.sendMeasurement(measurement);
     }
 
-    public SendStatistics sendMeasurements(Set<Measurement> measurementsToSend) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public SendStatistics sendMeasurements(Set<Measurement> measurements) {
+        RestMeasurementOperations rmo = new RestMeasurementOperations();
+        return rmo.sendMeasurements(measurements);
     }
 
 }

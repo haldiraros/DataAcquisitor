@@ -156,7 +156,7 @@ public class Session {
     public void sendMeasurements() {
         if (restMenager != null) {
             try {
-                Set<Measurement> measurementsToSend = localDataBaseMenager.getMeasurementToSend();
+                Set<Measurement> measurementsToSend = localDataBaseMenager.getMeasurementsToSend();
                 SendStatistics stats = restMenager.sendMeasurements(measurementsToSend);
                 localDataBaseMenager.updateMeasurements(measurementsToSend);
                 incrementCounters(stats);
