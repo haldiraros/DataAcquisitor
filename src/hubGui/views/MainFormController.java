@@ -24,6 +24,7 @@ import java.util.ResourceBundle;
 import java.util.concurrent.ExecutionException;
 import java.util.logging.Level;
 import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
@@ -36,11 +37,14 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.CheckMenuItem;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.ToggleButton;
+import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.util.Callback;
 import localDB.menagers.LocalDataBaseMenager;
 import project.data.Session;
 
@@ -78,9 +82,49 @@ public class MainFormController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         timeColumn.setCellValueFactory(c -> c.getValue().getTimeProperty());
         messageColumn.setCellValueFactory(c -> c.getValue().getMessageProperty());
+        
+        messageColumn.setCellFactory(new Callback<TableColumn<Message, String>, TableCell<Message, String>>() {
+
+            @Override
+            public TableCell<Message, String> call(TableColumn<Message, String> column) {
+                return new TableCell<Message, String>() {
+                    @Override
+                    public void updateItem(String item, boolean empty) {
+                        super.updateItem(item, empty);
+                        if (!isEmpty()) {
+                            int currentIndex = indexProperty().getValue() < 0
+                                    ? 0 
+                                    : indexProperty().getValue();
+                            Message msg = column.getTableView().getItems().get(currentIndex);
+                            switch (msg.getType()) {
+                                case ERROR:
+                                    this.setTextFill(Color.RED);
+                                    break;
+                                case SUCCESS:
+                                    this.setTextFill(Color.DARKGREEN);
+                                    break;
+                                case WARNING:
+                                    this.setTextFill(Color.ORANGE);
+                                    break;
+                            }                            
+                            setText(item);
+                        }
+                    }
+                };
+            }
+        });
 
         ObservableList<Message> messages = FXCollections.observableArrayList();
         messageTable.setItems(messages);
+        
+        messageTable.getItems().addListener((ListChangeListener<Message>) (c -> {
+            c.next();
+            final int size = messageTable.getItems().size();
+            if (size > 0) {
+                messageTable.scrollTo(size - 1);
+            }
+        }));
+        
         Logger.addTarget(new GuiLogTarget(messages));
         Session ses = null;
         try {
@@ -296,7 +340,7 @@ public class MainFormController implements Initializable {
                     java.util.logging.Logger.getLogger(MainFormController.class.getName()).log(Level.SEVERE, null, ex1);
                 }
             }
-            addMessage(Resources.getString("msg.main.datareceiveFailed"));
+            Logger.write(Resources.getString("msg.main.datareceiveFailed"), LogTyps.ERROR);
         });
         new Thread(task).start();
     }

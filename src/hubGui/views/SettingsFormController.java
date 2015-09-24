@@ -8,17 +8,22 @@ package hubGui.views;
 import hubGui.i18n.Resources;
 import hubGui.models.IdKeyPair;
 import hubGui.settings.HubConfig;
+import hubGui.settings.ProxySetter;
 import hubGui.settings.Settings;
 import hubGui.settings.SettingsLoader;
 import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -47,6 +52,21 @@ public class SettingsFormController implements Initializable {
     @FXML
     private ComboBox langCombo;
     
+    @FXML
+    private CheckBox useProxyCheck;
+    
+    @FXML
+    private TextField proxyHostText;
+    
+    @FXML
+    private TextField proxyPortText;
+    
+    @FXML
+    private TextField proxyUserText;
+    
+    @FXML
+    private PasswordField proxyPassword;
+    
     /**
      * Initializes the controller class.
      */
@@ -61,11 +81,34 @@ public class SettingsFormController implements Initializable {
         ObservableList<String> locales = FXCollections.observableArrayList(Resources.avaliableLocales);
         langCombo.setItems(locales);
         
+        proxyPortText.textProperty().addListener(
+                (ObservableValue<? extends String> observable, String oldValue, String newValue) -> {
+                    if (!newValue.matches("\\d*")) {
+                        proxyPortText.setText(oldValue);
+                    }
+                });
+        
+        useProxyCheck.selectedProperty().addListener(new ChangeListener<Boolean>() {
+
+            @Override
+            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+                boolean disable = newValue == null ? true : !newValue;
+                proxyHostText.setDisable(disable);
+                proxyPortText.setDisable(disable);
+                proxyUserText.setDisable(disable);
+                proxyPassword.setDisable(disable);
+            }
+        });
+        
+        // Fire first changed event.
+        useProxyCheck.setSelected(!useProxyCheck.isSelected());
+        
         try {
             Settings settings = SettingsLoader.loadOrCreateEmpty();
             setSettings(settings);
         }
         catch(Exception ex) {
+            ex.printStackTrace();
             Dialogs.showInfoAlert(Resources.getFormatString("msg.settings.errorOnLoadingSettings", ex.getMessage()));
             close();
         }
@@ -137,6 +180,7 @@ public class SettingsFormController implements Initializable {
     private void okActionHandler(ActionEvent event) {
         try {
             Settings settings = getSettings();
+            setProxySettings(settings);
             SettingsLoader.save(settings);
             close();
         }
@@ -154,8 +198,26 @@ public class SettingsFormController implements Initializable {
         stage.close();
     }
     
+    private void setProxySettings(Settings settings) {
+        boolean useProxy = settings.isUseProxy() == null ? false : settings.isUseProxy();
+        if (useProxy) {
+            ProxySetter.setProxy(
+                    settings.getProxyHost(),
+                    settings.getProxyPort(),
+                    settings.getProxyUser(),
+                    settings.getProxyPassword());
+        } else {
+            ProxySetter.unsetProxy();
+        }
+    }
+    
     private void setSettings(Settings settings) {
         restUrlText.setText(settings.getRestUrl());
+        useProxyCheck.setSelected(settings.isUseProxy() == null ? false : settings.isUseProxy());
+        proxyHostText.setText(settings.getProxyHost());
+        proxyPortText.setText(settings.getProxyPort());
+        proxyUserText.setText(settings.getProxyUser());
+        proxyPassword.setText(settings.getProxyPassword());
         ObservableList<IdKeyPair> items = hubIdKeyTable.getItems();
         for(HubConfig hubConfig : settings.getHubConfigs()) {
             IdKeyPair pair = new IdKeyPair(hubConfig.getId(), hubConfig.getKey());
@@ -168,6 +230,11 @@ public class SettingsFormController implements Initializable {
     private Settings getSettings() {
         Settings settings = new Settings();
         settings.setRestUrl(restUrlText.getText());
+        settings.setUseProxy(useProxyCheck.isSelected());
+        settings.setProxyHost(proxyHostText.getText());
+        settings.setProxyPort(proxyPortText.getText());
+        settings.setProxyUser(proxyUserText.getText());
+        settings.setProxyPassword(proxyPassword.getText());
         for(IdKeyPair pair : hubIdKeyTable.getItems()) {
             HubConfig hubConfig = new HubConfig(pair.getId(), pair.getKey());
             settings.getHubConfigs().add(hubConfig);
