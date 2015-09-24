@@ -16,6 +16,7 @@ import javafx.collections.ObservableList;
 public class GuiLogTarget implements ILogTarget {
     
     private ObservableList<Message> messages;
+    private final int MESSAGE_LIMIT = 1000;
 
     public GuiLogTarget(ObservableList<Message> messages) {
         this.messages = messages;
@@ -23,6 +24,10 @@ public class GuiLogTarget implements ILogTarget {
     
     @Override
     public void write(String message, LogTyps type) {
+        if (messages.size() > MESSAGE_LIMIT) {
+            messages.remove(0);
+        }
+            
         messages.add(new Message(LocalTime.now(), message, type));
     }
     
