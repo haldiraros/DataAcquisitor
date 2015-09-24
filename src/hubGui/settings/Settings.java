@@ -18,6 +18,11 @@ public class Settings {
     private ArrayList<HubConfig> hubConfigs = new ArrayList<>();
     private String restUrl;
     private String lang;
+    private Boolean useProxy;
+    private String proxyHost;
+    private String proxyPort;
+    private String proxyUser;
+    private String proxyPassword;
 
     /**
      * @return the hubConfigs
@@ -59,5 +64,75 @@ public class Settings {
      */
     public void setLang(String locale) {
         this.lang = locale;
+    }
+
+    /**
+     * @return the useProxy
+     */
+    public Boolean isUseProxy() {
+        return useProxy;
+    }
+
+    /**
+     * @param useProxy the useProxy to set
+     */
+    public void setUseProxy(Boolean useProxy) {
+        this.useProxy = useProxy;
+    }
+
+    /**
+     * @return the proxyHost
+     */
+    public String getProxyHost() {
+        return proxyHost;
+    }
+
+    /**
+     * @param proxyHost the proxyHost to set
+     */
+    public void setProxyHost(String proxyHost) {
+        this.proxyHost = proxyHost;
+    }
+
+    /**
+     * @return the proxyPort
+     */
+    public String getProxyPort() {
+        return proxyPort;
+    }
+
+    /**
+     * @param proxyPort the proxyPort to set
+     */
+    public void setProxyPort(String proxyPort) {
+        this.proxyPort = proxyPort;
+    }
+
+    /**
+     * @return the proxyUser
+     */
+    public String getProxyUser() {
+        return proxyUser;
+    }
+
+    /**
+     * @param proxyUser the proxyUser to set
+     */
+    public void setProxyUser(String proxyUser) {
+        this.proxyUser = proxyUser;
+    }
+
+    /**
+     * @return the proxyPassword
+     */
+    public String getProxyPassword() {
+        return proxyPassword;
+    }
+
+    /**
+     * @param proxyPassword the proxyPassword to set
+     */
+    public void setProxyPassword(String proxyPassword) {
+        this.proxyPassword = proxyPassword;
     }
 }
