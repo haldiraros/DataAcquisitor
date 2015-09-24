@@ -24,6 +24,7 @@ import org.json.JSONObject;
 public class RestUtils {
 
     private final static String measurementsURL = "/bluconsolerest/1.0/resources/measurementbatch";
+    private final static String plainmeasurementbatchURL = "/bluconsolerest/1.0/resources/plainmeasurementbatch";
     private final static String hubstatusURL = "/bluconsolerest/1.0/resources/hubstatus";
     private final static String hubcommandURL = "/bluconsolerest/1.0/resources/hubcommand";
     private final static String hubcommandstatusURL = "/bluconsolerest/1.0/resources/hubcommandstatus";
@@ -107,6 +108,13 @@ public class RestUtils {
      */
     public static String getHubcommandstatusURL() throws Exception {
         return SettingsLoader.load().getRestUrl() + hubcommandstatusURL;
+    }
+
+    /**
+     * @return the plainmeasurementbatchURL
+     */
+    public static String getPlainmeasurementbatchURL() throws Exception {
+        return SettingsLoader.load().getRestUrl() + plainmeasurementbatchURL;
     }
 
 }

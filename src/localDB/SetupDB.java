@@ -58,8 +58,8 @@ public class SetupDB {
             = "CREATE TABLE Measurements_Data( "
             + " ID              integer   NOT NULL  PRIMARY KEY AUTOINCREMENT"
             + ",Measurement_id  integer   NOT NULL"
-            + ",'INDEX'          integer   NOT NULL"
-            + ",VALUE           integer   NOT NULL"
+            + ",TAB_INDEX       integer   NOT NULL"
+            + ",TAB_VALUE       integer   NOT NULL"
             + ",FOREIGN KEY (Measurement_id) REFERENCES Measurements (id)"
             + ")";
 

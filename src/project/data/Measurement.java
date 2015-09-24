@@ -11,7 +11,7 @@ import java.math.BigDecimal;
  *
  * @author hp
  */
-public class Measurement {
+public class Measurement{
     
     private BigDecimal id;
     private final String loggerId;
@@ -59,6 +59,7 @@ public class Measurement {
 
     /**
      * @param id the id to set
+     * @throws java.lang.Exception
      */
     public void setId(BigDecimal id) throws Exception {
         if (this.id == null) {

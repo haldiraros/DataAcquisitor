@@ -11,7 +11,7 @@ import java.math.BigDecimal;
  *
  * @author hp
  */
-public class Datagram {
+public class Datagram{
 
     private BigDecimal id;
     private final String data;

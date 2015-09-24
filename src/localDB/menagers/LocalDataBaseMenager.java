@@ -14,6 +14,7 @@ import java.util.Set;
 import localDB.SetupDB;
 import project.Config;
 import project.data.Datagram;
+import project.data.Measurement;
 import project.data.Session;
 
 /**
@@ -27,6 +28,7 @@ public class LocalDataBaseMenager {
     private String DBPatch;
     private DatagramMenager datagramMenager;
     private SessionMenager sessionMenager;
+    private MeasurementManager measurementManager;
 
     private String getDBPatch() {
         return DBPatch;
@@ -40,6 +42,7 @@ public class LocalDataBaseMenager {
         this.setDBPatch(Config.getString("DBPath"));
         datagramMenager = new DatagramMenager(getConnection());
         sessionMenager = new SessionMenager(getConnection());
+        measurementManager = new MeasurementManager(getConnection());
     }
 
     public Connection getConnection() throws SQLException {
@@ -59,8 +62,7 @@ public class LocalDataBaseMenager {
     }
 
     public boolean fullTestBDExists() throws ClassNotFoundException, SQLException {
-        String tables[] = {"Datagrams", "Datagram_statistics", "Datagram_Errors_log", "Session_statistics"
-                          ,"Measurements", "Measurements_Data", "Measurement_statistics", "Measurement_Errors_log"};
+        String tables[] = {"Datagrams", "Datagram_statistics", "Datagram_Errors_log", "Session_statistics", "Measurements", "Measurements_Data", "Measurement_statistics", "Measurement_Errors_log"};
         for (String table : tables) {
             try {
                 String sql = "select count(*) from " + table + ";";
@@ -91,10 +93,6 @@ public class LocalDataBaseMenager {
 
     public void createDatagram(Datagram datagram) throws Exception {
         getDatagramMenager().createDatagram(datagram);
-    }
-
-    public void updateDatagram(Datagram datagram) throws Exception {
-        getDatagramMenager().updateDatagram(datagram);
     }
 
     public Set<Datagram> getDatagramsToSend() throws ClassNotFoundException, SQLException {
@@ -145,6 +143,39 @@ public class LocalDataBaseMenager {
         for (Datagram d : datagrams) {
             getDatagramMenager().updateDatagram(d);
         }
+    }
+
+    public void removeSendData() throws SQLException, ClassNotFoundException {
+        getDatagramMenager().removeSendDatagrams();
+        getMeasurementManager().removeSendMeasurements();
+    }
+
+    public void createMeasurement(Measurement measurement) throws Exception {
+        getMeasurementManager().createMeasurement(measurement);
+    }
+
+    public Set<Measurement> getMeasurementToSend() throws ClassNotFoundException, SQLException {
+        return getMeasurementManager().getMeasurementsToSend();
+    }
+
+    public void updateMeasurements(Set<Measurement> measurements) throws Exception {
+        for (Measurement m : measurements) {
+            getMeasurementManager().updateMeasurement(m);
+        }
+    }
+
+    /**
+     * @return the measurementManager
+     */
+    public MeasurementManager getMeasurementManager() {
+        return measurementManager;
+    }
+
+    /**
+     * @param measurementManager the measurementManager to set
+     */
+    public void setMeasurementManager(MeasurementManager measurementManager) {
+        this.measurementManager = measurementManager;
     }
 
 }

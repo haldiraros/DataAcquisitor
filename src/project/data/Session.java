@@ -5,8 +5,8 @@
  */
 package project.data;
 
-import REST.DatagramsSendStatistics;
 import REST.RestMenager;
+import REST.SendStatistics;
 import hubGui.i18n.Resources;
 import hubGui.logging.LogTyps;
 import hubGui.logging.Logger;
@@ -60,30 +60,6 @@ public class Session {
         setUpStartValues(null, sessionWithLocalDB);
     }
 
-    // to_do - dodać tutaj menager wysyłania datagramów
-    // Menager menager ??, tkóry będzie wysyła i przy poprawnym wyłaniu ustawi:
-    //        datagram.setDataSend(true);
-    // a np przy niepoprawnym zwróci błąd jako stringa
-    // dodatkowo do rozstrzygnięcia kiedy będzie wołana funkcja setupDataBase() 
-    // z LocalDataBaseMenager która tworzy bazę danych, bo nie wiem czy
-    // to powinno być przy każdym odpalaniu programu wołane i logowane jak nastąpi stworzebnie bazy, 
-    // czy tylko w jakiś szczególnych przypadkach ??
-    public void sendDatagrams() {
-        if (restMenager != null) {
-            try {
-                Set<Datagram> datagramsToSend = localDataBaseMenager.getDatagramsToSend();
-                DatagramsSendStatistics stats = restMenager.sendDatagrams(datagramsToSend);
-                localDataBaseMenager.updateDatagrams(datagramsToSend);
-                incrementCounters(stats);
-                localDataBaseMenager.updateSession(this);
-            } catch (Exception e) {
-                System.out.println(e);
-            }
-        } else {
-            Logger.write(Resources.getString("msg.session.restManagerNotFound"), LogTyps.WARNING);
-        }
-    }
-
     public void setUpStartValues(LocalDataBaseMenager ldbm, Boolean sessionWithLocalDB) throws Exception {
         setDatagramsEnqueued(0);
         setDatagramsReceived(0);
@@ -110,7 +86,7 @@ public class Session {
             localDataBaseMenager = ldbm;
         }
         localDataBaseMenager.createSession(this);
-        localDataBaseMenager.getDatagramMenager().removeSendDatagrams();
+        localDataBaseMenager.removeSendData();
         createIddleSending();
     }
 
@@ -126,10 +102,36 @@ public class Session {
                 }
             }
         }, 15, 30, TimeUnit.SECONDS);
+        exec.scheduleAtFixedRate(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    sendMeasurements();
+                } catch (Exception ex) {
+                    Logger.write(Resources.getString("msg.session.errorOnCreatingSendTask"), LogTyps.ERROR);
+                }
+            }
+        }, 15, 30, TimeUnit.SECONDS);
     }
 
     public boolean isSessionWithLocalDB() {
         return localDataBaseMenager != null;
+    }
+  
+    public void sendDatagrams() {
+        if (restMenager != null) {
+            try {
+                Set<Datagram> datagramsToSend = localDataBaseMenager.getDatagramsToSend();
+                SendStatistics stats = restMenager.sendDatagrams(datagramsToSend);
+                localDataBaseMenager.updateDatagrams(datagramsToSend);
+                incrementCounters(stats);
+                localDataBaseMenager.updateSession(this);
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+        } else {
+            Logger.write(Resources.getString("msg.session.restManagerNotFound"), LogTyps.WARNING);
+        }
     }
 
     public boolean addDatagram(Datagram datagram) throws Exception {
@@ -139,8 +141,8 @@ public class Session {
             localDataBaseMenager.updateSession(this);
             return true;
         } else {
-            DatagramsSendStatistics stats = restMenager.sendDatagram(datagram);
-            if (stats.getSendFailsCounter() > 0) {
+            SendStatistics stats = restMenager.sendDatagram(datagram);
+            if (stats.getDatagramSendFailsCounter() > 0) {
                 Logger.write(
                         Resources.getFormatString(
                                 "msg.session.errorOnSendingDatagram",
@@ -151,11 +153,48 @@ public class Session {
         }
     }
 
-    public boolean closeSession() throws Exception {
+    public void sendMeasurements() {
+        if (restMenager != null) {
+            try {
+                Set<Measurement> measurementsToSend = localDataBaseMenager.getMeasurementToSend();
+                SendStatistics stats = restMenager.sendMeasurements(measurementsToSend);
+                localDataBaseMenager.updateMeasurements(measurementsToSend);
+                incrementCounters(stats);
+                localDataBaseMenager.updateSession(this);
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+        } else {
+            Logger.write(Resources.getString("msg.session.restManagerNotFound"), LogTyps.WARNING);
+        }
+    }
+
+    public boolean addMeasurement(Measurement measurement) throws Exception {
         if (localDataBaseMenager != null) {
-            localDataBaseMenager.getDatagramMenager().removeSendDatagrams();
-            localDataBaseMenager.closeSession(this);
+            localDataBaseMenager.createMeasurement(measurement);
+            addMeasuresReceived();
+            localDataBaseMenager.updateSession(this);
+            return true;
+        } else {
+            SendStatistics stats = restMenager.sendMeasurement(measurement);
+            if (stats.getMeasurementSendFailsCounter() > 0) {
+                Logger.write(
+                        Resources.getFormatString(
+                                "msg.session.errorOnSendingMeasurement",
+                                measurement.getNewErrorMessage()),
+                        LogTyps.ERROR);
+            }
+            return false;
+        }
+    }
+
+    public boolean closeSession() throws Exception {
+        if (exec != null) {
             exec.shutdown();
+        }
+        if (localDataBaseMenager != null) {
+            localDataBaseMenager.removeSendData();
+            localDataBaseMenager.closeSession(this);
             return true;
         }
         return false;
@@ -169,9 +208,11 @@ public class Session {
         exec.notifyAll();
     }
 
-    private void incrementCounters(DatagramsSendStatistics statistics) {
-        addDatagramsSend_OK(statistics.getSendOkCounter());
-        addDatagramsSend_Failures(statistics.getSendFailsCounter());
+    private void incrementCounters(SendStatistics statistics) {
+        addDatagramsSend_OK(statistics.getDatagramSendOkCounter());
+        addDatagramsSend_Failures(statistics.getDatagramSendFailsCounter());
+        addMeasuresSend_OK(statistics.getDatagramSendOkCounter());
+        addMeasuresSend_Failures(statistics.getMeasurementSendFailsCounter());     
     }
 
     public BigDecimal getId() {
@@ -366,7 +407,7 @@ public class Session {
     public int getMeasuresSend_Failures() {
         return measuresSend_Failures;
     }
-    
+
     private void setMeasuresSend_Failures(int measuresSend_Failures) {
         this.measuresSend_Failures = measuresSend_Failures;
     }

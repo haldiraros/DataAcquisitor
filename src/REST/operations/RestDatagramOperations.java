@@ -5,7 +5,7 @@
  */
 package REST.operations;
 
-import REST.DatagramsSendStatistics;
+import REST.SendStatistics;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
@@ -23,8 +23,8 @@ public class RestDatagramOperations {
 
     private final static int maxDatagramsPerFrame = 10;
 
-    public DatagramsSendStatistics sendDatagram(Datagram datagram) throws Exception {
-        DatagramsSendStatistics stats = new DatagramsSendStatistics();
+    public SendStatistics sendDatagram(Datagram datagram) throws Exception {
+        SendStatistics stats = new SendStatistics();
         try {
             // Step1: Prepare JSON data
             JSONObject message = RestUtils.getHubLogInfo(datagram.getHubId());
@@ -36,22 +36,22 @@ public class RestDatagramOperations {
             JSONObject response = RestUtils.sendToServer(message, RestUtils.getMeasurementsURL());
             int status = response.getInt("errCode");
             if (RestUtils.NoErrorResponse == status) {
-                stats.addSendOkCounter();
+                stats.addDatagramSendOkCounter();
                 datagram.setDataSend(true);
             } else {
-                stats.addSendFailsCounter();
+                stats.addDatagramSendFailsCounter();
                 datagram.setNewErrorMessage(Integer.toString(status));
             }
         } catch (Exception e) {
-            stats.addSendFailsCounter();
+            stats.addDatagramSendFailsCounter();
             datagram.setNewErrorMessage(e.getMessage());
         }
         return stats;
     }
 
-    public DatagramsSendStatistics sendDatagrams(Set<Datagram> datagrams) {
+    public SendStatistics sendDatagrams(Set<Datagram> datagrams) {
         Map<String, Set<Datagram>> mappedDatagrams = DatagramsUtils.sortDatagrams(datagrams);
-        DatagramsSendStatistics stats = new DatagramsSendStatistics();
+        SendStatistics stats = new SendStatistics();
         for (String hubId : mappedDatagrams.keySet()) {
             for (Set<Datagram> datas : DatagramsUtils.splitDatagrams(mappedDatagrams.get(hubId), maxDatagramsPerFrame)) {
                 try {
@@ -63,18 +63,18 @@ public class RestDatagramOperations {
                     JSONObject response = RestUtils.sendToServer(message, RestUtils.getMeasurementsURL());
                     int status = response.getInt("errCode");
                     if (RestUtils.NoErrorResponse == status) {
-                        stats.addSendOkCounter(datas.size());
+                        stats.addDatagramSendOkCounter(datas.size());
                         datas.stream().forEach((d) -> {
                             d.setDataSend(true);
                         });
                     } else {
-                        stats.addSendFailsCounter(datas.size());
+                        stats.addDatagramSendFailsCounter(datas.size());
                         datas.stream().forEach((d) -> {
                             d.setNewErrorMessage(Integer.toString(status));
                         });
                     }
                 } catch (Exception e) {
-                    stats.addSendFailsCounter(datas.size());
+                    stats.addDatagramSendFailsCounter(datas.size());
                     datas.stream().forEach((d) -> {
                         d.setNewErrorMessage(e.getMessage());
                     });

@@ -97,7 +97,6 @@ public class DatagramMenager {
     public void getLastDatagramError(Datagram d)
             throws ClassNotFoundException, SQLException {
         /*LOG*/ System.out.println("Start: getLastDatagramError, with ID: " + d.getId().toPlainString());
-        Datagram datagram = null;
         String sql = "select err.error ERROR"
                 + "     from Datagram_Errors_log err "
                 + "        , Datagram_statistics stat "
@@ -107,7 +106,7 @@ public class DatagramMenager {
         ps.setBigDecimal(1, d.getId());
         ResultSet rs = ps.executeQuery();
         if (rs.next()) {
-            datagram.setPrevErrorMessage(rs.getString("ERROR"));
+            d.setPrevErrorMessage(rs.getString("ERROR"));
         }
         rs.close();
         ps.close();
