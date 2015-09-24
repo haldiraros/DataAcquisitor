@@ -5,6 +5,7 @@
  */
 package REST.operations;
 
+import hubGui.i18n.Resources;
 import hubGui.logging.LogTyps;
 import hubGui.settings.SettingsLoader;
 import java.io.BufferedReader;
@@ -34,12 +35,12 @@ public class RestUtils {
         try {
             String key = SettingsLoader.getHubAuthKey(hubId);
             if (key == null) {
-                hubGui.logging.Logger.write("No authorization Key for HUB with ID: " + hubId, LogTyps.ERROR);
+                hubGui.logging.Logger.write(Resources.getFormatString("msg.restUtils.noAuthKeyForHub", hubId), LogTyps.ERROR);
             } else {
                 header.put("authKey", key);
             }
         } catch (Exception ex) {
-            hubGui.logging.Logger.write("Error while searching authorization Key for HUB with ID: " + hubId + "\n" + ex.getMessage(), LogTyps.ERROR);
+            hubGui.logging.Logger.write(Resources.getFormatString("msg.restUtils.errorOnAuthKeySearch", hubId), LogTyps.ERROR);
             throw ex;
         }
         return header;

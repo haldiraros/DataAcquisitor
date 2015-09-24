@@ -16,6 +16,7 @@
  */
 package hubGui.views;
 
+import hubGui.i18n.Resources;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
@@ -38,7 +39,7 @@ import javafx.stage.StageStyle;
             dialogStage.initStyle(StageStyle.UTILITY);
             dialogStage.setResizable(false);
             dialogStage.initModality(Modality.APPLICATION_MODAL);
-            dialogStage.setTitle("Operation in progress");
+            dialogStage.setTitle(Resources.getString("gui.progress.title"));
             // PROGRESS BAR
             final Label label = new Label();
             label.setText(info);

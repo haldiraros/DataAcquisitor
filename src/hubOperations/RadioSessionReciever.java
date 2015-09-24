@@ -16,6 +16,7 @@
  */
 package hubOperations;
 
+import hubGui.i18n.Resources;
 import hubGui.logging.LogTyps;
 import hubLibrary.meteringcomreader.DataPacket;
 import hubLibrary.meteringcomreader.HubConnection;
@@ -72,7 +73,7 @@ public class RadioSessionReciever implements Runnable{
         }catch (MeteringSessionException tout) {
             lgr.debug("Exception while processing new packet: "+tout.getMessage());            
         } catch (Exception ex) {
-            hubGui.logging.Logger.write("Error when processing packet from HUB.", LogTyps.ERROR);
+            hubGui.logging.Logger.write(Resources.getString("msg.radioSessionReceiver.errorOnPacketProcessing"), LogTyps.ERROR);
         }
         finally{
             setThread(null);

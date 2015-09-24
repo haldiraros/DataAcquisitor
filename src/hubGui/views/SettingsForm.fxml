@@ -16,22 +16,22 @@
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
               </columnConstraints>
               <rowConstraints>
-                  <RowConstraints maxHeight="292.0" minHeight="10.0" prefHeight="72.0" vgrow="SOMETIMES" />
-                <RowConstraints maxHeight="370.0" minHeight="10.0" prefHeight="367.0" vgrow="SOMETIMES" />
-                <RowConstraints maxHeight="246.0" minHeight="10.0" prefHeight="24.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="292.0" minHeight="10.0" prefHeight="63.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="399.0" minHeight="10.0" prefHeight="281.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="399.0" minHeight="10.0" prefHeight="136.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <FlowPane orientation="VERTICAL" prefHeight="388.0" prefWidth="347.0" GridPane.rowIndex="1">
+                  <FlowPane orientation="VERTICAL" prefHeight="323.0" prefWidth="347.0" GridPane.rowIndex="1">
                      <children>
-                        <Label prefHeight="17.0" prefWidth="337.0" text="Hubs configuration">
+                        <Label prefHeight="17.0" prefWidth="337.0" text="%gui.settings.hubsConfiguration">
                            <FlowPane.margin>
                               <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                            </FlowPane.margin>
                         </Label>
                         <TableView fx:id="hubIdKeyTable" prefHeight="208.0" prefWidth="335.0">
                           <columns>
-                            <TableColumn fx:id="hubIdColumn" prefWidth="112.0" text="Id" />
-                            <TableColumn fx:id="hubKeyColumn" prefWidth="224.0" text="Key" />
+                            <TableColumn fx:id="hubIdColumn" prefWidth="112.0" text="%gui.settings.id" />
+                            <TableColumn fx:id="hubKeyColumn" prefWidth="224.0" text="%gui.settings.key" />
                           </columns>
                            <FlowPane.margin>
                               <Insets left="5.0" right="5.0" />
@@ -40,17 +40,17 @@
                         <HBox prefHeight="35.0" prefWidth="346.0" HBox.hgrow="ALWAYS">
                            <children>
                                 <Pane HBox.hgrow="ALWAYS" />
-                              <Button fx:id="deleteButton" mnemonicParsing="false" onAction="#deleteActionHandler" text="Delete">
+                              <Button fx:id="deleteButton" mnemonicParsing="false" onAction="#deleteActionHandler" text="%gui.settings.delete">
                                  <HBox.margin>
                                     <Insets left="5.0" />
                                  </HBox.margin>
                               </Button>
-                              <Button fx:id="editButton" mnemonicParsing="false" onAction="#editActionHandler" text="Edit">
+                              <Button fx:id="editButton" mnemonicParsing="false" onAction="#editActionHandler" text="%gui.settings.edit">
                                  <HBox.margin>
                                     <Insets left="5.0" />
                                  </HBox.margin>
                               </Button>
-                              <Button fx:id="addButton" mnemonicParsing="false" onAction="#addActionHandler" text="Add">
+                              <Button fx:id="addButton" mnemonicParsing="false" onAction="#addActionHandler" text="%gui.settings.add">
                                  <HBox.margin>
                                     <Insets left="5.0" />
                                  </HBox.margin>
@@ -64,7 +64,7 @@
                   </FlowPane>
                   <FlowPane orientation="VERTICAL" prefHeight="200.0" prefWidth="200.0">
                      <children>
-                        <Label text="Rest URL">
+                        <Label text="%gui.settings.restUrl">
                            <FlowPane.margin>
                               <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                            </FlowPane.margin>
@@ -76,6 +76,23 @@
                         </TextField>
                      </children>
                   </FlowPane>
+                  <FlowPane orientation="VERTICAL" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="2">
+                     <children>
+                        <Label text="%gui.settings.lang">
+                           <FlowPane.margin>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </FlowPane.margin>
+                        </Label>
+                        <ComboBox fx:id="langCombo" prefHeight="25.0" prefWidth="336.0">
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                           <FlowPane.margin>
+                              <Insets bottom="5.0" left="5.0" right="5.0" />
+                           </FlowPane.margin>
+                        </ComboBox>
+                     </children>
+                  </FlowPane>
                </children>
             </GridPane>
          </center>
@@ -83,8 +100,8 @@
             <ToolBar prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
               <items>
                   <Pane HBox.hgrow="ALWAYS" />
-                <Button fx:id="cancelButton" mnemonicParsing="false" onAction="#cancelActionHandler" prefHeight="25.0" prefWidth="67.0" text="Cancel" />
-                  <Button fx:id="okButton" mnemonicParsing="false" onAction="#okActionHandler" prefHeight="25.0" prefWidth="78.0" text="Ok" />
+                <Button fx:id="cancelButton" mnemonicParsing="false" onAction="#cancelActionHandler" prefHeight="25.0" prefWidth="67.0" text="%common.cancel" />
+                  <Button fx:id="okButton" mnemonicParsing="false" onAction="#okActionHandler" prefHeight="25.0" prefWidth="78.0" text="%common.ok" />
               </items>
             </ToolBar>
          </bottom>

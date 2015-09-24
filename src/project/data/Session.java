@@ -7,6 +7,7 @@ package project.data;
 
 import REST.DatagramsSendStatistics;
 import REST.RestMenager;
+import hubGui.i18n.Resources;
 import hubGui.logging.LogTyps;
 import hubGui.logging.Logger;
 import java.math.BigDecimal;
@@ -79,7 +80,7 @@ public class Session {
                 System.out.println(e);
             }
         } else {
-            Logger.write("No datagrams send - REST Manager not Found in Session", LogTyps.WARNING);
+            Logger.write(Resources.getString("msg.session.restManagerNotFound"), LogTyps.WARNING);
         }
     }
 
@@ -121,7 +122,7 @@ public class Session {
                 try {
                     sendDatagrams();
                 } catch (Exception ex) {
-                    Logger.write("Error while creating idle sending loop in: " + Session.class.getName() + ":\n" + ex.getMessage(), LogTyps.LOG);
+                    Logger.write(Resources.getString("msg.session.errorOnCreatingSendTask"), LogTyps.ERROR);
                 }
             }
         }, 15, 30, TimeUnit.SECONDS);
@@ -140,7 +141,11 @@ public class Session {
         } else {
             DatagramsSendStatistics stats = restMenager.sendDatagram(datagram);
             if (stats.getSendFailsCounter() > 0) {
-                Logger.write("Error while sending Datagram:" + datagram.getNewErrorMessage(), LogTyps.ERROR);
+                Logger.write(
+                        Resources.getFormatString(
+                                "msg.session.errorOnSendingDatagram",
+                                datagram.getNewErrorMessage()),
+                        LogTyps.ERROR);
             }
             return false;
         }

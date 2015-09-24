@@ -17,6 +17,7 @@ public class Settings {
     
     private ArrayList<HubConfig> hubConfigs = new ArrayList<>();
     private String restUrl;
+    private String lang;
 
     /**
      * @return the hubConfigs
@@ -44,5 +45,19 @@ public class Settings {
      */
     public void setRestUrl(String restUrl) {
         this.restUrl = restUrl;
+    }
+
+    /**
+     * @return the locale
+     */
+    public String getLang() {
+        return lang;
+    }
+
+    /**
+     * @param locale the locale to set
+     */
+    public void setLang(String locale) {
+        this.lang = locale;
     }
 }

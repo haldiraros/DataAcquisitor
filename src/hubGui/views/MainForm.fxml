@@ -17,13 +17,13 @@
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="542.0" prefWidth="234.0">
                      <children>
                         <ListView fx:id="chipsList" layoutX="14.0" layoutY="36.0" prefHeight="502.0" prefWidth="218.0" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="25.0" />
-                        <Label layoutX="14.0" layoutY="14.0" text="Registered loggers" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0" />
+                        <Label layoutX="14.0" layoutY="14.0" text="%gui.main.registeredLoggers" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0" />
                         <ToolBar layoutX="14.0" layoutY="515.0" prefHeight="40.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
                           <items>
-                            <Button fx:id="registerButton" mnemonicParsing="false" onAction="#registerActionHandler" text="Register" />
-                              <Button fx:id="autoRegisterButton" mnemonicParsing="false" onAction="#registerAutoActionHandler" text="Auto register" />
-                              <Button fx:id="unregisterButton" mnemonicParsing="false" onAction="#unregisterActionHandler" text="Unregister" />
-                              <Button fx:id="readButton" mnemonicParsing="false" onAction="#readActionHandler" text="Read" />
+                            <Button fx:id="registerButton" mnemonicParsing="false" onAction="#registerActionHandler" text="%gui.main.register" />
+                              <Button fx:id="autoRegisterButton" mnemonicParsing="false" onAction="#registerAutoActionHandler" text="%gui.main.autoRegister" />
+                              <Button fx:id="unregisterButton" mnemonicParsing="false" onAction="#unregisterActionHandler" text="%gui.main.unregister" />
+                              <Button fx:id="readButton" mnemonicParsing="false" onAction="#readActionHandler" text="%gui.main.read" />
                           </items>
                         </ToolBar>
                      </children>
@@ -32,14 +32,14 @@
                      <children>
                         <TabPane layoutX="14.0" layoutY="14.0" prefHeight="567.0" prefWidth="450.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                           <tabs>
-                            <Tab text="Log">
+                            <Tab text="%gui.main.logTab">
                               <content>
                                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                        <children>
                                           <TableView fx:id="messageTable" layoutX="34.0" layoutY="35.0" prefHeight="538.0" prefWidth="520.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                             <columns>
-                                              <TableColumn fx:id="timeColumn" prefWidth="110.0" text="Time" />
-                                              <TableColumn fx:id="messageColumn" prefWidth="409.0" text="Message" />
+                                              <TableColumn fx:id="timeColumn" prefWidth="110.0" text="%gui.main.time" />
+                                              <TableColumn fx:id="messageColumn" prefWidth="409.0" text="%gui.main.message" />
                                             </columns>
                                           </TableView>
                                        </children>
@@ -56,29 +56,29 @@
          <top>
             <MenuBar BorderPane.alignment="CENTER">
               <menus>
-                  <Menu mnemonicParsing="false" text="App">
+                  <Menu mnemonicParsing="false" text="%gui.main.app">
                     <items>
-                      <MenuItem fx:id="settingsMenuItem" mnemonicParsing="false" onAction="#settingsActionHandler" text="Settings" />
-                      <MenuItem fx:id="closeMenuItem" mnemonicParsing="false" onAction="#closeActionHandler" text="Close" />
+                      <MenuItem fx:id="settingsMenuItem" mnemonicParsing="false" onAction="#settingsActionHandler" text="%gui.main.settings" />
+                      <MenuItem fx:id="closeMenuItem" mnemonicParsing="false" onAction="#closeActionHandler" text="%gui.main.close" />
                     </items>
                   </Menu>
-                <Menu mnemonicParsing="false" text="Logger">
+                <Menu mnemonicParsing="false" text="%gui.main.logger">
                   <items>
-                    <MenuItem fx:id="registerMenuItem" mnemonicParsing="false" onAction="#registerActionHandler" text="Register Logger" />
-                    <MenuItem fx:id="registerAutoMenuItem" mnemonicParsing="false" onAction="#registerAutoActionHandler" text="Auto Register Logger" />
-                    <MenuItem fx:id="unregisterMenuItem" mnemonicParsing="false" onAction="#unregisterActionHandler" text="Unregister Logger" />
-                    <MenuItem fx:id="readMenuItem" mnemonicParsing="false" onAction="#readActionHandler" text="Read" />
+                    <MenuItem fx:id="registerMenuItem" mnemonicParsing="false" onAction="#registerActionHandler" text="%gui.main.registerLogger" />
+                    <MenuItem fx:id="registerAutoMenuItem" mnemonicParsing="false" onAction="#registerAutoActionHandler" text="%gui.main.autorRegisterLogger" />
+                    <MenuItem fx:id="unregisterMenuItem" mnemonicParsing="false" onAction="#unregisterActionHandler" text="%gui.main.unregisterLogger" />
+                    <MenuItem fx:id="readMenuItem" mnemonicParsing="false" onAction="#readActionHandler" text="%gui.main.read" />
                   </items>
                 </Menu>
-                <Menu mnemonicParsing="false" text="Hub">
+                <Menu mnemonicParsing="false" text="%gui.main.hub">
                   <items>
-                    <MenuItem fx:id="readFromHubMenuItem" mnemonicParsing="false" onAction="#readFromHubHandler" text="Read from Hub" />
-                    <CheckMenuItem fx:id="radioSessionMenuItem" mnemonicParsing="false" onAction="#radioSessionHandler" text="Radio Session" />
+                    <MenuItem fx:id="readFromHubMenuItem" mnemonicParsing="false" onAction="#readFromHubHandler" text="%gui.main.readFromHub" />
+                    <CheckMenuItem fx:id="radioSessionMenuItem" mnemonicParsing="false" onAction="#radioSessionHandler" text="%gui.main.radioSession" />
                   </items>
                 </Menu>
-                <Menu mnemonicParsing="false" text="Help">
+                <Menu mnemonicParsing="false" text="%gui.main.help">
                   <items>
-                    <MenuItem fx:id="aboutMenuItem" mnemonicParsing="false" onAction="#aboutActionHandler" text="About" />
+                    <MenuItem fx:id="aboutMenuItem" mnemonicParsing="false" onAction="#aboutActionHandler" text="%gui.main.about" />
                   </items>
                 </Menu>
               </menus>
@@ -88,8 +88,8 @@
             <ToolBar prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
               <items>
                   <Pane HBox.hgrow="ALWAYS" />
-                <Button fx:id="readFromHubButton" mnemonicParsing="false" onAction="#readFromHubHandler" text="Read from Hub" />
-                  <ToggleButton fx:id="radioSessionToggle" mnemonicParsing="false" onAction="#radioSessionHandler" text="Radio session" />
+                <Button fx:id="readFromHubButton" mnemonicParsing="false" onAction="#readFromHubHandler" text="%gui.main.readFromHub" />
+                  <ToggleButton fx:id="radioSessionToggle" mnemonicParsing="false" onAction="#radioSessionHandler" text="%gui.main.radioSession" />
               </items>
             </ToolBar>
          </bottom>

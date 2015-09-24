@@ -5,6 +5,7 @@
  */
 package hubGui.views;
 
+import hubGui.i18n.Resources;
 import hubGui.models.IdKeyPair;
 import hubGui.settings.HubConfig;
 import hubGui.settings.Settings;
@@ -17,6 +18,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -42,6 +44,9 @@ public class SettingsFormController implements Initializable {
     @FXML
     private TextField restUrlText;
     
+    @FXML
+    private ComboBox langCombo;
+    
     /**
      * Initializes the controller class.
      */
@@ -53,12 +58,15 @@ public class SettingsFormController implements Initializable {
         ObservableList<IdKeyPair> idKeyPairs = FXCollections.observableArrayList();
         hubIdKeyTable.setItems(idKeyPairs);
         
+        ObservableList<String> locales = FXCollections.observableArrayList(Resources.avaliableLocales);
+        langCombo.setItems(locales);
+        
         try {
             Settings settings = SettingsLoader.loadOrCreateEmpty();
             setSettings(settings);
         }
         catch(Exception ex) {
-            Dialogs.showInfoAlert("Error loading settings: " + ex.getMessage());
+            Dialogs.showInfoAlert(Resources.getFormatString("msg.settings.errorOnLoadingSettings", ex.getMessage()));
             close();
         }
     }    
@@ -66,9 +74,11 @@ public class SettingsFormController implements Initializable {
     @FXML
     private void addActionHandler(ActionEvent event) {
         Optional<Pair<String, String>> result = Dialogs.inputStringPair(
-                "Hub configuration",
-                "Enter hub id and key",
-                new Pair<>("Hub id", "Hub key"));
+                Resources.getString("msg.settigns.hubConfigTitle"),
+                Resources.getString("msg.settigns.hubConfigDescription"),
+                new Pair<>(
+                        Resources.getString("msg.settings.hubId"),
+                        Resources.getString("msg.settigns.hubKey")));
         
         if (result.isPresent()) {
             String id = result.get().getKey();
@@ -90,10 +100,14 @@ public class SettingsFormController implements Initializable {
         IdKeyPair idKeyPair = items.get(index);
         
         Optional<Pair<String, String>> result = Dialogs.inputStringPair(
-                "Hub configuration",
-                "Edit hub id and key",
-                new Pair<>("Hub id", "Hub key"),
-                new Pair<>(idKeyPair.getId(), idKeyPair.getKey()));
+                Resources.getString("msg.settigns.hubConfigTitle"),
+                Resources.getString("msg.settigns.hubConfigDescription"),
+                new Pair<>(
+                        Resources.getString("msg.settings.hubId"),
+                        Resources.getString("msg.settigns.hubKey")),
+                new Pair<>(
+                        idKeyPair.getId(),
+                        idKeyPair.getKey()));
         
         if (result.isPresent()) {
             String id = result.get().getKey();
@@ -127,12 +141,12 @@ public class SettingsFormController implements Initializable {
             close();
         }
         catch (Exception ex) {
-            Dialogs.showInfoAlert("Error saving settings: " + ex.getMessage());
+            Dialogs.showInfoAlert(Resources.getFormatString("msg.settigns.errorOnSavingSettings", ex.getMessage()));
         }
     }
     
     private static void showNoHubConfigSelectedAlert() {
-        Dialogs.showInfoAlert("No hub configuration selected.");
+        Dialogs.showInfoAlert(Resources.getString("msg.settigns.noHubConfigSelected"));
     }
     
     private void close() {
@@ -147,6 +161,8 @@ public class SettingsFormController implements Initializable {
             IdKeyPair pair = new IdKeyPair(hubConfig.getId(), hubConfig.getKey());
             items.add(pair);
         }
+        String lang = Resources.getCurrentLang();
+        langCombo.getSelectionModel().select(lang);
     }
     
     private Settings getSettings() {
@@ -156,6 +172,7 @@ public class SettingsFormController implements Initializable {
             HubConfig hubConfig = new HubConfig(pair.getId(), pair.getKey());
             settings.getHubConfigs().add(hubConfig);
         }
+        settings.setLang((String)langCombo.getSelectionModel().getSelectedItem());
         return settings;
     }
     

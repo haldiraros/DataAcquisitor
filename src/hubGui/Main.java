@@ -6,8 +6,11 @@
 package hubGui;
 
 import com.sun.javafx.runtime.VersionInfo;
+import hubGui.i18n.Resources;
 import hubGui.logging.ConsoleLogTarget;
 import hubGui.logging.Logger;
+import hubGui.settings.Settings;
+import hubGui.settings.SettingsLoader;
 import hubOperations.HubHandler;
 import java.io.IOException;
 import javafx.application.Application;
@@ -27,6 +30,7 @@ public class Main extends Application {
             System.out.println("JavaFX runtime version: " + VersionInfo.getRuntimeVersion());
             
             FXMLLoader loader = new FXMLLoader();
+            loader.setResources(Resources.getResourceBundle());
             loader.setLocation(Main.class.getResource("views/MainForm.fxml"));
             Scene scene = new Scene(loader.load());
             primaryStage.setScene(scene);
@@ -44,8 +48,8 @@ public class Main extends Application {
             hubH.getHubControl().closeAll();
             hubH.getHubControl().getDbSession().closeSession();
             hubH=null;
-        }catch(Exception ex){
-                ;
+        }catch(Exception e){
+            e.printStackTrace();
         }
     }
     /**
@@ -53,8 +57,22 @@ public class Main extends Application {
      * @throws java.lang.Exception
      */
     public static void main(String[] args) throws Exception {
-        Logger.addTarget(new ConsoleLogTarget());
+        initResources();
+        initLogger();
         launch(args);  
+    }
+    
+    private static void initResources() throws Exception {
+        Settings settings = SettingsLoader.loadOrCreateEmpty();
+        String locale = settings.getLang();
+        if (locale == null) {
+            locale = Resources.avaliableLocales.get(0);
+        }
+        Resources.setLang(locale);
+    }
+    
+    private static void initLogger() {
+        Logger.addTarget(new ConsoleLogTarget());
     }
     
 }

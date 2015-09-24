@@ -16,6 +16,7 @@
  */
 package hubOperations;
 
+import hubGui.i18n.Resources;
 import hubGui.logging.LogTyps;
 import hubLibrary.meteringcomreader.DataPacket;
 import hubLibrary.meteringcomreader.DataPacketDTO;
@@ -188,7 +189,7 @@ public class HubControl {
     }
 
     public void processDataPacketEncoded (DataPacket pck) throws Exception{ 
-        hubGui.logging.Logger.write("Paczka danych: " +DatatypeConverter.printHexBinary(pck.getOrgData())); //TODO: Remove later
+        hubGui.logging.Logger.write(Resources.getFormatString("msg.hubControl.dataPacket", DatatypeConverter.printHexBinary(pck.getOrgData()))); //TODO: Remove later
         dbSession.addDatagram(new Datagram(DatatypeConverter.printHexBinary(pck.getOrgData()),getHubId(),null));      
     }
     
@@ -236,7 +237,7 @@ public class HubControl {
             throw e;
 
         } catch (Exception ex) {
-            hubGui.logging.Logger.write("Error when processing packet from HUB.", LogTyps.ERROR);
+            hubGui.logging.Logger.write(Resources.getString("msg.hubControl.errorOnPacketProcessing"), LogTyps.ERROR);
         }finally{
             try{
                 hubConn.closeHubFlashSession();

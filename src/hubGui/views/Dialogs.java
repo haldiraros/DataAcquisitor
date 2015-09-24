@@ -5,6 +5,7 @@
  */
 package hubGui.views;
 
+import hubGui.i18n.Resources;
 import java.util.Optional;
 import javafx.application.Platform;
 import javafx.geometry.Insets;
@@ -27,14 +28,14 @@ public class Dialogs {
     
     public static void showInfoAlert(String message) {
         Alert alert = new Alert(AlertType.INFORMATION);
-        alert.setTitle("Information");
+        alert.setTitle(Resources.getString("gui.dialog.information"));
         alert.setHeaderText(message);
         alert.showAndWait();
     }
     
     public static void showErrorAlert(String message) {
         Alert alert = new Alert(AlertType.ERROR);
-        alert.setTitle("Error");
+        alert.setTitle(Resources.getString("gui.dialog.error"));
         alert.setHeaderText(message);
         alert.showAndWait();
     }
@@ -56,8 +57,9 @@ public class Dialogs {
         dialog.setTitle(title);
         dialog.setHeaderText(text);
         
-        ButtonType okButton = new ButtonType("Ok", ButtonData.OK_DONE);
-        dialog.getDialogPane().getButtonTypes().addAll(okButton, ButtonType.CANCEL);
+        ButtonType okButton = new ButtonType(Resources.getString("common.ok"), ButtonData.OK_DONE);
+        ButtonType cancelButton = new ButtonType(Resources.getString("common.cancel"), ButtonData.CANCEL_CLOSE);
+        dialog.getDialogPane().getButtonTypes().addAll(okButton, cancelButton);
 
         // Create the username and password labels and fields.
         GridPane grid = new GridPane();
@@ -121,8 +123,9 @@ public class Dialogs {
         dialog.setTitle(title);
         dialog.setHeaderText(text);
         
-        ButtonType okButton = new ButtonType("Ok", ButtonData.OK_DONE);
-        dialog.getDialogPane().getButtonTypes().addAll(okButton, ButtonType.CANCEL);
+        ButtonType okButton = new ButtonType(Resources.getString("common.ok"), ButtonData.OK_DONE);
+        ButtonType cancelButton = new ButtonType(Resources.getString("common.cancel"), ButtonData.CANCEL_CLOSE);
+        dialog.getDialogPane().getButtonTypes().addAll(okButton, cancelButton);
         
         // Create the username and password labels and fields.
         GridPane grid = new GridPane();
