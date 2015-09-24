@@ -24,6 +24,7 @@ import java.util.ResourceBundle;
 import java.util.concurrent.ExecutionException;
 import java.util.logging.Level;
 import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
@@ -115,6 +116,15 @@ public class MainFormController implements Initializable {
 
         ObservableList<Message> messages = FXCollections.observableArrayList();
         messageTable.setItems(messages);
+        
+        messageTable.getItems().addListener((ListChangeListener<Message>) (c -> {
+            c.next();
+            final int size = messageTable.getItems().size();
+            if (size > 0) {
+                messageTable.scrollTo(size - 1);
+            }
+        }));
+        
         Logger.addTarget(new GuiLogTarget(messages));
         Session ses = null;
         try {
