@@ -5,6 +5,7 @@
  */
 package hubGui.models;
 
+import hubGui.logging.LogTyps;
 import java.time.LocalTime;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
@@ -18,15 +19,17 @@ import javafx.beans.property.StringProperty;
 public class Message {
     private final ObjectProperty<LocalTime> timeProperty;
     private final StringProperty messageProperty;
+    private LogTyps type;
     
     public Message() {
-        this(null, null);
+        this(null, null, LogTyps.LOG);
     }
     
-    public Message(LocalTime date, String message)
+    public Message(LocalTime date, String message, LogTyps type)
     {
         timeProperty = new SimpleObjectProperty(date);
         messageProperty = new SimpleStringProperty(message);
+        this.type = type;
     }
 
     public ObjectProperty<LocalTime> getTimeProperty() {
@@ -51,5 +54,19 @@ public class Message {
     
     public void setMessage(String message) {
         messageProperty.set(message);
+    }
+
+    /**
+     * @return the type
+     */
+    public LogTyps getType() {
+        return type;
+    }
+
+    /**
+     * @param type the type to set
+     */
+    public void setType(LogTyps type) {
+        this.type = type;
     }
 }

@@ -23,7 +23,7 @@ public class GuiLogTarget implements ILogTarget {
     
     @Override
     public void write(String message, LogTyps type) {
-        messages.add(new Message(LocalTime.now(), message));
+        messages.add(new Message(LocalTime.now(), message, type));
     }
     
 }
