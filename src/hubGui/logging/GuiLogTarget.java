@@ -7,6 +7,7 @@ package hubGui.logging;
 
 import hubGui.models.Message;
 import java.time.LocalTime;
+import javafx.application.Platform;
 import javafx.collections.ObservableList;
 
 /**
@@ -27,8 +28,9 @@ public class GuiLogTarget implements ILogTarget {
         if (messages.size() > MESSAGE_LIMIT) {
             messages.remove(0);
         }
-            
-        messages.add(new Message(LocalTime.now(), message, type));
+        Platform.runLater(() -> {     
+            messages.add(new Message(LocalTime.now(), message, type));
+        });
     }
     
 }
