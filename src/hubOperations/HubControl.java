@@ -26,15 +26,18 @@ import hubLibrary.meteringcomreader.HubFlashSession;
 import hubLibrary.meteringcomreader.HubSessionDBManager;
 import hubLibrary.meteringcomreader.Hubs;
 import hubLibrary.meteringcomreader.LoggerFlashSession;
+import hubLibrary.meteringcomreader.Utils;
 import hubLibrary.meteringcomreader.exceptions.MeteringSessionException;
 import static hubOperations.RadioSessionReciever.createRadioSessionReciever;
 import java.sql.Timestamp;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.xml.bind.DatatypeConverter;
 import project.data.Datagram;
+import project.data.Measurement;
 import project.data.Session;
 
 /**
@@ -93,7 +96,7 @@ public class HubControl {
     }
     
     public String getHubId(){
-        return hub.getHubHexId(); //TODO: Skasować pierwsze 4 bity
+        return hub.getHubHexId().substring(4); //TODO: Skasować pierwsze 4 bity
     }
     
 
@@ -189,20 +192,21 @@ public class HubControl {
     }
 
     public void processDataPacketEncoded (DataPacket pck) throws Exception{ 
-        hubGui.logging.Logger.write(Resources.getFormatString("msg.hubControl.dataPacket", DatatypeConverter.printHexBinary(pck.getOrgData()))); //TODO: Remove later
-        dbSession.addDatagram(new Datagram(DatatypeConverter.printHexBinary(pck.getOrgData()),getHubId(),null));      
+        hubGui.logging.Logger.write(Resources.getFormatString("msg.hubControl.dataPacket", DatatypeConverter.printHexBinary(pck.getOrgData()))); //TODO: Remove later      
+            String time = String.format("%0#8X", (long)(new Date().getTime()/1000));
+            dbSession.addDatagram(new Datagram(DatatypeConverter.printHexBinary(pck.getOrgData()),getHubId(),time));      
     }
     
-    public void processDataPacketTemps (DataPacket pck){ //TODO: change to putting in DB whtn it's done
+    public void processDataPacketTemps (DataPacket pck) throws Exception{ 
         System.out.println(pck);
         //System.out.println("Paczka danych: " +DatatypeConverter.printHexBinary(pck.getOrgData()));
-
 //Wydobywanie danych :        
-//        DataPacketDTO test =pck.generateDTO();
-//        pck.getLoggerHexId();  //usunąć pierwsze 4 znaki
-//        test.getMeasurmentTimeStart();
-//        test.getMeasurmentPeriod();
-//        test.getTemperatures();
+        DataPacketDTO test =pck.generateDTO();
+        String logID = pck.getLoggerHexId();
+       logID = logID.substring(4);  //usunąć pierwsze 4 znaki
+        String time = String.format("%0#8X",(long) ((test.getMeasurmentTimeStart().getTime() ) / 1000));
+//        test.getMeasurmentPeriod(); //TODO:: Dodać do Measurement period!!!
+        dbSession.addMeasurement(new Measurement(logID, getHubId(), test.getTemperatures(), time));
         
         
     }
@@ -213,8 +217,12 @@ public class HubControl {
             LoggerFlashSession loggerFlashSession = hubConn.createLoggerFlashSession(new Timestamp(0));
             
             while ((packet = loggerFlashSession.getNextPacket(100000))!=null){
-                processDataPacketTemps(packet);
+                try {
+                    processDataPacketTemps(packet);
+                } catch (Exception ex) {
+                    Logger.getLogger(HubControl.class.getName()).log(Level.SEVERE, null, ex);
                 }
+            }
             hubConn.closeLoggerFlashSession();
     }
     

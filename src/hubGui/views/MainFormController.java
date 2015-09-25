@@ -136,7 +136,7 @@ public class MainFormController implements Initializable {
         initializeLoggerList();
     }
 
-    private void hubControlInit(Session dbSession) {
+    private void hubControlInit(Session dbSession) { //TODO: make sure there is a auth key for the HUB
         HubHandler hubH = null;
         try {
             hubH = HubHandler.getInstance();
