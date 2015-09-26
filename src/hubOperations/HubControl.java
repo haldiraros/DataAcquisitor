@@ -26,7 +26,6 @@ import hubLibrary.meteringcomreader.HubFlashSession;
 import hubLibrary.meteringcomreader.HubSessionDBManager;
 import hubLibrary.meteringcomreader.Hubs;
 import hubLibrary.meteringcomreader.LoggerFlashSession;
-import hubLibrary.meteringcomreader.Utils;
 import hubLibrary.meteringcomreader.exceptions.MeteringSessionException;
 import static hubOperations.RadioSessionReciever.createRadioSessionReciever;
 import java.sql.Timestamp;
@@ -46,64 +45,64 @@ import project.data.Session;
  */
 public class HubControl {
 
-   
-    HubConnection hubConn=null;
-    Hub hub =null;
-    RadioSessionReciever RSRecv=null;
+    HubConnection hubConn = null;
+    Hub hub = null;
+    RadioSessionReciever RSRecv = null;
 
-    
     Session dbSession = null;
 
     public Session getDbSession() {
         return dbSession;
     }
-    
+
     public void setDbSession(Session dbSession) {
         this.dbSession = dbSession;
     }
-    
+
     /**
      * Konstruktor klasy hub wykorzystującej klasę Hub z biblioteki
-     * @param hubId  identyfikator koncentratora
+     *
+     * @param hubId identyfikator koncentratora
      * @param comPortName nazwa portu, do którego podłączony jest koncentrator
      */
-    public HubControl(long hubId, String comPortName){
-        this.hub= new Hub(hubId,comPortName);
+    public HubControl(long hubId, String comPortName) {
+        this.hub = new Hub(hubId, comPortName);
     }
+
     /**
      * Konstruktor klasy hub wykorzystującej klasę Hub z biblioteki
+     *
      * @param hexHubId heksadecymalny identyfikator koncentratora
      * @param comPortName nazwa portu, do którego podłączony jest koncentrator
      */
-    public HubControl(String hexHubId, String comPortName){
-        this.hub= new Hub(hexHubId,comPortName);
+    public HubControl(String hexHubId, String comPortName) {
+        this.hub = new Hub(hexHubId, comPortName);
     }
-    
-    public HubControl() throws MeteringSessionException{
-        Hubs hubs = HubSessionDBManager.getHubSessionManager().discoverHubs();
-        Iterator<Map.Entry<String, Hub>> it =hubs.entrySet().iterator();
-            if (it.hasNext()) {
-                Map.Entry<String, Hub> pairs = (Map.Entry<String, Hub>)it.next();
-                this.hub = pairs.getValue();
 
-            }
-            else{
-                throw new MeteringSessionException("nie znaleziono żadnego huba");
-            }
+    public HubControl() throws MeteringSessionException {
+        Hubs hubs = HubSessionDBManager.getHubSessionManager().discoverHubs();
+        Iterator<Map.Entry<String, Hub>> it = hubs.entrySet().iterator();
+        if (it.hasNext()) {
+            Map.Entry<String, Hub> pairs = (Map.Entry<String, Hub>) it.next();
+            this.hub = pairs.getValue();
+
+        } else {
+            throw new MeteringSessionException("nie znaleziono żadnego huba");
+        }
     }
+
     public Hub getHub() {
         return hub;
     }
-    
-    public String getHubId(){
+
+    public String getHubId() {
         return hub.getHubHexId().substring(4); //TODO: Skasować pierwsze 4 bity
     }
-    
 
     public void setHub(Hub hub) {
         this.hub = hub;
     }
-    
+
     public HubConnection getHubConn() {
         return hubConn;
     }
@@ -111,79 +110,79 @@ public class HubControl {
     public void setHubConn(HubConnection hubConn) {
         this.hubConn = hubConn;
     }
-    
-    public void openHubConn() throws MeteringSessionException{
-        try{
-         hubConn = HubConnection.createHubConnection(hub);
-        }catch(Exception e){
-             System.out.println("error opening connection "+e.getMessage());
-         }
-    }
-    
-    public void closeHubConn(){
-        if (hubConn!=null){
-             System.out.print("closing hubConn");
-                               hubConn.close();
-           }
-    }
-    
-    public long[] getRegisteredLoggersList(){
-        long[] registeredLoggers= null;
-        try{
-            registeredLoggers = hubConn.getRegistredLoggers();
-        }catch(Exception e){
-             System.out.println("error listing loggers "+e.getMessage());
+
+    public void openHubConn() throws MeteringSessionException {
+        try {
+            hubConn = HubConnection.createHubConnection(hub);
+        } catch (Exception e) {
+            System.out.println("error opening connection " + e.getMessage());
         }
-        finally{
+    }
+
+    public void closeHubConn() {
+        if (hubConn != null) {
+            System.out.print("closing hubConn");
+            hubConn.close();
+        }
+    }
+
+    public long[] getRegisteredLoggersList() {
+        long[] registeredLoggers = null;
+        try {
+            registeredLoggers = hubConn.getRegistredLoggers();
+        } catch (Exception e) {
+            System.out.println("error listing loggers " + e.getMessage());
+        } finally {
             return registeredLoggers;
         }
     }
-    
-    public long registerNewLogger(long loggerID) throws MeteringSessionException{
+
+    public long registerNewLogger(long loggerID) throws MeteringSessionException {
         long out = -1;
         out = hubConn.registerLogger(loggerID);
         return out;
     }
-    public void unregisterLogger(long registeredLoggerID) throws MeteringSessionException{
-             hubConn.unregisterLogger(registeredLoggerID);
+
+    public void unregisterLogger(long registeredLoggerID) throws MeteringSessionException {
+        hubConn.unregisterLogger(registeredLoggerID);
 
     }
-    
-    public int unregisterAllLoggers(){
-        int removalCount =0;
-        long[] currentLoggers =getRegisteredLoggersList();
-        for (int i=0; i<currentLoggers.length; i++){
-            System.out.println("Removing logger:0x"+Long.toHexString(currentLoggers[i]));
-            try{
-            unregisterLogger(currentLoggers[i]);
-            }catch(MeteringSessionException ex){
+
+    public int unregisterAllLoggers() {
+        int removalCount = 0;
+        long[] currentLoggers = getRegisteredLoggersList();
+        for (int i = 0; i < currentLoggers.length; i++) {
+            System.out.println("Removing logger:0x" + Long.toHexString(currentLoggers[i]));
+            try {
+                unregisterLogger(currentLoggers[i]);
+            } catch (MeteringSessionException ex) {
                 ;
             }
             removalCount++;
-            try{
-            Thread.sleep(100);
-            }catch(Exception e){}
+            try {
+                Thread.sleep(100);
+            } catch (Exception e) {
+            }
         }
         return removalCount;
     }
-    
-    public void closeAllSessions(){
-        try{
+
+    public void closeAllSessions() {
+        try {
             hubConn.closeAllSessions();
-        }catch(Exception e)
-        {
-            System.out.println("error closing sessions "+e.getMessage());
+        } catch (Exception e) {
+            System.out.println("error closing sessions " + e.getMessage());
         }
     }
-      
-    public long checkLoggerID() throws MeteringSessionException{
-        long loggerID=-1;
-        loggerID= hubConn.getLoggerId();
+
+    public long checkLoggerID() throws MeteringSessionException {
+        long loggerID = -1;
+        loggerID = hubConn.getLoggerId();
         return loggerID;
-        
+
     }
-    
-    public long autoRegisterLogger() throws MeteringSessionException{
+
+    public long autoRegisterLogger() throws MeteringSessionException {
         long logID = -1;
         logID = checkLoggerID();
         //if(logID)
@@ -191,90 +190,90 @@ public class HubControl {
         return logID;
     }
 
-    public void processDataPacketEncoded (DataPacket pck) throws Exception{ 
+    public void processDataPacketEncoded(DataPacket pck) throws Exception {
         hubGui.logging.Logger.write(Resources.getFormatString("msg.hubControl.dataPacket", DatatypeConverter.printHexBinary(pck.getOrgData()))); //TODO: Remove later      
-            String time = String.format("%0#8X", (long)(new Date().getTime()/1000));
-            dbSession.addDatagram(new Datagram(DatatypeConverter.printHexBinary(pck.getOrgData()),getHubId(),time));      
+        String time = String.format("%0#8X", (long) (new Date().getTime() / 1000));
+        dbSession.addDatagram(new Datagram(DatatypeConverter.printHexBinary(pck.getOrgData()), getHubId(), time));
     }
-    
-    public void processDataPacketTemps (DataPacket pck) throws Exception{ 
+
+    public void processDataPacketTemps(DataPacket pck) throws Exception {
         System.out.println(pck);
         //System.out.println("Paczka danych: " +DatatypeConverter.printHexBinary(pck.getOrgData()));
-//Wydobywanie danych :        
-        DataPacketDTO test =pck.generateDTO();
+        //Wydobywanie danych :        
+        DataPacketDTO test = pck.generateDTO();
         String logID = pck.getLoggerHexId();
-       logID = logID.substring(4);  //usunąć pierwsze 4 znaki
-        String time = String.format("%0#8X",(long) ((test.getMeasurmentTimeStart().getTime() ) / 1000));
-//        test.getMeasurmentPeriod(); //TODO:: Dodać do Measurement period!!!
-        dbSession.addMeasurement(new Measurement(logID, getHubId(), test.getTemperatures(), time));
-        
-        
+        logID = logID.substring(4);  //usunąć pierwsze 4 znaki
+        String time = String.format("%0#8X", (long) ((test.getMeasurmentTimeStart().getTime()) / 1000));
+        // test.getMeasurmentPeriod(); //TODO:: Dodać do Measurement period!!!
+        dbSession.addMeasurement(new Measurement(logID, getHubId(), time, test.getTemperatures(), test.getMeasurmentPeriod()));
+
     }
-    
-    public void readPacketsLoggerFlash() throws MeteringSessionException{
-        DataPacket packet=null;
-        
-            LoggerFlashSession loggerFlashSession = hubConn.createLoggerFlashSession(new Timestamp(0));
-            
-            while ((packet = loggerFlashSession.getNextPacket(100000))!=null){
-                try {
-                    processDataPacketTemps(packet);
-                } catch (Exception ex) {
-                    Logger.getLogger(HubControl.class.getName()).log(Level.SEVERE, null, ex);
-                }
+
+    public void readPacketsLoggerFlash() throws MeteringSessionException {
+        DataPacket packet = null;
+
+        LoggerFlashSession loggerFlashSession = hubConn.createLoggerFlashSession(new Timestamp(0));
+
+        while ((packet = loggerFlashSession.getNextPacket(100000)) != null) {
+            try {
+                processDataPacketTemps(packet);
+            } catch (Exception ex) {
+                Logger.getLogger(HubControl.class.getName()).log(Level.SEVERE, null, ex);
             }
-            hubConn.closeLoggerFlashSession();
+        }
+        hubConn.closeLoggerFlashSession();
     }
-    
-    public void readPacketsHubFlash() throws MeteringSessionException{
-        DataPacket packet=null;
-        int packetCount =0;
-        try{
+
+    public void readPacketsHubFlash() throws MeteringSessionException {
+        DataPacket packet = null;
+        int packetCount = 0;
+        try {
             HubFlashSession hubFlashSession = hubConn.createHubFlashSession(0xFFFFFFFF);
             System.out.println("Session started");
-            while ((packet = hubFlashSession.getPrevPacket())!=null){
+            while ((packet = hubFlashSession.getPrevPacket()) != null) {
                 System.out.println("packetrecvd");
                 processDataPacketEncoded(packet);
                 packetCount++;
-                if (packetCount==10000)
+                if (packetCount == 10000) {
                     break;
-    }
+                }
+            }
             System.out.println("nopckg");
-        }catch(MeteringSessionException e){
+        } catch (MeteringSessionException e) {
             System.out.println(e.getMessage());
             throw e;
 
         } catch (Exception ex) {
             hubGui.logging.Logger.write(Resources.getString("msg.hubControl.errorOnPacketProcessing"), LogTyps.ERROR);
-        }finally{
-            try{
+        } finally {
+            try {
                 hubConn.closeHubFlashSession();
-            }catch(Exception e){
-                System.out.println("Error closing Hub Flash Session "+e.getMessage());
+            } catch (Exception e) {
+                System.out.println("Error closing Hub Flash Session " + e.getMessage());
             }
         }
     }
-        
-    public void startRecievingInRadioSession() throws MeteringSessionException{
-      // try{
-           hubConn.createRadioSession(0);
-           RSRecv = createRadioSessionReciever(this);
-           System.out.println("Started radio session recieving ");
-           RSRecv.mainThread();
-           
-       //}catch(Exception e){System.out.println("Error in radio session "+e.getMessage());}
+
+    public void startRecievingInRadioSession() throws MeteringSessionException {
+        // try{
+        hubConn.createRadioSession(0);
+        RSRecv = createRadioSessionReciever(this);
+        System.out.println("Started radio session recieving ");
+        RSRecv.mainThread();
+
+        //}catch(Exception e){System.out.println("Error in radio session "+e.getMessage());}
     }
-    
-    public void stopRecievingInRadioSession() throws MeteringSessionException{
-        if(RSRecv!=null){
+
+    public void stopRecievingInRadioSession() throws MeteringSessionException {
+        if (RSRecv != null) {
             RSRecv.close();
             hubConn.closeRadioSession();
         }
         RSRecv = null;
         System.out.println("Stopped radio session recieving ");
     }
-    
-    public void closeAll(){
+
+    public void closeAll() {
         try {
             stopRecievingInRadioSession();
         } catch (MeteringSessionException ex) {
@@ -283,13 +282,12 @@ public class HubControl {
         closeAllSessions();
         closeHubConn();
     }
-    
-    public void restartAll() throws MeteringSessionException{
+
+    public void restartAll() throws MeteringSessionException {
         boolean flag = false;
-        if(RSRecv!=null)
-        {
+        if (RSRecv != null) {
             flag = !flag;
-        
+
             try {
                 stopRecievingInRadioSession();
             } catch (MeteringSessionException ex) {
@@ -299,7 +297,9 @@ public class HubControl {
         closeAllSessions();
         closeHubConn();
         openHubConn();
-        if(flag) startRecievingInRadioSession();
- 
+        if (flag) {
+            startRecievingInRadioSession();
+        }
+
     }
 }

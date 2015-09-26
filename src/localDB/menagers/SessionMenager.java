@@ -40,7 +40,8 @@ public class SessionMenager {
 
     public void createSession(Session session) throws SQLException, Exception {
         if (session.getId() == null) {
-            /*LOG*/ System.out.println("Start: createSession");
+            /*LOG*/ // System.out.println("Start: createSession");
+            getConnection().setAutoCommit(true);
             String sql = "INSERT INTO Session_statistics(d_enqueued,d_received,d_send_ok,d_send_failures,m_enqueued,m_received,m_send_ok,m_send_failures) VALUES (?,?,?,?,?,?,?,?)";
             PreparedStatement cs = getConnection().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             cs.setInt(1, session.getDatagramsEnqueued());
@@ -62,7 +63,7 @@ public class SessionMenager {
                 }
             }
             cs.close();
-            /*LOG*/ System.out.println("End: createSession, session id: " + session.getId().toPlainString());
+            /*LOG*/ // System.out.println("End: createSession, session id: " + session.getId().toPlainString());
         } else {
             throw new SQLException("Creating session failed, session already has id: " + session.getId().toPlainString());
         }
@@ -75,7 +76,8 @@ public class SessionMenager {
             throw new SQLException("Udating session failed, session has no ID!");
         }
         if (session.getId() != null  && !session.isClosedOnLocalBD()) {
-            /*LOG*/ System.out.println("Start: updateSession, session id: " + session.getId().toPlainString());
+            /*LOG*/ // System.out.println("Start: updateSession, session id: " + session.getId().toPlainString());
+            getConnection().setAutoCommit(true);
             String sql = "UPDATE Session_statistics SET"
                     + " d_enqueued = (?),"
                     + " d_received = (?),"
@@ -101,7 +103,7 @@ public class SessionMenager {
                 throw new SQLException("Udating session failed, no rows affected.");
             }
             ps.close();
-            /*LOG*/ System.out.println("End: updateSession, session id: " + session.getId().toPlainString());
+            /*LOG*/ // System.out.println("End: updateSession, session id: " + session.getId().toPlainString());
         }
     }
 
@@ -112,7 +114,8 @@ public class SessionMenager {
             throw new SQLException("Closing session failed, session has no ID.");
         }
         if (session.getId() != null && !session.isClosedOnLocalBD()) {
-            /*LOG*/ System.out.println("Start: closeSession, session id: " + session.getId().toPlainString());
+            /*LOG*/ // System.out.println("Start: closeSession, session id: " + session.getId().toPlainString());
+            getConnection().setAutoCommit(true);
             String sql = "UPDATE Session_statistics SET "
                     + " d_enqueued = (?),"
                     + " d_received = (?),"
@@ -140,7 +143,7 @@ public class SessionMenager {
             }
             session.closeOnLocalBD();
             ps.close();
-            /*LOG*/ System.out.println("End: closeSession, session id: " + session.getId().toPlainString());
+            /*LOG*/ // System.out.println("End: closeSession, session id: " + session.getId().toPlainString());
         }
     }
 

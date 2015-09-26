@@ -42,6 +42,9 @@ public class MeasurementUtils {
                 currentSet = new HashSet<Measurement>();
             }
         }
+        if (currentSet.size() > 0) {
+            splitedMeasurements.add(currentSet);
+        }
         return splitedMeasurements;
     }
 }

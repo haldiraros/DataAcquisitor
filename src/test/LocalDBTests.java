@@ -5,11 +5,13 @@
  */
 package test;
 
-import hubGui.logging.LogTyps;
-import hubGui.logging.Logger;
-import localDB.menagers.DatagramMenager;
+import REST.RestMenager;
+import hubGui.i18n.Resources;
+import java.util.HashSet;
+import java.util.Set;
 import localDB.menagers.LocalDataBaseMenager;
-import project.data.Datagram;
+import localDB.menagers.MeasurementManager;
+import project.data.Measurement;
 import project.data.Session;
 
 /**
@@ -23,60 +25,87 @@ public class LocalDBTests {
 
         LocalDataBaseMenager ldbm = new LocalDataBaseMenager();
 //        if(ldbm.fullTestBDExists()){
-//           Logger.write("Local DB Found!", LogTyps.WARNING); 
+//           System.out.println("Local DB Found!", LogTyps.WARNING); 
 //        }else{
-//            Logger.write("Local DB Not Found!", LogTyps.WARNING);
+//            System.out.println("Local DB Not Found!", LogTyps.WARNING);
 //        }
         if (ldbm.fullTestBDExists() == false) {
-            Logger.write("Local DB Not Found!", LogTyps.WARNING);
-            Logger.write("Trying to create new Local DB.", LogTyps.SUCCESS);
+            System.out.println("Local DB Not Found!");
+            System.out.println("Trying to create new Local DB.");
             try {
                 ldbm.setupDataBase();
-                Logger.write("New Local DB created.", LogTyps.SUCCESS);
+                System.out.println("New Local DB created.");
             } catch (Exception e) {
-                Logger.write("Error while creating Local DB:" + e.getMessage(), LogTyps.ERROR);
+                System.out.println("Error while creating Local DB:" + e.getMessage());
                 e.printStackTrace();
             }
             if (ldbm.fullTestBDExists() == false) {
-                Logger.write("Error: Local BD is not valid!", LogTyps.ERROR);
+                System.out.println("Error: Local BD is not valid!");
                 return;
             }
         }
-        Session localDBSession = new Session(ldbm, true);
-        localDBSession.getLocalDataBaseMenager().getDatagramMenager().createDatagram(new Datagram("lol","hub_id","teraz"));
-        
-        testDatagram(localDBSession.getLocalDataBaseMenager().getDatagramMenager());
-        
+        Resources.setLang("pl");
+        Session localDBSession = new Session(ldbm, true, new RestMenager());
+        int[] tab = new int[10];
+        for (int i = 0; i < 10; i++) {
+            tab[i] = i;
+        }
+//        localDBSession.getLocalDataBaseMenager().createMeasurement(new Measurement("lol", "hub_id", "teraz", tab, 10));
+//
+        testMeasurement(localDBSession.getLocalDataBaseMenager().getMeasurementManager());
+        long startTime2 = System.currentTimeMillis();
+        System.out.println("startTime multi:" + startTime2);
+        Set<Measurement> sd = new HashSet<Measurement>();
+        for (int i = 0; i < 1000; i++) {
+            sd.add(new Measurement("lol", "hub_id" + i/100, "teraz", tab, i));
+        }
+        localDBSession.addMeasurements(sd);
+        System.out.println("multi:" + (System.currentTimeMillis() - startTime2));
+
+//        long startTime = System.currentTimeMillis();
+//        System.out.println("startTime single:"+startTime);
+//        for (int i = 0; i < 1000; i++) {
+//            localDBSession.getLocalDataBaseMenager().getMeasurementMenager().createMeasurement(new Measurement("lol", "hub_id", "pojedynczo:" + i));
+//        }
+//        System.out.println("single:"+(System.currentTimeMillis() - startTime));
+        Thread.sleep(10000);
+//        localDBSession.sendDatagrams();
+//        localDBSession.sendMeasurements();
+//        if (1 == 1) {
+//            throw new Exception("lol");
+//        }
         localDBSession.closeSession();
-        
+
         System.out.println("LocalDBTests END");
         return;
     }
+//1: 343 510
+//2: 226 731
 
-    private static void testDatagram(DatagramMenager dm) throws Exception {
+    private static void testMeasurement(MeasurementManager dm) throws Exception {
         if (dm != null) {
-            Datagram test = new Datagram("testowy","hub_ID","teraz");
-            dm.createDatagram(test);
-            test.setNewErrorMessage("error");
-            dm.updateDatagram(test);
-            Datagram test2 = dm.getDatagram(test.getId());
-            if (!test.getData().equals(test2.getData())) {
-                Logger.write("ERROR while comparing datagram: test:[" + test.getData() + "];test2:[" + test2.getData() + "]", LogTyps.ERROR);
-            } else {
-                Logger.write("SUCCESS while comparing datagram: test:[" + test.getData() + "];test2:[" + test2.getData() + "]", LogTyps.SUCCESS);
+            int[] tab = new int[10];
+            for (int i = 0; i < 10; i++) {
+                tab[i] = i;
             }
-            Logger.write("before setting as send:", LogTyps.WARNING);
-            Logger.write("  dm.getDatagramsToSend().size()  :" + dm.getDatagramsToSend().size(), LogTyps.WARNING);
-            Logger.write("  dm.getDatagramsToRemove().size():" + dm.getDatagramsToRemove().size(), LogTyps.WARNING);
-            test2.setDataSend(true);
-            dm.setSendOK(test2);
-            Logger.write("after setting as send:", LogTyps.WARNING);
-            Logger.write("  dm.getDatagramsToSend().size()  :" + dm.getDatagramsToSend().size(), LogTyps.WARNING);
-            Logger.write("  dm.getDatagramsToRemove().size():" + dm.getDatagramsToRemove().size(), LogTyps.WARNING);
-            dm.removeSendDatagrams();
-            Logger.write("after removing send datagrams:", LogTyps.WARNING);
-            Logger.write("  dm.getDatagramsToSend().size()  :" + dm.getDatagramsToSend().size(), LogTyps.WARNING);
-            Logger.write("  dm.getDatagramsToRemove().size():" + dm.getDatagramsToRemove().size(), LogTyps.WARNING);
+            Measurement test = new Measurement("lol", "hub_id", "teraz", tab, 10);
+            Set<Measurement> ds = new HashSet<>();
+            ds.add(test);
+            System.out.println("Inserted:" + dm.createMeasurements(ds));
+            test.setNewErrorMessage("error");
+            dm.updateMeasurements(ds);
+//            dm.updateMeasurement(test);
+//            Measurement test2 = dm.getMeasurement(test.getId());
+            System.out.println("before setting as send:");
+            System.out.println("  dm.getMeasurementsToSend().size()  :" + dm.getMeasurementsToSend().size());
+            test.setDataSend(true);
+            dm.updateMeasurements(ds);
+            System.out.println("after setting as send:");
+            System.out.println("  dm.getMeasurementsToSend().size()  :" + dm.getMeasurementsToSend().size());
+            dm.deleteSendMeasurements();
+            System.out.println("after removing send datagrams:");
+            System.out.println("  dm.getMeasurementsToSend().size()  :" + dm.getMeasurementsToSend().size());
+
         }
     }
 }

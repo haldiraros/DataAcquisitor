@@ -32,7 +32,7 @@ public class SetupDB {
             + ",Received       DATETIME                 DEFAULT CURRENT_TIMESTAMP"
             + ",send_attempts  INTEGER                  DEFAULT 0"
             + ",is_send        BOOLEAN        NOT NULL  DEFAULT FALSE"
-            + ",FOREIGN KEY (datagram_id) REFERENCES Datagrams (id)"
+            + ",FOREIGN KEY (datagram_id) REFERENCES Datagrams (id) ON DELETE CASCADE"
             + ",FOREIGN KEY (last_log_id) REFERENCES Datagram_Errors_log (id)"
             + ")";
 
@@ -43,24 +43,17 @@ public class SetupDB {
             + ",time           datetime       NOT NULL  DEFAULT CURRENT_TIMESTAMP"
             + ",type           integer"
             + ",error          varchar(2000)"
-            + ",FOREIGN KEY (datagram_id) REFERENCES Datagrams (id)"
+            + ",FOREIGN KEY (datagram_id) REFERENCES Datagrams (id) ON DELETE CASCADE"
             + ")";
-    
+
     private final String createMeasurementsTable
             = "CREATE TABLE Measurements( "
             + " ID               integer        NOT NULL  PRIMARY KEY AUTOINCREMENT"
             + ",LOGGER_ID        varchar(128)   NOT NULL"
             + ",HUB_ID           varchar(128)   NOT NULL"
             + ",MEASUREMENT_TIME varchar(128)   NOT NULL"
-            + ")";
-    
-    private final String createMeasurementsDataTable
-            = "CREATE TABLE Measurements_Data( "
-            + " ID              integer   NOT NULL  PRIMARY KEY AUTOINCREMENT"
-            + ",Measurement_id  integer   NOT NULL"
-            + ",TAB_INDEX       integer   NOT NULL"
-            + ",TAB_VALUE       integer   NOT NULL"
-            + ",FOREIGN KEY (Measurement_id) REFERENCES Measurements (id)"
+            + ",PERIOD           integer        NOT NULL"
+            + ",DATA             CLOB           NOT NULL"
             + ")";
 
     private final String createMeasurementsStatisticsTable
@@ -71,7 +64,7 @@ public class SetupDB {
             + ",received       DATETIME                 DEFAULT CURRENT_TIMESTAMP"
             + ",send_attempts  INTEGER                  DEFAULT 0"
             + ",is_send        BOOLEAN        NOT NULL  DEFAULT FALSE"
-            + ",FOREIGN KEY (Measurement_id) REFERENCES Measurements (id)"
+            + ",FOREIGN KEY (Measurement_id) REFERENCES Measurements (id) ON DELETE CASCADE"
             + ",FOREIGN KEY (last_log_id)    REFERENCES Measurement_Errors_log (id)"
             + ")";
 
@@ -82,7 +75,7 @@ public class SetupDB {
             + ",time           datetime       NOT NULL  DEFAULT CURRENT_TIMESTAMP"
             + ",type           integer"
             + ",error          varchar(2000)"
-            + ",FOREIGN KEY (Measurement_id) REFERENCES Measurements (id)"
+            + ",FOREIGN KEY (Measurement_id) REFERENCES Measurements (id) ON DELETE CASCADE"
             + ")";
 
     private final String createSessionStatisticsTable
@@ -101,6 +94,32 @@ public class SetupDB {
             + ",m_send_failures integer        NOT NULL  DEFAULT 0"
             + ")";
 
+    private final String createDatagramsTrigs
+            = "CREATE TRIGGER Datagrams_Ins_Trig AFTER INSERT "
+            + " ON Datagrams "
+            + " BEGIN"
+            + "   INSERT INTO Datagram_statistics(datagram_id) VALUES (new.ID); "
+            + " END;"
+            + "CREATE TRIGGER Datagrams_Add_Hist_Trig AFTER INSERT "
+            + " ON Datagram_Errors_log "
+            + " BEGIN"
+            + "   UPDATE Datagram_statistics SET last_log_id = new.ID, send_attempts = send_attempts + 1 where datagram_id = new.datagram_id; "
+            + " END;"
+            + "";
+
+    private final String createMeasurementTrigs
+            = "CREATE TRIGGER Measurement_Ins_Trig AFTER INSERT "
+            + " ON Measurements "
+            + " BEGIN"
+            + "   INSERT INTO Measurement_statistics(Measurement_id) VALUES (new.ID); "
+            + " END;"
+            + "CREATE TRIGGER Measurement_Add_Hist_Trig AFTER INSERT "
+            + " ON Measurement_Errors_log "
+            + " BEGIN"
+            + "   UPDATE Measurement_statistics SET last_log_id = new.ID, send_attempts = send_attempts + 1 where Measurement_id = new.Measurement_id; "
+            + " END;"
+            + "";
+
     public SetupDB() {
     }
 
@@ -115,10 +134,11 @@ public class SetupDB {
             stmt.executeUpdate(createDatagramsLogTable);
             stmt.executeUpdate(createDatagramsStatisticsTable);
             stmt.executeUpdate(createMeasurementsTable);
-            stmt.executeUpdate(createMeasurementsDataTable);
             stmt.executeUpdate(createMeasurementsLogTable);
             stmt.executeUpdate(createMeasurementsStatisticsTable);
             stmt.executeUpdate(createSessionStatisticsTable);
+            stmt.executeUpdate(createDatagramsTrigs);
+            stmt.executeUpdate(createMeasurementTrigs);
             stmt.close();
         } catch (Exception e) {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());

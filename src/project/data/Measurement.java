@@ -6,6 +6,8 @@
 package project.data;
 
 import java.math.BigDecimal;
+import org.json.JSONArray;
+import org.json.JSONException;
 
 /**
  *
@@ -17,36 +19,33 @@ public class Measurement{
     private final String loggerId;
     private final String hubId;
     private final String measurmentTime;
+    private final int period;
+    private final JSONArray data;
+    
     private boolean dataSend;
 
     private String newErrorMessage;
     private String prevErrorMessage;
     
-    private int[] measurments;
-    
-       
-    public Measurement(String loggerId, String hubId, int[] measurments, String measurmentTime){
-        this(null,loggerId,hubId,measurments,measurmentTime,false);
-    }  
-       
-    public Measurement(BigDecimal id, String loggerId, String hubId, int[] measurments, String measurmentTime){
-        this(id,loggerId,hubId,measurments,measurmentTime,false);
+    public Measurement(String loggerId, String hubId, String measurmentTime, int[] data, int period) throws JSONException{
+        this(null,loggerId,hubId,measurmentTime,new JSONArray(data),period,false);
     }
     
-    public Measurement(BigDecimal id, String loggerId, String hubId, String measurmentTime){
-        this(id,loggerId,hubId,null,measurmentTime,false);
+    public Measurement(BigDecimal id, String loggerId, String hubId, String measurmentTime, String data, int period, boolean dataSend) throws JSONException{
+        this(id,loggerId,hubId,measurmentTime,new JSONArray(data),period,dataSend);
     }
     
-    public Measurement(BigDecimal id, String loggerId, String hubId, String measurmentTime, boolean dataSend){
-        this(id,loggerId,hubId,null,measurmentTime,dataSend);
+    public Measurement(BigDecimal id, String loggerId, String hubId, String measurmentTime, String data, int period) throws JSONException{
+        this(id,loggerId,hubId,measurmentTime,new JSONArray(data),period,false);
     }
 
-    public Measurement(BigDecimal id, String loggerId, String hubId, int[] measurments, String measurmentTime, boolean dataSend){
+    public Measurement(BigDecimal id, String loggerId, String hubId, String measurmentTime, JSONArray data, int period, boolean dataSend){
         this.id = id;
         this.loggerId = loggerId;
         this.hubId = hubId;
-        this.measurments = measurments;
         this.measurmentTime = measurmentTime;
+        this.data = data;
+        this.period = period;
         this.dataSend = dataSend;
     }
     
@@ -130,24 +129,24 @@ public class Measurement{
     }
 
     /**
-     * @return the measurments
-     */
-    public int[] getMeasurments() {
-        return measurments;
-    }
-
-    /**
-     * @param measurments the measurments to set
-     */
-    public void setMeasurments(int[] measurments) {
-        this.measurments = measurments;
-    }
-
-    /**
      * @return the measurmentTime
      */
     public String getMeasurmentTime() {
         return measurmentTime;
+    }
+
+    /**
+     * @return the period
+     */
+    public int getPeriod() {
+        return period;
+    }
+
+    /**
+     * @return the data
+     */
+    public JSONArray getData() {
+        return data;
     }
 
 }

@@ -22,6 +22,10 @@ import localDB.menagers.LocalDataBaseMenager;
  * @author hp
  */
 public class Session {
+    private static final int datagramsIdleSendInitialDelay = 15;
+    private static final int datagramsIdleSendPeriod = 30;
+    private static final int measurementsIdleSendInitialDelay = 30;
+    private static final int measurementsIdleSendPeriod = 30;
 
     private BigDecimal id;
     private int datagramsEnqueued;
@@ -101,7 +105,7 @@ public class Session {
                     Logger.write(Resources.getString("msg.session.errorOnCreatingSendTask"), LogTyps.ERROR);
                 }
             }
-        }, 15, 30, TimeUnit.SECONDS);
+        }, datagramsIdleSendInitialDelay, datagramsIdleSendPeriod, TimeUnit.SECONDS);
         exec.scheduleAtFixedRate(new Runnable() {
             @Override
             public void run() {
@@ -111,7 +115,7 @@ public class Session {
                     Logger.write(Resources.getString("msg.session.errorOnCreatingSendTask"), LogTyps.ERROR);
                 }
             }
-        }, 15, 30, TimeUnit.SECONDS);
+        }, measurementsIdleSendInitialDelay, measurementsIdleSendPeriod, TimeUnit.SECONDS);
     }
 
     public boolean isSessionWithLocalDB() {
@@ -136,8 +140,7 @@ public class Session {
 
     public boolean addDatagram(Datagram datagram) throws Exception {
         if (localDataBaseMenager != null) {
-            localDataBaseMenager.createDatagram(datagram);
-            addDatagramReceived();
+            addDatagramsReceived(localDataBaseMenager.createDatagram(datagram));
             localDataBaseMenager.updateSession(this);
             return true;
         } else {
@@ -147,6 +150,24 @@ public class Session {
                         Resources.getFormatString(
                                 "msg.session.errorOnSendingDatagram",
                                 datagram.getNewErrorMessage()),
+                        LogTyps.ERROR);
+            }
+            return false;
+        }
+    }
+
+    public boolean addDatagrams(Set<Datagram> datagrams) throws Exception {
+        if (localDataBaseMenager != null) {
+            addDatagramsReceived(localDataBaseMenager.createDatagrams(datagrams));
+            localDataBaseMenager.updateSession(this);
+            return true;
+        } else {
+            SendStatistics stats = restMenager.sendDatagrams(datagrams);
+            if (stats.getDatagramSendFailsCounter() > 0) {
+                Logger.write(
+                        Resources.getFormatString(
+                                "msg.session.errorOnSendingDatagram",
+                                ((Datagram[]) datagrams.toArray())[0].getNewErrorMessage()),
                         LogTyps.ERROR);
             }
             return false;
@@ -171,8 +192,7 @@ public class Session {
 
     public boolean addMeasurement(Measurement measurement) throws Exception {
         if (localDataBaseMenager != null) {
-            localDataBaseMenager.createMeasurement(measurement);
-            addMeasuresReceived();
+            addMeasuresReceived(localDataBaseMenager.createMeasurement(measurement));
             localDataBaseMenager.updateSession(this);
             return true;
         } else {
@@ -182,6 +202,24 @@ public class Session {
                         Resources.getFormatString(
                                 "msg.session.errorOnSendingMeasurement",
                                 measurement.getNewErrorMessage()),
+                        LogTyps.ERROR);
+            }
+            return false;
+        }
+    }
+
+    public boolean addMeasurements(Set<Measurement> measurements) throws Exception {
+        if (localDataBaseMenager != null) {
+            addMeasuresReceived(localDataBaseMenager.createMeasurements(measurements));
+            localDataBaseMenager.updateSession(this);
+            return true;
+        } else {
+            SendStatistics stats = restMenager.sendMeasurements(measurements);
+            if (stats.getMeasurementSendFailsCounter() > 0) {
+                Logger.write(
+                        Resources.getFormatString(
+                                "msg.session.errorOnSendingMeasurement",
+                                ((Measurement[]) measurements.toArray())[0].getNewErrorMessage()),
                         LogTyps.ERROR);
             }
             return false;

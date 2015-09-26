@@ -87,17 +87,14 @@ public class RestMeasurementOperations {
     private void fillMeasurementsInfos(JSONObject message, Set<Measurement> measurements) throws JSONException {
         JSONArray datas = new JSONArray();
         for (Measurement m : measurements) {
-            JSONArray values = new JSONArray();
-            for(int i=0; i<m.getMeasurments().length; i++){
-                values.put(m.getMeasurments()[i]);
-            }
             JSONObject measure = new JSONObject();
             measure.put("logerId", m.getLoggerId());
             measure.put("startTime", m.getMeasurmentTime());
-            measure.put("measures", values);
+            measure.put("period", m.getPeriod());
+            measure.put("measures", m.getData());
             datas.put(measure);
         }
-        message.put("frames", datas);
+        message.put("measurements", datas);
     }
 
 }

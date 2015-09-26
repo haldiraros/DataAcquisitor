@@ -42,6 +42,9 @@ public class DatagramsUtils {
                 currentSet = new HashSet<Datagram>();
             }
         }
+        if (currentSet.size() > 0) {
+            splitedDatagrams.add(currentSet);
+        }
         return splitedDatagrams;
     }
 }
