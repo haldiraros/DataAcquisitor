@@ -23,8 +23,8 @@ public class RestHubOperations {
         JSONObject message = RestUtils.getHubLogInfo(hc.getHubId());
         message.put("firmwareVer", hc.getHubFirmVer());
         message.put("hardwareVer", hc.getHubHardVer());
-        message.put("dateTime", hc.getHubConn().getHubTime());
-        message.put("ntpTime", "T");
+        message.put("dateTime", String.format("%0#8X", (long) (hc.getHubConn().getHubTime().getTime()/1000)));
+        message.put("ntpTime", "N");
         System.out.println("\nJSON Object: " + message);
         // Step2: Now pass JSON File Data to REST Service
         return RestUtils.sendToServer(message, RestUtils.getHubStatusURL());
