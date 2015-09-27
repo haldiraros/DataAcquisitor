@@ -6,6 +6,7 @@
 package REST.operations;
 
 import hubOperations.HubControl;
+import hubOperations.HubHandler;
 import java.io.IOException;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -16,17 +17,17 @@ import org.json.JSONObject;
  */
 public class RestHubOperations {
     
-    public JSONObject sendHubStatus(HubControl hc) throws JSONException, IOException, Exception {
-        // Step1: Prepare JSON data
-        JSONObject status = RestUtils.getHubLogInfo(hc.getHubId());
-        status.put("firmwareVer", "1.0");
-        status.put("hardwareVer", "1.0");
-        status.put("dateTime", "FFFF");
-        JSONObject message = new JSONObject();
-        message.put("status", status);
+    public JSONObject sendHubStatus() throws JSONException, IOException, Exception {
+        HubControl hc = HubHandler.getInstance().getHubControl();
+        // Step1: Prepare JSON data 
+        JSONObject message = RestUtils.getHubLogInfo(hc.getHubId());
+        message.put("firmwareVer", hc.getHubFirmVer());
+        message.put("hardwareVer", hc.getHubHardVer());
+        message.put("dateTime", hc.getHubConn().getHubTime());
+        message.put("ntpTime", "T");
         System.out.println("\nJSON Object: " + message);
         // Step2: Now pass JSON File Data to REST Service
-        return RestUtils.sendToServer(message, RestUtils.getHubstatusURL());
+        return RestUtils.sendToServer(message, RestUtils.getHubStatusURL());
     }
 
     public JSONObject getHubCommand(HubControl hc) throws JSONException, IOException, Exception {
@@ -34,7 +35,7 @@ public class RestHubOperations {
         JSONObject message = RestUtils.getHubLogInfo(hc.getHubId());
         System.out.println("\nJSON Object: " + message);
         // Step2: Now pass JSON File Data to REST Service
-        return RestUtils.sendToServer(message, RestUtils.getHubcommandURL());
+        return RestUtils.sendToServer(message, RestUtils.getHubCommandURL());
     }
 
     public JSONObject sendHubCommandStatus(HubControl hc, Long commandId, String commandStatus) throws JSONException, IOException, Exception {
@@ -46,7 +47,7 @@ public class RestHubOperations {
         message.put("command", command);
         System.out.println("\nJSON Object: " + message);
         // Step2: Now pass JSON File Data to REST Service
-        return RestUtils.sendToServer(message, RestUtils.getHubcommandstatusURL());
+        return RestUtils.sendToServer(message, RestUtils.getHubCommandStatusURL());
     }
 
 }

@@ -33,9 +33,9 @@ public class RestMeasurementOperations {
             fillMeasurementsInfos(message, ds);
             System.out.println("\nJSON Object: " + message);
             // Step2: Now pass JSON File Data to REST Service
-            JSONObject response = RestUtils.sendToServer(message, RestUtils.getPlainmeasurementbatchURL());
+            JSONObject response = RestUtils.sendToServer(message, RestUtils.getPlainMeasurementBatchURL());
             int status = response.getInt("errCode");
-            if (RestUtils.NoErrorResponse == status) {
+            if (RestUtils.noErrorResponse == status) {
                 stats.addMeasurementSendOkCounter();
                 measurement.setDataSend(true);
             } else {
@@ -60,9 +60,9 @@ public class RestMeasurementOperations {
                     fillMeasurementsInfos(message, datas);
                     System.out.println("\nJSON Object: " + message);
                     // Step2: Now pass JSON File Data to REST Service
-                    JSONObject response = RestUtils.sendToServer(message, RestUtils.getPlainmeasurementbatchURL());
+                    JSONObject response = RestUtils.sendToServer(message, RestUtils.getPlainMeasurementBatchURL());
                     int status = response.getInt("errCode");
-                    if (RestUtils.NoErrorResponse == status) {
+                    if (RestUtils.noErrorResponse == status) {
                         stats.addMeasurementSendOkCounter(datas.size());
                         datas.stream().forEach((d) -> {
                             d.setDataSend(true);

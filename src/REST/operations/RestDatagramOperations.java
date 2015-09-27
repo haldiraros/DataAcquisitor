@@ -35,7 +35,7 @@ public class RestDatagramOperations {
             // Step2: Now pass JSON File Data to REST Service
             JSONObject response = RestUtils.sendToServer(message, RestUtils.getMeasurementsURL());
             int status = response.getInt("errCode");
-            if (RestUtils.NoErrorResponse == status) {
+            if (RestUtils.noErrorResponse == status) {
                 stats.addDatagramSendOkCounter();
                 datagram.setDataSend(true);
             } else {
@@ -62,7 +62,7 @@ public class RestDatagramOperations {
                     // Step2: Now pass JSON File Data to REST Service
                     JSONObject response = RestUtils.sendToServer(message, RestUtils.getMeasurementsURL());
                     int status = response.getInt("errCode");
-                    if (RestUtils.NoErrorResponse == status) {
+                    if (RestUtils.noErrorResponse == status) {
                         stats.addDatagramSendOkCounter(datas.size());
                         datas.stream().forEach((d) -> {
                             d.setDataSend(true);

@@ -10,8 +10,10 @@ package REST;
  * @author hp
  */
 import REST.operations.RestDatagramOperations;
+import REST.operations.RestHubOperations;
 import REST.operations.RestMeasurementOperations;
 import java.util.Set;
+import org.json.JSONObject;
 import project.data.Datagram;
 import project.data.Measurement;
 
@@ -35,6 +37,11 @@ public class RestMenager {
     public SendStatistics sendMeasurements(Set<Measurement> measurements) {
         RestMeasurementOperations rmo = new RestMeasurementOperations();
         return rmo.sendMeasurements(measurements);
+    }
+    
+    public JSONObject sendHubStatus() throws Exception {
+        RestHubOperations rho = new RestHubOperations();
+        return rho.sendHubStatus();
     }
 
 }
