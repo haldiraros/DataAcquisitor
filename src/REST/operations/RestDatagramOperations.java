@@ -6,6 +6,9 @@
 package REST.operations;
 
 import REST.SendStatistics;
+import hubGui.i18n.Resources;
+import hubGui.logging.LogTyps;
+import hubGui.settings.SettingsLoader;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
@@ -25,10 +28,20 @@ public class RestDatagramOperations {
 
     public SendStatistics sendDatagram(Datagram datagram) throws Exception {
         SendStatistics stats = new SendStatistics();
+        String key = null;
+        try {
+            key = SettingsLoader.getHubAuthKey(datagram.getHubId());
+        } catch (Exception ex) {
+            key = null;
+        }
+        if (key == null) {
+            hubGui.logging.Logger.write(Resources.getFormatString("msg.restUtils.noAuthKeyForHub", datagram.getHubId()), LogTyps.ERROR);
+            return stats;
+        }
         try {
             // Step1: Prepare JSON data
             JSONObject message = RestUtils.getHubLogInfo(datagram.getHubId());
-            Set<Datagram> ds  = new HashSet<Datagram>();
+            Set<Datagram> ds = new HashSet<Datagram>();
             ds.add(datagram);
             fillDatagramsInfos(message, ds);
             System.out.println("\nJSON Object: " + message);
@@ -53,6 +66,16 @@ public class RestDatagramOperations {
         Map<String, Set<Datagram>> mappedDatagrams = DatagramsUtils.sortDatagrams(datagrams);
         SendStatistics stats = new SendStatistics();
         for (String hubId : mappedDatagrams.keySet()) {
+            String key = null;
+            try {
+                key = SettingsLoader.getHubAuthKey(hubId);
+            } catch (Exception ex) {
+                key = null;
+            }
+            if (key == null) {
+                hubGui.logging.Logger.write(Resources.getFormatString("msg.restUtils.noAuthKeyForHub", hubId), LogTyps.ERROR);
+                continue;
+            }
             for (Set<Datagram> datas : DatagramsUtils.splitDatagrams(mappedDatagrams.get(hubId), maxDatagramsPerFrame)) {
                 try {
                     // Step1: Prepare JSON data

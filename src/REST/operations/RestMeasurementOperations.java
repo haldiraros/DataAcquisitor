@@ -6,6 +6,9 @@
 package REST.operations;
 
 import REST.SendStatistics;
+import hubGui.i18n.Resources;
+import hubGui.logging.LogTyps;
+import hubGui.settings.SettingsLoader;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
@@ -25,6 +28,16 @@ public class RestMeasurementOperations {
 
     public SendStatistics sendMeasurement(Measurement measurement) throws Exception {
         SendStatistics stats = new SendStatistics();
+        String key = null;
+        try {
+            key = SettingsLoader.getHubAuthKey(measurement.getHubId());
+        } catch (Exception ex) {
+            key = null;
+        }
+        if (key == null) {
+            hubGui.logging.Logger.write(Resources.getFormatString("msg.restUtils.noAuthKeyForHub", measurement.getHubId()), LogTyps.ERROR);
+            return stats;
+        }
         try {
             // Step1: Prepare JSON data
             JSONObject message = RestUtils.getHubLogInfo(measurement.getHubId());
@@ -53,6 +66,16 @@ public class RestMeasurementOperations {
         Map<String, Set<Measurement>> mappedMeasurements = MeasurementUtils.sortMeasurements(measurements);
         SendStatistics stats = new SendStatistics();
         for (String hubId : mappedMeasurements.keySet()) {
+            String key = null;
+            try {
+                key = SettingsLoader.getHubAuthKey(hubId);
+            } catch (Exception ex) {
+                key = null;
+            }
+            if (key == null) {
+                hubGui.logging.Logger.write(Resources.getFormatString("msg.restUtils.noAuthKeyForHub", hubId), LogTyps.ERROR);
+                continue;
+            }
             for (Set<Measurement> datas : MeasurementUtils.splitMeasurements(mappedMeasurements.get(hubId), maxMeasurementsPerFrame)) {
                 try {
                     // Step1: Prepare JSON data
