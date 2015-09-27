@@ -83,7 +83,7 @@ public class SettingsFormController implements Initializable {
         
         proxyPortText.textProperty().addListener(
                 (ObservableValue<? extends String> observable, String oldValue, String newValue) -> {
-                    if (!newValue.matches("\\d*")) {
+                    if (newValue!=null && !newValue.matches("\\d*")) {
                         proxyPortText.setText(oldValue);
                     }
                 });
