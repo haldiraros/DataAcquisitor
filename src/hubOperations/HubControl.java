@@ -191,20 +191,16 @@ public class HubControl {
     }
 
     public void processDataPacketEncoded(DataPacket pck) throws Exception {
-        hubGui.logging.Logger.write(Resources.getFormatString("msg.hubControl.dataPacket", DatatypeConverter.printHexBinary(pck.getOrgData()))); //TODO: Remove later      
+        //hubGui.logging.Logger.write(Resources.getFormatString("msg.hubControl.dataPacket", DatatypeConverter.printHexBinary(pck.getOrgData()))); //TODO: Remove later      
         String time = String.format("%0#8X", (long) (new Date().getTime() / 1000));
         dbSession.addDatagram(new Datagram(DatatypeConverter.printHexBinary(pck.getOrgData()), getHubId(), time));
     }
 
-    public void processDataPacketTemps(DataPacket pck) throws Exception {
-        System.out.println(pck);
-        //System.out.println("Paczka danych: " +DatatypeConverter.printHexBinary(pck.getOrgData()));
-        //Wydobywanie danych :        
+    public void processDataPacketTemps(DataPacket pck) throws Exception {       
         DataPacketDTO test = pck.generateDTO();
         String logID = pck.getLoggerHexId();
         logID = logID.substring(4);  //usunąć pierwsze 4 znaki
         String time = String.format("%0#8X", (long) ((test.getMeasurmentTimeStart().getTime()) / 1000));
-        // test.getMeasurmentPeriod(); //TODO:: Dodać do Measurement period!!!
         dbSession.addMeasurement(new Measurement(logID, getHubId(), time, test.getTemperatures(), test.getMeasurmentPeriod()));
 
     }

@@ -68,6 +68,7 @@ public class RadioSessionReciever implements Runnable{
             while (isShouldRun()) {
                 dp = metSess.getNextPacket();
                 hubContr.processDataPacketEncoded(dp);
+                hubGui.logging.Logger.write(Resources.getFormatString("msg.radioSessionReciever.packetRecievedFrom", dp.getLoggerHexId().substring(4)), LogTyps.LOG);
                 lgr.info("Time:"+System.nanoTime()+","+dp);
             } 
         }catch (MeteringSessionException tout) {
