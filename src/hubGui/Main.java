@@ -47,6 +47,7 @@ public class Main extends Application {
             HubHandler hubH = HubHandler.getInstance();
             hubH.getHubControl().closeAll();
             hubH.getHubControl().getDbSession().closeSession();
+            hubH.shutdown();
             hubH=null;
         }catch(Exception e){
             e.printStackTrace();
