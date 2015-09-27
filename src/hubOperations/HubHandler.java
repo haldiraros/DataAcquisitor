@@ -16,7 +16,13 @@
  */
 package hubOperations;
 
+import hubGui.i18n.Resources;
+import hubGui.logging.LogTyps;
+import hubGui.logging.Logger;
 import hubLibrary.meteringcomreader.exceptions.MeteringSessionException;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 import project.data.Session;
 
 /**
@@ -27,6 +33,7 @@ public class HubHandler {
     private static volatile HubHandler instance = null;
     
     private HubControl hubControl = null;
+    private ScheduledExecutorService exec;
 
     public HubControl getHubControl() {
         return hubControl;
@@ -34,7 +41,27 @@ public class HubHandler {
     
     private HubHandler() throws MeteringSessionException {
         hubControl = new HubControl();
+        
+         exec = Executors.newSingleThreadScheduledExecutor();
+         exec.scheduleAtFixedRate(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    Session dbSession = hubControl.getDbSession();
+                    if(dbSession!=null) dbSession.sendHubStatus();
+                } catch (Exception ex) {
+                    Logger.write(Resources.getString("msg.hubHandler.errorSubmitingHubStatus"), LogTyps.ERROR);
+                }
+            }
+        }, 5, 5, TimeUnit.MINUTES);
        
+    }
+    
+    public void shutdown(){
+        if (exec != null) {
+            exec.shutdown();
+        }
+        instance = null;
     }
     
     public static synchronized HubHandler getInstance() throws MeteringSessionException {
