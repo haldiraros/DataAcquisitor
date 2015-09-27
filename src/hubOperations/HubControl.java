@@ -125,7 +125,14 @@ public class HubControl {
             hubConn.close();
         }
     }
-
+    public int getHubFirmVer() throws MeteringSessionException{
+        return hubConn.getHubFirmawareVersion();
+    }
+    
+    public int getHubHardVer() throws MeteringSessionException{
+        return hubConn.getHubHardwareVersion();
+    }
+    
     public long[] getRegisteredLoggersList() {
         long[] registeredLoggers = null;
         try {
