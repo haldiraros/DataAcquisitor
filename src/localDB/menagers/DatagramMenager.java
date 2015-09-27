@@ -102,12 +102,14 @@ public class DatagramMenager {
         //getConnection().setAutoCommit(false);
         String sql = "INSERT INTO Datagram_Errors_log(DATAGRAM_ID,ERROR) VALUES (?,?)";
         for (Datagram datagram : datagrams) {
-            if (datagram.getId() != null && datagram.isDataSend() != true) {
+            if (datagram.getId() != null && datagram.isDataSend() != true && datagram.getNewErrorMessage() != null) {
                 /*LOG*/ // System.out.println("Start: reportSendErrorForDatagram with id:" + datagram.getId());
                 PreparedStatement ps = getConnection().prepareStatement(sql);
                 ps.setBigDecimal(1, datagram.getId());
                 ps.setString(2, datagram.getNewErrorMessage() != null ? datagram.getNewErrorMessage().substring(0, Math.min(datagram.getNewErrorMessage().length(), 2000)) : null);
                 updated += ps.executeUpdate();
+                datagram.setPrevErrorMessage(datagram.getNewErrorMessage());
+                datagram.setNewErrorMessage(null);
                 ps.close();
                 /*LOG*/ // System.out.println("End: reportSendErrorForDatagram with id:" + datagram.getId());
             }

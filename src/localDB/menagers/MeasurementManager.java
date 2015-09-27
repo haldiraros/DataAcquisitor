@@ -108,12 +108,14 @@ public class MeasurementManager {
         //getConnection().setAutoCommit(false);
         String sql = "INSERT INTO Measurement_Errors_log(Measurement_ID,ERROR) VALUES (?,?)";
         for (Measurement measurement : measurements) {
-            if (measurement.getId() != null && measurement.isDataSend() != true) {
+            if (measurement.getId() != null && measurement.isDataSend() != true && measurement.getNewErrorMessage() != null) {
                 /*LOG*/ // System.out.println("Start: reportSendErrorForMeasurement with id:" + measurement.getId());
                 PreparedStatement ps = getConnection().prepareStatement(sql);
                 ps.setBigDecimal(1, measurement.getId());
                 ps.setString(2, measurement.getNewErrorMessage() != null ? measurement.getNewErrorMessage().substring(0, Math.min(measurement.getNewErrorMessage().length(), 2000)) : null);
                 updated += ps.executeUpdate();
+                measurement.setPrevErrorMessage(measurement.getNewErrorMessage());
+                measurement.setNewErrorMessage(null);
                 ps.close();
                 /*LOG*/ // System.out.println("End: reportSendErrorForMeasurement with id:" + measurement.getId());
             }
