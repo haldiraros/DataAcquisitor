@@ -30,7 +30,7 @@ public class MeasurementManager {
     public int createMeasurements(Set<Measurement> measurements) throws SQLException, Exception {
         int inserted = 0;
         String sql = "INSERT INTO Measurements(LOGGER_ID,HUB_ID,MEASUREMENT_TIME,PERIOD,DATA) VALUES (?,?,?,?,?)";
-        getConnection().setAutoCommit(false);
+        //getConnection().setAutoCommit(false);
         for (Measurement m : measurements) {
             if (m.getId() == null) {
                 /*LOG*/ //System.out.println("Start: createDatagram");
@@ -58,7 +58,7 @@ public class MeasurementManager {
         }
 
         getConnection().commit();
-        getConnection().setAutoCommit(true);
+        //getConnection().setAutoCommit(true);
         return inserted;
     }
 
@@ -92,20 +92,20 @@ public class MeasurementManager {
 
     public int deleteSendMeasurements() throws SQLException {
         /*LOG*/ //System.out.println("Start: deleteSendMeasurements");
-        getConnection().setAutoCommit(false);
+        //getConnection().setAutoCommit(false);
         String sql = "DELETE FROM Measurements WHERE ID in (select Measurement_id from Measurement_statistics where is_send = 'TRUE')";
         PreparedStatement ps = getConnection().prepareStatement(sql);
         int deleted = ps.executeUpdate();
         ps.close();
         getConnection().commit();
-        getConnection().setAutoCommit(true);
+        //getConnection().setAutoCommit(true);
         return deleted;
         /*LOG*/ // System.out.println("End: deleteSendMeasurements");
     }
 
     private int reportSendErrorForMeasurements(Set<Measurement> measurements) throws SQLException {
         int updated = 0;
-        getConnection().setAutoCommit(false);
+        //getConnection().setAutoCommit(false);
         String sql = "INSERT INTO Measurement_Errors_log(Measurement_ID,ERROR) VALUES (?,?)";
         for (Measurement measurement : measurements) {
             if (measurement.getId() != null && measurement.isDataSend() != true) {
@@ -119,13 +119,13 @@ public class MeasurementManager {
             }
         }
         getConnection().commit();
-        getConnection().setAutoCommit(true);
+        //getConnection().setAutoCommit(true);
         return updated;
     }
 
     private int setSendOK(Set<Measurement> measurements) throws SQLException {
         int updated = 0;
-        getConnection().setAutoCommit(false);
+        //getConnection().setAutoCommit(false);
         String sql = "UPDATE Measurement_statistics "
                 + " SET "
                 + " is_send = 'TRUE',"
@@ -143,7 +143,7 @@ public class MeasurementManager {
             }
         }
         getConnection().commit();
-        getConnection().setAutoCommit(true);
+        //getConnection().setAutoCommit(true);
         return updated;
     }
 
