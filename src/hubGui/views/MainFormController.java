@@ -12,6 +12,7 @@ import hubGui.logging.LogTyps;
 import hubGui.logging.Logger;
 import hubGui.models.Chip;
 import hubGui.models.Message;
+import hubGui.settings.SettingsLoader;
 import hubLibrary.meteringcomreader.exceptions.MeteringSessionException;
 import hubOperations.HubControl;
 import hubOperations.HubHandler;
@@ -106,6 +107,9 @@ public class MainFormController implements Initializable {
                                 case WARNING:
                                     this.setTextFill(Color.ORANGE);
                                     break;
+                                case LOG:
+                                    this.setTextFill(Color.BLACK);
+                                    break;
                             }                            
                             setText(item);
                         }
@@ -134,6 +138,19 @@ public class MainFormController implements Initializable {
         }
         hubControlInit(ses);
         initializeLoggerList();
+        
+        try {
+            String hID = HubHandler.getInstance().getHubControl().getHubId();
+            if(SettingsLoader.getHubAuthKey(hID) == null){
+                Dialogs.showInfoAlert(
+                        Resources.getFormatString(
+                                "msg.main.noAuthKeyForHubOnInitAlert",hID,
+                                Resources.getString("msg.main.AuthKeyInstructions")));
+                hubGui.logging.Logger.write(Resources.getFormatString("msg.main.noAuthKeyForHubOnInit", hID), LogTyps.WARNING);
+            }
+        } catch (Exception ex) {
+            java.util.logging.Logger.getLogger(MainFormController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     private void hubControlInit(Session dbSession) { //TODO: make sure there is a auth key for the HUB
@@ -318,7 +335,7 @@ public class MainFormController implements Initializable {
         task.setOnRunning((e) -> test.getDialogStage().show());
         task.setOnSucceeded((e) -> {
             test.getDialogStage().hide();
-            addMessage(Resources.getString("msg.main.dataReceived"));
+            Logger.write(Resources.getString("msg.main.dataReceived"),LogTyps.SUCCESS);
         });
         task.setOnFailed((e) -> {
             test.getDialogStage().hide();
