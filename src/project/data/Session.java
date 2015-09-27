@@ -16,7 +16,6 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 import localDB.menagers.LocalDataBaseMenager;
-import org.json.JSONObject;
 
 /**
  *
@@ -254,8 +253,8 @@ public class Session {
         addMeasuresSend_Failures(statistics.getMeasurementSendFailsCounter());     
     }
     
-    public JSONObject sendHubStatus() throws Exception{
-        return restMenager.sendHubStatus();
+    public void sendHubStatus() throws Exception{
+        restMenager.sendHubStatus();
     }
 
     public BigDecimal getId() {

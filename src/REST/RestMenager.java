@@ -13,7 +13,6 @@ import REST.operations.RestDatagramOperations;
 import REST.operations.RestHubOperations;
 import REST.operations.RestMeasurementOperations;
 import java.util.Set;
-import org.json.JSONObject;
 import project.data.Datagram;
 import project.data.Measurement;
 
@@ -39,9 +38,9 @@ public class RestMenager {
         return rmo.sendMeasurements(measurements);
     }
     
-    public JSONObject sendHubStatus() throws Exception {
+    public void sendHubStatus() throws Exception {
         RestHubOperations rho = new RestHubOperations();
-        return rho.sendHubStatus();
+        rho.sendHubStatus();
     }
 
 }
