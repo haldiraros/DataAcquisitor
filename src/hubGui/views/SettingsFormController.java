@@ -179,9 +179,12 @@ public class SettingsFormController implements Initializable {
     @FXML
     private void okActionHandler(ActionEvent event) {
         try {
+            if(langCombo.getValue()!= Resources.getCurrentLang()){
+                Dialogs.showInfoAlert(Resources.getString("msg.settings.langChangeRestartNeeded"));
+            }
             Settings settings = getSettings();
             setProxySettings(settings);
-            SettingsLoader.save(settings);
+            SettingsLoader.save(settings); 
             close();
         }
         catch (Exception ex) {
