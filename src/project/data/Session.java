@@ -22,6 +22,7 @@ import localDB.menagers.LocalDataBaseMenager;
  * @author hp
  */
 public class Session {
+
     private static final int datagramsIdleSendInitialDelay = 15;
     private static final int datagramsIdleSendPeriod = 30;
     private static final int measurementsIdleSendInitialDelay = 30;
@@ -121,55 +122,76 @@ public class Session {
     public boolean isSessionWithLocalDB() {
         return localDataBaseMenager != null;
     }
-  
+
     public void sendDatagrams() {
         if (restMenager != null) {
             try {
                 Set<Datagram> datagramsToSend = localDataBaseMenager.getDatagramsToSend();
                 SendStatistics stats = restMenager.sendDatagrams(datagramsToSend);
-                localDataBaseMenager.updateDatagrams(datagramsToSend);
-                incrementCounters(stats);
-                localDataBaseMenager.updateSession(this);
-            } catch (Exception e) {
-                System.out.println(e);
+                DatagramsUtils.reportSendStats(stats, datagramsToSend);
+                try {
+                    localDataBaseMenager.updateDatagrams(datagramsToSend);
+                    incrementCounters(stats);
+                    try {
+                        localDataBaseMenager.updateSession(this);
+                    } catch (Exception ex) {
+                        Logger.write(Resources.getFormatString("msg.session.updateSessionException", ex.getMessage()), LogTyps.ERROR);
+                    }
+                } catch (Exception ex) {
+                    Logger.write(Resources.getFormatString("msg.session.updateDatagramsException", ex.getMessage()), LogTyps.ERROR);
+                }
+            } catch (Exception ex) {
+                Logger.write(Resources.getFormatString("msg.session.getDatagramsToSendException", ex.getMessage()), LogTyps.ERROR);
             }
         } else {
             Logger.write(Resources.getString("msg.session.restManagerNotFound"), LogTyps.WARNING);
         }
     }
 
-    public boolean addDatagram(Datagram datagram) throws Exception {
+    public boolean addDatagram(Datagram datagram) {
         if (localDataBaseMenager != null) {
-            addDatagramsReceived(localDataBaseMenager.createDatagram(datagram));
-            localDataBaseMenager.updateSession(this);
-            return true;
+            try {
+                addDatagramsReceived(localDataBaseMenager.createDatagram(datagram));
+                try {
+                    localDataBaseMenager.updateSession(this);
+                } catch (Exception ex) {
+                    Logger.write(Resources.getFormatString("msg.session.updateSessionException", ex.getMessage()), LogTyps.ERROR);
+                }
+                return true;
+            } catch (Exception ex) {
+                Logger.write(Resources.getFormatString("msg.session.createDatagramException", ex.getMessage()), LogTyps.ERROR);
+            }
+            return false;
         } else {
-            SendStatistics stats = restMenager.sendDatagram(datagram);
-            if (stats.getDatagramSendFailsCounter() > 0) {
-                Logger.write(
-                        Resources.getFormatString(
-                                "msg.session.errorOnSendingDatagram",
-                                datagram.getNewErrorMessage()),
-                        LogTyps.ERROR);
+            try {
+                SendStatistics stats = restMenager.sendDatagram(datagram);
+                if (stats.getDatagramSendFailsCounter() > 0) {
+                    Logger.write(Resources.getFormatString("msg.session.errorOnSendingDatagram", datagram.getNewErrorMessage()), LogTyps.ERROR);
+                }
+            } catch (Exception ex) {
+                Logger.write(Resources.getFormatString("msg.session.errorOnSendingDatagram", ex.getMessage()), LogTyps.ERROR);
             }
             return false;
         }
     }
 
-    public boolean addDatagrams(Set<Datagram> datagrams) throws Exception {
+    public boolean addDatagrams(Set<Datagram> datagrams) {
         if (localDataBaseMenager != null) {
-            addDatagramsReceived(localDataBaseMenager.createDatagrams(datagrams));
-            localDataBaseMenager.updateSession(this);
-            return true;
+            try {
+                addDatagramsReceived(localDataBaseMenager.createDatagrams(datagrams));
+                try {
+                    localDataBaseMenager.updateSession(this);
+                } catch (Exception ex) {
+                    Logger.write(Resources.getFormatString("msg.session.updateSessionException", ex.getMessage()), LogTyps.ERROR);
+                }
+                return true;
+            } catch (Exception ex) {
+                Logger.write(Resources.getFormatString("msg.session.createDatagramsException", ex.getMessage()), LogTyps.ERROR);
+                return false;
+            }
         } else {
             SendStatistics stats = restMenager.sendDatagrams(datagrams);
-            if (stats.getDatagramSendFailsCounter() > 0) {
-                Logger.write(
-                        Resources.getFormatString(
-                                "msg.session.errorOnSendingDatagram",
-                                ((Datagram[]) datagrams.toArray())[0].getNewErrorMessage()),
-                        LogTyps.ERROR);
-            }
+            DatagramsUtils.reportSendStats(stats, datagrams);
             return false;
         }
     }
@@ -179,60 +201,89 @@ public class Session {
             try {
                 Set<Measurement> measurementsToSend = localDataBaseMenager.getMeasurementsToSend();
                 SendStatistics stats = restMenager.sendMeasurements(measurementsToSend);
-                localDataBaseMenager.updateMeasurements(measurementsToSend);
-                incrementCounters(stats);
-                localDataBaseMenager.updateSession(this);
-            } catch (Exception e) {
-                System.out.println(e);
+                MeasurementUtils.reportSendStats(stats, measurementsToSend);
+                try {
+                    localDataBaseMenager.updateMeasurements(measurementsToSend);
+                    incrementCounters(stats);
+                    try {
+                        localDataBaseMenager.updateSession(this);
+                    } catch (Exception ex) {
+                        Logger.write(Resources.getFormatString("msg.session.updateSessionException", ex.getMessage()), LogTyps.ERROR);
+                    }
+                } catch (Exception ex) {
+                    Logger.write(Resources.getFormatString("msg.session.updateMeasurementsException", ex.getMessage()), LogTyps.ERROR);
+                }
+            } catch (Exception ex) {
+                Logger.write(Resources.getFormatString("msg.session.getMeasurementsToSendException", ex.getMessage()), LogTyps.ERROR);
             }
         } else {
             Logger.write(Resources.getString("msg.session.restManagerNotFound"), LogTyps.WARNING);
         }
     }
 
-    public boolean addMeasurement(Measurement measurement) throws Exception {
+    public boolean addMeasurement(Measurement measurement) {
         if (localDataBaseMenager != null) {
-            addMeasuresReceived(localDataBaseMenager.createMeasurement(measurement));
-            localDataBaseMenager.updateSession(this);
-            return true;
+            try {
+                addMeasuresReceived(localDataBaseMenager.createMeasurement(measurement));
+                try {
+                    localDataBaseMenager.updateSession(this);
+                } catch (Exception ex) {
+                    Logger.write(Resources.getFormatString("msg.session.updateSessionException", ex.getMessage()), LogTyps.ERROR);
+                }
+                return true;
+            } catch (Exception ex) {
+                Logger.write(Resources.getFormatString("msg.session.createMeasurementException", ex.getMessage()), LogTyps.ERROR);
+                return false;
+            }
         } else {
-            SendStatistics stats = restMenager.sendMeasurement(measurement);
-            if (stats.getMeasurementSendFailsCounter() > 0) {
-                Logger.write(
-                        Resources.getFormatString(
-                                "msg.session.errorOnSendingMeasurement",
-                                measurement.getNewErrorMessage()),
-                        LogTyps.ERROR);
+            try {
+                SendStatistics stats = restMenager.sendMeasurement(measurement);
+                if (stats.getMeasurementSendFailsCounter() > 0) {
+                    Logger.write(Resources.getFormatString("msg.session.errorOnSendingMeasurement", measurement.getNewErrorMessage()), LogTyps.ERROR);
+                }
+            } catch (Exception ex) {
+                Logger.write(Resources.getFormatString("msg.session.errorOnSendingMeasurement", ex.getMessage(), LogTyps.ERROR));
             }
             return false;
         }
     }
 
-    public boolean addMeasurements(Set<Measurement> measurements) throws Exception {
+    public boolean addMeasurements(Set<Measurement> measurements) {
         if (localDataBaseMenager != null) {
-            addMeasuresReceived(localDataBaseMenager.createMeasurements(measurements));
-            localDataBaseMenager.updateSession(this);
-            return true;
+            try {
+                addMeasuresReceived(localDataBaseMenager.createMeasurements(measurements));
+                try {
+                    localDataBaseMenager.updateSession(this);
+                } catch (Exception ex) {
+                    Logger.write(Resources.getFormatString("msg.session.updateSessionException", ex.getMessage(), LogTyps.ERROR));
+                }
+                return true;
+            } catch (Exception ex) {
+                Logger.write(Resources.getFormatString("msg.session.createMeasurementsException", ex.getMessage(), LogTyps.ERROR));
+                return false;
+            }
         } else {
             SendStatistics stats = restMenager.sendMeasurements(measurements);
-            if (stats.getMeasurementSendFailsCounter() > 0) {
-                Logger.write(
-                        Resources.getFormatString(
-                                "msg.session.errorOnSendingMeasurement",
-                                ((Measurement[]) measurements.toArray())[0].getNewErrorMessage()),
-                        LogTyps.ERROR);
-            }
+            MeasurementUtils.reportSendStats(stats, measurements);
             return false;
         }
     }
 
-    public boolean closeSession() throws Exception {
+    public boolean closeSession() {
         if (exec != null) {
             exec.shutdown();
         }
         if (localDataBaseMenager != null) {
-            localDataBaseMenager.removeSendData();
-            localDataBaseMenager.closeSession(this);
+            try {
+                localDataBaseMenager.removeSendData();
+            } catch (Exception ex) {
+                Logger.write(Resources.getFormatString("msg.session.removeSendDataException", ex.getMessage(), LogTyps.ERROR));
+            }
+            try {
+                localDataBaseMenager.closeSession(this);
+            } catch (Exception ex) {
+                Logger.write(Resources.getFormatString("msg.session.closeSessionException", ex.getMessage(), LogTyps.ERROR));
+            }
             return true;
         }
         return false;
@@ -250,11 +301,15 @@ public class Session {
         addDatagramsSend_OK(statistics.getDatagramSendOkCounter());
         addDatagramsSend_Failures(statistics.getDatagramSendFailsCounter());
         addMeasuresSend_OK(statistics.getDatagramSendOkCounter());
-        addMeasuresSend_Failures(statistics.getMeasurementSendFailsCounter());     
+        addMeasuresSend_Failures(statistics.getMeasurementSendFailsCounter());
     }
-    
-    public void sendHubStatus() throws Exception{
-        restMenager.sendHubStatus();
+
+    public void sendHubStatus() {
+        try {
+            restMenager.sendHubStatus();
+        } catch (Exception ex) {
+            Logger.write(Resources.getFormatString("msg.session.sendHubStatusException", ex.getMessage(), LogTyps.ERROR));
+        }
     }
 
     public BigDecimal getId() {

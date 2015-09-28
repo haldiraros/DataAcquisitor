@@ -5,6 +5,10 @@
  */
 package project.data;
 
+import REST.SendStatistics;
+import hubGui.i18n.Resources;
+import hubGui.logging.LogTyps;
+import hubGui.logging.Logger;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -46,5 +50,35 @@ public class DatagramsUtils {
             splitedDatagrams.add(currentSet);
         }
         return splitedDatagrams;
+    }
+
+    static void reportSendStats(SendStatistics stats, Set<Datagram> datagramsToSend) {
+        if (stats.getDatagramSendFailsCounter() == 0 && stats.getDatagramSendOkCounter() == 0) {
+            return;
+        } else if (stats.getDatagramSendFailsCounter() == 0 && stats.getDatagramSendOkCounter() > 0) {
+            Logger.write(Resources.getFormatString("msg.DatagramsUtils.DatagramSendToRestAllOK", stats.getDatagramSendOkCounter()), LogTyps.LOG);
+            return;
+        } else if (stats.getDatagramSendFailsCounter() > 0) {
+            Map<String, Integer> sortedDatagrams = new HashMap<String, Integer>();
+            for (Datagram d : datagramsToSend) {
+                String key = d.getNewErrorMessage();
+                if (key != null) {
+                    if (sortedDatagrams.containsKey(key)) {
+                        sortedDatagrams.replace(key, sortedDatagrams.get(key) + 1);
+                    } else {
+                        sortedDatagrams.put(key, 1);
+                    }
+                }
+            }
+            String errors = null;
+            for (String e : sortedDatagrams.keySet()) {
+                errors = errors + e + ":" + sortedDatagrams.get(e);
+            }
+            if (stats.getDatagramSendOkCounter() > 0) {
+                Logger.write(Resources.getFormatString("msg.DatagramsUtils.DatagramSendToRestSomeError", stats.getDatagramSendOkCounter(), errors), LogTyps.ERROR);
+            } else {
+                Logger.write(Resources.getFormatString("msg.DatagramsUtils.DatagramSendToRestAllError", errors), LogTyps.ERROR);
+            }
+        }
     }
 }

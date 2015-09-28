@@ -5,6 +5,10 @@
  */
 package project.data;
 
+import REST.SendStatistics;
+import hubGui.i18n.Resources;
+import hubGui.logging.LogTyps;
+import hubGui.logging.Logger;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -46,5 +50,36 @@ public class MeasurementUtils {
             splitedMeasurements.add(currentSet);
         }
         return splitedMeasurements;
+    }
+
+    static void reportSendStats(SendStatistics stats, Set<Measurement> measurementsToSend) {
+
+        if (stats.getMeasurementSendFailsCounter() == 0 && stats.getMeasurementSendOkCounter() == 0) {
+            return;
+        } else if (stats.getMeasurementSendFailsCounter() == 0 && stats.getMeasurementSendOkCounter() > 0) {
+            Logger.write(Resources.getFormatString("msg.MeasurementUtils.MeasurementSendToRestAllOK", stats.getMeasurementSendOkCounter()), LogTyps.LOG);
+            return;
+        } else if (stats.getMeasurementSendFailsCounter() > 0) {
+            Map<String, Integer> sortedMeasurements = new HashMap<String, Integer>();
+            for (Measurement d : measurementsToSend) {
+                String key = d.getNewErrorMessage();
+                if (key != null) {
+                    if (sortedMeasurements.containsKey(key)) {
+                        sortedMeasurements.replace(key, sortedMeasurements.get(key) + 1);
+                    } else {
+                        sortedMeasurements.put(key, 1);
+                    }
+                }
+            }
+            String errors = null;
+            for (String e : sortedMeasurements.keySet()) {
+                errors = errors + e + ":" + sortedMeasurements.get(e);
+            }
+            if (stats.getMeasurementSendOkCounter() > 0) {
+                Logger.write(Resources.getFormatString("msg.MeasurementUtils.MeasurementSendToRestSomeError", stats.getMeasurementSendOkCounter(), errors), LogTyps.ERROR);
+            } else {
+                Logger.write(Resources.getFormatString("msg.MeasurementUtils.MeasurementSendToRestAllError", errors), LogTyps.ERROR);
+            }
+        }
     }
 }
