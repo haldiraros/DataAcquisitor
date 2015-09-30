@@ -234,7 +234,6 @@ public class HubControl {
             HubFlashSession hubFlashSession = hubConn.createHubFlashSession(0xFFFFFFFF);
             System.out.println("Session started");
             while ((packet = hubFlashSession.getPrevPacket()) != null) {
-                System.out.println("packetrecvd");
                 processDataPacketEncoded(packet);
                 packetCount++;
                 if (packetCount == 10000) {
