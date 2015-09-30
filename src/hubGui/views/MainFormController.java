@@ -164,7 +164,7 @@ public class MainFormController implements Initializable {
                     Resources.getFormatString(
                             "msg.main.errorOnHubAutofindingAltert",
                             Resources.getString("msg.main.programPrerequisites")));
-            //this.closeActionHandler(null);
+            this.closeActionHandler(null);
         }
         try {
             hubH.getHubControl().openHubConn();
