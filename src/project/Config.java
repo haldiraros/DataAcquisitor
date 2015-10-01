@@ -5,6 +5,8 @@
  */
 package project;
 
+import hubGui.i18n.Resources;
+import hubGui.logging.LogTyps;
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 
@@ -19,6 +21,11 @@ public class Config {
     private static final ResourceBundle RESOURCE_BUNDLE = ResourceBundle
             .getBundle(BUNDLE_NAME);
 
+    public static String getPath(String key) {
+        // na upartego możnaby dołożyć sprawdzanie, czy to jest poprawny Path w danym systemie plików
+        return Config.getString(key);
+    }
+
     private Config() {
     }
 
@@ -27,6 +34,15 @@ public class Config {
             return RESOURCE_BUNDLE.getString(key);
         } catch (MissingResourceException e) {
             return '!' + key + '!';
+        }
+    }
+
+    public static Integer getInteger(String key) {
+        try {
+            return Integer.parseInt(RESOURCE_BUNDLE.getString(key));
+        } catch (MissingResourceException e) {
+            hubGui.logging.Logger.write(Resources.getFormatString("project.Config.getIntegerMissingResourceException", key), LogTyps.ERROR);
+            return null;
         }
     }
 }

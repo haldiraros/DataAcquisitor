@@ -20,20 +20,14 @@ import project.data.Datagram;
  */
 public class DatagramMenager {
 
-    private Connection connection;
-
-    public DatagramMenager(Connection c) {
-        connection = c;
-    }
-
-    public int createDatagrams(Set<Datagram> datagrams) throws SQLException, Exception {
+    public int createDatagrams(Connection connection, Set<Datagram> datagrams) throws SQLException, Exception {
         int inserted = 0;
         String sql = "INSERT INTO DATAGRAMS(MESSAGE,HUB_ID,DATA_TIME) VALUES (?,?,?)";
-        //getConnection().setAutoCommit(false);
+        //connection.setAutoCommit(false);
         for (Datagram d : datagrams) {
             if (d.getId() == null) {
                 /*LOG*/ // System.out.println("Start: createDatagram");
-                PreparedStatement ps = getConnection().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+                PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
                 ps.setString(1, d.getData());
                 ps.setString(2, d.getHubId());
                 ps.setString(3, d.getDataTimestamp());
@@ -53,12 +47,12 @@ public class DatagramMenager {
                 ps.close();
             }
         }
-        getConnection().commit();
-        //getConnection().setAutoCommit(true);
+        connection.commit();
+        //connection.setAutoCommit(true);
         return inserted;
     }
 
-    public Set<Datagram> getDatagramsToSend()
+    public Set<Datagram> getDatagramsToSend(Connection connection)
             throws ClassNotFoundException, SQLException {
         /*LOG*/ // System.out.println("Start: getDatagramsToSend");
         Set<Datagram> datagrams = new HashSet<>();
@@ -71,7 +65,7 @@ public class DatagramMenager {
                 + "        , Datagram_statistics stat "
                 + "    where stat.datagram_id = dt.id "
                 + "      and stat.is_send = 'FALSE' ";
-        PreparedStatement ps = getConnection().prepareStatement(sql);
+        PreparedStatement ps = connection.prepareStatement(sql);
         ResultSet rs = ps.executeQuery();
         while (rs.next()) {
             Datagram datagram = new Datagram(rs.getBigDecimal("id"), rs.getString("MESSAGE"), rs.getString("HUB_ID"), rs.getString("DATA_TIME"));
@@ -84,27 +78,27 @@ public class DatagramMenager {
         return datagrams;
     }
 
-    public int deleteSendDatagrams() throws SQLException {
+    public int deleteSendDatagrams(Connection connection) throws SQLException {
         /*LOG*/ // System.out.println("Start: deleteSendDatagrams");
-        //getConnection().setAutoCommit(false);
+        //connection.setAutoCommit(false);
         String sql = "DELETE FROM DATAGRAMS WHERE ID in (select datagram_id from Datagram_statistics where is_send = 'TRUE')";
-        PreparedStatement ps = getConnection().prepareStatement(sql);
+        PreparedStatement ps = connection.prepareStatement(sql);
         int deleted = ps.executeUpdate();
         ps.close();
-        getConnection().commit();
-        //getConnection().setAutoCommit(true);
+        connection.commit();
+        //connection.setAutoCommit(true);
         return deleted;
         /*LOG*/ // System.out.println("End: deleteSendDatagrams");
     }
 
-    private int reportSendErrorForDatagram(Set<Datagram> datagrams) throws SQLException {
+    private int reportSendErrorForDatagram(Connection connection, Set<Datagram> datagrams) throws SQLException {
         int updated = 0;
-        //getConnection().setAutoCommit(false);
+        //connection.setAutoCommit(false);
         String sql = "INSERT INTO Datagram_Errors_log(DATAGRAM_ID,ERROR) VALUES (?,?)";
         for (Datagram datagram : datagrams) {
             if (datagram.getId() != null && datagram.isDataSend() != true && datagram.getNewErrorMessage() != null) {
                 /*LOG*/ // System.out.println("Start: reportSendErrorForDatagram with id:" + datagram.getId());
-                PreparedStatement ps = getConnection().prepareStatement(sql);
+                PreparedStatement ps = connection.prepareStatement(sql);
                 ps.setBigDecimal(1, datagram.getId());
                 ps.setString(2, datagram.getNewErrorMessage() != null ? datagram.getNewErrorMessage().substring(0, Math.min(datagram.getNewErrorMessage().length(), 2000)) : null);
                 updated += ps.executeUpdate();
@@ -114,14 +108,14 @@ public class DatagramMenager {
                 /*LOG*/ // System.out.println("End: reportSendErrorForDatagram with id:" + datagram.getId());
             }
         }
-        getConnection().commit();
-        //getConnection().setAutoCommit(true);
+        connection.commit();
+        //connection.setAutoCommit(true);
         return updated;
     }
 
-    private int setSendOK(Set<Datagram> datagrams) throws SQLException {
+    private int setSendOK(Connection connection, Set<Datagram> datagrams) throws SQLException {
         int updated = 0;
-        //getConnection().setAutoCommit(false);
+        //connection.setAutoCommit(false);
         String sql = "UPDATE Datagram_statistics "
                 + " SET "
                 + " is_send = 'TRUE',"
@@ -131,34 +125,20 @@ public class DatagramMenager {
         for (Datagram datagram : datagrams) {
             if (datagram.getId() != null && datagram.isDataSend() == true) {
                 /*LOG*/ // System.out.println("Start: setSendOK with id:" + datagram.getId());
-                PreparedStatement ps = getConnection().prepareStatement(sql);
+                PreparedStatement ps = connection.prepareStatement(sql);
                 ps.setBigDecimal(1, datagram.getId());
                 updated += ps.executeUpdate();
                 ps.close();
                 /*LOG*/ // System.out.println("End: setSendOK with id:" + datagram.getId());
             }
         }
-        getConnection().commit();
-        //getConnection().setAutoCommit(true);
+        connection.commit();
+        //connection.setAutoCommit(true);
         return updated;
     }
 
-    public int updateDatagrams(Set<Datagram> datagrams) throws SQLException {
-        return setSendOK(datagrams) + reportSendErrorForDatagram(datagrams);
-    }
-
-    /**
-     * @return the connection
-     */
-    public Connection getConnection() {
-        return connection;
-    }
-
-    /**
-     * @param connection the connection to set
-     */
-    public void setConnection(Connection connection) {
-        this.connection = connection;
+    public int updateDatagrams(Connection connection, Set<Datagram> datagrams) throws SQLException {
+        return setSendOK(connection, datagrams) + reportSendErrorForDatagram(connection, datagrams);
     }
 
 }

@@ -11,19 +11,18 @@ import java.io.FileWriter;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
+import project.Config;
 
 /**
  *
  * @author Marcin
  */
 public class SettingsLoader {
-    
-    private static final String FILE_NAME = "settings.xml";
-    
+        
     public static Settings load() throws Exception {
         JAXBContext jc = JAXBContext.newInstance(Settings.class);
         Unmarshaller m = jc.createUnmarshaller();
-        try (FileReader fstream = new FileReader(FILE_NAME)) {
+        try (FileReader fstream = new FileReader(Config.getString("hubGui.settings.fileName"))) {
             return (Settings)m.unmarshal(fstream);
         }
     }
@@ -31,7 +30,7 @@ public class SettingsLoader {
     public static void save(Settings settings) throws Exception {
         JAXBContext jc = JAXBContext.newInstance(Settings.class);
         Marshaller m = jc.createMarshaller();
-        try (FileWriter fstream = new FileWriter(FILE_NAME, false)) {
+        try (FileWriter fstream = new FileWriter(Config.getString("hubGui.settings.fileName"), false)) {
             m.marshal(settings, fstream);
         }
     }

@@ -15,6 +15,7 @@ import java.util.Set;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import project.Config;
 import project.data.Measurement;
 import project.data.MeasurementUtils;
 
@@ -24,7 +25,6 @@ import project.data.MeasurementUtils;
  */
 public class RestMeasurementOperations {
 
-    private final static int maxMeasurementsPerFrame = 10;
 
     public SendStatistics sendMeasurement(Measurement measurement) throws Exception {
         SendStatistics stats = new SendStatistics();
@@ -76,7 +76,7 @@ public class RestMeasurementOperations {
                 hubGui.logging.Logger.write(Resources.getFormatString("msg.restUtils.noAuthKeyForHub", hubId), LogTyps.ERROR);
                 continue;
             }
-            for (Set<Measurement> datas : MeasurementUtils.splitMeasurements(mappedMeasurements.get(hubId), maxMeasurementsPerFrame)) {
+            for (Set<Measurement> datas : MeasurementUtils.splitMeasurements(mappedMeasurements.get(hubId), Config.getInteger("maxMeasurementsPerRestMessage"))) {
                 try {
                     // Step1: Prepare JSON data
                     JSONObject message = RestUtils.getHubLogInfo(hubId);

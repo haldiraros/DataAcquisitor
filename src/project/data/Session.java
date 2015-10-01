@@ -11,22 +11,19 @@ import hubGui.i18n.Resources;
 import hubGui.logging.LogTyps;
 import hubGui.logging.Logger;
 import java.math.BigDecimal;
+import java.sql.Connection;
 import java.util.Set;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 import localDB.menagers.LocalDataBaseMenager;
+import project.Config;
 
 /**
  *
  * @author hp
  */
 public class Session {
-
-    private static final int datagramsIdleSendInitialDelay = 15;
-    private static final int datagramsIdleSendPeriod = 30;
-    private static final int measurementsIdleSendInitialDelay = 30;
-    private static final int measurementsIdleSendPeriod = 30;
 
     private BigDecimal id;
     private int datagramsEnqueued;
@@ -42,6 +39,7 @@ public class Session {
     private LocalDataBaseMenager localDataBaseMenager;
     private RestMenager restMenager;
     private ScheduledExecutorService exec;
+    private Connection connection;
 
     public Session() throws Exception {
         setUpStartValues(null, true);
@@ -90,33 +88,16 @@ public class Session {
         } else {
             localDataBaseMenager = ldbm;
         }
-        localDataBaseMenager.createSession(this);
-        localDataBaseMenager.removeSendData();
+        connection = localDataBaseMenager.getNewConnection();
+        localDataBaseMenager.createSession(connection, this);
+        localDataBaseMenager.removeSendData(connection);
         createIddleSending();
     }
 
-    private void createIddleSending() {
+    private void createIddleSending() throws Exception {
         exec = Executors.newSingleThreadScheduledExecutor();
-        exec.scheduleAtFixedRate(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    sendDatagrams();
-                } catch (Exception ex) {
-                    Logger.write(Resources.getString("msg.session.errorOnCreatingSendTask"), LogTyps.ERROR);
-                }
-            }
-        }, datagramsIdleSendInitialDelay, datagramsIdleSendPeriod, TimeUnit.SECONDS);
-        exec.scheduleAtFixedRate(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    sendMeasurements();
-                } catch (Exception ex) {
-                    Logger.write(Resources.getString("msg.session.errorOnCreatingSendTask"), LogTyps.ERROR);
-                }
-            }
-        }, measurementsIdleSendInitialDelay, measurementsIdleSendPeriod, TimeUnit.SECONDS);
+        exec.scheduleAtFixedRate(new DatagramsIdleSend(localDataBaseMenager.getNewConnection()), Config.getInteger("datagramsIdleSendInitialDelay"), Config.getInteger("datagramsIdleSendPeriod"), TimeUnit.SECONDS);
+        exec.scheduleAtFixedRate(new MeasurementsIdleSend(localDataBaseMenager.getNewConnection()), Config.getInteger("measurementsIdleSendInitialDelay"), Config.getInteger("measurementsIdleSendPeriod"), TimeUnit.SECONDS);
     }
 
     public boolean isSessionWithLocalDB() {
@@ -124,16 +105,23 @@ public class Session {
     }
 
     public void sendDatagrams() {
+        sendDatagrams(null);
+    }
+
+    public void sendDatagrams(Connection c) {
+        if (c == null) {
+            c = connection;
+        }
         if (restMenager != null) {
             try {
-                Set<Datagram> datagramsToSend = localDataBaseMenager.getDatagramsToSend();
+                Set<Datagram> datagramsToSend = localDataBaseMenager.getDatagramsToSend(c);
                 SendStatistics stats = restMenager.sendDatagrams(datagramsToSend);
                 DatagramsUtils.reportSendStats(stats, datagramsToSend);
                 try {
-                    localDataBaseMenager.updateDatagrams(datagramsToSend);
+                    localDataBaseMenager.updateDatagrams(c, datagramsToSend);
                     incrementCounters(stats);
                     try {
-                        localDataBaseMenager.updateSession(this);
+                        localDataBaseMenager.updateSession(c, this);
                     } catch (Exception ex) {
                         Logger.write(Resources.getFormatString("msg.session.updateSessionException", ex.getMessage()), LogTyps.ERROR);
                     }
@@ -151,9 +139,9 @@ public class Session {
     public boolean addDatagram(Datagram datagram) {
         if (localDataBaseMenager != null) {
             try {
-                addDatagramsReceived(localDataBaseMenager.createDatagram(datagram));
+                addDatagramsReceived(localDataBaseMenager.createDatagram(connection, datagram));
                 try {
-                    localDataBaseMenager.updateSession(this);
+                    localDataBaseMenager.updateSession(connection, this);
                 } catch (Exception ex) {
                     Logger.write(Resources.getFormatString("msg.session.updateSessionException", ex.getMessage()), LogTyps.ERROR);
                 }
@@ -178,9 +166,9 @@ public class Session {
     public boolean addDatagrams(Set<Datagram> datagrams) {
         if (localDataBaseMenager != null) {
             try {
-                addDatagramsReceived(localDataBaseMenager.createDatagrams(datagrams));
+                addDatagramsReceived(localDataBaseMenager.createDatagrams(connection, datagrams));
                 try {
-                    localDataBaseMenager.updateSession(this);
+                    localDataBaseMenager.updateSession(connection, this);
                 } catch (Exception ex) {
                     Logger.write(Resources.getFormatString("msg.session.updateSessionException", ex.getMessage()), LogTyps.ERROR);
                 }
@@ -197,16 +185,20 @@ public class Session {
     }
 
     public void sendMeasurements() {
+        sendMeasurements(connection);
+    }
+
+    public void sendMeasurements(Connection c) {
         if (restMenager != null) {
             try {
-                Set<Measurement> measurementsToSend = localDataBaseMenager.getMeasurementsToSend();
+                Set<Measurement> measurementsToSend = localDataBaseMenager.getMeasurementsToSend(c);
                 SendStatistics stats = restMenager.sendMeasurements(measurementsToSend);
                 MeasurementUtils.reportSendStats(stats, measurementsToSend);
                 try {
-                    localDataBaseMenager.updateMeasurements(measurementsToSend);
+                    localDataBaseMenager.updateMeasurements(c, measurementsToSend);
                     incrementCounters(stats);
                     try {
-                        localDataBaseMenager.updateSession(this);
+                        localDataBaseMenager.updateSession(c, this);
                     } catch (Exception ex) {
                         Logger.write(Resources.getFormatString("msg.session.updateSessionException", ex.getMessage()), LogTyps.ERROR);
                     }
@@ -224,9 +216,9 @@ public class Session {
     public boolean addMeasurement(Measurement measurement) {
         if (localDataBaseMenager != null) {
             try {
-                addMeasuresReceived(localDataBaseMenager.createMeasurement(measurement));
+                addMeasuresReceived(localDataBaseMenager.createMeasurement(connection, measurement));
                 try {
-                    localDataBaseMenager.updateSession(this);
+                    localDataBaseMenager.updateSession(connection, this);
                 } catch (Exception ex) {
                     Logger.write(Resources.getFormatString("msg.session.updateSessionException", ex.getMessage()), LogTyps.ERROR);
                 }
@@ -251,9 +243,9 @@ public class Session {
     public boolean addMeasurements(Set<Measurement> measurements) {
         if (localDataBaseMenager != null) {
             try {
-                addMeasuresReceived(localDataBaseMenager.createMeasurements(measurements));
+                addMeasuresReceived(localDataBaseMenager.createMeasurements(connection, measurements));
                 try {
-                    localDataBaseMenager.updateSession(this);
+                    localDataBaseMenager.updateSession(connection, this);
                 } catch (Exception ex) {
                     Logger.write(Resources.getFormatString("msg.session.updateSessionException", ex.getMessage(), LogTyps.ERROR));
                 }
@@ -275,12 +267,12 @@ public class Session {
         }
         if (localDataBaseMenager != null) {
             try {
-                localDataBaseMenager.removeSendData();
+                localDataBaseMenager.removeSendData(connection);
             } catch (Exception ex) {
                 Logger.write(Resources.getFormatString("msg.session.removeSendDataException", ex.getMessage(), LogTyps.ERROR));
             }
             try {
-                localDataBaseMenager.closeSession(this);
+                localDataBaseMenager.closeSession(connection, this);
             } catch (Exception ex) {
                 Logger.write(Resources.getFormatString("msg.session.closeSessionException", ex.getMessage(), LogTyps.ERROR));
             }
@@ -300,7 +292,7 @@ public class Session {
     private void incrementCounters(SendStatistics statistics) {
         addDatagramsSend_OK(statistics.getDatagramSendOkCounter());
         addDatagramsSend_Failures(statistics.getDatagramSendFailsCounter());
-        addMeasuresSend_OK(statistics.getDatagramSendOkCounter());
+        addMeasuresSend_OK(statistics.getMeasurementSendOkCounter());
         addMeasuresSend_Failures(statistics.getMeasurementSendFailsCounter());
     }
 
@@ -515,6 +507,42 @@ public class Session {
 
     private void addMeasuresSend_Failures() {
         this.addMeasuresSend_Failures(1);
+    }
+
+    private class DatagramsIdleSend implements Runnable {
+
+        private Connection connection;
+
+        DatagramsIdleSend(Connection connection) {
+            this.connection = connection;
+        }
+
+        @Override
+        public void run() {
+            try {
+                sendDatagrams(connection);
+            } catch (Exception ex) {
+                Logger.write(Resources.getString("msg.session.errorOnCreatingSendTask"), LogTyps.ERROR);
+            }
+        }
+    }
+
+    private class MeasurementsIdleSend implements Runnable {
+
+        private Connection connection;
+
+        MeasurementsIdleSend(Connection connection) {
+            this.connection = connection;
+        }
+
+        @Override
+        public void run() {
+            try {
+                sendMeasurements(connection);
+            } catch (Exception ex) {
+                Logger.write(Resources.getString("msg.session.errorOnCreatingSendTask"), LogTyps.ERROR);
+            }
+        }
     }
 
 }

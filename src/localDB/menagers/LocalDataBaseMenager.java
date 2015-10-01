@@ -25,8 +25,6 @@ import project.data.Session;
  */
 public class LocalDataBaseMenager {
 
-    private Connection c;
-
     private String DBPatch;
     private DatagramMenager datagramMenager;
     private SessionMenager sessionMenager;
@@ -41,27 +39,19 @@ public class LocalDataBaseMenager {
     }
 
     public LocalDataBaseMenager() throws SQLException, ClassNotFoundException {
-        this.setDBPatch(Config.getString("DBPath"));
-        datagramMenager = new DatagramMenager(getConnection());
-        sessionMenager = new SessionMenager(getConnection());
-        measurementManager = new MeasurementManager(getConnection());
+        this.setDBPatch(Config.getPath("localDB.menagers.DataBaseFilePath"));
+        datagramMenager = new DatagramMenager();
+        sessionMenager = new SessionMenager();
+        measurementManager = new MeasurementManager();
     }
 
-    public Connection getConnection() throws SQLException {
-        if (c != null) {
-            return c;
-        } else {
-            try {
-                Class.forName("org.sqlite.JDBC");
-                c = DriverManager.getConnection("jdbc:sqlite:"
-                        + getDBPatch());
-            } catch (Exception e) {
-                System.err.println(e.getClass().getName() + ": " + e.getMessage());
-                System.exit(0);
-            }
-            c.setAutoCommit(false);
-            return c;
-        }
+    public Connection getNewConnection() throws SQLException, ClassNotFoundException {
+        Connection c = null;
+        Class.forName(Config.getString("localDB.menagers.jdbcClass"));
+        c = DriverManager.getConnection(Config.getString("localDB.menagers.jdbcPath")
+                + getDBPatch());
+        c.setAutoCommit(false);
+        return c;
     }
 
     public boolean fullTestBDExists() throws ClassNotFoundException, SQLException {
@@ -69,7 +59,7 @@ public class LocalDataBaseMenager {
         for (String table : tables) {
             try {
                 String sql = "select count(*) from " + table + ";";
-                Statement stmt = getConnection().createStatement();
+                Statement stmt = getNewConnection().createStatement();
                 System.out.println(sql);
                 ResultSet rs = stmt.executeQuery(sql);
                 while (rs.next()) {
@@ -87,63 +77,63 @@ public class LocalDataBaseMenager {
 
     public boolean setupDataBase() throws ClassNotFoundException, SQLException {
         if (fullTestBDExists() == false) {
-            new SetupDB().setupDB(getDBPatch(), getConnection());
+            new SetupDB().setupDB(getDBPatch(), getNewConnection());
             return fullTestBDExists();
         } else {
             throw new SQLException("LocalDB already exists!");
         }
     }
 
-    public void createSession(Session session) throws Exception {
-        getSessionMenager().createSession(session);
+    public void createSession(Connection c, Session session) throws Exception {
+        getSessionMenager().createSession(c,session);
     }
 
-    public void updateSession(Session session) throws Exception {
-        getSessionMenager().updateSession(session);
+    public void updateSession(Connection c, Session session) throws Exception {
+        getSessionMenager().updateSession(c,session);
     }
 
-    public void closeSession(Session session) throws Exception {
-        getSessionMenager().closeSession(session);
+    public void closeSession(Connection c, Session session) throws Exception {
+        getSessionMenager().closeSession(c,session);
     }
 
-    public int createDatagram(Datagram datagram) throws SQLException, Exception {
+    public int createDatagram(Connection c, Datagram datagram) throws SQLException, Exception {
         Set<Datagram> ds = new HashSet<>();
         ds.add(datagram);
-        return getDatagramMenager().createDatagrams(ds);
+        return getDatagramMenager().createDatagrams(c,ds);
     }
 
-    public int createDatagrams(Set<Datagram> datagrams) throws SQLException, Exception {
-        return getDatagramMenager().createDatagrams(datagrams);
+    public int createDatagrams(Connection c, Set<Datagram> datagrams) throws SQLException, Exception {
+        return getDatagramMenager().createDatagrams(c,datagrams);
     }
 
-    public Set<Datagram> getDatagramsToSend() throws ClassNotFoundException, SQLException {
-        return getDatagramMenager().getDatagramsToSend();
+    public Set<Datagram> getDatagramsToSend(Connection c) throws ClassNotFoundException, SQLException {
+        return getDatagramMenager().getDatagramsToSend(c);
     }
 
-    public int updateDatagrams(Set<Datagram> datagrams) throws SQLException, Exception {
-        return getDatagramMenager().updateDatagrams(datagrams);
+    public int updateDatagrams(Connection c, Set<Datagram> datagrams) throws SQLException, Exception {
+        return getDatagramMenager().updateDatagrams(c,datagrams);
     }
 
-    public int createMeasurement(Measurement measurement) throws SQLException, Exception {
+    public int createMeasurement(Connection c, Measurement measurement) throws SQLException, Exception {
         Set<Measurement> ms = new HashSet<>();
         ms.add(measurement);
-        return getMeasurementManager().createMeasurements(ms);
+        return getMeasurementManager().createMeasurements(c,ms);
     }
 
-    public int createMeasurements(Set<Measurement> measurements) throws SQLException, Exception {
-        return getMeasurementManager().createMeasurements(measurements);
+    public int createMeasurements(Connection c, Set<Measurement> measurements) throws SQLException, Exception {
+        return getMeasurementManager().createMeasurements(c,measurements);
     }
 
-    public Set<Measurement> getMeasurementsToSend() throws ClassNotFoundException, SQLException, JSONException {
-        return getMeasurementManager().getMeasurementsToSend();
+    public Set<Measurement> getMeasurementsToSend(Connection c) throws ClassNotFoundException, SQLException, JSONException {
+        return getMeasurementManager().getMeasurementsToSend(c);
     }
 
-    public int updateMeasurements(Set<Measurement> measurements) throws Exception {
-        return getMeasurementManager().updateMeasurements(measurements);
+    public int updateMeasurements(Connection c, Set<Measurement> measurements) throws Exception {
+        return getMeasurementManager().updateMeasurements(c,measurements);
     }
 
-    public int removeSendData() throws SQLException, ClassNotFoundException {
-        return getDatagramMenager().deleteSendDatagrams() + getMeasurementManager().deleteSendMeasurements();
+    public int removeSendData(Connection c) throws SQLException, ClassNotFoundException {
+        return getDatagramMenager().deleteSendDatagrams(c) + getMeasurementManager().deleteSendMeasurements(c);
     }
 
     /**

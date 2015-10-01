@@ -91,20 +91,20 @@ public class LocalDBTests {
             Measurement test = new Measurement("lol", "hub_id", "teraz", tab, 10);
             Set<Measurement> ds = new HashSet<>();
             ds.add(test);
-            System.out.println("Inserted:" + dm.createMeasurements(ds));
-            test.setNewErrorMessage("error");
-            dm.updateMeasurements(ds);
-//            dm.updateMeasurement(test);
-//            Measurement test2 = dm.getMeasurement(test.getId());
-            System.out.println("before setting as send:");
-            System.out.println("  dm.getMeasurementsToSend().size()  :" + dm.getMeasurementsToSend().size());
-            test.setDataSend(true);
-            dm.updateMeasurements(ds);
-            System.out.println("after setting as send:");
-            System.out.println("  dm.getMeasurementsToSend().size()  :" + dm.getMeasurementsToSend().size());
-            dm.deleteSendMeasurements();
-            System.out.println("after removing send datagrams:");
-            System.out.println("  dm.getMeasurementsToSend().size()  :" + dm.getMeasurementsToSend().size());
+//            System.out.println("Inserted:" + dm.createMeasurements(ds));
+//            test.setNewErrorMessage("error");
+//            dm.updateMeasurements(ds);
+////            dm.updateMeasurement(test);
+////            Measurement test2 = dm.getMeasurement(test.getId());
+//            System.out.println("before setting as send:");
+//            System.out.println("  dm.getMeasurementsToSend().size()  :" + dm.getMeasurementsToSend().size());
+//            test.setDataSend(true);
+//            dm.updateMeasurements(ds);
+//            System.out.println("after setting as send:");
+//            System.out.println("  dm.getMeasurementsToSend().size()  :" + dm.getMeasurementsToSend().size());
+//            dm.deleteSendMeasurements();
+//            System.out.println("after removing send datagrams:");
+//            System.out.println("  dm.getMeasurementsToSend().size()  :" + dm.getMeasurementsToSend().size());
 
         }
     }

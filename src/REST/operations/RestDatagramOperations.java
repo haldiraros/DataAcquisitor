@@ -15,6 +15,7 @@ import java.util.Set;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import project.Config;
 import project.data.Datagram;
 import project.data.DatagramsUtils;
 
@@ -23,8 +24,6 @@ import project.data.DatagramsUtils;
  * @author hp
  */
 public class RestDatagramOperations {
-
-    private final static int maxDatagramsPerFrame = 10;
 
     public SendStatistics sendDatagram(Datagram datagram) throws Exception {
         SendStatistics stats = new SendStatistics();
@@ -76,7 +75,7 @@ public class RestDatagramOperations {
                 hubGui.logging.Logger.write(Resources.getFormatString("msg.restUtils.noAuthKeyForHub", hubId), LogTyps.ERROR);
                 continue;
             }
-            for (Set<Datagram> datas : DatagramsUtils.splitDatagrams(mappedDatagrams.get(hubId), maxDatagramsPerFrame)) {
+            for (Set<Datagram> datas : DatagramsUtils.splitDatagrams(mappedDatagrams.get(hubId), Config.getInteger("maxDatagramsPerRestMessage"))) {
                 try {
                     // Step1: Prepare JSON data
                     JSONObject message = RestUtils.getHubLogInfo(hubId);
