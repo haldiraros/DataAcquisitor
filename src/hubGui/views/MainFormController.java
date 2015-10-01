@@ -285,7 +285,7 @@ public class MainFormController implements Initializable {
                                 Resources.getString("msg.main.loggerPrerequisites")));
             try {
                 hubC = HubHandler.getInstance().getHubControl();
-                //hubC.restartAll();
+                hubC.restartAll();
             } catch (MeteringSessionException ex1) {
                 ;
             }
@@ -352,7 +352,7 @@ public class MainFormController implements Initializable {
                                 Resources.getString("msg.main.loggerPrerequisites")));
                 try {
                     HubControl hubC = HubHandler.getInstance().getHubControl();
-                    //hubC.restartAll();
+                    hubC.restartAll();
                 } catch (MeteringSessionException ex1) {
                     java.util.logging.Logger.getLogger(MainFormController.class.getName()).log(Level.SEVERE, null, ex1);
                 }

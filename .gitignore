@@ -1,15 +1,11 @@
 /build
 /nbproject
+/dist/
+/dll/rxtxParallel.dll
+/dll/rxtxSerial.dll
 settings.xml
-<<<<<<< HEAD
-/dist/
 nbbuild.xml
-=======
-/dist/
->>>>>>> origin/master
-dll/rxtxParallel.dll
-dll/rxtxParallel.dll
-dll/rxtxParallel.dll
-dll/rxtxSerial.dll
 *.db
 *.db-journal
+*.log
+*.log.*

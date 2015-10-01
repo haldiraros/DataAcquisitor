@@ -17,10 +17,7 @@
 package hubOperations;
 
 import gnu.io.SerialPortEvent;
-import hubLibrary.meteringcomreader.LoggerFlashSession;
-import hubLibrary.meteringcomreader.TestFlashSession;
 import hubLibrary.meteringcomreader.exceptions.MeteringSessionException;
-import hubLibrary.meteringcomreader.exceptions.MeteringSessionOperationAlreadyInProgressException;
 import org.apache.log4j.PropertyConfigurator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -69,22 +66,22 @@ public class Tester {
     //hubC.readPacketsHubFlash();
 
        // System.out.println(hubC.checkLoggerID());
-        //hubC.readPacketsLoggerFlash();
-        boolean flag = true;
-        int i=0;
-        do{
-            flag = true;
-            i++;
-        try{
-           // hubC.readPacketsLoggerFlash();
-            
-            System.out.println(Long.toHexString(hubC.checkLoggerID())+"   --- "+i);
-        }catch(MeteringSessionException ex){
-        System.out.println("tt" + i +" --- "+ ex.getMessage());
-
-        flag= false;
-        }
-        }while(!flag);
+        hubC.readPacketsLoggerFlash();
+//        boolean flag = true;
+//        int i=0;
+//        do{
+//            flag = true;
+//            i++;
+//        try{
+//           // hubC.readPacketsLoggerFlash();
+//            
+//            System.out.println(Long.toHexString(hubC.checkLoggerID())+"   --- "+i);
+//        }catch(MeteringSessionException ex){
+//        System.out.println("tt" + i +" --- "+ ex.getMessage());
+//
+//        flag= false;
+//        }
+//        }while(!flag);
       // hubC.getHubConn().closeAllSessions(); //dla pewnosci domykamy inne sesje!
        
        //hubC.startRecievingInRadioSession();

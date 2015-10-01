@@ -18,9 +18,12 @@
 package hubLibrary.meteringcomreader;
 
 import hubLibrary.meteringcomreader.exceptions.MeteringSessionCRCException;
+import hubLibrary.meteringcomreader.exceptions.MeteringSessionDeviceBusyException;
 import hubLibrary.meteringcomreader.exceptions.MeteringSessionException;
 import hubLibrary.meteringcomreader.exceptions.MeteringSessionFlashLoggerTransException;
 import hubLibrary.meteringcomreader.exceptions.MeteringSessionTimeoutException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Reprezentuje abstrakcyjny obiekt sesji w bieżącym połączeniu 
@@ -115,6 +118,15 @@ abstract public class MeteringSession {
                    if (retries==maxRetries)
                        throw e;
                    retries++;                                       
+               }catch(MeteringSessionDeviceBusyException e){
+                   if (retries==maxRetries)
+                       throw e;
+                   try {
+                       Thread.sleep(5);
+                   } catch (InterruptedException ex) {
+                       Logger.getLogger(MeteringSession.class.getName()).log(Level.SEVERE, null, ex);
+                   }
+                   retries++; 
                }
            }
            return packet;

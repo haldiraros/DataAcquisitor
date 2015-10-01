@@ -47,8 +47,8 @@ public class HubHandler {
             @Override
             public void run() {
                 try {
-                    Session dbSession = hubControl.getDbSession();
-                    if(dbSession!=null) dbSession.sendHubStatus();
+                    //Session dbSession = hubControl.getDbSession();
+                    //if(dbSession!=null) dbSession.sendHubStatus();
                 } catch (Exception ex) {
                     Logger.write(Resources.getString("msg.hubHandler.errorSubmitingHubStatus"), LogTyps.ERROR);
                 }

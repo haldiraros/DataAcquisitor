@@ -198,7 +198,8 @@ public class HubControl {
     }
 
     public void processDataPacketEncoded(DataPacket pck) throws Exception {
-        //hubGui.logging.Logger.write(Resources.getFormatString("msg.hubControl.dataPacket", DatatypeConverter.printHexBinary(pck.getOrgData()))); //TODO: Remove later      
+       // System.out.println(DatatypeConverter.printHexBinary(pck.getOrgData()));
+//        hubGui.logging.Logger.write(Resources.getFormatString("msg.hubControl.dataPacket", DatatypeConverter.printHexBinary(pck.getOrgData()))); //TODO: Remove later      
         String time = String.format("%0#8X", (long) (new Date().getTime() / 1000));
         dbSession.addDatagram(new Datagram(DatatypeConverter.printHexBinary(pck.getOrgData()), getHubId(), time));
     }
@@ -209,7 +210,7 @@ public class HubControl {
         logID = logID.substring(4);  //usunąć pierwsze 4 znaki
         String time = String.format("%0#8X", (long) ((test.getMeasurmentTimeStart().getTime()) / 1000));
         dbSession.addMeasurement(new Measurement(logID, getHubId(), time, test.getTemperatures(), test.getMeasurmentPeriod()));
-
+        System.out.println(pck);
     }
 
     public void readPacketsLoggerFlash() throws MeteringSessionException {
