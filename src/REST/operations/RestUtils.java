@@ -16,6 +16,7 @@ import java.net.URL;
 import java.net.URLConnection;
 import org.json.JSONException;
 import org.json.JSONObject;
+import project.Config;
 
 /**
  *
@@ -23,12 +24,6 @@ import org.json.JSONObject;
  */
 public class RestUtils {
 
-    private final static String measurementsURL = "/bluconsolerest/1.0/resources/measurementbatch";
-    private final static String plainMeasurementBatchURL = "/bluconsolerest/1.0/resources/plainmeasurementbatch";
-    private final static String hubStatusURL = "/bluconsolerest/1.0/resources/hubstatus";
-    private final static String hubCommandURL = "/bluconsolerest/1.0/resources/hubcommand";
-    private final static String hubCommandStatusURL = "/bluconsolerest/1.0/resources/hubcommandstatus";
-    public final static int noErrorResponse = 0;
 
     public static JSONObject getHubLogInfo(String hubId) throws JSONException, Exception {
         JSONObject header = new JSONObject();
@@ -53,7 +48,6 @@ public class RestUtils {
         while ((line = buffIn.readLine()) != null) {
             everything.append(line);
         }
-        System.out.println(everything.toString());
         return everything.toString();
     }
     
@@ -65,18 +59,12 @@ public class RestUtils {
         connection.setRequestProperty("Content-Type", "application/json");
         connection.setConnectTimeout(5000);
         connection.setReadTimeout(5000);
-        System.out.println("Creating OutputStreamWriter");
         OutputStreamWriter out = new OutputStreamWriter(connection.getOutputStream());
-        System.out.println("Writng Message");
         out.write(message.toString());
-        System.out.println("out.close");
         out.close();
 
-        System.out.println("Creating InputStreamReader");
         InputStreamReader isr = new InputStreamReader(connection.getInputStream());
-        System.out.println("Creating BufferedReader");
         BufferedReader in = new BufferedReader(isr);
-        System.out.println("Creating JSONObject response");
         JSONObject response = new JSONObject(readBigStringIn(in));
         in.close();
         return response;
@@ -86,35 +74,35 @@ public class RestUtils {
      * @return the measurementsURL
      */
     public static String getMeasurementsURL() throws Exception {
-        return SettingsLoader.load().getRestUrl() + measurementsURL;
+        return SettingsLoader.load().getRestUrl() + Config.getString("REST.measurementsURL");
     }
 
     /**
      * @return the hubstatusURL
      */
     public static String getHubStatusURL() throws Exception {
-        return SettingsLoader.load().getRestUrl() + hubStatusURL;
+        return SettingsLoader.load().getRestUrl() + Config.getString("REST.hubStatusURL");
     }
 
     /**
      * @return the hubcommandURL
      */
     public static String getHubCommandURL() throws Exception {
-        return SettingsLoader.load().getRestUrl() + hubCommandURL;
+        return SettingsLoader.load().getRestUrl() + Config.getString("REST.hubCommandURL");
     }
 
     /**
      * @return the hubcommandstatusURL
      */
     public static String getHubCommandStatusURL() throws Exception {
-        return SettingsLoader.load().getRestUrl() + hubCommandStatusURL;
+        return SettingsLoader.load().getRestUrl() + Config.getString("REST.hubCommandStatusURL");
     }
 
     /**
      * @return the plainmeasurementbatchURL
      */
     public static String getPlainMeasurementBatchURL() throws Exception {
-        return SettingsLoader.load().getRestUrl() + plainMeasurementBatchURL;
+        return SettingsLoader.load().getRestUrl() + Config.getString("REST.plainMeasurementBatchURL");
     }
 
 }

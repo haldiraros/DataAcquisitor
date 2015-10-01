@@ -12,6 +12,7 @@ import hubOperations.HubHandler;
 import java.io.IOException;
 import org.json.JSONException;
 import org.json.JSONObject;
+import project.Config;
 
 /**
  *
@@ -34,7 +35,7 @@ public class RestHubOperations {
             try {
                 response = RestUtils.sendToServer(message, RestUtils.getHubStatusURL());
                 int status = response.getInt("errCode");
-                if (RestUtils.noErrorResponse != status) {
+                if (Config.getInteger("REST.noErrorNumericResponse") != status) {
                     hubGui.logging.Logger.write(Resources.getFormatString("msg.sendHubStatus.nonValidResponseError", status), LogTyps.ERROR);
                 }
 //            } catch (IOException ex) {
@@ -56,7 +57,7 @@ public class RestHubOperations {
     public JSONObject getHubCommand(HubControl hc) throws JSONException, IOException, Exception {
         // Step1: Prepare JSON data
         JSONObject message = RestUtils.getHubLogInfo(hc.getHubId());
-        System.out.println("\nJSON Object: " + message);
+        // System.out.println("\nJSON Object: " + message);
         // Step2: Now pass JSON File Data to REST Service
         return RestUtils.sendToServer(message, RestUtils.getHubCommandURL());
     }
@@ -68,7 +69,7 @@ public class RestHubOperations {
         command.put("id", commandId);
         command.put("status", commandStatus);
         message.put("command", command);
-        System.out.println("\nJSON Object: " + message);
+        // System.out.println("\nJSON Object: " + message);
         // Step2: Now pass JSON File Data to REST Service
         return RestUtils.sendToServer(message, RestUtils.getHubCommandStatusURL());
     }

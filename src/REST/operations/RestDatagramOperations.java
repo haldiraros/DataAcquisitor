@@ -43,11 +43,10 @@ public class RestDatagramOperations {
             Set<Datagram> ds = new HashSet<Datagram>();
             ds.add(datagram);
             fillDatagramsInfos(message, ds);
-            System.out.println("\nJSON Object: " + message);
             // Step2: Now pass JSON File Data to REST Service
             JSONObject response = RestUtils.sendToServer(message, RestUtils.getMeasurementsURL());
             int status = response.getInt("errCode");
-            if (RestUtils.noErrorResponse == status) {
+            if (Config.getInteger("REST.noErrorNumericResponse") == status) {
                 stats.addDatagramSendOkCounter();
                 datagram.setDataSend(true);
             } else {
@@ -75,16 +74,15 @@ public class RestDatagramOperations {
                 hubGui.logging.Logger.write(Resources.getFormatString("msg.restUtils.noAuthKeyForHub", hubId), LogTyps.ERROR);
                 continue;
             }
-            for (Set<Datagram> datas : DatagramsUtils.splitDatagrams(mappedDatagrams.get(hubId), Config.getInteger("maxDatagramsPerRestMessage"))) {
+            for (Set<Datagram> datas : DatagramsUtils.splitDatagrams(mappedDatagrams.get(hubId), Config.getInteger("REST.maxDatagramsPerRestMessage"))) {
                 try {
                     // Step1: Prepare JSON data
                     JSONObject message = RestUtils.getHubLogInfo(hubId);
                     fillDatagramsInfos(message, datas);
-                    System.out.println("\nJSON Object: " + message);
                     // Step2: Now pass JSON File Data to REST Service
                     JSONObject response = RestUtils.sendToServer(message, RestUtils.getMeasurementsURL());
                     int status = response.getInt("errCode");
-                    if (RestUtils.noErrorResponse == status) {
+                    if (Config.getInteger("REST.noErrorNumericResponse") == status) {
                         stats.addDatagramSendOkCounter(datas.size());
                         datas.stream().forEach((d) -> {
                             d.setDataSend(true);

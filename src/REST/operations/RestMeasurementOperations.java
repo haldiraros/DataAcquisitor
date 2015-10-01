@@ -44,11 +44,10 @@ public class RestMeasurementOperations {
             Set<Measurement> ds = new HashSet<Measurement>();
             ds.add(measurement);
             fillMeasurementsInfos(message, ds);
-            System.out.println("\nJSON Object: " + message);
             // Step2: Now pass JSON File Data to REST Service
             JSONObject response = RestUtils.sendToServer(message, RestUtils.getPlainMeasurementBatchURL());
             int status = response.getInt("errCode");
-            if (RestUtils.noErrorResponse == status) {
+            if (Config.getInteger("REST.noErrorNumericResponse") == status) {
                 stats.addMeasurementSendOkCounter();
                 measurement.setDataSend(true);
             } else {
@@ -76,16 +75,15 @@ public class RestMeasurementOperations {
                 hubGui.logging.Logger.write(Resources.getFormatString("msg.restUtils.noAuthKeyForHub", hubId), LogTyps.ERROR);
                 continue;
             }
-            for (Set<Measurement> datas : MeasurementUtils.splitMeasurements(mappedMeasurements.get(hubId), Config.getInteger("maxMeasurementsPerRestMessage"))) {
+            for (Set<Measurement> datas : MeasurementUtils.splitMeasurements(mappedMeasurements.get(hubId), Config.getInteger("REST.maxMeasurementsPerRestMessage"))) {
                 try {
                     // Step1: Prepare JSON data
                     JSONObject message = RestUtils.getHubLogInfo(hubId);
                     fillMeasurementsInfos(message, datas);
-                    System.out.println("\nJSON Object: " + message);
                     // Step2: Now pass JSON File Data to REST Service
                     JSONObject response = RestUtils.sendToServer(message, RestUtils.getPlainMeasurementBatchURL());
                     int status = response.getInt("errCode");
-                    if (RestUtils.noErrorResponse == status) {
+                    if (Config.getInteger("REST.noErrorNumericResponse") == status) {
                         stats.addMeasurementSendOkCounter(datas.size());
                         datas.stream().forEach((d) -> {
                             d.setDataSend(true);
