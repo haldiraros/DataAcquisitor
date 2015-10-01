@@ -34,11 +34,19 @@ public class HubHandler {
     
     private HubControl hubControl = null;
     private ScheduledExecutorService exec;
-
+    
+    /**
+     * Funkcja zwracająca obiekt kontroli HUBa
+     * @return obiekt kontroli HUBa
+     */
     public HubControl getHubControl() {
         return hubControl;
     }
-    
+    /**
+     * Konstruktor obiektu obsługującego Hub.
+     * Dodatkowo tworzony jest wątek odpowiedzialny za wysyłanie statusu HUBa co 5 minut.
+     * @throws MeteringSessionException 
+     */
     private HubHandler() throws MeteringSessionException {
         hubControl = new HubControl();
         
@@ -56,14 +64,20 @@ public class HubHandler {
         }, 5, 5, TimeUnit.MINUTES);
        
     }
-    
+    /**
+     * Funkcja zamykająca wątek wysyłający stan Huba
+     */
     public void shutdown(){
         if (exec != null) {
             exec.shutdown();
         }
         instance = null;
     }
-    
+    /**
+     * Getter singletonowej instancji obiektu zarzadzajacego HUBem
+     * @return
+     * @throws MeteringSessionException 
+     */
     public static synchronized HubHandler getInstance() throws MeteringSessionException {
         if (instance == null) {
             instance = new HubHandler();
@@ -71,7 +85,11 @@ public class HubHandler {
 
         return instance;
     }
-
+    
+    /**
+     * Funkcja ustawiająca odwołanie do obiektu Sesji z DB
+     * @param dbSession 
+     */
     public void setDBSession(Session dbSession) {
         hubControl.setDbSession(dbSession);
     }

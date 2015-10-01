@@ -5,7 +5,7 @@
  */
 package hubGui.views;
 
-import REST.RestMenager;
+import REST.RestMenager; 
 import hubGui.i18n.Resources;
 import hubGui.logging.GuiLogTarget;
 import hubGui.logging.LogTyps;
@@ -136,6 +136,15 @@ public class MainFormController implements Initializable {
         } catch (Exception ex) {
             java.util.logging.Logger.getLogger(MainFormController.class.getName()).log(Level.SEVERE, null, ex);
         }
+        try{    
+            System.loadLibrary("rxtxSerial");
+        }catch(UnsatisfiedLinkError e){
+            Logger.write(Resources.getString("msg.main.errorOnRXTXLibLoad"), LogTyps.ERROR);
+            Dialogs.showErrorAlert(
+                    Resources.getString(
+                            "msg.main.errorOnRXTXLibLoadAlert"));
+            this.closeActionHandler(null);
+        }
         hubControlInit(ses);
         initializeLoggerList();
         
@@ -164,7 +173,7 @@ public class MainFormController implements Initializable {
                     Resources.getFormatString(
                             "msg.main.errorOnHubAutofindingAltert",
                             Resources.getString("msg.main.programPrerequisites")));
-            //this.closeActionHandler(null);
+            this.closeActionHandler(null);
         }
         try {
             hubH.getHubControl().openHubConn();

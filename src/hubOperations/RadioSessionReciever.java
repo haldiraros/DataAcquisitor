@@ -47,19 +47,30 @@ public class RadioSessionReciever implements Runnable{
         this.hubContr=hCon;
     }
     
-    
+    /**
+     * Funkcja tworząca obiekt zarządzający sesją radiową
+     * @param hCon
+     * @return
+     * @throws MeteringSessionException 
+     */
     static public RadioSessionReciever createRadioSessionReciever(HubControl hCon) throws MeteringSessionException {
         RadioSessionReciever RSRcv = new RadioSessionReciever(hCon);
         RSRcv.metSess = RSRcv.hubContr.getHubConn().getRadioSession();
         return RSRcv;
     }
-
+    /**
+     * Funkcja tworząca wątek odbierający dane z sesji radiowej.
+     * @return
+     * @throws MeteringSessionException 
+     */
     public int mainThread() throws MeteringSessionException {
         setThread(new Thread(this, "RadioSessionReciever for hub: "+hubContr.getHub().getHubHexId()));
         getThread().start();
         return 0;
     }
-
+    /**
+     * Funkcja wątku odbierającego dane z Sesji Radiowej
+     */
     @Override
     public void run() {
     lgr.debug("Time:"+System.nanoTime()+","+"Thread started: "+Thread.currentThread().getName());
@@ -82,7 +93,10 @@ public class RadioSessionReciever implements Runnable{
         }
     lgr.debug("Time:"+System.nanoTime()+","+"Thread stoped: "+Thread.currentThread().getName());
     }
-    
+    /**
+     * Funkcja zamykająca wątek odbierajacy z sesji radiowej
+     * @throws MeteringSessionException 
+     */
     public void close() throws MeteringSessionException{
         setShouldRun(false);
         if (getThread()!=null)
