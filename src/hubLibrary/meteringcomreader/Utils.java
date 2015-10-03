@@ -140,7 +140,8 @@ public class Utils {
     static final int getLoggerHardwareVerReq=0x030d;
     static final int getLoggerHardwareVerRes=0x030d;
 
-
+    static final int getLoggerAesKeyReq=0x080d;
+    static final int getLoggerAesKeyRes=0x080d;
     
     final static int closeAllSessionRes=0x0F02;
     final static int closeLoggerFlashSessionReq=0xF102;
@@ -175,6 +176,7 @@ public class Utils {
     static final int getNextLoggerFlashSessionRes=0x010A;
     static final int regetPrevLoggerFlashSessionReq=0x010B;
     static final int regetPrevLoggerFlashSessionRes=0x010B;
+    
     
 /**
  * Zamienia long na tablicę bajtów według Little Endian.
@@ -229,6 +231,19 @@ public class Utils {
      */
     static long bytes2long(byte[] data, int size){
         return bytes2long(data, 0, size);
+    }
+    
+    /**
+     * Zamienia tablicę 2 bajtów na opis wersji (zgodnie z opisem z dokumentacji)
+     * @param data
+     * @return zamieniony numter wersji.
+     */
+    static String bytes2verString(byte [] data){
+        String ret = new String();
+        int tail = (int)(((long)data[1])&0xFFL);
+        int head = (int)(((long)data[0])&0xFFL);
+        ret = head+"."+tail;
+        return ret;
     }
     
     static String bytes2HexStr(byte[] data){

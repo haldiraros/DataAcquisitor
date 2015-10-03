@@ -81,10 +81,10 @@ public class TestHubFlashSession {
             hubSession.close();
              */
            
-            int hubHVer=hc.getHubHardwareVersion();
-            int hubFVer=hc.getHubFirmawareVersion();
-            System.out.println("hubHVer"+Integer.toHexString(hubHVer));
-            System.out.println("hubFVer"+Integer.toHexString(hubFVer));
+            //int hubHVer=hc.getHubHardwareVersion();
+            //int hubFVer=hc.getHubFirmawareVersion();
+            //System.out.println("hubHVer"+Integer.toHexString(hubHVer));
+            //System.out.println("hubFVer"+Integer.toHexString(hubFVer));
 /*  
             Date now =new Date();
             

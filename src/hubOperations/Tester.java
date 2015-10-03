@@ -66,7 +66,13 @@ public class Tester {
     //hubC.readPacketsHubFlash();
 
        // System.out.println(hubC.checkLoggerID());
-        hubC.readPacketsLoggerFlash();
+        //hubC.readPacketsLoggerFlash();
+        System.out.println(hubC.getHubConn().getLoggerId());
+        System.out.println(hubC.getHubConn().getLoggerFirmawareVersion());
+        System.out.println(hubC.getHubConn().getLoggerHardwareVersion());
+        System.out.println(hubC.getHubConn().getLoggerAesKey());
+        System.out.println(hubC.getHubFirmVer());
+        System.out.println(hubC.getHubHardVer());
 //        boolean flag = true;
 //        int i=0;
 //        do{

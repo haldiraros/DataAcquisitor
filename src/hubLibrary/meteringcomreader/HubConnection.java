@@ -448,17 +448,17 @@ public class HubConnection implements Runnable{
         }
     }
 
-    public int getHubFirmawareVersion() throws MeteringSessionException{
+    public String getHubFirmawareVersion() throws MeteringSessionException{
         sendCommand(Utils.hubFirmwareVerReq);
         byte[] data = receiveAck(Utils.hubFirmwareVerRes);
-        int ver= (int)Utils.bytes2long(data, 2);
+        String ver=Utils.bytes2verString(data);
         return ver;
     }
     
-    public int getHubHardwareVersion() throws MeteringSessionException{
+    public String getHubHardwareVersion() throws MeteringSessionException{
         sendCommand(Utils.hubHardwareVerReq);
         byte[] data = receiveAck(Utils.hubHardwareVerRes);
-        int ver= (int)Utils.bytes2long(data, 2);
+        String ver= Utils.bytes2verString(data);
         return ver;
     }
     
@@ -907,6 +907,49 @@ public class HubConnection implements Runnable{
         }
         return Utils.bytes2long(data, 4);
     }
+    /**
+     * Pobiera za pośrednictwem koncentratora wersję Firmware loggera,
+     * który jest aktualnie zainstalowany na koncentratorze
+     * @return wersja Firmware loggera który jest zainstalowany na koncentratorze.
+     * @throws MeteringSessionException 
+     */
+    public String getLoggerFirmawareVersion() throws MeteringSessionException{
+        sendCommand(Utils.getLoggerFirmwareVerReq);
+        byte[] ret=receiveAck(Utils.getLoggerFirmwareVerRes);
+        String logFirmVer=Utils.bytes2verString(ret);
+        return logFirmVer;
+    }
+    /**
+     * Pobiera za pośrednictwem koncentratora wersję Hardware loggera,
+     * który jest aktualnie zainstalowany na koncentratorze
+     * @return wersja Hardware logera któryu jest zainstalowany na koncentratorze
+     * @throws MeteringSessionException 
+     */
+    public String getLoggerHardwareVersion() throws MeteringSessionException{
+        sendCommand(Utils.getLoggerHardwareVerReq);
+        byte[] ret=receiveAck(Utils.getLoggerHardwareVerRes);
+        String logHardVer=Utils.bytes2verString(ret);
+        return logHardVer;
+    }
+    /**
+     * Pobiera za pośrednictwem koncentratora Klucz szyfrowania AES loggera,
+     * który jest aktualnie zainstalowany na koncentratorze
+     * @return klucz AES logera któryu jest zainstalowany na koncentratorze
+     * @throws MeteringSessionException 
+     */
+    public String getLoggerAesKey() throws MeteringSessionException{
+        sendCommand(Utils.getLoggerAesKeyReq);
+        byte[] ret=receiveAck(Utils.getLoggerAesKeyRes);
+        StringBuilder sb =  new StringBuilder(100);
+        sb.append("0X");
+        for (int i=0; i<ret.length; i++ ){
+            sb.append(String.format("%02X", ret[i]));
+        }
+        String aesKey=sb.toString();
+        return aesKey;
+    }
+  
+    
     
     /**
      * Uruchamia nadawanie danych radiowych przez logger o identyfikatorze <code>loggerId</code>, który

@@ -171,7 +171,7 @@ public class HubControl {
      * @return wartość int z wersją Firmware
      * @throws MeteringSessionException 
      */
-    public int getHubFirmVer() throws MeteringSessionException{
+    public String getHubFirmVer() throws MeteringSessionException{
         return hubConn.getHubFirmawareVersion();
     }
     /**
@@ -179,7 +179,7 @@ public class HubControl {
      * @return wartość int wyrażająca wersję Hardware urządzenia Hub
      * @throws MeteringSessionException 
      */
-    public int getHubHardVer() throws MeteringSessionException{
+    public String getHubHardVer() throws MeteringSessionException{
         return hubConn.getHubHardwareVersion();
     }
     
@@ -269,6 +269,15 @@ public class HubControl {
         return loggerID;
 
     }
+    
+    public String getLoggerFirmVer() throws MeteringSessionException{
+        return hubConn.getLoggerFirmawareVersion();
+    }
+    
+    public String getLoggerHardVer() throws MeteringSessionException{
+        return hubConn.getLoggerHardwareVersion();
+    }
+    
     
     /**
      * Funkcja autorejestrująca logger umieszczony na urządzeniu HUB

@@ -163,7 +163,7 @@ static{
 
      resSizes.put(Utils.getLoggerFirmwareVerRes,2);
      resSizes.put(Utils.getLoggerHardwareVerRes,2);
-
+     resSizes.put(Utils.getLoggerAesKeyRes,16);
     
     resSizes.put(Utils.getIdLoggerFlashSessionRes, 4);
     resSizes.put(Utils.readPeriodRecodTimeFlashSessionRes, 2);
