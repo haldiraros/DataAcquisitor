@@ -8,11 +8,11 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="599.0" prefWidth="849.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hubGui.views.MainFormController">
+<AnchorPane id="AnchorPane" fx:id="root" prefHeight="650.0" prefWidth="900.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hubGui.views.MainFormController">
    <children>
       <BorderPane prefHeight="569.0" prefWidth="756.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <center>
-            <SplitPane dividerPositions="0.35" prefHeight="569.0" prefWidth="756.0" BorderPane.alignment="CENTER">
+            <SplitPane dividerPositions="0.4" prefHeight="569.0" prefWidth="756.0" BorderPane.alignment="CENTER">
               <items>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="542.0" prefWidth="234.0">
                      <children>
@@ -24,6 +24,7 @@
                               <Button fx:id="autoRegisterButton" mnemonicParsing="false" onAction="#registerAutoActionHandler" text="%gui.main.autoRegister" />
                               <Button fx:id="unregisterButton" mnemonicParsing="false" onAction="#unregisterActionHandler" text="%gui.main.unregister" />
                               <Button fx:id="readButton" mnemonicParsing="false" onAction="#readActionHandler" text="%gui.main.read" />
+                              <Button fx:id="infoButton" mnemonicParsing="false" onAction="#infoLoggerActionHandler" text="%gui.main.info" />
                           </items>
                         </ToolBar>
                      </children>
@@ -68,6 +69,7 @@
                     <MenuItem fx:id="registerAutoMenuItem" mnemonicParsing="false" onAction="#registerAutoActionHandler" text="%gui.main.autorRegisterLogger" />
                     <MenuItem fx:id="unregisterMenuItem" mnemonicParsing="false" onAction="#unregisterActionHandler" text="%gui.main.unregisterLogger" />
                     <MenuItem fx:id="readMenuItem" mnemonicParsing="false" onAction="#readActionHandler" text="%gui.main.read" />
+                        <MenuItem fx:id="infoLogger" mnemonicParsing="false" onAction="#infoLoggerActionHandler" text="%gui.main.infoLogger" />
                   </items>
                 </Menu>
                 <Menu mnemonicParsing="false" text="%gui.main.hub">

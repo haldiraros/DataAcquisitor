@@ -11,6 +11,7 @@ import hubGui.logging.ConsoleLogTarget;
 import hubGui.logging.Logger;
 import hubGui.settings.Settings;
 import hubGui.settings.SettingsLoader;
+import hubGui.views.MainFormController;
 import hubOperations.HubHandler;
 import java.io.IOException;
 import javafx.application.Application;
@@ -35,6 +36,9 @@ public class Main extends Application {
             Scene scene = new Scene(loader.load());
             primaryStage.setScene(scene);
             primaryStage.show();
+            
+            MainFormController c = (MainFormController)loader.getController();
+            c.init();
       
         } catch (IOException e) {
             e.printStackTrace();

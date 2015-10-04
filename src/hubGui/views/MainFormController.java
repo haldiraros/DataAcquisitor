@@ -81,6 +81,9 @@ public class MainFormController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+    }
+    
+    public void init() { 
         timeColumn.setCellValueFactory(c -> c.getValue().getTimeProperty());
         messageColumn.setCellValueFactory(c -> c.getValue().getMessageProperty());
         
@@ -148,7 +151,10 @@ public class MainFormController implements Initializable {
                             "msg.main.errorOnRXTXLibLoadAlert"));
             this.closeActionHandler(null);
         }
-        hubControlInit(ses);
+        
+        if (!hubControlInit(ses))
+            return;
+        
         initializeLoggerList();
         
         try {
@@ -165,7 +171,7 @@ public class MainFormController implements Initializable {
         }
     }
 
-    private void hubControlInit(Session dbSession) { //TODO: make sure there is a auth key for the HUB
+    private boolean hubControlInit(Session dbSession) { //TODO: make sure there is a auth key for the HUB
         HubHandler hubH = null;
         try {
             hubH = HubHandler.getInstance();
@@ -178,6 +184,7 @@ public class MainFormController implements Initializable {
                             Resources.getString("msg.main.programPrerequisites")));
             
             this.closeActionHandler(null);
+            return false;
         }
         try {
             hubH.getHubControl().openHubConn();
@@ -191,9 +198,10 @@ public class MainFormController implements Initializable {
                             Resources.getString("msg.main.programPrerequisites")));
             ex.printStackTrace();
             this.closeActionHandler(null);
-            return;
+            return false;
         }
         addMessage(Resources.getFormatString("msg.main.hubConnected", hubH.getHubControl().getHubId()));
+        return true;
     }
 
     private void initializeLoggerList() {
@@ -390,6 +398,25 @@ public class MainFormController implements Initializable {
         alert.setHeaderText(Resources.getString("common.program"));
         alert.setContentText(Resources.getString("msg.main.copyrights"));
         alert.showAndWait();
+    }
+    
+    @FXML
+    private void infoLoggerActionHandler(ActionEvent event) {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("LoggerInfoForm.fxml"));
+            fxmlLoader.setResources(Resources.getResourceBundle());
+            Stage stage = new Stage();
+            Parent root = (Parent) fxmlLoader.load();
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setResizable(false);
+            stage.setTitle(Resources.getString("msg.main.loggerInfoTitle"));
+            stage.setScene(new Scene(root));
+            stage.show();
+            LoggerInfoFormController c = (LoggerInfoFormController)fxmlLoader.getController();
+            c.readInfo();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
