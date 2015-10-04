@@ -51,8 +51,8 @@ public class Session {
     }
 
     public Session(LocalDataBaseMenager ldbm, Boolean sessionWithLocalDB, RestMenager restMenager) throws Exception {
-        this.restMenager = restMenager;
         setUpStartValues(ldbm, sessionWithLocalDB);
+        setRestMenager(restMenager);
     }
 
     public Session(LocalDataBaseMenager ldbm, Boolean sessionWithLocalDB) throws Exception {
@@ -91,7 +91,6 @@ public class Session {
         connection = localDataBaseMenager.getNewConnection();
         localDataBaseMenager.createSession(connection, this);
         localDataBaseMenager.removeSendData(connection);
-        createIddleSending();
     }
 
     private void createIddleSending() throws Exception {
@@ -432,7 +431,13 @@ public class Session {
     /**
      * @param restMenager the restMenager to set
      */
-    public void setRestMenager(RestMenager restMenager) {
+    public void setRestMenager(RestMenager restMenager) throws Exception {
+        if (this.restMenager == null && restMenager != null) {
+            createIddleSending();
+        } else if (this.restMenager == null && restMenager != null && exec != null) {
+            exec.shutdown();
+            exec = null;
+        }
         this.restMenager = restMenager;
     }
 

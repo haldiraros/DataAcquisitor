@@ -25,34 +25,35 @@ public class MeasurementManager {
         int inserted = 0;
         String sql = "INSERT INTO Measurements(LOGGER_ID,HUB_ID,MEASUREMENT_TIME,PERIOD,DATA) VALUES (?,?,?,?,?)";
         //connection.setAutoCommit(false);
-        synchronized(connection){
-        for (Measurement m : measurements) {
-            if (m.getId() == null) {
-                /*LOG*/ //System.out.println("Start: createDatagram");
-                PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-                ps.setString(1, m.getLoggerId());
-                ps.setString(2, m.getHubId());
-                ps.setString(3, m.getMeasurmentTime());
-                ps.setInt(4, m.getPeriod());
-                ps.setString(5, m.getData().toString());
-                int insert = ps.executeUpdate();
-                inserted += insert;
-                if (insert == 0) {
-                    throw new SQLException("Storing Measurement failed, no rows inserted.");
-                }
-                try (ResultSet generatedKeys = ps.getGeneratedKeys()) {
-                    if (generatedKeys.next()) {
-                        m.setId(generatedKeys.getBigDecimal(1));
-                    } else {
-                        throw new SQLException("Storing Measurement failed, no ID obtained.");
+        synchronized (connection) {
+            for (Measurement m : measurements) {
+                if (m.getId() == null) {
+                    /*LOG*/ //System.out.println("Start: createDatagram");
+                    PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+                    ps.setString(1, m.getLoggerId());
+                    ps.setString(2, m.getHubId());
+                    ps.setString(3, m.getMeasurmentTime());
+                    ps.setInt(4, m.getPeriod());
+                    ps.setString(5, m.getData().toString());
+                    int insert = ps.executeUpdate();
+                    inserted += insert;
+                    if (insert == 0) {
+                        throw new SQLException("Storing Measurement failed, no rows inserted.");
                     }
+                    try (ResultSet generatedKeys = ps.getGeneratedKeys()) {
+                        if (generatedKeys.next()) {
+                            m.setId(generatedKeys.getBigDecimal(1));
+                        } else {
+                            throw new SQLException("Storing Measurement failed, no ID obtained.");
+                        }
+                    }
+                    /*LOG*/ //System.out.println("End: createMeasurement, created Measurement ID: " + m.getId().toPlainString());
+                    ps.close();
                 }
-                /*LOG*/ //System.out.println("End: createMeasurement, created Measurement ID: " + m.getId().toPlainString());
-                ps.close();
             }
+
+            connection.commit();
         }
-        
-        connection.commit();}
         //connection.setAutoCommit(true);
         return inserted;
     }
@@ -90,12 +91,13 @@ public class MeasurementManager {
         //connection.setAutoCommit(false);
         String sql = "DELETE FROM Measurements WHERE ID in (select Measurement_id from Measurement_statistics where is_send = 'TRUE')";
         int deleted;
-        synchronized(connection){
-        PreparedStatement ps = connection.prepareStatement(sql);
-        deleted = ps.executeUpdate();
-        ps.close();
-    
-        connection.commit();}
+        synchronized (connection) {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            deleted = ps.executeUpdate();
+            ps.close();
+
+            connection.commit();
+        }
         //connection.setAutoCommit(true);
         return deleted;
         /*LOG*/ // System.out.println("End: deleteSendMeasurements");
@@ -105,22 +107,23 @@ public class MeasurementManager {
         int updated = 0;
         //connection.setAutoCommit(false);
         String sql = "INSERT INTO Measurement_Errors_log(Measurement_ID,ERROR) VALUES (?,?)";
-        synchronized(connection){
-        for (Measurement measurement : measurements) {
-            if (measurement.getId() != null && measurement.isDataSend() != true && measurement.getNewErrorMessage() != null) {
-                /*LOG*/ // System.out.println("Start: reportSendErrorForMeasurement with id:" + measurement.getId());
-                PreparedStatement ps = connection.prepareStatement(sql);
-                ps.setBigDecimal(1, measurement.getId());
-                ps.setString(2, measurement.getNewErrorMessage() != null ? measurement.getNewErrorMessage().substring(0, Math.min(measurement.getNewErrorMessage().length(), 2000)) : null);
-                updated += ps.executeUpdate();
-                measurement.setPrevErrorMessage(measurement.getNewErrorMessage());
-                measurement.setNewErrorMessage(null);
-                ps.close();
-                /*LOG*/ // System.out.println("End: reportSendErrorForMeasurement with id:" + measurement.getId());
+        synchronized (connection) {
+            for (Measurement measurement : measurements) {
+                if (measurement.getId() != null && measurement.isDataSend() != true && measurement.getNewErrorMessage() != null) {
+                    /*LOG*/ // System.out.println("Start: reportSendErrorForMeasurement with id:" + measurement.getId());
+                    PreparedStatement ps = connection.prepareStatement(sql);
+                    ps.setBigDecimal(1, measurement.getId());
+                    ps.setString(2, measurement.getNewErrorMessage() != null ? measurement.getNewErrorMessage().substring(0, Math.min(measurement.getNewErrorMessage().length(), 2000)) : null);
+                    updated += ps.executeUpdate();
+                    measurement.setPrevErrorMessage(measurement.getNewErrorMessage());
+                    measurement.setNewErrorMessage(null);
+                    ps.close();
+                    /*LOG*/ // System.out.println("End: reportSendErrorForMeasurement with id:" + measurement.getId());
+                }
             }
+
+            connection.commit();
         }
-        
-        connection.commit(); }
         //connection.setAutoCommit(true);
         return updated;
     }
@@ -134,19 +137,19 @@ public class MeasurementManager {
                 + " send_attempts = send_attempts + 1"
                 + " WHERE "
                 + " measurement_id = (?)";
-        synchronized(connection){
-        for (Measurement measurement : measurements) {
-            if (measurement.getId() != null && measurement.isDataSend() == true) {
-                /*LOG*/ // System.out.println("Start: setSendOK with id:" + measurement.getId());
-                PreparedStatement ps = connection.prepareStatement(sql);
-                ps.setBigDecimal(1, measurement.getId());
-                updated += ps.executeUpdate();
-                ps.close();
-                /*LOG*/ // System.out.println("End: setSendOK with id:" + measurement.getId());
+        synchronized (connection) {
+            for (Measurement measurement : measurements) {
+                if (measurement.getId() != null && measurement.isDataSend() == true) {
+                    /*LOG*/ // System.out.println("Start: setSendOK with id:" + measurement.getId());
+                    PreparedStatement ps = connection.prepareStatement(sql);
+                    ps.setBigDecimal(1, measurement.getId());
+                    updated += ps.executeUpdate();
+                    ps.close();
+                    /*LOG*/ // System.out.println("End: setSendOK with id:" + measurement.getId());
+                }
             }
-        }
-        
-        connection.commit();
+
+            connection.commit();
         }
         //connection.setAutoCommit(true);
         return updated;

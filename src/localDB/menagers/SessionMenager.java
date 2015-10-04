@@ -23,29 +23,29 @@ public class SessionMenager {
             /*LOG*/ // System.out.println("Start: createSession");
             //connection.setAutoCommit(true);
             String sql = "INSERT INTO Session_statistics(d_enqueued,d_received,d_send_ok,d_send_failures,m_enqueued,m_received,m_send_ok,m_send_failures) VALUES (?,?,?,?,?,?,?,?)";
-            synchronized(connection){
-            PreparedStatement cs = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-            cs.setInt(1, session.getDatagramsEnqueued());
-            cs.setInt(2, session.getDatagramsReceived());
-            cs.setInt(3, session.getDatagramsSend_OK());
-            cs.setInt(4, session.getDatagramsSend_Failures());
-            cs.setInt(5, session.getMeasuresEnqueued());
-            cs.setInt(6, session.getMeasuresReceived());
-            cs.setInt(7, session.getMeasuresSend_OK());
-            cs.setInt(8, session.getMeasuresSend_Failures());
-            if (cs.executeUpdate() == 0) {
-                throw new SQLException("Creating session failed, no rows created.");
-            }
-            try (ResultSet generatedKeys = cs.getGeneratedKeys()) {
-                if (generatedKeys.next()) {
-                    session.setId(generatedKeys.getBigDecimal(1));
-                } else {
-                    throw new SQLException("Creating session failed, no ID obtained.");
+            synchronized (connection) {
+                PreparedStatement cs = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+                cs.setInt(1, session.getDatagramsEnqueued());
+                cs.setInt(2, session.getDatagramsReceived());
+                cs.setInt(3, session.getDatagramsSend_OK());
+                cs.setInt(4, session.getDatagramsSend_Failures());
+                cs.setInt(5, session.getMeasuresEnqueued());
+                cs.setInt(6, session.getMeasuresReceived());
+                cs.setInt(7, session.getMeasuresSend_OK());
+                cs.setInt(8, session.getMeasuresSend_Failures());
+                if (cs.executeUpdate() == 0) {
+                    throw new SQLException("Creating session failed, no rows created.");
                 }
-            }
-            cs.close();
-            
-            connection.commit();
+                try (ResultSet generatedKeys = cs.getGeneratedKeys()) {
+                    if (generatedKeys.next()) {
+                        session.setId(generatedKeys.getBigDecimal(1));
+                    } else {
+                        throw new SQLException("Creating session failed, no ID obtained.");
+                    }
+                }
+                cs.close();
+
+                connection.commit();
             }
             /*LOG*/ // System.out.println("End: createSession, session id: " + session.getId().toPlainString());
         } else {
@@ -73,22 +73,22 @@ public class SessionMenager {
                     + " m_send_failures = (?), "
                     + " last_update = CURRENT_TIMESTAMP "
                     + " where id = (?)";
-            synchronized(connection){
-            PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-            ps.setInt(1, session.getDatagramsEnqueued());
-            ps.setInt(2, session.getDatagramsReceived());
-            ps.setInt(3, session.getDatagramsSend_OK());
-            ps.setInt(4, session.getDatagramsSend_Failures());
-            ps.setInt(5, session.getMeasuresEnqueued());
-            ps.setInt(6, session.getMeasuresReceived());
-            ps.setInt(7, session.getMeasuresSend_OK());
-            ps.setInt(8, session.getMeasuresSend_Failures());
-            ps.setBigDecimal(9, session.getId());
-            if (ps.executeUpdate() == 0) {
-                throw new SQLException("Udating session failed, no rows affected.");
-            }
-            ps.close();
-            connection.commit();
+            synchronized (connection) {
+                PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+                ps.setInt(1, session.getDatagramsEnqueued());
+                ps.setInt(2, session.getDatagramsReceived());
+                ps.setInt(3, session.getDatagramsSend_OK());
+                ps.setInt(4, session.getDatagramsSend_Failures());
+                ps.setInt(5, session.getMeasuresEnqueued());
+                ps.setInt(6, session.getMeasuresReceived());
+                ps.setInt(7, session.getMeasuresSend_OK());
+                ps.setInt(8, session.getMeasuresSend_Failures());
+                ps.setBigDecimal(9, session.getId());
+                if (ps.executeUpdate() == 0) {
+                    throw new SQLException("Udating session failed, no rows affected.");
+                }
+                ps.close();
+                connection.commit();
             }
             /*LOG*/ // System.out.println("End: updateSession, session id: " + session.getId().toPlainString());
         }
@@ -115,23 +115,24 @@ public class SessionMenager {
                     + " time_end = CURRENT_TIMESTAMP,"
                     + " last_update = CURRENT_TIMESTAMP "
                     + " where id = (?)";
-            synchronized(connection){
-            PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-            ps.setInt(1, session.getDatagramsEnqueued());
-            ps.setInt(2, session.getDatagramsReceived());
-            ps.setInt(3, session.getDatagramsSend_OK());
-            ps.setInt(4, session.getDatagramsSend_Failures());
-            ps.setInt(5, session.getMeasuresEnqueued());
-            ps.setInt(6, session.getMeasuresReceived());
-            ps.setInt(7, session.getMeasuresSend_OK());
-            ps.setInt(8, session.getMeasuresSend_Failures());
-            ps.setBigDecimal(9, session.getId());
-            if (ps.executeUpdate() == 0) {
-                throw new SQLException("Udating session failed, no rows affected.");
+            synchronized (connection) {
+                PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+                ps.setInt(1, session.getDatagramsEnqueued());
+                ps.setInt(2, session.getDatagramsReceived());
+                ps.setInt(3, session.getDatagramsSend_OK());
+                ps.setInt(4, session.getDatagramsSend_Failures());
+                ps.setInt(5, session.getMeasuresEnqueued());
+                ps.setInt(6, session.getMeasuresReceived());
+                ps.setInt(7, session.getMeasuresSend_OK());
+                ps.setInt(8, session.getMeasuresSend_Failures());
+                ps.setBigDecimal(9, session.getId());
+                if (ps.executeUpdate() == 0) {
+                    throw new SQLException("Udating session failed, no rows affected.");
+                }
+                session.closeOnLocalBD();
+                ps.close();
+                connection.commit();
             }
-            session.closeOnLocalBD();
-            ps.close();
-            connection.commit(); }
             /*LOG*/ // System.out.println("End: closeSession, session id: " + session.getId().toPlainString());
         }
     }

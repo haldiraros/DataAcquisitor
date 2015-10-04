@@ -24,31 +24,32 @@ public class DatagramMenager {
         int inserted = 0;
         String sql = "INSERT INTO DATAGRAMS(MESSAGE,HUB_ID,DATA_TIME) VALUES (?,?,?)";
         //connection.setAutoCommit(false);
-        synchronized(connection){
-        for (Datagram d : datagrams) {
-            if (d.getId() == null) {
-                /*LOG*/ // System.out.println("Start: createDatagram");
-                PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-                ps.setString(1, d.getData());
-                ps.setString(2, d.getHubId());
-                ps.setString(3, d.getDataTimestamp());
-                int insert = ps.executeUpdate();
-                inserted += insert;
-                if (insert == 0) {
-                    throw new SQLException("Storing Datagram failed, no rows inserted.");
-                }
-                try (ResultSet generatedKeys = ps.getGeneratedKeys()) {
-                    if (generatedKeys.next()) {
-                        d.setId(generatedKeys.getBigDecimal(1));
-                    } else {
-                        throw new SQLException("Storing Datagram failed, no ID obtained.");
+        synchronized (connection) {
+            for (Datagram d : datagrams) {
+                if (d.getId() == null) {
+                    /*LOG*/ // System.out.println("Start: createDatagram");
+                    PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+                    ps.setString(1, d.getData());
+                    ps.setString(2, d.getHubId());
+                    ps.setString(3, d.getDataTimestamp());
+                    int insert = ps.executeUpdate();
+                    inserted += insert;
+                    if (insert == 0) {
+                        throw new SQLException("Storing Datagram failed, no rows inserted.");
                     }
+                    try (ResultSet generatedKeys = ps.getGeneratedKeys()) {
+                        if (generatedKeys.next()) {
+                            d.setId(generatedKeys.getBigDecimal(1));
+                        } else {
+                            throw new SQLException("Storing Datagram failed, no ID obtained.");
+                        }
+                    }
+                    /*LOG*/ // System.out.println("End: createDatagram, created Datagram ID: " + datagram.getId().toPlainString());
+                    ps.close();
                 }
-                /*LOG*/ // System.out.println("End: createDatagram, created Datagram ID: " + datagram.getId().toPlainString());
-                ps.close();
             }
+            connection.commit();
         }
-        connection.commit(); }
         //connection.setAutoCommit(true);
         return inserted;
     }
@@ -83,12 +84,13 @@ public class DatagramMenager {
         /*LOG*/ // System.out.println("Start: deleteSendDatagrams");
         //connection.setAutoCommit(false);
         String sql = "DELETE FROM DATAGRAMS WHERE ID in (select datagram_id from Datagram_statistics where is_send = 'TRUE')";
-        int deleted =0;
-        synchronized(connection){
-        PreparedStatement ps = connection.prepareStatement(sql);
-        deleted = ps.executeUpdate();
-        ps.close();
-        connection.commit();}
+        int deleted = 0;
+        synchronized (connection) {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            deleted = ps.executeUpdate();
+            ps.close();
+            connection.commit();
+        }
         //connection.setAutoCommit(true);
         return deleted;
         /*LOG*/ // System.out.println("End: deleteSendDatagrams");
@@ -98,21 +100,22 @@ public class DatagramMenager {
         int updated = 0;
         //connection.setAutoCommit(false);
         String sql = "INSERT INTO Datagram_Errors_log(DATAGRAM_ID,ERROR) VALUES (?,?)";
-        synchronized(connection){
-        for (Datagram datagram : datagrams) {
-            if (datagram.getId() != null && datagram.isDataSend() != true && datagram.getNewErrorMessage() != null) {
-                /*LOG*/ // System.out.println("Start: reportSendErrorForDatagram with id:" + datagram.getId());
-                PreparedStatement ps = connection.prepareStatement(sql);
-                ps.setBigDecimal(1, datagram.getId());
-                ps.setString(2, datagram.getNewErrorMessage() != null ? datagram.getNewErrorMessage().substring(0, Math.min(datagram.getNewErrorMessage().length(), 2000)) : null);
-                updated += ps.executeUpdate();
-                datagram.setPrevErrorMessage(datagram.getNewErrorMessage());
-                datagram.setNewErrorMessage(null);
-                ps.close();
-                /*LOG*/ // System.out.println("End: reportSendErrorForDatagram with id:" + datagram.getId());
+        synchronized (connection) {
+            for (Datagram datagram : datagrams) {
+                if (datagram.getId() != null && datagram.isDataSend() != true && datagram.getNewErrorMessage() != null) {
+                    /*LOG*/ // System.out.println("Start: reportSendErrorForDatagram with id:" + datagram.getId());
+                    PreparedStatement ps = connection.prepareStatement(sql);
+                    ps.setBigDecimal(1, datagram.getId());
+                    ps.setString(2, datagram.getNewErrorMessage() != null ? datagram.getNewErrorMessage().substring(0, Math.min(datagram.getNewErrorMessage().length(), 2000)) : null);
+                    updated += ps.executeUpdate();
+                    datagram.setPrevErrorMessage(datagram.getNewErrorMessage());
+                    datagram.setNewErrorMessage(null);
+                    ps.close();
+                    /*LOG*/ // System.out.println("End: reportSendErrorForDatagram with id:" + datagram.getId());
+                }
             }
+            connection.commit();
         }
-        connection.commit();}
         //connection.setAutoCommit(true);
         return updated;
     }
@@ -126,18 +129,19 @@ public class DatagramMenager {
                 + " send_attempts = send_attempts + 1"
                 + " WHERE "
                 + " datagram_id = (?)";
-        synchronized(connection){
-        for (Datagram datagram : datagrams) {
-            if (datagram.getId() != null && datagram.isDataSend() == true) {
-                /*LOG*/ // System.out.println("Start: setSendOK with id:" + datagram.getId());
-                PreparedStatement ps = connection.prepareStatement(sql);
-                ps.setBigDecimal(1, datagram.getId());
-                updated += ps.executeUpdate();
-                ps.close();
-                /*LOG*/ // System.out.println("End: setSendOK with id:" + datagram.getId());
+        synchronized (connection) {
+            for (Datagram datagram : datagrams) {
+                if (datagram.getId() != null && datagram.isDataSend() == true) {
+                    /*LOG*/ // System.out.println("Start: setSendOK with id:" + datagram.getId());
+                    PreparedStatement ps = connection.prepareStatement(sql);
+                    ps.setBigDecimal(1, datagram.getId());
+                    updated += ps.executeUpdate();
+                    ps.close();
+                    /*LOG*/ // System.out.println("End: setSendOK with id:" + datagram.getId());
+                }
             }
+            connection.commit();
         }
-        connection.commit();}
         //connection.setAutoCommit(true);
         return updated;
     }
