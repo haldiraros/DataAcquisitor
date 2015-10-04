@@ -16,6 +16,9 @@
  */
 package hubGui.settings;
 
+import java.net.Authenticator;
+import java.net.PasswordAuthentication;
+
 /**
  *
  * @author Haros
@@ -26,23 +29,31 @@ public class ProxySetter {
         
         System.setProperty("http.proxyHost", host);
         System.setProperty("http.proxyPort", port);
-        System.setProperty("http.proxyUserName", user);
-        System.setProperty("http.proxyPassword", pass);
         
+        if(user!=null && user!="") 
+            Authenticator.setDefault( new BasicAuthenticator(user, pass));
+
         System.setProperty("https.proxyHost", host);
-        System.setProperty("https.proxyPort", port);
-        System.setProperty("https.proxyUserName", user);
-        System.setProperty("https.proxyPassword", pass);
-        
-        
-            
-        
-        
+        System.setProperty("https.proxyPort", port); 
     }
     
     public static void unsetProxy(){
         System.clearProperty("http.proxyHost");
         System.clearProperty("https.proxyHost");
+    }
+    
+    static class BasicAuthenticator extends Authenticator {
+        String baName;
+        String baPassword;
+        private BasicAuthenticator(String baName1, String baPassword1) {
+            baName = baName1;
+            baPassword = baPassword1;
+        }
+        @Override
+            public PasswordAuthentication getPasswordAuthentication() {
+                //System.out.println("Authenticating...");
+                return new PasswordAuthentication(baName, baPassword.toCharArray());
+            }
     }
     
 }

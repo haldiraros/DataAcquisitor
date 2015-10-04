@@ -61,7 +61,7 @@ public class HubHandler {
                     Logger.write(Resources.getString("msg.hubHandler.errorSubmitingHubStatus"), LogTyps.ERROR);
                 }
             }
-        }, 5, 5, TimeUnit.MINUTES);
+        }, 1, 4, TimeUnit.MINUTES);
        
     }
     /**

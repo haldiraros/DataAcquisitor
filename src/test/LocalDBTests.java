@@ -7,6 +7,8 @@ package test;
 
 import REST.RestMenager;
 import hubGui.i18n.Resources;
+import hubGui.settings.ProxySetter;
+import hubOperations.HubHandler;
 import java.util.HashSet;
 import java.util.Set;
 import localDB.menagers.LocalDataBaseMenager;
@@ -68,9 +70,17 @@ public class LocalDBTests {
 //            localDBSession.getLocalDataBaseMenager().getMeasurementMenager().createMeasurement(new Measurement("lol", "hub_id", "pojedynczo:" + i));
 //        }
 //        System.out.println("single:"+(System.currentTimeMillis() - startTime));
-        Thread.sleep(10000);
-//        localDBSession.sendDatagrams();
-//        localDBSession.sendMeasurements();
+        Thread.sleep(1000);
+        //localDBSession.sendDatagrams();
+       // localDBSession.sendMeasurements();
+        //ProxySetter.unsetProxy();
+        ProxySetter.setProxy("localhost", "1234", "", "");
+        HubHandler hh= HubHandler.getInstance();
+        hh.getHubControl().openHubConn();
+        for (int i = 0; i < 50; i++) {
+        localDBSession.sendHubStatus();
+        }
+        hh.getHubControl().closeAll();
 //        if (1 == 1) {
 //            throw new Exception("lol");
 //        }

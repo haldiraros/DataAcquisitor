@@ -7,11 +7,14 @@ package REST.operations;
 
 import hubGui.i18n.Resources;
 import hubGui.logging.LogTyps;
+import hubGui.settings.Settings;
 import hubGui.settings.SettingsLoader;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.net.InetSocketAddress;
+import java.net.Proxy;
 import java.net.URL;
 import java.net.URLConnection;
 import org.json.JSONException;
@@ -51,10 +54,10 @@ public class RestUtils {
         return everything.toString();
     }
     
-    public static JSONObject sendToServer(JSONObject message, String service) throws IOException, JSONException {
+    public static JSONObject sendToServer(JSONObject message, String service) throws IOException, JSONException, Exception {
         URL url = new URL(service);
         System.out.println("Creating connection");
-        URLConnection connection = url.openConnection();
+        URLConnection connection = connectionSetup(url);
         connection.setDoOutput(true);
         connection.setRequestProperty("Content-Type", "application/json");
         connection.setConnectTimeout(5000);
@@ -104,5 +107,18 @@ public class RestUtils {
     public static String getPlainMeasurementBatchURL() throws Exception {
         return SettingsLoader.load().getRestUrl() + Config.getString("REST.plainMeasurementBatchURL");
     }
-
+    
+    public static URLConnection connectionSetup(URL url) throws IOException, Exception{
+        Settings sett =SettingsLoader.load();
+        URLConnection connection;
+        
+        if(sett.isUseProxy() == null ? false : sett.isUseProxy()){
+            Proxy proxy = new Proxy(Proxy.Type.HTTP, new InetSocketAddress(sett.getProxyHost(), Integer.parseInt(sett.getProxyPort())));
+            connection = url.openConnection(proxy);
+        }else{
+            connection = url.openConnection();
+        }
+        return connection;
+        
+    }
 }
