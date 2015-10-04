@@ -23,6 +23,7 @@ public class SessionMenager {
             /*LOG*/ // System.out.println("Start: createSession");
             //connection.setAutoCommit(true);
             String sql = "INSERT INTO Session_statistics(d_enqueued,d_received,d_send_ok,d_send_failures,m_enqueued,m_received,m_send_ok,m_send_failures) VALUES (?,?,?,?,?,?,?,?)";
+            synchronized(connection){
             PreparedStatement cs = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             cs.setInt(1, session.getDatagramsEnqueued());
             cs.setInt(2, session.getDatagramsReceived());
@@ -43,7 +44,9 @@ public class SessionMenager {
                 }
             }
             cs.close();
+            
             connection.commit();
+            }
             /*LOG*/ // System.out.println("End: createSession, session id: " + session.getId().toPlainString());
         } else {
             throw new SQLException("Creating session failed, session already has id: " + session.getId().toPlainString());
@@ -70,6 +73,7 @@ public class SessionMenager {
                     + " m_send_failures = (?), "
                     + " last_update = CURRENT_TIMESTAMP "
                     + " where id = (?)";
+            synchronized(connection){
             PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setInt(1, session.getDatagramsEnqueued());
             ps.setInt(2, session.getDatagramsReceived());
@@ -85,6 +89,7 @@ public class SessionMenager {
             }
             ps.close();
             connection.commit();
+            }
             /*LOG*/ // System.out.println("End: updateSession, session id: " + session.getId().toPlainString());
         }
     }
@@ -110,6 +115,7 @@ public class SessionMenager {
                     + " time_end = CURRENT_TIMESTAMP,"
                     + " last_update = CURRENT_TIMESTAMP "
                     + " where id = (?)";
+            synchronized(connection){
             PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setInt(1, session.getDatagramsEnqueued());
             ps.setInt(2, session.getDatagramsReceived());
@@ -125,7 +131,7 @@ public class SessionMenager {
             }
             session.closeOnLocalBD();
             ps.close();
-            connection.commit();
+            connection.commit(); }
             /*LOG*/ // System.out.println("End: closeSession, session id: " + session.getId().toPlainString());
         }
     }

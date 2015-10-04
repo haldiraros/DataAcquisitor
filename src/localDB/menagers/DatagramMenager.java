@@ -24,6 +24,7 @@ public class DatagramMenager {
         int inserted = 0;
         String sql = "INSERT INTO DATAGRAMS(MESSAGE,HUB_ID,DATA_TIME) VALUES (?,?,?)";
         //connection.setAutoCommit(false);
+        synchronized(connection){
         for (Datagram d : datagrams) {
             if (d.getId() == null) {
                 /*LOG*/ // System.out.println("Start: createDatagram");
@@ -47,7 +48,7 @@ public class DatagramMenager {
                 ps.close();
             }
         }
-        connection.commit();
+        connection.commit(); }
         //connection.setAutoCommit(true);
         return inserted;
     }
@@ -82,10 +83,12 @@ public class DatagramMenager {
         /*LOG*/ // System.out.println("Start: deleteSendDatagrams");
         //connection.setAutoCommit(false);
         String sql = "DELETE FROM DATAGRAMS WHERE ID in (select datagram_id from Datagram_statistics where is_send = 'TRUE')";
+        int deleted =0;
+        synchronized(connection){
         PreparedStatement ps = connection.prepareStatement(sql);
-        int deleted = ps.executeUpdate();
+        deleted = ps.executeUpdate();
         ps.close();
-        connection.commit();
+        connection.commit();}
         //connection.setAutoCommit(true);
         return deleted;
         /*LOG*/ // System.out.println("End: deleteSendDatagrams");
@@ -95,6 +98,7 @@ public class DatagramMenager {
         int updated = 0;
         //connection.setAutoCommit(false);
         String sql = "INSERT INTO Datagram_Errors_log(DATAGRAM_ID,ERROR) VALUES (?,?)";
+        synchronized(connection){
         for (Datagram datagram : datagrams) {
             if (datagram.getId() != null && datagram.isDataSend() != true && datagram.getNewErrorMessage() != null) {
                 /*LOG*/ // System.out.println("Start: reportSendErrorForDatagram with id:" + datagram.getId());
@@ -108,7 +112,7 @@ public class DatagramMenager {
                 /*LOG*/ // System.out.println("End: reportSendErrorForDatagram with id:" + datagram.getId());
             }
         }
-        connection.commit();
+        connection.commit();}
         //connection.setAutoCommit(true);
         return updated;
     }
@@ -122,6 +126,7 @@ public class DatagramMenager {
                 + " send_attempts = send_attempts + 1"
                 + " WHERE "
                 + " datagram_id = (?)";
+        synchronized(connection){
         for (Datagram datagram : datagrams) {
             if (datagram.getId() != null && datagram.isDataSend() == true) {
                 /*LOG*/ // System.out.println("Start: setSendOK with id:" + datagram.getId());
@@ -132,7 +137,7 @@ public class DatagramMenager {
                 /*LOG*/ // System.out.println("End: setSendOK with id:" + datagram.getId());
             }
         }
-        connection.commit();
+        connection.commit();}
         //connection.setAutoCommit(true);
         return updated;
     }
