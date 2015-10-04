@@ -67,6 +67,7 @@ public class Tester {
 
        // System.out.println(hubC.checkLoggerID());
         //hubC.readPacketsLoggerFlash();
+
         System.out.println(hubC.getHubConn().getLoggerId());
         System.out.println(hubC.getHubConn().getLoggerFirmawareVersion());
         System.out.println(hubC.getHubConn().getLoggerHardwareVersion());

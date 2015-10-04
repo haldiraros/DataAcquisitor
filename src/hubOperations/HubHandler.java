@@ -33,6 +33,7 @@ public class HubHandler {
     private static volatile HubHandler instance = null;
     
     private HubControl hubControl = null;
+    private Session dbSession = null;
     private ScheduledExecutorService exec;
     
     /**
@@ -91,7 +92,12 @@ public class HubHandler {
      * @param dbSession 
      */
     public void setDBSession(Session dbSession) {
+        this.dbSession = dbSession;
         hubControl.setDbSession(dbSession);
+    }
+    
+    public Session getDBSession(){
+        return this.dbSession;
     }
 
 
