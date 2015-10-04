@@ -140,6 +140,7 @@ public class SetupDB {
             stmt.executeUpdate(createDatagramsTrigs);
             stmt.executeUpdate(createMeasurementTrigs);
             stmt.close();
+            c.commit();
         } catch (Exception e) {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
             System.exit(0);

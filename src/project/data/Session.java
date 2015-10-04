@@ -96,8 +96,8 @@ public class Session {
 
     private void createIddleSending() throws Exception {
         exec = Executors.newSingleThreadScheduledExecutor();
-        exec.scheduleAtFixedRate(new DatagramsIdleSend(localDataBaseMenager.getNewConnection()), Config.getInteger("datagramsIdleSendInitialDelay"), Config.getInteger("datagramsIdleSendPeriod"), TimeUnit.SECONDS);
-        exec.scheduleAtFixedRate(new MeasurementsIdleSend(localDataBaseMenager.getNewConnection()), Config.getInteger("measurementsIdleSendInitialDelay"), Config.getInteger("measurementsIdleSendPeriod"), TimeUnit.SECONDS);
+        exec.scheduleAtFixedRate(new DatagramsIdleSend(localDataBaseMenager.getNewConnection()), Config.getInteger("REST.datagramsIdleSendInitialDelay"), Config.getInteger("REST.datagramsIdleSendPeriod"), TimeUnit.SECONDS);
+        exec.scheduleAtFixedRate(new MeasurementsIdleSend(localDataBaseMenager.getNewConnection()), Config.getInteger("REST.measurementsIdleSendInitialDelay"), Config.getInteger("REST.measurementsIdleSendPeriod"), TimeUnit.SECONDS);
     }
 
     public boolean isSessionWithLocalDB() {

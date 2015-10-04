@@ -134,7 +134,10 @@ public class MainFormController implements Initializable {
         try {
             ses = setupDBSession();
         } catch (Exception ex) {
-            java.util.logging.Logger.getLogger(MainFormController.class.getName()).log(Level.SEVERE, null, ex);
+            Dialogs.showErrorAlert(
+                    Resources.getFormatString(
+                            "msg.main.errorOnDBSetup",ex.getLocalizedMessage()));
+            this.closeActionHandler(null);
         }
         try{    
             System.loadLibrary("rxtxSerial");
@@ -173,6 +176,7 @@ public class MainFormController implements Initializable {
                     Resources.getFormatString(
                             "msg.main.errorOnHubAutofindingAltert",
                             Resources.getString("msg.main.programPrerequisites")));
+            
             this.closeActionHandler(null);
         }
         try {
@@ -185,6 +189,8 @@ public class MainFormController implements Initializable {
                     Resources.getFormatString(
                             "msg.main.errorOnHubConnectionAlert",
                             Resources.getString("msg.main.programPrerequisites")));
+            ex.printStackTrace();
+            this.closeActionHandler(null);
             return;
         }
         addMessage(Resources.getFormatString("msg.main.hubConnected", hubH.getHubControl().getHubId()));
@@ -492,7 +498,8 @@ public class MainFormController implements Initializable {
             }
             if (ldbm.fullTestBDExists() == false) {
                 Logger.write(Resources.getString("msg.main.invalidDb"), LogTyps.ERROR);
-                return null;
+                throw new SQLException("Can not set up database.");
+                //return null;
             }
         }
         Session localDBSession = new Session(ldbm, true);

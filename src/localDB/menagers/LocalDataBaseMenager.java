@@ -59,7 +59,8 @@ public class LocalDataBaseMenager {
         for (String table : tables) {
             try {
                 String sql = "select count(*) from " + table + ";";
-                Statement stmt = getNewConnection().createStatement();
+                Connection conn = getNewConnection();
+                Statement stmt = conn.createStatement();
                 System.out.println(sql);
                 ResultSet rs = stmt.executeQuery(sql);
                 while (rs.next()) {
@@ -67,6 +68,7 @@ public class LocalDataBaseMenager {
                 }
                 rs.close();
                 stmt.close();
+                conn.close();
             } catch (Exception e) {
                 e.printStackTrace();
                 return false;
@@ -77,7 +79,9 @@ public class LocalDataBaseMenager {
 
     public boolean setupDataBase() throws ClassNotFoundException, SQLException {
         if (fullTestBDExists() == false) {
-            new SetupDB().setupDB(getDBPatch(), getNewConnection());
+            Connection conn = getNewConnection();
+            new SetupDB().setupDB(getDBPatch(),conn);
+            conn.close();
             return fullTestBDExists();
         } else {
             throw new SQLException("LocalDB already exists!");
