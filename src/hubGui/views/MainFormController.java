@@ -24,6 +24,7 @@ import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.concurrent.ExecutionException;
 import java.util.logging.Level;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
@@ -230,6 +231,7 @@ public class MainFormController implements Initializable {
             fxmlLoader.setResources(Resources.getResourceBundle());
             Parent root = (Parent) fxmlLoader.load();
             Stage stage = new Stage();
+            stage.getIcons().add(Resources.getFxImage("ico16.png"));
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.setResizable(false);
             stage.setTitle(Resources.getString("msg.main.settingsTitle"));
@@ -387,17 +389,15 @@ public class MainFormController implements Initializable {
 
     @FXML
     private void closeActionHandler(ActionEvent event) {
-        Stage stage = (Stage) messageTable.getScene().getWindow();
-        stage.close();
+        Platform.exit();
     }
 
     @FXML
     private void aboutActionHandler(ActionEvent event) {
-        Alert alert = new Alert(AlertType.INFORMATION);
-        alert.setTitle(Resources.getString("gui.main.about"));
-        alert.setHeaderText(Resources.getString("common.program"));
-        alert.setContentText(Resources.getString("msg.main.copyrights"));
-        alert.showAndWait();
+        Dialogs.showInfoAlert(
+                Resources.getString("gui.main.about"),
+                Resources.getString("common.program"),
+                Resources.getString("msg.main.copyrights"));
     }
     
     @FXML
@@ -408,6 +408,7 @@ public class MainFormController implements Initializable {
             Stage stage = new Stage();
             Parent root = (Parent) fxmlLoader.load();
             stage.initModality(Modality.APPLICATION_MODAL);
+            stage.getIcons().add(Resources.getFxImage("ico16.png"));
             stage.setResizable(false);
             stage.setTitle(Resources.getString("msg.main.loggerInfoTitle"));
             stage.setScene(new Scene(root));

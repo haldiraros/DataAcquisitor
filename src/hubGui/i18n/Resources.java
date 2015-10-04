@@ -5,10 +5,12 @@
  */
 package hubGui.i18n;
 
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 import java.util.ResourceBundle;
+import javax.imageio.ImageIO;
 
 /**
  *
@@ -43,6 +45,18 @@ public class Resources {
     public static String getCurrentLang() {
         assertCurrentLocaleIsNotEmpty();
         return currentLocale.getLanguage();
+    }
+    
+    public static java.awt.Image getAwtImage(String name) {
+        try {
+            return ImageIO.read(Resources.class.getResource(name));
+        } catch (IOException ex) {
+            return null;
+        }
+    }
+    
+    public static javafx.scene.image.Image getFxImage(String name) {
+        return new javafx.scene.image.Image(Resources.class.getResourceAsStream(name));
     }
     
     private static void assertCurrentLocaleIsNotEmpty() {

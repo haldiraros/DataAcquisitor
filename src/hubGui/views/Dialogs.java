@@ -18,6 +18,7 @@ import javafx.scene.control.Dialog;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
+import javafx.stage.Stage;
 import javafx.util.Pair;
 
 /**
@@ -27,14 +28,24 @@ import javafx.util.Pair;
 public class Dialogs {
     
     public static void showInfoAlert(String message) {
+        showInfoAlert(Resources.getString("gui.dialog.information"), message, null);
+    }
+    
+    public static void showInfoAlert(String title, String header, String content) {
         Alert alert = new Alert(AlertType.INFORMATION);
-        alert.setTitle(Resources.getString("gui.dialog.information"));
-        alert.setHeaderText(message);
+        setIcon(alert);
+        if (title != null)
+            alert.setTitle(title);
+        if (header != null)
+            alert.setHeaderText(header);
+        if (content != null)
+            alert.setContentText(content);
         alert.showAndWait();
     }
     
     public static void showErrorAlert(String message) {
         Alert alert = new Alert(AlertType.ERROR);
+        setIcon(alert);
         alert.setTitle(Resources.getString("gui.dialog.error"));
         alert.setHeaderText(message);
         alert.showAndWait();
@@ -53,6 +64,7 @@ public class Dialogs {
             Pair<String, String> labels,
             Pair<String, String> values) {
         Dialog<Pair<String, String>> dialog = new Dialog<>();
+        setIcon(dialog);
         
         dialog.setTitle(title);
         dialog.setHeaderText(text);
@@ -119,6 +131,7 @@ public class Dialogs {
             String label,
             String value) {
         Dialog<String> dialog = new Dialog<>();
+        setIcon(dialog);
         
         dialog.setTitle(title);
         dialog.setHeaderText(text);
@@ -166,5 +179,10 @@ public class Dialogs {
         });
 
         return dialog.showAndWait();
+    }
+
+    private static void setIcon(Dialog dialog) {
+        Stage stage = (Stage) dialog.getDialogPane().getScene().getWindow();
+        stage.getIcons().add(Resources.getFxImage("ico16.png"));
     }
 }
