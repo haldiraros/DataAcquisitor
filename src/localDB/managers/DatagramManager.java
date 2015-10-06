@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package localDB.menagers;
+package localDB.managers;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -18,7 +18,7 @@ import project.data.Datagram;
  *
  * @author hp
  */
-public class DatagramMenager {
+public class DatagramManager {
 
     public int createDatagrams(Connection connection, Set<Datagram> datagrams) throws SQLException, Exception {
         int inserted = 0;

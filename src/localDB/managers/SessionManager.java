@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package localDB.menagers;
+package localDB.managers;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -16,7 +16,7 @@ import project.data.Session;
  *
  * @author hp
  */
-public class SessionMenager {
+public class SessionManager {
 
     public void createSession(Connection connection, Session session) throws SQLException, Exception {
         if (session.getId() == null) {

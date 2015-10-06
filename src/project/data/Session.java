@@ -16,7 +16,7 @@ import java.util.Set;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
-import localDB.menagers.LocalDataBaseMenager;
+import localDB.managers.LocalDataBaseManager;
 import project.Config;
 
 /**
@@ -36,7 +36,7 @@ public class Session {
     private int measuresSend_Failures;
     private boolean closedOnLocalBD;
 
-    private LocalDataBaseMenager localDataBaseMenager;
+    private LocalDataBaseManager localDataBaseMenager;
     private RestMenager restMenager;
     private ScheduledExecutorService exec;
     private Connection connection;
@@ -50,12 +50,12 @@ public class Session {
         setUpStartValues(null, true);
     }
 
-    public Session(LocalDataBaseMenager ldbm, Boolean sessionWithLocalDB, RestMenager restMenager) throws Exception {
+    public Session(LocalDataBaseManager ldbm, Boolean sessionWithLocalDB, RestMenager restMenager) throws Exception {
         setUpStartValues(ldbm, sessionWithLocalDB);
         setRestMenager(restMenager);
     }
 
-    public Session(LocalDataBaseMenager ldbm, Boolean sessionWithLocalDB) throws Exception {
+    public Session(LocalDataBaseManager ldbm, Boolean sessionWithLocalDB) throws Exception {
         setUpStartValues(ldbm, sessionWithLocalDB);
     }
 
@@ -63,7 +63,7 @@ public class Session {
         setUpStartValues(null, sessionWithLocalDB);
     }
 
-    public void setUpStartValues(LocalDataBaseMenager ldbm, Boolean sessionWithLocalDB) throws Exception {
+    public void setUpStartValues(LocalDataBaseManager ldbm, Boolean sessionWithLocalDB) throws Exception {
         setDatagramsEnqueued(0);
         setDatagramsReceived(0);
         setDatagramsSend_OK(0);
@@ -82,9 +82,9 @@ public class Session {
         }
     }
 
-    private void setupDataBaseMenager(LocalDataBaseMenager ldbm) throws Exception {
+    private void setupDataBaseMenager(LocalDataBaseManager ldbm) throws Exception {
         if (ldbm == null) {
-            localDataBaseMenager = new LocalDataBaseMenager();
+            localDataBaseMenager = new LocalDataBaseManager();
         } else {
             localDataBaseMenager = ldbm;
         }
@@ -389,14 +389,14 @@ public class Session {
     /**
      * @return the localDataBaseMenager
      */
-    public LocalDataBaseMenager getLocalDataBaseMenager() {
+    public LocalDataBaseManager getLocalDataBaseMenager() {
         return localDataBaseMenager;
     }
 
     /**
      * @param localDataBaseMenager the localDataBaseMenager to set
      */
-    public void setLocalDataBaseMenager(LocalDataBaseMenager localDataBaseMenager) {
+    public void setLocalDataBaseMenager(LocalDataBaseManager localDataBaseMenager) {
         this.localDataBaseMenager = localDataBaseMenager;
     }
 

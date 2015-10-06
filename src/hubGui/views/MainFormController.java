@@ -47,7 +47,7 @@ import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Callback;
-import localDB.menagers.LocalDataBaseMenager;
+import localDB.managers.LocalDataBaseManager;
 import project.data.Session;
 
 /**
@@ -513,7 +513,7 @@ public class MainFormController implements Initializable {
     }
 
     private Session setupDBSession() throws SQLException, ClassNotFoundException, Exception {
-        LocalDataBaseMenager ldbm = new LocalDataBaseMenager();
+        LocalDataBaseManager ldbm = new LocalDataBaseManager();
         if (ldbm.fullTestBDExists() == false) {
             Logger.write(Resources.getString("msg.main.dbNotFound"), LogTyps.WARNING);
             Logger.write(Resources.getString("msg.main.tryingToCreateDb"), LogTyps.SUCCESS);

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package localDB.menagers;
+package localDB.managers;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -23,11 +23,11 @@ import project.data.Session;
  *
  * @author hp
  */
-public class LocalDataBaseMenager {
+public class LocalDataBaseManager {
 
     private String DBPatch;
-    private DatagramMenager datagramMenager;
-    private SessionMenager sessionMenager;
+    private DatagramManager datagramMenager;
+    private SessionManager sessionMenager;
     private MeasurementManager measurementManager;
 
     private String getDBPatch() {
@@ -38,10 +38,10 @@ public class LocalDataBaseMenager {
         DBPatch = dBPatch;
     }
 
-    public LocalDataBaseMenager() throws SQLException, ClassNotFoundException {
+    public LocalDataBaseManager() throws SQLException, ClassNotFoundException {
         this.setDBPatch(Config.getPath("localDB.menagers.DataBaseFilePath"));
-        datagramMenager = new DatagramMenager();
-        sessionMenager = new SessionMenager();
+        datagramMenager = new DatagramManager();
+        sessionMenager = new SessionManager();
         measurementManager = new MeasurementManager();
     }
 
@@ -157,28 +157,28 @@ public class LocalDataBaseMenager {
     /**
      * @return the datagramMenager
      */
-    public DatagramMenager getDatagramMenager() {
+    public DatagramManager getDatagramMenager() {
         return datagramMenager;
     }
 
     /**
      * @param datagramMenager the datagramMenager to set
      */
-    public void setDatagramMenager(DatagramMenager datagramMenager) {
+    public void setDatagramMenager(DatagramManager datagramMenager) {
         this.datagramMenager = datagramMenager;
     }
 
     /**
      * @return the sessionMenager
      */
-    public SessionMenager getSessionMenager() {
+    public SessionManager getSessionMenager() {
         return sessionMenager;
     }
 
     /**
      * @param sessionMenager the sessionMenager to set
      */
-    public void setSessionMenager(SessionMenager sessionMenager) {
+    public void setSessionMenager(SessionManager sessionMenager) {
         this.sessionMenager = sessionMenager;
     }
 
