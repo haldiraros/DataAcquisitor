@@ -14,10 +14,12 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package hubOperations;
+package test;
 
 import gnu.io.SerialPortEvent;
 import hubLibrary.meteringcomreader.exceptions.MeteringSessionException;
+import hubOperations.HubControl;
+import hubOperations.HubHandler;
 import org.apache.log4j.PropertyConfigurator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
