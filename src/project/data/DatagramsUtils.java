@@ -72,7 +72,7 @@ public class DatagramsUtils {
             }
             String errors = null;
             for (String e : sortedDatagrams.keySet()) {
-                errors = errors + e + ":" + sortedDatagrams.get(e);
+                errors = errors + e + ": " + sortedDatagrams.get(e) + "\n";
             }
             if (stats.getDatagramSendOkCounter() > 0) {
                 Logger.write(Resources.getFormatString("msg.DatagramsUtils.DatagramSendToRestSomeError", stats.getDatagramSendOkCounter(), errors), LogTyps.ERROR);

@@ -13,6 +13,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.net.HttpURLConnection;
 import java.net.InetSocketAddress;
 import java.net.Proxy;
 import java.net.URL;
@@ -26,7 +27,6 @@ import project.Config;
  * @author hp
  */
 public class RestUtils {
-
 
     public static JSONObject getHubLogInfo(String hubId) throws JSONException, Exception {
         JSONObject header = new JSONObject();
@@ -53,10 +53,9 @@ public class RestUtils {
         }
         return everything.toString();
     }
-    
+
     public static JSONObject sendToServer(JSONObject message, String service) throws IOException, JSONException, Exception {
         URL url = new URL(service);
-        System.out.println("Creating connection");
         URLConnection connection = connectionSetup(url);
         connection.setDoOutput(true);
         connection.setRequestProperty("Content-Type", "application/json");
@@ -65,7 +64,12 @@ public class RestUtils {
         OutputStreamWriter out = new OutputStreamWriter(connection.getOutputStream());
         out.write(message.toString());
         out.close();
+        HttpURLConnection httpConnection = (HttpURLConnection) connection;
 
+        int code = httpConnection.getResponseCode();
+        if (code != 200) {
+            throw new Exception(Resources.getFormatString("REST.operations.invalidResponseCode", code));
+        }
         InputStreamReader isr = new InputStreamReader(connection.getInputStream());
         BufferedReader in = new BufferedReader(isr);
         JSONObject response = new JSONObject(readBigStringIn(in));
@@ -107,18 +111,18 @@ public class RestUtils {
     public static String getPlainMeasurementBatchURL() throws Exception {
         return SettingsLoader.load().getRestUrl() + Config.getString("REST.plainMeasurementBatchURL");
     }
-    
-    public static URLConnection connectionSetup(URL url) throws IOException, Exception{
-        Settings sett =SettingsLoader.load();
+
+    public static URLConnection connectionSetup(URL url) throws IOException, Exception {
+        Settings sett = SettingsLoader.load();
         URLConnection connection;
-        
-        if(sett.isUseProxy() == null ? false : sett.isUseProxy()){
+
+        if (sett.isUseProxy() == null ? false : sett.isUseProxy()) {
             Proxy proxy = new Proxy(Proxy.Type.HTTP, new InetSocketAddress(sett.getProxyHost(), Integer.parseInt(sett.getProxyPort())));
             connection = url.openConnection(proxy);
-        }else{
+        } else {
             connection = url.openConnection();
         }
         return connection;
-        
+
     }
 }

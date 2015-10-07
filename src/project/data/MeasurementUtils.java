@@ -73,7 +73,7 @@ public class MeasurementUtils {
             }
             String errors = null;
             for (String e : sortedMeasurements.keySet()) {
-                errors = errors + e + ":" + sortedMeasurements.get(e);
+                errors = errors + e + ": " + sortedMeasurements.get(e) + "\n";
             }
             if (stats.getMeasurementSendOkCounter() > 0) {
                 Logger.write(Resources.getFormatString("msg.MeasurementUtils.MeasurementSendToRestSomeError", stats.getMeasurementSendOkCounter(), errors), LogTyps.ERROR);
