@@ -9,3 +9,4 @@ nbbuild.xml
 *.db-journal
 *.log
 *.log.*
+/bin
