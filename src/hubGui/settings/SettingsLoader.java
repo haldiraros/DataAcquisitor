@@ -5,6 +5,7 @@
  */
 package hubGui.settings;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -30,7 +31,9 @@ public class SettingsLoader {
     public static void save(Settings settings) throws Exception {
         JAXBContext jc = JAXBContext.newInstance(Settings.class);
         Marshaller m = jc.createMarshaller();
-        try (FileWriter fstream = new FileWriter(Config.getPath("hubGui.settings.fileName"), false)) {
+        File file = new File(Config.getPath("hubGui.settings.fileName"));
+        file.getParentFile().mkdirs();
+        try (FileWriter fstream = new FileWriter(file, false)) {
             m.marshal(settings, fstream);
         }
     }
