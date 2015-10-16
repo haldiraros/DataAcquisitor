@@ -233,7 +233,7 @@ public class MainFormController implements Initializable {
             Stage stage = new Stage();
             stage.getIcons().add(Resources.getFxImage("ico16.png"));
             stage.initModality(Modality.APPLICATION_MODAL);
-            stage.setResizable(false);
+            stage.setResizable(true);
             stage.setTitle(Resources.getString("msg.main.settingsTitle"));
             stage.setScene(new Scene(root));
             stage.show();

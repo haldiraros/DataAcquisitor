@@ -7,7 +7,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="578.0" prefWidth="347.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hubGui.views.SettingsFormController">
+<AnchorPane id="AnchorPane" minHeight="675.0" minWidth="395.0" prefHeight="675.0" prefWidth="395.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hubGui.views.SettingsFormController">
    <children>
       <BorderPane prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <center>
@@ -17,115 +17,109 @@
               </columnConstraints>
               <rowConstraints>
                   <RowConstraints maxHeight="292.0" minHeight="10.0" prefHeight="55.0" vgrow="SOMETIMES" />
-                  <RowConstraints maxHeight="292.0" minHeight="10.0" prefHeight="144.0" vgrow="SOMETIMES" />
-                <RowConstraints maxHeight="399.0" minHeight="10.0" prefHeight="271.0" vgrow="SOMETIMES" />
-                  <RowConstraints maxHeight="399.0" minHeight="10.0" prefHeight="62.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="292.0" minHeight="10.0" prefHeight="152.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="419.0" minHeight="10.0" prefHeight="393.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="399.0" minHeight="10.0" prefHeight="56.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <FlowPane orientation="VERTICAL" prefHeight="300.0" prefWidth="347.0" GridPane.rowIndex="2">
+                  <AnchorPane prefHeight="200.0" prefWidth="200.0">
                      <children>
-                        <Label prefHeight="17.0" prefWidth="337.0" text="%gui.settings.hubsConfiguration">
-                           <FlowPane.margin>
-                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                           </FlowPane.margin>
-                        </Label>
-                        <TableView fx:id="hubIdKeyTable" prefHeight="208.0" prefWidth="335.0">
-                          <columns>
-                            <TableColumn fx:id="hubIdColumn" prefWidth="112.0" text="%gui.settings.id" />
-                            <TableColumn fx:id="hubKeyColumn" prefWidth="224.0" text="%gui.settings.key" />
-                          </columns>
-                           <FlowPane.margin>
-                              <Insets left="5.0" right="5.0" />
-                           </FlowPane.margin>
-                        </TableView>
-                        <HBox prefHeight="35.0" prefWidth="346.0" HBox.hgrow="ALWAYS">
+                        <Label text="%gui.settings.restUrl" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0" />
+                        <TextField fx:id="restUrlText" prefHeight="25.0" prefWidth="335.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="25.0" />
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
+                     <children>
+                        <GridPane prefHeight="146.0" prefWidth="394.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
+                          <columnConstraints>
+                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="283.0" minWidth="10.0" prefWidth="205.0" />
+                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="299.0" minWidth="10.0" prefWidth="256.0" />
+                          </columnConstraints>
+                          <rowConstraints>
+                            <RowConstraints maxHeight="29.0" minHeight="10.0" prefHeight="23.0" vgrow="SOMETIMES" />
+                            <RowConstraints maxHeight="44.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="44.0" minHeight="10.0" prefHeight="27.0" vgrow="SOMETIMES" />
+                            <RowConstraints maxHeight="44.0" minHeight="10.0" prefHeight="29.0" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="44.0" minHeight="10.0" prefHeight="29.0" vgrow="SOMETIMES" />
+                          </rowConstraints>
                            <children>
-                                <Pane HBox.hgrow="ALWAYS" />
-                              <Button fx:id="deleteButton" mnemonicParsing="false" onAction="#deleteActionHandler" text="%gui.settings.delete">
-                                 <HBox.margin>
-                                    <Insets left="5.0" />
-                                 </HBox.margin>
-                              </Button>
-                              <Button fx:id="editButton" mnemonicParsing="false" onAction="#editActionHandler" text="%gui.settings.edit">
-                                 <HBox.margin>
-                                    <Insets left="5.0" />
-                                 </HBox.margin>
-                              </Button>
-                              <Button fx:id="addButton" mnemonicParsing="false" onAction="#addActionHandler" text="%gui.settings.add">
-                                 <HBox.margin>
-                                    <Insets left="5.0" />
-                                 </HBox.margin>
-                              </Button>
+                              <CheckBox fx:id="useProxyCheck" mnemonicParsing="false" prefHeight="17.0" prefWidth="161.0" text="%gui.settings.proxy" GridPane.columnSpan="2" />
+                              <Label text="%gui.settings.proxyHost" GridPane.rowIndex="1" />
+                              <Label text="%gui.settings.proxyPort" GridPane.rowIndex="2" />
+                              <Label text="%gui.settings.proxyUser" GridPane.rowIndex="3" />
+                              <Label text="%gui.settings.proxyPass" GridPane.rowIndex="4" />
+                              <TextField fx:id="proxyHostText" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                              <TextField fx:id="proxyPortText" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                              <TextField fx:id="proxyUserText" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                              <PasswordField fx:id="proxyPassword" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                            </children>
-                           <padding>
-                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                           </padding>
-                        </HBox>
+                        </GridPane>
                      </children>
-                  </FlowPane>
-                  <FlowPane orientation="VERTICAL" prefHeight="200.0" prefWidth="200.0">
+                  </AnchorPane>
+                  <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="2">
                      <children>
-                        <Label text="%gui.settings.restUrl">
-                           <FlowPane.margin>
-                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                           </FlowPane.margin>
-                        </Label>
-                        <TextField fx:id="restUrlText" prefHeight="25.0" prefWidth="335.0">
-                           <FlowPane.margin>
-                              <Insets left="5.0" right="5.0" />
-                           </FlowPane.margin>
-                        </TextField>
+                        <BorderPane prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
+                           <top>
+                              <Label prefHeight="17.0" prefWidth="337.0" text="%gui.settings.hubsConfiguration" BorderPane.alignment="TOP_LEFT">
+                                 <BorderPane.margin>
+                                    <Insets bottom="5.0" top="5.0" />
+                                 </BorderPane.margin>
+                              </Label>
+                           </top>
+                           <center>
+                              <TableView fx:id="hubIdKeyTable" prefHeight="208.0" prefWidth="335.0" BorderPane.alignment="CENTER">
+                                <columns>
+                                  <TableColumn fx:id="hubIdColumn" prefWidth="112.0" text="%gui.settings.id" />
+                                  <TableColumn fx:id="hubKeyColumn" prefWidth="224.0" text="%gui.settings.key" />
+                                </columns>
+                              </TableView>
+                           </center>
+                           <bottom>
+                              <HBox prefHeight="35.0" prefWidth="346.0" BorderPane.alignment="CENTER">
+                                 <children>
+                                      <Pane HBox.hgrow="ALWAYS" />
+                                    <Button fx:id="deleteButton" mnemonicParsing="false" onAction="#deleteActionHandler" text="%gui.settings.delete">
+                                       <HBox.margin>
+                                          <Insets left="5.0" />
+                                       </HBox.margin>
+                                    </Button>
+                                    <Button fx:id="editButton" mnemonicParsing="false" onAction="#editActionHandler" text="%gui.settings.edit">
+                                       <HBox.margin>
+                                          <Insets left="5.0" />
+                                       </HBox.margin>
+                                    </Button>
+                                    <Button fx:id="addButton" mnemonicParsing="false" onAction="#addActionHandler" text="%gui.settings.add">
+                                       <HBox.margin>
+                                          <Insets left="5.0" />
+                                       </HBox.margin>
+                                    </Button>
+                                 </children>
+                                 <padding>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                 </padding>
+                              </HBox>
+                           </bottom>
+                        </BorderPane>
                      </children>
-                  </FlowPane>
-                  <FlowPane orientation="VERTICAL" prefHeight="59.0" prefWidth="347.0" GridPane.rowIndex="3">
+                  </AnchorPane>
+                  <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="3">
                      <children>
-                        <Label text="%gui.settings.lang">
-                           <FlowPane.margin>
-                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                           </FlowPane.margin>
-                        </Label>
-                        <ComboBox fx:id="langCombo" prefHeight="25.0" prefWidth="336.0">
+                        <Label text="%gui.settings.lang" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0" />
+                        <ComboBox fx:id="langCombo" prefHeight="25.0" prefWidth="336.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="25.0">
                            <opaqueInsets>
                               <Insets />
                            </opaqueInsets>
-                           <FlowPane.margin>
-                              <Insets bottom="5.0" left="5.0" right="5.0" />
-                           </FlowPane.margin>
                         </ComboBox>
                      </children>
-                  </FlowPane>
-                  <GridPane GridPane.rowIndex="1">
-                    <columnConstraints>
-                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="164.0" minWidth="10.0" prefWidth="141.0" />
-                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="196.0" minWidth="10.0" prefWidth="196.0" />
-                    </columnConstraints>
-                    <rowConstraints>
-                      <RowConstraints maxHeight="29.0" minHeight="10.0" prefHeight="23.0" vgrow="SOMETIMES" />
-                      <RowConstraints maxHeight="44.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints maxHeight="44.0" minHeight="10.0" prefHeight="27.0" vgrow="SOMETIMES" />
-                      <RowConstraints maxHeight="44.0" minHeight="10.0" prefHeight="29.0" vgrow="SOMETIMES" />
-                        <RowConstraints maxHeight="44.0" minHeight="10.0" prefHeight="29.0" vgrow="SOMETIMES" />
-                    </rowConstraints>
-                     <children>
-                        <CheckBox fx:id="useProxyCheck" mnemonicParsing="false" prefHeight="17.0" prefWidth="161.0" text="%gui.settings.proxy" GridPane.columnSpan="2" />
-                        <Label text="%gui.settings.proxyHost" GridPane.rowIndex="1" />
-                        <Label text="%gui.settings.proxyPort" GridPane.rowIndex="2" />
-                        <Label text="%gui.settings.proxyUser" GridPane.rowIndex="3" />
-                        <Label text="%gui.settings.proxyPass" GridPane.rowIndex="4" />
-                        <TextField fx:id="proxyHostText" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                        <TextField fx:id="proxyPortText" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                        <TextField fx:id="proxyUserText" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                        <PasswordField fx:id="proxyPassword" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                     </children>
-                     <GridPane.margin>
-                        <Insets left="5.0" right="5.0" />
-                     </GridPane.margin>
-                  </GridPane>
+                  </AnchorPane>
                </children>
+               <BorderPane.margin>
+                  <Insets />
+               </BorderPane.margin>
             </GridPane>
          </center>
          <bottom>
-            <ToolBar prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+            <ToolBar prefHeight="41.0" prefWidth="473.0" BorderPane.alignment="CENTER">
               <items>
                   <Pane HBox.hgrow="ALWAYS" />
                 <Button fx:id="cancelButton" mnemonicParsing="false" onAction="#cancelActionHandler" prefHeight="25.0" prefWidth="67.0" text="%common.cancel" />
