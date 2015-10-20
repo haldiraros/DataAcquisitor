@@ -313,7 +313,7 @@ public class HubControl {
         DataPacketDTO test = pck.generateDTO();
         String logID = pck.getLoggerHexId();
         logID = logID.substring(4);  //usunąć pierwsze 4 znaki
-        String time = String.format("%0#8X", (long) ((test.getMeasurmentTimeStart().getTime()) / 1000));
+        int time = (int) ((test.getMeasurmentTimeStart().getTime()) / 1000);
         dbSession.addMeasurement(new Measurement(logID, getHubId(), time, test.getTemperatures(), test.getMeasurmentPeriod()));
         System.out.println(pck);
     }

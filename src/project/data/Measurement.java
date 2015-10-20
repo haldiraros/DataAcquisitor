@@ -18,7 +18,7 @@ public class Measurement{
     private BigDecimal id;
     private final String loggerId;
     private final String hubId;
-    private final String measurmentTime;
+    private final int measurmentTime;
     private final int period;
     private final JSONArray data;
     
@@ -27,19 +27,19 @@ public class Measurement{
     private String newErrorMessage;
     private String prevErrorMessage;
     
-    public Measurement(String loggerId, String hubId, String measurmentTime, int[] data, int period) throws JSONException{
+    public Measurement(String loggerId, String hubId, int measurmentTime, int[] data, int period) throws JSONException{
         this(null,loggerId,hubId,measurmentTime,new JSONArray(data),period,false);
     }
     
-    public Measurement(BigDecimal id, String loggerId, String hubId, String measurmentTime, String data, int period, boolean dataSend) throws JSONException{
+    public Measurement(BigDecimal id, String loggerId, String hubId, int measurmentTime, String data, int period, boolean dataSend) throws JSONException{
         this(id,loggerId,hubId,measurmentTime,new JSONArray(data),period,dataSend);
     }
     
-    public Measurement(BigDecimal id, String loggerId, String hubId, String measurmentTime, String data, int period) throws JSONException{
+    public Measurement(BigDecimal id, String loggerId, String hubId, int measurmentTime, String data, int period) throws JSONException{
         this(id,loggerId,hubId,measurmentTime,new JSONArray(data),period,false);
     }
 
-    public Measurement(BigDecimal id, String loggerId, String hubId, String measurmentTime, JSONArray data, int period, boolean dataSend){
+    public Measurement(BigDecimal id, String loggerId, String hubId, int measurmentTime, JSONArray data, int period, boolean dataSend){
         this.id = id;
         this.loggerId = loggerId;
         this.hubId = hubId;
@@ -131,7 +131,7 @@ public class Measurement{
     /**
      * @return the measurmentTime
      */
-    public String getMeasurmentTime() {
+    public int getMeasurmentTime() {
         return measurmentTime;
     }
 

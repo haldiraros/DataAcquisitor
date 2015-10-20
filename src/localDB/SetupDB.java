@@ -51,7 +51,7 @@ public class SetupDB {
             + " ID               integer        NOT NULL  PRIMARY KEY AUTOINCREMENT"
             + ",LOGGER_ID        varchar(128)   NOT NULL"
             + ",HUB_ID           varchar(128)   NOT NULL"
-            + ",MEASUREMENT_TIME varchar(128)   NOT NULL"
+            + ",MEASUREMENT_TIME integer   NOT NULL"
             + ",PERIOD           integer        NOT NULL"
             + ",DATA             CLOB           NOT NULL"
             + ")";

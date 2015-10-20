@@ -32,7 +32,7 @@ public class MeasurementManager {
                     PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
                     ps.setString(1, m.getLoggerId());
                     ps.setString(2, m.getHubId());
-                    ps.setString(3, m.getMeasurmentTime());
+                    ps.setInt(3, m.getMeasurmentTime());
                     ps.setInt(4, m.getPeriod());
                     ps.setString(5, m.getData().toString());
                     int insert = ps.executeUpdate();
@@ -76,7 +76,7 @@ public class MeasurementManager {
         PreparedStatement ps = connection.prepareStatement(sql);
         ResultSet rs = ps.executeQuery();
         while (rs.next()) {
-            Measurement measurement = new Measurement(rs.getBigDecimal("ID"), rs.getString("LOGGER_ID"), rs.getString("HUB_ID"), rs.getString("MEASUREMENT_TIME"), rs.getString("DATA"), rs.getInt("PERIOD"));
+            Measurement measurement = new Measurement(rs.getBigDecimal("ID"), rs.getString("LOGGER_ID"), rs.getString("HUB_ID"), rs.getInt("MEASUREMENT_TIME"), rs.getString("DATA"), rs.getInt("PERIOD"));
             measurement.setPrevErrorMessage(rs.getString("ERROR"));
             measurements.add(measurement);
         }
