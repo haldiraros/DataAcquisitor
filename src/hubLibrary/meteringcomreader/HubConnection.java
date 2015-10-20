@@ -941,7 +941,7 @@ public class HubConnection implements Runnable{
         sendCommand(Utils.getLoggerAesKeyReq);
         byte[] ret=receiveAck(Utils.getLoggerAesKeyRes);
         StringBuilder sb =  new StringBuilder(100);
-        for (int i=0; i<ret.length; i++ ){
+        for (int i=ret.length-1; i>0; i-- ){
             sb.append(String.format("%02X", ret[i]));
         }
         String aesKey=sb.toString();

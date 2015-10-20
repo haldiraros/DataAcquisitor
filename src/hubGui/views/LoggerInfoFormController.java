@@ -49,7 +49,7 @@ public class LoggerInfoFormController implements Initializable {
         try {
             HubHandler hubH = HubHandler.getInstance();
             HubControl hubC = hubH.getHubControl();
-            idText.setText(Long.toHexString(hubC.getHubConn().getLoggerId()));
+            idText.setText(Long.toHexString(hubC.getHubConn().getLoggerId()).toUpperCase());
             firmwareVersionText.setText(hubC.getHubConn().getLoggerFirmawareVersion());
             deviceVersionText.setText(hubC.getHubConn().getLoggerHardwareVersion());
             aesText.setText(hubC.getHubConn().getLoggerAesKey());
