@@ -59,8 +59,8 @@ public class RestUtils {
         URLConnection connection = connectionSetup(url);
         connection.setDoOutput(true);
         connection.setRequestProperty("Content-Type", "application/json");
-        connection.setConnectTimeout(5000);
-        connection.setReadTimeout(5000);
+        connection.setConnectTimeout(1000*60); //minuta
+        connection.setReadTimeout(1000*60*5); //5 minut
         OutputStreamWriter out = new OutputStreamWriter(connection.getOutputStream());
         out.write(message.toString());
         out.close();
